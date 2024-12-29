@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #000;
+  --secondary: #fff;
+  --variant: #0056b3;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--primary);
+  color: var(--secondary);
+  font-family: 'Inter Tight', serif;
+  overflow-x: none;
+}
+::selection {
+  background-color: var(--variant);
+  color: white;
+}
+.card {
+  background: rgba(74, 74, 74, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+.cscard {
+  background: rgba(137, 137, 137, 0.21);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(137, 137, 137, 0.21);
+  backdrop-filter: blur(2.6px);
+  -webkit-backdrop-filter: blur(2.6px);
+  border: 1px solid rgba(137, 137, 137, 0.21);
+}
+@layer components {
+  .flex-col-center {
+    @apply flex flex-col items-center justify-center;
+  }
+}
