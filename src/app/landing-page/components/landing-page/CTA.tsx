@@ -21,7 +21,7 @@ export default function CTASection() {
         <PrimaryButton>
           {CTABTN1TITLE} <ArrowRight />
         </PrimaryButton>
-        <SecondaryButton text={CTABTN2TITLE} />
+        <SecondaryButton children={CTABTN2TITLE} />
       </div>
     </div>
   )
