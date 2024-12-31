@@ -24,7 +24,7 @@ export default function NavBar() {
       </button>
 
       <div
-        className={`absolute md:static top-4 left-0 w-full md:w-auto bg-primary md:bg-transparent z-40 p-4 md:p-0 transition-transform ${
+        className={`absolute md:static top-0 left-0 w-full md:w-auto bg-theme-primary md:bg-transparent z-40 p-4 md:p-0 transition-transform ${
           isMenuOpen ? 'translate-y-0' : '-translate-y-full md:translate-y-0'
         }`}
       >
@@ -41,14 +41,14 @@ export default function NavBar() {
           ))}
         </div>
         <div className='flex justify-center md:hidden gap-4 mt-4'>
-          <SecondaryButton text='Login' />
-          <PrimaryButton children='Signup' />
+          <SecondaryButton children='Login' href='login' />
+          <PrimaryButton children='Signup' href='register' />
         </div>
       </div>
 
       <div className='hidden md:flex gap-4'>
-        <SecondaryButton text='Login' />
-        <PrimaryButton children='Signup' />
+        <SecondaryButton children='Login' href='login' />
+        <PrimaryButton children='Signup' href='register' />
       </div>
     </nav>
   )

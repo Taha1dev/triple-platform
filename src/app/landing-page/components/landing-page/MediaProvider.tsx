@@ -31,7 +31,7 @@ export default function MediaProvider() {
   return (
     <section id='media' className='relative flex'>
       {/* <div className='absolute top-10 right-0 bg-blur-pattern w-[2000px] h-[1000px] bg-cover'></div> */}
-      {/* <div className='absolute bottom-52 z-50 left-0 bg-blur-pattern w-[2000px] h-[1000px] bg-cover'></div> */}
+      <div className='absolute bottom-52 overflow-x-hidden left-12 bg-blur-pattern w-[2000px] h-[1000px] bg-cover'></div>
       <section className='container mx-auto py-8 px-4 md:px-8 lg:px-8 mb-4 flex-col-center gap-8 '>
         <Heading
           sub='Why Sign Up as a Media Service Provider'
@@ -56,7 +56,7 @@ export default function MediaProvider() {
                     <h3 className='font-semibold text-2xl'>{item.title}</h3>
                     <div>{item.icon}</div>
                   </div>
-                  <p className='text-secondary/90 text-xl font-light'>
+                  <p className='text-theme-secondary/90 text-xl font-light'>
                     {item.description}
                   </p>
                 </div>

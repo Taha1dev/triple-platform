@@ -19,7 +19,10 @@ export default function HowItWorks() {
     },
   ]
   return (
-    <section id='how-it-works' className='container mx-auto py-8 px-4 md:px-8 lg:px-8 mb-4'>
+    <section
+      id='how-it-works'
+      className='container mx-auto py-8 px-4 md:px-8 lg:px-8 mb-4'
+    >
       <Heading
         sub='How It Works'
         main='Your Path to stress-free Pre-production'
@@ -28,7 +31,7 @@ export default function HowItWorks() {
         {data.map(item => {
           return (
             <div key={item.id} className='flex flex-col items-center gap-11'>
-              <p className='bg-variant text-white font-bold text-xl px-4 py-2 rounded-full text-center w-fit'>
+              <p className='bg-theme-variant text-white font-bold text-xl px-4 py-2 rounded-full text-center w-fit'>
                 {item.id}
               </p>
               <div className='flex flex-col gap-7 *:text-center'>

@@ -20,7 +20,7 @@ export default function Vision() {
           <h4 className='font-medium text-xl md:text-2xl mt-4'>
             Shadi Musharraaf
           </h4>
-          <p className='text-secondary/50 text-sm md:text-base'>
+          <p className='text-theme-secondary/50 text-sm md:text-base'>
             Triple P Founder & Director - Innovator - Producer
           </p>
         </div>

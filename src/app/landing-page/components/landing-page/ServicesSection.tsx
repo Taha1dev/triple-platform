@@ -8,32 +8,35 @@ export default function ServicesSection() {
       title: 'Effortlessly find media resources with our detailed search',
       description:
         'Discover media service providers, filming locations, and production essentials effortlessly.',
-      icon: <Search size={42} className='text-variant' />,
+      icon: <Search size={42} className='text-theme-variant' />,
     },
     {
       id: 2,
       title: 'Visual Insights at a Glance',
       description:
         'Gain visual access to profiles and information to make informed decisions quickly.',
-      icon: <Eye size={42} className='text-variant' />,
+      icon: <Eye size={42} className='text-theme-variant' />,
     },
     {
       id: 3,
       title: 'Streamlined Pre-Production',
       description:
         'Enjoy the experience of a streamlined, efficient, and stress-free Pre-production process.',
-      icon: <CheckCircle size={42} className='text-variant' />,
+      icon: <CheckCircle size={42} className='text-theme-variant' />,
     },
     {
       id: 4,
       title: 'Get more access and save time',
       description:
         'Save time with a Pre-Production platform designed to support you from start to finish.',
-      icon: <Clock size={42} className='text-variant' />,
+      icon: <Clock size={42} className='text-theme-variant' />,
     },
   ]
   return (
-    <main id='services' className='container mx-auto flex flex-col gap-8 items-center justify-center px-4'>
+    <main
+      id='services'
+      className='container mx-auto flex flex-col gap-8 items-center justify-center px-4'
+    >
       <Heading
         sub='Why Triple Platform'
         main='Simplifying Media Production for You'
@@ -42,16 +45,16 @@ export default function ServicesSection() {
         {services.map(service => (
           <div
             key={service.id}
-            className='bg-black px-6 py-8 md:py-10 rounded-[30px] md:rounded-[50px] border-2 border-secondary/60 min-h-[300px] shadow-lg flex flex-col gap-8'
+            className='bg-theme-primary px-6 py-8 md:py-10 rounded-[30px] md:rounded-[50px] border-2 border-theme-secondary/60 min-h-[300px] shadow-lg flex flex-col gap-8'
           >
-            <div className='flex self-end items-center justify-center bg-primary/80 p-4 rounded-full shadow-[0px_0px_10px_0px_rgba(0,123,255,0.25)]'>
+            <div className='flex self-end items-center justify-center bg-theme-primary/80 p-4 rounded-full shadow-[0px_0px_10px_0px_rgba(0,123,255,0.25)]'>
               {service.icon}
             </div>
             <div className='flex flex-col gap-3'>
-              <h3 className='text-xl md:text-2xl font-bold text-secondary'>
+              <h3 className='text-xl md:text-2xl font-bold text-theme-secondary'>
                 {service.title}
               </h3>
-              <p className='text-secondary/80 font-medium text-base md:text-xl'>
+              <p className='text-theme-secondary/80 font-medium text-base md:text-xl'>
                 {service.description}
               </p>
             </div>

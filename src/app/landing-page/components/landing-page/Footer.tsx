@@ -12,7 +12,7 @@ const Footer = () => {
             width={458}
             height={124}
           />
-          <p className='text-xl -mt-2 text-secondary/50 italic'>
+          <p className='text-xl -mt-2 text-theme-secondary/50 italic'>
             Height the odds
           </p>
         </div>
@@ -73,8 +73,8 @@ const Footer = () => {
       </div>
 
       {/* Copyright and Social Icons */}
-      <div className='mt-8 border-t border-secondary-40 pt-4 flex flex-col md:flex-row justify-between items-center gap-4'>
-        <p className='text-xl text-secondary text-center'>
+      <div className='mt-8 border-t border-theme-secondary-40 pt-4 flex flex-col md:flex-row justify-between items-center gap-4'>
+        <p className='text-xl text-theme-secondary text-center'>
           © 2024 Tripple Platform. All Rights Reserved.
         </p>
         <div className='flex gap-4'>
