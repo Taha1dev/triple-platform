@@ -75,7 +75,7 @@ const Footer = () => {
       {/* Copyright and Social Icons */}
       <div className='mt-8 border-t border-theme-secondary-40 pt-4 flex flex-col md:flex-row justify-between items-center gap-4'>
         <p className='text-xl text-theme-secondary text-center'>
-          © 2024 Tripple Platform. All Rights Reserved.
+          © {new Date().getFullYear()} Tripple Platform. All Rights Reserved.
         </p>
         <div className='flex gap-4'>
           <a href='#' aria-label='Instagram'>

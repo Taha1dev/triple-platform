@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './app/dashboard/pages/Login.tsx'
 import Register from './app/dashboard/pages/Register.tsx'
+import ResetPassword from './app/dashboard/pages/ResetPassword.tsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: 'register',
     element: <Register />,
+  },
+  {
+    path: 'reset-password',
+    element: <ResetPassword />,
   },
 ])
 ReactDOM.createRoot(document.getElementById('root')!).render(
