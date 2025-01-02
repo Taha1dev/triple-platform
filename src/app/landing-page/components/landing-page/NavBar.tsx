@@ -13,7 +13,7 @@ export default function NavBar() {
     { id: 4, name: 'Media Providers', href: '#media' },
   ]
   return (
-    <nav className='container mx-auto flex justify-between items-center p-4 md:p-0'>
+    <nav className='container mx-auto flex justify-between items-center p-4 md:p-0 dark:bg-background'>
       <img src='/triple-logo.png' alt='triple-logo' width={200} height={90} />
       <button
         className='block md:hidden z-50'
@@ -24,7 +24,7 @@ export default function NavBar() {
       </button>
 
       <div
-        className={`absolute md:static top-0 left-0 w-full md:w-auto bg-theme-primary md:bg-transparent z-40 p-4 md:p-0 transition-transform ${
+        className={`absolute md:static top-0 left-0 w-full md:w-auto bg-theme-primary  md:bg-transparent z-40 p-4 md:p-0 transition-transform ${
           isMenuOpen ? 'translate-y-0' : '-translate-y-full md:translate-y-0'
         }`}
       >

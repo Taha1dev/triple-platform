@@ -10,11 +10,14 @@ import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 import FormField, { FormFieldProps } from '../components/FormField'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Dialog } from '@/components/custom/Dialog'
 interface FormValues {
   username: string
   password: string
 }
 export default function Login() {
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const form = useForm<FormValues>()
   const { register, handleSubmit, formState } = form
   const FormFields: FormFieldProps[] = [
@@ -40,9 +43,10 @@ export default function Login() {
   const onSubmit = (data: FormValues) => {
     console.log('Form data submitted:', data)
   }
+
   return (
     <main className='bg-zinc-950 flex h-screen items-center justify-center'>
-      <section className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 bg-white rounded-lg shadow-lg overflow-hidden'>
+      <section className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
         {/* Image Section */}
         <article className='hidden lg:block relative'>
           <img
@@ -76,12 +80,22 @@ export default function Login() {
                     <FormField {...e} />
                   </div>
                 ))}
-                <Link
-                  to='/reset-password'
-                  className='inline-block text-sm text-theme-variant hover:underline transition-colors duration-200'
-                >
-                  Forgot password?
-                </Link>
+                <div>
+                  <Button
+                    type='button'
+                    onClick={() => setIsDialogOpen(!isDialogOpen)}
+                    className='inline-block p-0 m-0 text-sm text-theme-variant hover:underline transition-colors duration-200'
+                  >
+                    Forgot password?
+                  </Button>
+
+                  {isDialogOpen && (
+                    <Dialog
+                    // ques='Forgot your password?'
+                    // body="Please enter your email address below. We'll send you an OTP to reset your password."
+                    />
+                  )}
+                </div>
                 <Button
                   type='submit'
                   className='w-full bg-theme-primary text-white font-medium py-2 rounded-md transition-colors duration-200 mt-6'

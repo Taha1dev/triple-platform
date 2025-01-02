@@ -1,3 +1,4 @@
+import { ModeToggle } from '@/mode-toggle'
 import { Instagram, Linkedin } from 'lucide-react'
 
 const Footer = () => {
@@ -5,24 +6,24 @@ const Footer = () => {
     <footer className='text-white py-8 container mx-auto'>
       <div className='container mx-auto px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-8'>
         {/* Logo and Tagline */}
-        <div className='flex flex-col items-center md:items-start text-center md:text-left'>
+        <div className='flex flex-col justify-center items-center text-center '>
           <img
             src='/triple-platform-logo.png'
             alt='Triple Platform Logo'
             width={458}
             height={124}
           />
-          <p className='text-xl -mt-2 text-theme-secondary/50 italic'>
+          <p className='text-xl text-center -mt-2 text-theme-secondary/50 italic'>
             Height the odds
           </p>
         </div>
 
         {/* Quick Links and Legal */}
-        <div className='w-full md:w-auto flex flex-col md:flex-row gap-12'>
+        <div className='w-full md:w-auto flex flex-col md:flex-row gap-12 lg:items-start :items-center'>
           {/* Quick Links */}
           <div>
             <h3 className='font-semibold mb-2 text-xl'>Quick Links</h3>
-            <ul className='space-y-1 text-gray-300'>
+            <ul className='space-y-1 text-gray-400'>
               <li>
                 <a
                   href='#about'
@@ -84,6 +85,7 @@ const Footer = () => {
           <a href='#' aria-label='LinkedIn'>
             <Linkedin size={32} />
           </a>
+          <ModeToggle />
         </div>
       </div>
     </footer>

@@ -24,7 +24,10 @@ const FormField: React.FC<FormFieldProps> = ({
 }) => {
   return (
     <div className='mb-4 flex flex-col items-start'>
-      <label htmlFor={id} className='font-medium text-theme-primary/90 mb-1 ml-1'>
+      <label
+        htmlFor={id}
+        className='font-medium text-theme-primary/90 mb-1 ml-1'
+      >
         {label}
       </label>
       <Input

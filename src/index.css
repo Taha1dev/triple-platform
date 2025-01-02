@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --primary: #09090b ;
+  --primary: #09090b;
   --secondary: #fff;
   --variant: #0056b3;
 }
@@ -14,8 +14,8 @@ html {
 }
 
 body {
-  background-color: var(--primary);
-  color: var(--secondary);
+  /* background-color: var(--primary);
+  color: var(--secondary); */
   font-family: 'Inter Tight', serif;
   overflow-x: none;
 }
@@ -66,6 +66,7 @@ html {
   scrollbar-width: thin;
   scrollbar-color: var(--variant) #f1f1f1;
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -94,6 +95,7 @@ html {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -121,10 +123,12 @@ html {
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
