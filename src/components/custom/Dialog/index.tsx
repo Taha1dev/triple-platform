@@ -1,76 +1,82 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import FormField, { FormFieldProps } from '@/app/dashboard/components/FormField'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { useForm } from 'react-hook-form'
-interface FormValues {
-  email: string
-}
-export function Dialog() {
-  const form = useForm<FormValues>()
-  const { register, handleSubmit, formState } = form
-  const FormFields: FormFieldProps[] = [
-    {
-      id: '1',
-      label: 'Email',
-      placeholder: 'Enter your Email',
-      register: register,
-      type: 'email',
-      formState: formState,
-      required: true,
-    },
-  ]
-  const onSubmit = (data: FormValues) => {
-    console.log('Form data submitted:', data)
-  }
-  return (
-    <AlertDialog defaultOpen>
-      {/* <AlertDialogTrigger asChild >
-        <Button variant='outline'>Show Dialog</Button>
-      </AlertDialogTrigger> */}
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-    // <AlertDialog defaultOpen>
-    //   <AlertDialogTrigger asChild></AlertDialogTrigger>
-    //   <AlertDialogContent>
-    //     <AlertDialogHeader>
-    //       <AlertDialogTitle>{ques}</AlertDialogTitle>
-    //       <AlertDialogDescription>
-    //         {body}
-    //         <form onSubmit={handleSubmit(onSubmit)}>
-    //           {FormFields.map(e => {
-    //             return <FormField {...e} />
-    //           })}
-    //         </form>
-    //       </AlertDialogDescription>
-    //     </AlertDialogHeader>
-    //     <AlertDialogFooter>
-    //       <AlertDialogCancel>Cancel</AlertDialogCancel>
-    //       <AlertDialogAction>Continue</AlertDialogAction>
-    //     </AlertDialogFooter>
-    //   </AlertDialogContent>
-    // </AlertDialog>
-  )
-}
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+// import FormField, { FormFieldProps } from '@/app/dashboard/components/FormField'
+// import { setIsDialogOpen } from '@/app/features/openDialogSlice'
+// import { AppDispatch } from '@/app/store'
+// import {
+//   AlertDialog,
+//   AlertDialogAction,
+//   AlertDialogCancel,
+//   AlertDialogContent,
+//   AlertDialogDescription,
+//   AlertDialogFooter,
+//   AlertDialogHeader,
+//   AlertDialogTitle,
+// } from '@/components/ui/alert-dialog'
+
+// import { useDispatch } from 'react-redux'
+
+// interface FormValues {
+//   email: string
+// }
+
+// export function Dialog({ body, ques }: any) {
+//   const dispatch = useDispatch<AppDispatch>()
+
+//   const handleOpenChange = (open: boolean) => {
+//     dispatch(setIsDialogOpen(open))
+//     if (!open) {
+//       reset()
+//     }
+//   }
+
+//   const handleContinue = () => {
+//     handleSubmit(onSubmit)()
+//   }
+
+//   const FormFields: FormFieldProps[] = [
+//     {
+//       id: '1',
+//       label: 'Email',
+//       placeholder: 'Enter your Email',
+//       type: 'email',
+//     },
+//   ]
+
+//   const onSubmit = (data: FormValues) => {
+//     console.log('Form data submitted:', data)
+//   }
+
+//   return (
+//     <AlertDialog onOpenChange={handleOpenChange} defaultOpen>
+//       <AlertDialogContent className='sm:max-w-[425px]'>
+//         <AlertDialogHeader>
+//           <AlertDialogTitle className='text-xl font-semibold'>
+//             {ques}
+//           </AlertDialogTitle>
+//           <AlertDialogDescription className='mt-2 text-zinc-600 dark:text-zinc-400'>
+//             <p className='mb-4'>{body}</p>
+//             <form
+//               className='space-y-4 border-t border-zinc-200 pt-4 dark:border-zinc-800'
+//               onSubmit={handleSubmit(onSubmit)}
+//             >
+//               {FormFields.map((e, index) => (
+//                 <FormField key={index} {...e} />
+//               ))}
+//             </form>
+//           </AlertDialogDescription>
+//         </AlertDialogHeader>
+//         <AlertDialogFooter className='mt-4'>
+//           <AlertDialogCancel className='bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700'>
+//             Cancel
+//           </AlertDialogCancel>
+//           <AlertDialogAction
+//             onClick={handleContinue}
+//             className='bg-zinc-900 text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-100'
+//           >
+//             Continue
+//           </AlertDialogAction>
+//         </AlertDialogFooter>
+//       </AlertDialogContent>
+//     </AlertDialog>
+//   )
+// }

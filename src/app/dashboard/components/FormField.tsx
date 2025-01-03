@@ -1,45 +1,37 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react'
 import { Input } from '@/components/ui/input'
-import { UseFormRegister } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
+import { ZodType } from 'zod'
+
 export type FormFieldProps = {
   label: string
-  type: string
   id: string
-  placeholder: string
-  register: UseFormRegister<any>
-  required?: boolean
-  formState?: {
-    errors: Record<string, any>
-  }
+  placeholder?: string
+  type?: string
+  schema?: ZodType<any>
 }
 
 const FormField: React.FC<FormFieldProps> = ({
   label,
-  type,
   id,
-  register,
-  required,
-  formState,
-  placeholder,
+  placeholder = '',
+  type = 'text',
 }) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext()
+
   return (
     <div className='mb-4 flex flex-col items-start'>
-      <label
-        htmlFor={id}
-        className='font-medium text-theme-primary/90 mb-1 ml-1'
-      >
+      <label htmlFor={id} className='font-medium mb-1 ml-1'>
         {label}
       </label>
-      <Input
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        {...register(id, { required })}
-      />
-      {required && formState?.errors[id] && (
+      <Input id={id} type={type} placeholder={placeholder} {...register(id)} />
+      {errors[id] && (
         <span className='text-red-600 text-sm mt-1 ml-2'>
-          {formState.errors[id]?.type === 'required' &&
-            'This field is required'}
+          {errors[id]?.message as string}
         </span>
       )}
     </div>

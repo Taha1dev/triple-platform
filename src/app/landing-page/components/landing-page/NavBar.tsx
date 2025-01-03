@@ -1,20 +1,59 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { X, Menu } from 'lucide-react'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import PrimaryButton from '../buttons/PrimaryButton'
 import SecondaryButton from '../buttons/SecondaryButton'
+import { useTheme } from '@/components/theme-provider'
 
 export default function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
   const navLinks = [
     { id: 1, name: 'Why Triple Platform', href: '#services' },
     { id: 2, name: 'How It Works', href: '#how-it-works' },
     { id: 3, name: 'Vision', href: '#vision' },
     { id: 4, name: 'Media Providers', href: '#media' },
   ]
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { theme } = useTheme()
+  const [logo, setLogo] = useState<string>('/triple-platform-logo.png')
+  const getSystemTheme = () => {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+  }
+
+  const getEffectiveTheme = useCallback(() => {
+    return theme === 'system' ? getSystemTheme() : theme
+  }, [theme])
+
+  useEffect(() => {
+    const effectiveTheme = getEffectiveTheme()
+    if (effectiveTheme === 'dark') {
+      setLogo('/triple-logo.png')
+    } else {
+      setLogo('/triple-logo-light.png')
+    }
+  }, [getEffectiveTheme, theme])
+
+  useEffect(() => {
+    if (theme === 'system') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      const handleSystemThemeChange = (e: any) => {
+        const newTheme = e.matches ? 'dark' : 'light'
+        setLogo(
+          newTheme === 'dark'
+            ? '/triple-platform-light-logo.png'
+            : '/triple-platform-logo.png',
+        )
+      }
+
+      mediaQuery.addEventListener('change', handleSystemThemeChange)
+      return () =>
+        mediaQuery.removeEventListener('change', handleSystemThemeChange)
+    }
+  }, [theme])
   return (
     <nav className='container mx-auto flex justify-between items-center p-4 md:p-0 dark:bg-background'>
-      <img src='/triple-logo.png' alt='triple-logo' width={200} height={90} />
+      <img src={logo} alt='triple-logo' width={200} height={90} />
       <button
         className='block md:hidden z-50'
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -24,7 +63,7 @@ export default function NavBar() {
       </button>
 
       <div
-        className={`absolute md:static top-0 left-0 w-full md:w-auto bg-theme-primary  md:bg-transparent z-40 p-4 md:p-0 transition-transform ${
+        className={`absolute md:static top-0 left-0 w-full md:w-auto   md:bg-transparent z-40 p-4 md:p-0 transition-transform ${
           isMenuOpen ? 'translate-y-0' : '-translate-y-full md:translate-y-0'
         }`}
       >

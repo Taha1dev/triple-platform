@@ -45,16 +45,16 @@ export default function ServicesSection() {
         {services.map(service => (
           <div
             key={service.id}
-            className='bg-theme-primary px-6 py-8 md:py-10 rounded-[30px] md:rounded-[50px] border-2 border-theme-secondary/60 min-h-[300px] shadow-lg flex flex-col gap-8'
+            className=' px-6 py-8 md:py-10 rounded-[30px] md:rounded-[50px] border-2 border-theme-secondary/60 min-h-[300px] shadow-lg flex flex-col gap-8'
           >
-            <div className='flex self-end items-center justify-center bg-theme-primary/80 p-4 rounded-full shadow-[0px_0px_10px_0px_rgba(0,123,255,0.25)]'>
+            <div className='flex self-end items-center justify-center /80 p-4 rounded-full shadow-[0px_0px_10px_0px_rgba(0,123,255,0.25)]'>
               {service.icon}
             </div>
             <div className='flex flex-col gap-3'>
-              <h3 className='text-xl md:text-2xl font-bold text-theme-secondary'>
+              <h3 className='text-xl md:text-2xl font-bold '>
                 {service.title}
               </h3>
-              <p className='text-theme-secondary/80 font-medium text-base md:text-xl'>
+              <p className='/80 font-medium text-base md:text-xl'>
                 {service.description}
               </p>
             </div>

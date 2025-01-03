@@ -57,9 +57,7 @@ export default function MediaProvider() {
                     <h3 className='font-semibold text-2xl'>{item.title}</h3>
                     <div>{item.icon}</div>
                   </div>
-                  <p className='text-theme-secondary/90 text-xl font-light'>
-                    {item.description}
-                  </p>
+                  <p className='/90 text-xl font-light'>{item.description}</p>
                 </div>
               </div>
             )

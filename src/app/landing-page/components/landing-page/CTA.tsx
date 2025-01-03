@@ -10,11 +10,11 @@ import {
 
 export default function CTASection() {
   return (
-    <div className='container mx-auto bg-theme-variant rounded-2xl flex flex-col gap-6 md:gap-8 items-center justify-center py-6 md:py-8 px-4'>
-      <h1 className='text-center font-paytone text-3xl md:text-5xl'>
+    <div className='container mx-auto bg-theme-variant rounded-2xl flex flex-col gap-6 md:gap-8 items-center justify-center py-6 md:py-8 px-4 '>
+      <h1 className='text-center font-paytone text-3xl md:text-5xl text-background dark:text-foreground'>
         {CTATITLE}
       </h1>
-      <p className='font-medium text-lg md:text-2xl text-theme-secondary/80 text-center max-w-3xl'>
+      <p className='font-medium text-lg md:text-2xl /80 text-center max-w-3xl text-background dark:text-foreground'>
         {CTADESCRIPTION}
       </p>
       <div className='flex flex-col sm:flex-row gap-4 sm:gap-9'>

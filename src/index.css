@@ -14,8 +14,6 @@ html {
 }
 
 body {
-  /* background-color: var(--primary);
-  color: var(--secondary); */
   font-family: 'Inter Tight', serif;
   overflow-x: none;
 }
@@ -47,26 +45,27 @@ body {
   }
 }
 
-/* globals */
-
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 100px !important;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--primary);
+  background: #09090b; /* Use theme background */
+  border-radius: 100px; /* Rounded corners for track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--variant);
+  background: var(--variant); /* Use theme variant color */
+  border-radius: 100px; /* Rounded corners for thumb */
+  border: 20px solid var(--primary); /* Add a border to make it look inset */
 }
 
 /* Firefox Scrollbar */
 html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--variant) #f1f1f1;
+  scrollbar-color: var(--variant) var(--primary); /* Thumb and track colors */
 }
-
 @layer base {
   :root {
     --background: 0 0% 100%;
