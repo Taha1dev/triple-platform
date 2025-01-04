@@ -15,10 +15,10 @@ import {
   InputOTPSlot,
 } from '@/components/ui/input-otp'
 import FormField, { FormFieldProps } from '../components/FormField'
-import { Footer } from '@/app/landing-page/components.barel'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { Footer } from '@/features/landing-page/components.barel'
 
 // Define the Zod schema for form validation
 const ResetPasswordSchema = z.object({

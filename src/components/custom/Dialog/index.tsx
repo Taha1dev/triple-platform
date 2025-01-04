@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import FormField from '@/app/dashboard/components/FormField'
-import { setIsDialogOpen } from '@/app/features/openDialogSlice'
+import { setIsDialogOpen } from '@/app/store/openDialogSlice'
 import { AppDispatch } from '@/app/store'
 import {
   AlertDialog,
@@ -68,9 +68,7 @@ export const Dialog: React.FC<DialogProps> = ({ body, ques }) => {
           <AlertDialogDescription className='mt-2 text-zinc-600 dark:text-zinc-400'>
             <p className='mb-4'>{body}</p>
             <FormProvider {...methods}>
-              <form
-                className='space-y-4 border-t border-zinc-200 pt-4 dark:border-zinc-800'
-              >
+              <form className='space-y-4 border-t border-zinc-200 pt-4 dark:border-zinc-800'>
                 {FormFields.map(field => (
                   <FormField key={field.id} {...field} />
                 ))}

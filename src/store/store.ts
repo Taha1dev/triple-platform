@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import dialogReducer from './features/openDialogSlice';
+import dialogReducer from './slices/openDialogSlice';
 export const store = configureStore({
   reducer: {
     dialog: dialogReducer,

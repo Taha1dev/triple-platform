@@ -7,16 +7,20 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { FormProvider, useForm } from 'react-hook-form'
-import FormField from '../components/FormField'
+
 import { Link } from 'react-router-dom'
 import { Dialog } from '@/components/custom/Dialog'
-import { Footer } from '@/app/landing-page/components.barel'
+
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/app/store'
-import { toggleDialog } from '@/app/features/openDialogSlice'
+import { AppDispatch, RootState } from '@/store/store.ts'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { LoginSchema } from '@/app/zod-schema/zod.schema'
+import { Footer } from '@/features/landing-page/components.barel'
+import { LoginSchema } from '@/models/zod-schema/zod.schema'
+import { toggleDialog } from '@/store/slices/openDialogSlice'
+import FormField from '../components/FormField'
+
 type FormValues = z.infer<typeof LoginSchema>
 export default function Login() {
   const isDialogOpen = useSelector(

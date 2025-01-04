@@ -10,10 +10,10 @@ import { Button } from '@/components/ui/button'
 import { useForm, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import FormField from '../components/FormField'
 import { Link } from 'react-router-dom'
-import { Footer } from '@/app/landing-page/components.barel'
-import { RegisterSchema } from '@/app/zod-schema/zod.schema'
+import { Footer } from '@/features/landing-page/components.barel'
+import { RegisterSchema } from '@/models/zod-schema/zod.schema'
+import FormField from '../components/FormField'
 
 // Validation Schema
 

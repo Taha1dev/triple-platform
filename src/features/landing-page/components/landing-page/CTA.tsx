@@ -6,7 +6,7 @@ import {
   CTABTN2TITLE,
   CTADESCRIPTION,
   CTATITLE,
-} from '@/app/landing-page/constants'
+} from '@/features/landing-page/constants'
 
 export default function CTASection() {
   return (
