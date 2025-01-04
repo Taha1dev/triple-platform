@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import FormField from '@/app/dashboard/components/FormField'
-import { setIsDialogOpen } from '@/app/store/openDialogSlice'
-import { AppDispatch } from '@/app/store'
+import FormField from '@/features/dashboard/components/FormField'
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,7 +16,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useDispatch } from 'react-redux'
-import { DialogSchema } from '@/app/zod-schema/zod.schema'
+import { DialogSchema } from '@/models/zod-schema/zod.schema'
+import { setIsDialogOpen } from '@/store/slices/openDialogSlice'
+import { AppDispatch } from '@/store/store'
 
 type FormValues = z.infer<typeof DialogSchema>
 

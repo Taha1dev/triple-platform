@@ -7,7 +7,7 @@ import {
   MediaProvider,
   ServicesSection,
   Vision,
-} from '@/app/landing-page/components.barel'
+} from '@/features/landing-page/components.barel'
 function App() {
   return (
     <>
