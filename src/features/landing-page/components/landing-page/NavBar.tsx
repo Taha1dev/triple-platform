@@ -4,8 +4,9 @@ import { useCallback, useEffect, useState } from 'react'
 import PrimaryButton from '../buttons/PrimaryButton'
 import SecondaryButton from '../buttons/SecondaryButton'
 import { useTheme } from '@/components/theme-provider'
+import { Link } from 'react-router-dom'
 
-export default function NavBar() {
+export default function NavBar({ showLinks = true }: any) {
   const navLinks = [
     { id: 1, name: 'Why Triple Platform', href: '#services' },
     { id: 2, name: 'How It Works', href: '#how-it-works' },
@@ -53,7 +54,9 @@ export default function NavBar() {
   }, [theme])
   return (
     <nav className='container mx-auto flex justify-between items-center p-4 md:p-0 dark:bg-background'>
-      <img src={logo} alt='triple-logo' width={200} height={90} />
+      <Link to={'/'}>
+        <img src={logo} alt='triple-logo' width={200} height={90} />
+      </Link>
       <button
         className='block md:hidden z-50'
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -68,16 +71,17 @@ export default function NavBar() {
         }`}
       >
         <div className='flex flex-col md:flex-row gap-6 md:gap-14 items-center'>
-          {navLinks.map(link => (
-            <a
-              key={link.id}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className='font-medium text-lg md:text-xl'
-            >
-              {link.name}
-            </a>
-          ))}
+          {showLinks &&
+            navLinks.map(link => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className='font-medium text-lg md:text-xl'
+              >
+                {link.name}
+              </a>
+            ))}
         </div>
         <div className='flex justify-center md:hidden gap-4 mt-4'>
           <SecondaryButton children='Login' href='login' />
@@ -86,8 +90,8 @@ export default function NavBar() {
       </div>
 
       <div className='hidden md:flex gap-4'>
-        <SecondaryButton children='Login' href='login' />
-        <PrimaryButton children='Signup' href='register' />
+        <SecondaryButton children='Login' href='/login' />
+        <PrimaryButton children='Signup' href='/register' />
       </div>
     </nav>
   )

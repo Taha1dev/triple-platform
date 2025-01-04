@@ -11,7 +11,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'react-router-dom'
-import { Footer } from '@/features/landing-page/components.barel'
+import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { RegisterSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../components/FormField'
 
@@ -25,18 +25,19 @@ export default function Register() {
   })
 
   const onSubmit = (data: FormValues) => {
+    console.log('ssssssssssss')
     console.log('Form data submitted:', data)
   }
 
-  const FormFields = [
+  const formFields = [
     {
-      id: 'firstName',
+      id: 'fname',
       label: 'First Name',
       placeholder: 'Enter your First Name',
       type: 'text',
     },
     {
-      id: 'lastName',
+      id: 'lName',
       label: 'Last Name',
       placeholder: 'Enter your Last Name',
       type: 'text',
@@ -48,7 +49,7 @@ export default function Register() {
       type: 'email',
     },
     {
-      id: 'phone',
+      id: 'contact_number',
       label: 'Phone Number',
       placeholder: 'Enter your Phone Number',
       type: 'text',
@@ -59,10 +60,19 @@ export default function Register() {
       placeholder: 'Enter your Password',
       type: 'password',
     },
+    {
+      id: 'dob',
+      label: 'Birth Date',
+      placeholder: 'Enter your Birth Date',
+      type: 'date',
+    },
   ]
-
+  formFields.map((field, i) => {
+    field.id = Object.keys(RegisterSchema.shape)[i]
+  })
   return (
     <>
+      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           {/* Image Section */}
@@ -98,7 +108,7 @@ export default function Register() {
                     className='space-y-4'
                   >
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                      {FormFields.map(field => (
+                      {formFields.map(field => (
                         <div key={field.id}>
                           <FormField
                             id={field.id}

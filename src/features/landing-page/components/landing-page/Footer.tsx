@@ -44,73 +44,103 @@ const Footer = () => {
     }
   }, [theme])
   return (
-    <footer className='py-8 container mx-auto'>
-      <div className='container mx-auto px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-8'>
+    <footer className='bg-background py-12 border-t'>
+      <div className='container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8'>
         {/* Logo and Tagline */}
-        <div className='flex flex-col justify-center items-center text-center '>
-          <img src={logo} alt='Triple Platform Logo' width={458} height={124} />
-          <p className='text-xl text-center -mt-2 /50 italic'>
-            Height the odds
-          </p>
+        <div className='flex flex-col items-start'>
+          <div className='flex-col-center'>
+            <img
+              src={logo}
+              alt='Triple Platform Logo'
+              width={250}
+              height={75}
+            />
+            <p className='text-lg text-muted-foreground italic'>
+              Height the odds
+            </p>
+          </div>
         </div>
 
-        {/* Quick Links and Legal */}
-        <div className='w-full md:w-auto flex flex-col md:flex-row gap-12 lg:items-start :items-center'>
-          {/* Quick Links */}
-          <div>
-            <h3 className='font-semibold mb-2 text-xl'>Quick Links</h3>
-            <ul className='space-y-1 '>
-              <li>
-                <a href='#about' className=' transition text-lg'>
-                  About
-                </a>
-              </li>
-              <li>
-                <a href='#faq' className=' transition text-lg'>
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href='#contact' className=' transition text-lg'>
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
+        {/* Quick Links */}
+        <div>
+          <h3 className='text-lg font-semibold mb-4 '>Quick Links</h3>
+          <ul className='space-y-2'>
+            <li>
+              <a
+                href='#about'
+                className='text-muted-foreground hover:text-foreground transition-colors'
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href='#faq'
+                className='text-muted-foreground hover:text-foreground transition-colors'
+              >
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a
+                href='#contact'
+                className='text-muted-foreground hover:text-foreground transition-colors'
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
 
-          {/* Legal */}
-          <div>
-            <h3 className='font-semibold mb-2 text-xl'>Legal</h3>
-            <ul className='space-y-1 '>
-              <li>
-                <a href='#privacy' className=' transition text-lg'>
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href='#terms' className=' transition text-lg'>
-                  Terms of Use
-                </a>
-              </li>
-            </ul>
+        {/* Legal */}
+        <div>
+          <h3 className='text-lg font-semibold mb-4 '>Legal</h3>
+          <ul className='space-y-2'>
+            <li>
+              <a
+                href='#privacy'
+                className='text-muted-foreground hover:text-foreground transition-colors'
+              >
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a
+                href='#terms'
+                className='text-muted-foreground hover:text-foreground transition-colors'
+              >
+                Terms of Use
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Social Links and Theme Toggle */}
+        <div className='flex flex-col items-center md:items-start space-y-4'>
+          <h3 className='text-lg font-semibold '>Follow Us</h3>
+          <div className='flex items-center space-x-4'>
+            <a
+              href='#'
+              aria-label='Instagram'
+              className='text-muted-foreground hover:text-foreground transition-colors'
+            >
+              <Instagram size={24} />
+            </a>
+            <a
+              href='#'
+              aria-label='LinkedIn'
+              className='text-muted-foreground hover:text-foreground transition-colors'
+            >
+              <Linkedin size={24} />
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Copyright and Social Icons */}
-      <div className='mt-8 border-t border-theme-secondary-40 pt-4 flex flex-col md:flex-row justify-between items-center gap-4'>
-        <p className='text-xl  text-center'>
-          © {new Date().getFullYear()} Tripple Platform. All Rights Reserved.
-        </p>
-        <div className='flex items-center gap-4'>
-          <ModeToggle />
-          <a href='#' aria-label='Instagram'>
-            <Instagram size={32} />
-          </a>
-          <a href='#' aria-label='LinkedIn'>
-            <Linkedin size={32} />
-          </a>
-        </div>
+      {/* Copyright */}
+      <div className='container mx-auto px-4 mt-8 border-t pt-8 text-center text-sm text-muted-foreground flex justify-between'>
+        © {new Date().getFullYear()} Triple Platform. All Rights Reserved.
+        <ModeToggle />
       </div>
     </footer>
   )

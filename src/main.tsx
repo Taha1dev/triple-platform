@@ -5,9 +5,9 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from './components/theme-provider.tsx'
-import Login from './features/dashboard/pages/Login.tsx'
-import Register from './features/dashboard/pages/Register.tsx'
-import ResetPassword from './features/dashboard/pages/ResetPassword.tsx'
+import Login from './features/dashboard/authentication/Login.tsx'
+import Register from './features/dashboard/authentication/Register.tsx'
+import ResetPassword from './features/dashboard/authentication/ResetPassword.tsx'
 import { store } from './store/store.ts'
 
 const router = createBrowserRouter([

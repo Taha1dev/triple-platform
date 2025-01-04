@@ -18,7 +18,7 @@ import FormField, { FormFieldProps } from '../components/FormField'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Footer } from '@/features/landing-page/components.barel'
+import { Footer, NavBar } from '@/features/landing-page/components.barel'
 
 // Define the Zod schema for form validation
 const ResetPasswordSchema = z.object({
@@ -68,7 +68,7 @@ export default function ResetPassword() {
       return
     }
 
-    setOtpError(null) // Clear any previous errors
+    setOtpError(null)
     console.log('Form data submitted:', data)
     console.log('OTP:', otp)
     alert('Password reset successfully!')
@@ -78,12 +78,12 @@ export default function ResetPassword() {
 
   return (
     <>
+      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
-          {/* Image Section */}
           <article className='hidden lg:block relative'>
             <img
-              src='/banner.png' // Replace with your image path
+              src='/banner.png' 
               alt='Reset Password Visual'
               className='w-full h-full object-cover'
             />
