@@ -4,11 +4,12 @@ import App from './App.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import Login from './app/dashboard/pages/Login.tsx'
-import Register from './app/dashboard/pages/Register.tsx'
-import ResetPassword from './app/dashboard/pages/ResetPassword.tsx'
 import { ThemeProvider } from './components/theme-provider.tsx'
-import { store } from './app/store.ts'
+import Login from './features/dashboard/pages/Login.tsx'
+import Register from './features/dashboard/pages/Register.tsx'
+import ResetPassword from './features/dashboard/pages/ResetPassword.tsx'
+import { store } from './store/store.ts'
+
 const router = createBrowserRouter([
   {
     path: '/',
