@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
   Card,
   CardHeader,
@@ -41,22 +40,22 @@ export default function ResetPassword() {
 
   const { handleSubmit, reset } = methods
 
-  // const FormFields: FormFieldProps[] = [
-  //   {
-  //     label: 'New Password',
-  //     id: 'newPassword',
-  //     placeholder: 'Enter your new Password',
-  //     type: 'password',
-  //     schema: ResetPasswordSchema.shape.newPassword,
-  //   },
-  //   {
-  //     label: 'Confirm Password',
-  //     id: 'confirmPassword',
-  //     placeholder: 'Confirm your Password',
-  //     type: 'password',
-  //     schema: ResetPasswordSchema.shape.confirmPassword,
-  //   },
-  // ]
+  const FormFields: FormFieldProps[] = [
+    {
+      label: 'New Password',
+      id: 'newPassword',
+      placeholder: 'Enter your new Password',
+      type: 'password',
+      schema: ResetPasswordSchema.shape.newPassword,
+    },
+    {
+      label: 'Confirm Password',
+      id: 'confirmPassword',
+      placeholder: 'Confirm your Password',
+      type: 'password',
+      schema: ResetPasswordSchema.shape.confirmPassword,
+    },
+  ]
 
   const onSubmit = (data: FormValues) => {
     if (otp.length < 6) {
@@ -129,6 +128,17 @@ export default function ResetPassword() {
                     </div>
 
                     {/* Form Fields */}
+                    {FormFields.map(field => (
+                      <div key={field.id} className='w-full'>
+                        <FormField
+                          label={field.label}
+                          id={field.id}
+                          placeholder={field.placeholder}
+                          type={field.type}
+                          schema={field.schema}
+                        />
+                      </div>
+                    ))}
 
                     {/* Submit Button */}
                     <Button
