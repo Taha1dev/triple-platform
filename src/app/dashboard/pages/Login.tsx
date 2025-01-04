@@ -110,7 +110,7 @@ export default function Login() {
                   </form>
                 </CardContent>
                 <CardFooter className='flex flex-col items-center py-6'>
-                  <p className='text-sm text-zinc-600'>
+                  <p className='text-sm text-zinc-600 dark:text-theme-secondary/80'>
                     Don't have an account?{' '}
                     <Link
                       to='/register'

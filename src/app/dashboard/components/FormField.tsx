@@ -28,7 +28,13 @@ const FormField: React.FC<FormFieldProps> = ({
       <label htmlFor={id} className='font-medium mb-1 ml-1'>
         {label}
       </label>
-      <Input id={id} type={type} placeholder={placeholder} {...register(id)} />
+      <Input
+        autoComplete='true'
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        {...register(id)}
+      />
       {errors[id] && (
         <span className='text-red-600 text-sm mt-1 ml-2'>
           {errors[id]?.message as string}

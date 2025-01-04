@@ -26,3 +26,6 @@ export const RegisterSchema = z.object({
       'Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., @, $, !, %, *, ?).'
     ),
 })
+export const DialogSchema = z.object({
+  email: z.string().email('Invalid email address'),
+})
