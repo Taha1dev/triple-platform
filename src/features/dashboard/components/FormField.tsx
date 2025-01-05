@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { CalendarIcon } from 'lucide-react'
-import moment from 'moment' // Import moment.js
+import moment from 'moment'
 
 export type FormFieldProps = {
   label: string
@@ -34,11 +34,10 @@ const FormField: React.FC<FormFieldProps> = ({
 
   const handleDateChange = (field: any, date: Date | undefined) => {
     if (date) {
-      // Format the date as "MM/DD/YYYY" using moment.js
       const formattedDate = moment(date).format('MM/DD/YYYY')
-      field.onChange(formattedDate) // Update the form field value
+      field.onChange(formattedDate)
     } else {
-      field.onChange(null) // Clear the field if no date is selected
+      field.onChange(null)
     }
   }
 
@@ -62,7 +61,6 @@ const FormField: React.FC<FormFieldProps> = ({
                 >
                   <CalendarIcon className='mr-2 h-4 w-4' />
                   {field.value ? (
-                    // Display the formatted date
                     moment(field.value, 'MM/DD/YYYY').format('MM/DD/YYYY')
                   ) : (
                     <span>Pick a date</span>

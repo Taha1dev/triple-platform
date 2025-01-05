@@ -15,8 +15,6 @@ import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { RegisterSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../components/FormField'
 
-// Validation Schema
-
 type FormValues = z.infer<typeof RegisterSchema>
 
 export default function Register() {
