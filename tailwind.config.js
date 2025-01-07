@@ -10,7 +10,7 @@ export default {
         paytone: ['"Paytone One"', "sans-serif"],
       },
       backgroundImage: {
-        'hero-pattern': "url('/banner.png')",
+        'hero-pattern': "url('/banner.webp')",
         'blur-pattern': "url('blob-blur.png')"
       },
       borderRadius: {
