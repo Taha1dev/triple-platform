@@ -45,6 +45,15 @@ const router = createBrowserRouter([
     element: <OTP_Verification />,
   },
 ])
+type Theme = 'light' | 'dark' | 'system'
+
+const getThemeFromLocalStorage = (key: string): Theme | undefined => {
+  const theme = window.localStorage.getItem(key)
+  if (theme === 'dark' || theme === 'light' || theme === 'system') {
+    return theme
+  }
+  return undefined
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -54,7 +63,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Toaster
           richColors
           duration={5000}
-          theme={window.localStorage.getItem('triple-theme')}
+          theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
         />
       </Provider>
     </ThemeProvider>
