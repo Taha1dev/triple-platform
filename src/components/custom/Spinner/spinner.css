@@ -1,115 +1,44 @@
-.infinity-path {
-  --size: 60;
-  --speed: 0.65;
-  height: calc(var(--size) * 1px);
+.loader {
   position: relative;
-  width: calc(var(--size) * 1px);
-}
-.infinity-path > div {
-  height: calc(var(--size) * 1px);
-  width: calc(var(--size) * 1px);
-  border-radius: 100%;
-  border: calc(var(--size) / 4 * 1px) solid var(--variant);
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-animation-duration: calc(var(--speed) * 1s);
-  animation-duration: calc(var(--speed) * 1s);
-  -webkit-animation-timing-function: linear;
-  animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  -webkit-animation-name: infinity-spin;
-  animation-name: infinity-spin;
-  -webkit-transform: translate(calc(var(--translate) * 1%), 0)
-    translate(calc(var(--translate-2) * 1px), 0);
-  transform: translate(calc(var(--translate) * 1%), 0)
-    translate(calc(var(--translate-2) * 1px), 0);
-}
-.infinity-path > div:before {
-  content: '';
-  height: calc(var(--size) / 4 * 1px);
-  width: calc(var(--size) / 4 * 1px);
-  border-radius: 100%;
-  background: var(--secondary);
-  position: absolute;
-  top: 50%;
-  animation: infinity-vanish calc(var(--speed) * 2s) infinite reverse steps(1);
-  -webkit-transform: translate(
-    calc(var(--translate-2) * 2px),
-    calc(var(--translate) * 1%)
-  );
-  transform: translate(
-    calc(var(--translate-2) * 2px),
-    calc(var(--translate) * 1%)
-  );
-}
-.infinity-path > div:nth-of-type(1) {
-  --translate: -50;
-  --translate-2: calc(var(--size) / 8);
-}
-.infinity-path > div:nth-of-type(1):before {
-  right: 0;
-}
-.infinity-path > div:nth-of-type(2) {
-  --translate: 50;
-  --translate-2: calc(var(--size) / 8 * -1);
-  -webkit-animation-delay: calc(var(--speed) * 1s);
-  animation-delay: calc(var(--speed) * 1s);
-  animation-direction: reverse;
-}
-.infinity-path > div:nth-of-type(2):before {
-  left: 0;
-  -webkit-transform: translate(calc(var(--size) / 4 * -1px), -50%);
-  transform: translate(calc(var(--size) / 4 * -1px), -50%);
-  -webkit-animation-direction: normal;
-  animation-direction: normal;
+  width: 85px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#FFF 50px, transparent 0),
+    linear-gradient(#FFF 50px, transparent 0),
+    linear-gradient(#FFF 50px, transparent 0),
+    linear-gradient(#FFF 50px, transparent 0),
+    linear-gradient(#FFF 50px, transparent 0),
+    linear-gradient(#FFF 50px, transparent 0);
+  background-position: 0px center, 15px center, 30px center, 45px center, 60px center, 75px center, 90px center;
+  animation: rikSpikeRoll 0.65s linear infinite alternate;
 }
 
-@-webkit-keyframes infinity-vanish {
+@keyframes rikSpikeRoll {
   0% {
-    opacity: 0;
+    background-size: 10px 3px;
   }
+
+  16% {
+    background-size: 10px 50px, 10px 3px, 10px 3px, 10px 3px, 10px 3px, 10px 3px
+  }
+
+  33% {
+    background-size: 10px 30px, 10px 50px, 10px 3px, 10px 3px, 10px 3px, 10px 3px
+  }
+
   50% {
-    opacity: 1;
+    background-size: 10px 10px, 10px 30px, 10px 50px, 10px 3px, 10px 3px, 10px 3px
   }
-}
 
-@keyframes infinity-vanish {
-  0% {
-    opacity: 0;
+  66% {
+    background-size: 10px 3px, 10px 10px, 10px 30px, 10px 50px, 10px 3px, 10px 3px
   }
-  50% {
-    opacity: 1;
-  }
-}
 
-@-webkit-keyframes infinity-spin {
-  from {
-    -webkit-transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(0deg);
-    transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(0deg);
+  83% {
+    background-size: 10px 3px, 10px 3px, 10px 10px, 10px 30px, 10px 50px, 10px 3px
   }
-  to {
-    -webkit-transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(360deg);
-    transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(360deg);
-  }
-}
 
-@keyframes infinity-spin {
-  from {
-    -webkit-transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(0deg);
-    transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(0deg);
-  }
-  to {
-    -webkit-transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(360deg);
-    transform: translate(calc(var(--translate) * 1%), 0)
-      translate(calc(var(--translate-2) * 1px), 0) rotate(360deg);
+  100% {
+    background-size: 10px 3px, 10px 3px, 10px 3px, 10px 10px, 10px 30px, 10px 50px
   }
 }

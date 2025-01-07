@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Card,
@@ -14,6 +15,11 @@ import { Link } from 'react-router-dom'
 import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { RegisterSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../components/FormField'
+import { useDispatch, useSelector } from 'react-redux'
+import { registerUser, resetState } from '@/store/slices/registerSlice'
+import { AppDispatch, RootState } from '@/store/store'
+import { useEffect } from 'react'
+import Spinner from '@/components/custom/Spinner'
 
 type FormValues = z.infer<typeof RegisterSchema>
 
@@ -22,11 +28,20 @@ export default function Register() {
     resolver: zodResolver(RegisterSchema),
   })
 
+  const dispatch = useDispatch<AppDispatch>()
+  const { error, loading } = useSelector((state: RootState) => state.register)
+
   const onSubmit = (data: FormValues) => {
-    console.log('ssssssssssss')
+    dispatch(registerUser(data))
     console.log('Form data submitted:', data)
   }
 
+  // Clear state when the component unmounts
+  useEffect(() => {
+    return () => {
+      dispatch(resetState())
+    }
+  }, [dispatch, error, loading])
   const formFields = [
     {
       id: 'fname',
@@ -68,10 +83,11 @@ export default function Register() {
   formFields.map((field, i) => {
     field.id = Object.keys(RegisterSchema.shape)[i]
   })
+
   return (
     <>
       <NavBar showLinks={false} />
-      <main className='flex h-screen items-center justify-center'>
+      <main className='flex min-h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           {/* Image Section */}
           <article className='hidden lg:block relative'>
@@ -121,7 +137,7 @@ export default function Register() {
                       type='submit'
                       className='w-full bg-foreground hover:bg-foreground/95 font-medium py-2 rounded-md transition-colors duration-200 mt-6'
                     >
-                      REGISTER
+                      {loading ? 'Registering...' : 'Register'}
                     </Button>
                   </form>
                 </CardContent>
@@ -141,6 +157,11 @@ export default function Register() {
             </FormProvider>
           </article>
         </Card>
+        {loading && (
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <Spinner />
+          </div>
+        )}
       </main>
       <Footer />
     </>

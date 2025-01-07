@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react'
 import {
   Card,
   CardHeader,
@@ -9,36 +8,30 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from '@/components/ui/input-otp'
+
 import FormField, { FormFieldProps } from '../components/FormField'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Footer, NavBar } from '@/features/landing-page/components.barel'
-
-// Define the Zod schema for form validation
-const ResetPasswordSchema = z.object({
-  newPassword: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z
-    .string()
-    .min(8, 'Confirm Password must be at least 8 characters'),
-})
+import { ResetPasswordSchema } from '@/models/zod-schema/zod.schema'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/store/store'
+import { resetPassword } from '@/store/slices/resetPasswordSlice'
+// import { useNavigate } from 'react-router-dom'
+import Spinner from '@/components/custom/Spinner'
 
 type FormValues = z.infer<typeof ResetPasswordSchema>
 
 export default function ResetPassword() {
-  const [otp, setOtp] = useState('')
-  const [otpError, setOtpError] = useState<string | null>(null)
-
+  // const navigate = useNavigate()
   const methods = useForm<FormValues>({
     resolver: zodResolver(ResetPasswordSchema),
   })
-
-  const { handleSubmit, reset } = methods
+  const dispatch = useDispatch<AppDispatch>()
+  const { email } = useSelector((state: RootState) => state.forgetPassword)
+  const { loading } = useSelector((state: RootState) => state.resetPassword)
+  const { handleSubmit } = methods
 
   const FormFields: FormFieldProps[] = [
     {
@@ -46,34 +39,22 @@ export default function ResetPassword() {
       id: 'newPassword',
       placeholder: 'Enter your new Password',
       type: 'password',
-      schema: ResetPasswordSchema.shape.newPassword,
     },
     {
       label: 'Confirm Password',
       id: 'confirmPassword',
       placeholder: 'Confirm your Password',
       type: 'password',
-      schema: ResetPasswordSchema.shape.confirmPassword,
     },
   ]
-
-  const onSubmit = (data: FormValues) => {
-    if (otp.length < 6) {
-      setOtpError('OTP must be 6 digits!')
-      return
+  const onSubmit = async (data: FormValues) => {
+    const { confirmPassword: password } = data
+    try {
+      await dispatch(resetPassword({ password, email })).unwrap()
+      // navigate('/ss')
+    } catch (error) {
+      console.log(error)
     }
-
-    if (data.newPassword !== data.confirmPassword) {
-      setOtpError('Passwords do not match!')
-      return
-    }
-
-    setOtpError(null)
-    console.log('Form data submitted:', data)
-    console.log('OTP:', otp)
-    alert('Password reset successfully!')
-    reset()
-    setOtp('')
   }
 
   return (
@@ -83,7 +64,7 @@ export default function ResetPassword() {
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           <article className='hidden lg:block relative'>
             <img
-              src='/banner.png' 
+              src='/banner.png'
               alt='Reset Password Visual'
               className='w-full h-full object-cover'
             />
@@ -109,24 +90,6 @@ export default function ResetPassword() {
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-                    {/* OTP Input */}
-                    <div className='flex justify-center flex-col items-center'>
-                      <InputOTP
-                        maxLength={6}
-                        value={otp}
-                        onChange={(value: string) => setOtp(value)}
-                      >
-                        <InputOTPGroup>
-                          {Array.from({ length: 6 }).map((_, index) => (
-                            <InputOTPSlot key={index} index={index} />
-                          ))}
-                        </InputOTPGroup>
-                      </InputOTP>
-                      {otpError && (
-                        <p className='text-red-600 text-sm mt-2'>{otpError}</p>
-                      )}
-                    </div>
-
                     {/* Form Fields */}
                     {FormFields.map(field => (
                       <div key={field.id} className='w-full'>
@@ -165,6 +128,11 @@ export default function ResetPassword() {
             </FormProvider>
           </article>
         </Card>
+        {loading && (
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <Spinner />
+          </div>
+        )}
       </main>
       <Footer />
     </>

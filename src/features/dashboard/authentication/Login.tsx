@@ -8,8 +8,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { Link } from 'react-router-dom'
-import { Dialog } from '@/components/custom/Dialog'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store.ts'
@@ -18,23 +17,19 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { LoginSchema } from '@/models/zod-schema/zod.schema'
-import { toggleDialog } from '@/store/slices/openDialogSlice'
 import FormField from '../components/FormField'
+import { loginUser } from '@/store/slices/loginSlice'
+import Spinner from '@/components/custom/Spinner'
 
 type FormValues = z.infer<typeof LoginSchema>
 export default function Login() {
-  const isDialogOpen = useSelector(
-    (state: RootState) => state.dialog.isDialogOpen,
-  )
+  const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-
+  const { loading } = useSelector((state: RootState) => state.login)
   const methods = useForm<FormValues>({
     resolver: zodResolver(LoginSchema),
   })
-  const onSubmit = (data: FormValues) => {
-    console.log('Form data submitted:', data)
-  }
-
+  const onSubmit = (data: FormValues) => dispatch(loginUser(data))
   const FormFields = [
     {
       id: 'email',
@@ -52,7 +47,7 @@ export default function Login() {
 
   return (
     <>
-    <NavBar showLinks={false}/>
+      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           <article className='hidden lg:block relative'>
@@ -98,17 +93,12 @@ export default function Login() {
                     <Button
                       variant={'link'}
                       type='button'
-                      onClick={() => dispatch(toggleDialog())}
+                      onClick={() => navigate('/forget-password')}
                       className='text-sm text-theme-variant hover:underline'
                     >
                       Forgot password?
                     </Button>
-                    {isDialogOpen && (
-                      <Dialog
-                        ques='Forgot your password?'
-                        body='Please enter your email address below.'
-                      />
-                    )}
+
                     <Button type='submit' className='w-full bg-foreground mt-6'>
                       LOGIN
                     </Button>
@@ -129,6 +119,11 @@ export default function Login() {
             </FormProvider>
           </article>
         </Card>
+        {loading && (
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <Spinner />
+          </div>
+        )}
       </main>
       <Footer />
     </>
