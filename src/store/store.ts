@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import dialogReducer from './slices/openDialogSlice';
 import registerReducer from './slices/registerSlice';
 import loginReducer from './slices/loginSlice';
-import resendOtpReducer from './slices/resendOtpSlice';
+import resendOtpReducer from './slices/resendOTPSlice';
 import forgetPasswordReducer from './slices/forgetPasswordSlice';
 import VerifyOtpReducer from './slices/verifyOTPSlice';
 import resetPasswordReducer from './slices/resetPasswordSlice';
