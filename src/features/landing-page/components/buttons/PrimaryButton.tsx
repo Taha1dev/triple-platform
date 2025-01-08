@@ -8,7 +8,7 @@ export default function PrimaryButton({
   href?: string
 }) {
   return (
-    <Button className='bg-foreground hover:bg-foreground font-semibold text-xl rounded-md w-fit'>
+    <Button className='font-semibold text-xl rounded-md w-fit'>
       <Link
         className='px-4 py-2 flex items-center justify-center gap-2'
         to={href || ''}

@@ -4,7 +4,6 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
-
       fontFamily: {
         monoScape: ['"Source Code Pro"', "sans-serif"],
         paytone: ['"Paytone One"', "sans-serif"],

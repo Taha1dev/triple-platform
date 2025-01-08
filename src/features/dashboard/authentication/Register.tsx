@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { useForm, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { RegisterSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../components/FormField'
@@ -24,6 +24,7 @@ import Spinner from '@/components/custom/Spinner'
 type FormValues = z.infer<typeof RegisterSchema>
 
 export default function Register() {
+  const navigate = useNavigate()
   const methods = useForm<FormValues>({
     resolver: zodResolver(RegisterSchema),
   })
@@ -31,12 +32,11 @@ export default function Register() {
   const dispatch = useDispatch<AppDispatch>()
   const { error, loading } = useSelector((state: RootState) => state.register)
 
-  const onSubmit = (data: FormValues) => {
-    dispatch(registerUser(data))
-    console.log('Form data submitted:', data)
+  const onSubmit = async (data: FormValues) => {
+    await dispatch(registerUser(data))
+    navigate('/select-country')
   }
 
-  // Clear state when the component unmounts
   useEffect(() => {
     return () => {
       dispatch(resetState())

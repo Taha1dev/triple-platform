@@ -87,12 +87,7 @@ export default function ForgetPassword() {
                       placeholder='Enter Your Email Here'
                       type='email'
                     />
-                    <Button
-                      type='submit'
-                      className='bg-theme-primary hover:bg-theme-primary/90 text-white font-medium py-2 rounded-md transition-colors duration-200'
-                    >
-                      Send OTP
-                    </Button>
+                    <Button type='submit'>Send OTP</Button>
                   </form>
                 </CardContent>
                 <CardFooter className='text-center py-6'>

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -14,6 +13,7 @@ import Test from './Test.tsx'
 import { Toaster } from 'sonner'
 import OTP_Verification from './features/dashboard/authentication/OTP-Verification.tsx'
 import ForgetPassword from './features/dashboard/authentication/ForgetPassword.tsx'
+import CountrySelection from './features/dashboard/authentication/CountrySelection.tsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
     path: 'otp-verification',
     element: <OTP_Verification />,
   },
+  {
+    path: 'select-country',
+    element: <CountrySelection />,
+  },
 ])
 type Theme = 'light' | 'dark' | 'system'
 
@@ -56,16 +60,14 @@ const getThemeFromLocalStorage = (key: string): Theme | undefined => {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-        <Toaster
-          richColors
-          duration={5000}
-          theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
-        />
-      </Provider>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <Toaster
+        richColors
+        duration={5000}
+        theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
+      />
+    </Provider>
+  </ThemeProvider>,
 )
