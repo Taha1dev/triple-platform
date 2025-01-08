@@ -20,6 +20,8 @@ import { forgetPassword } from '@/store/slices/forgetPasswordSlice'
 import Spinner from '@/components/custom/Spinner'
 import { useNavigate } from 'react-router-dom'
 import { Footer, NavBar } from '@/features/landing-page/components.barel'
+import { setPath } from '@/store/slices/routerSlice'
+import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 
 type FormValues = z.infer<typeof emailSchema>
 
@@ -32,11 +34,11 @@ export default function ForgetPassword() {
 
   const dispatch = useDispatch<AppDispatch>()
   const { loading } = useSelector((state: RootState) => state.forgetPassword)
-
   const onSubmit = async (data: FormValues) => {
     if (data) {
       try {
         await dispatch(forgetPassword(data.email)).unwrap()
+        dispatch(setPath('/reset-password'))
         navigate('/otp-verification')
       } catch (err) {
         console.error('Failed to send OTP:', err)
@@ -50,19 +52,7 @@ export default function ForgetPassword() {
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           {/* Banner Section */}
-          <article className='hidden lg:block relative'>
-            <img
-              src='/banner.png'
-              alt='Reset Password Visual'
-              className='w-full h-full object-cover'
-            />
-            <footer className='absolute inset-0 bg-black bg-opacity-40 flex items-end p-6 text-white'>
-              <p className='text-sm'>
-                © {new Date().getFullYear()} Triple Platform. All rights
-                reserved. Crafted with 🖤
-              </p>
-            </footer>
-          </article>
+          <BannerAuthImage />
 
           {/* Form Section */}
           <article className='p-8 flex items-center justify-center'>

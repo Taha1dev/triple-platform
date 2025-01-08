@@ -20,6 +20,7 @@ import { AppDispatch, RootState } from '@/store/store'
 import { resetPassword } from '@/store/slices/resetPasswordSlice'
 // import { useNavigate } from 'react-router-dom'
 import Spinner from '@/components/custom/Spinner'
+import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 
 type FormValues = z.infer<typeof ResetPasswordSchema>
 
@@ -62,20 +63,7 @@ export default function ResetPassword() {
       <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
-          <article className='hidden lg:block relative'>
-            <img
-              src='/banner.png'
-              alt='Reset Password Visual'
-              className='w-full h-full object-cover'
-            />
-            <footer className='absolute inset-0 bg-opacity-40 flex items-end p-6'>
-              <p className='text-sm'>
-                © {new Date().getFullYear()} Triple Platform. All rights
-                reserved. Crafted with 🖤
-              </p>
-            </footer>
-          </article>
-
+          <BannerAuthImage />
           {/* Form Section */}
           <article className='p-8'>
             <FormProvider {...methods}>

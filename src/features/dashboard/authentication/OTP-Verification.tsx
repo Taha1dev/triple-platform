@@ -24,6 +24,7 @@ import { verifyOtp } from '@/store/slices/verifyOTPSlice'
 import { useNavigate } from 'react-router-dom'
 import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { toast } from 'sonner'
+import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 
 export default function OTP_Verification() {
   const navigate = useNavigate()
@@ -37,6 +38,7 @@ export default function OTP_Verification() {
   const { loading, email } = useSelector(
     (state: RootState) => state.forgetPassword,
   )
+  const { path } = useSelector((state: RootState) => state.routerInstance)
   const { loading: v_loading } = useSelector(
     (state: RootState) => state.verifyOtp,
   )
@@ -54,7 +56,7 @@ export default function OTP_Verification() {
 
     try {
       await dispatch(verifyOtp({ email, forgot_password_OTP: otp })).unwrap()
-      navigate('/reset-password')
+      navigate(path)
     } catch (err) {
       console.error('Verification failed:', err)
     }
@@ -74,19 +76,7 @@ export default function OTP_Verification() {
       <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
-          <article className='hidden lg:block relative'>
-            <img
-              src='/banner.png'
-              alt='Reset Password Visual'
-              className='w-full h-full object-cover'
-            />
-            <footer className='absolute inset-0 bg-opacity-40 flex items-end p-6'>
-              <p className='text-sm'>
-                © {new Date().getFullYear()} Triple Platform. All rights
-                reserved. Crafted with 🖤
-              </p>
-            </footer>
-          </article>
+          <BannerAuthImage />
 
           {/* Form Section */}
           <article className='p-8'>

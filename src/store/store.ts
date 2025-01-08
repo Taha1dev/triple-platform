@@ -7,6 +7,7 @@ import forgetPasswordReducer from './slices/forgetPasswordSlice';
 import VerifyOtpReducer from './slices/verifyOTPSlice';
 import resetPasswordReducer from './slices/resetPasswordSlice';
 import citiesCountriesReducer from './slices/citiesCountriesSlice';
+import routerReducer from './slices/routerSlice';
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     verifyOtp: VerifyOtpReducer,
     forgetPassword: forgetPasswordReducer,
     resetPassword: resetPasswordReducer,
-    citiesCountries: citiesCountriesReducer
+    citiesCountries: citiesCountriesReducer,
+    routerInstance: routerReducer
   },
 });
 

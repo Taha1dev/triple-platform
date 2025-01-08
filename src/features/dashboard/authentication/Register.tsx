@@ -20,6 +20,8 @@ import { registerUser, resetState } from '@/store/slices/registerSlice'
 import { AppDispatch, RootState } from '@/store/store'
 import { useEffect } from 'react'
 import Spinner from '@/components/custom/Spinner'
+import { setPath } from '@/store/slices/routerSlice'
+import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 
 type FormValues = z.infer<typeof RegisterSchema>
 
@@ -31,11 +33,6 @@ export default function Register() {
 
   const dispatch = useDispatch<AppDispatch>()
   const { error, loading } = useSelector((state: RootState) => state.register)
-
-  const onSubmit = async (data: FormValues) => {
-    await dispatch(registerUser(data))
-    navigate('/select-country')
-  }
 
   useEffect(() => {
     return () => {
@@ -84,25 +81,19 @@ export default function Register() {
     field.id = Object.keys(RegisterSchema.shape)[i]
   })
 
+  const onSubmit = async (data: FormValues) => {
+    await dispatch(registerUser(data))
+    dispatch(setPath('/select-country'))
+    navigate('/otp-verification')
+  }
+
   return (
     <>
       <NavBar showLinks={false} />
       <main className='flex min-h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           {/* Image Section */}
-          <article className='hidden lg:block relative'>
-            <img
-              src='/banner.png'
-              alt='Register Visual'
-              className='w-full h-full object-cover'
-            />
-            <footer className='absolute inset-0 bg-opacity-40 flex items-end p-6'>
-              <p className='text-sm'>
-                © {new Date().getFullYear()} Triple Platform. All rights
-                reserved. Crafted with 🖤
-              </p>
-            </footer>
-          </article>
+          <BannerAuthImage />
 
           {/* Form Section */}
           <article className='p-8'>
