@@ -1,36 +1,64 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosClient from "@/api/apiClient";
+import { LoginResponseSchema } from "@/models/api-schema/auth.model";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-interface RegisterState {
+
+type UserData = Omit<LoginResponseSchema['data'], 'token'> | null;
+
+interface AuthState {
   loading: boolean;
   error: string | null;
   success: boolean;
+  token: string | null;
+  user: UserData
 }
-
-const initialState: RegisterState = {
+type LoginUserResponse = {
+  token: string;
+  user: Omit<LoginResponseSchema['data'], 'token'>;
+};
+const initialState: AuthState = {
   loading: false,
   error: null,
   success: false,
+  token: null,
+  user: null,
 };
-export const loginUser = createAsyncThunk(
+
+export const loginUser = createAsyncThunk<LoginUserResponse, Record<string, any>>(
   'auth/loginUser',
-  async (userData: Record<string, any>, { rejectWithValue }) => {
+  async (userData, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.post('/user/login', userData);
-      return response.data;
+      const response = await axiosClient.post<LoginResponseSchema>('/user/login', userData);
+      const { token, ...user } = response.data.data;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      return { token, user };
     } catch (error: any) {
       return rejectWithValue(error?.response?.data || 'An error occurred');
     }
   }
 );
+
 const loginSlice = createSlice({
-  name: 'login',
+  name: 'auth',
   initialState,
   reducers: {
     resetState: (state) => {
       state.loading = false;
       state.error = null;
       state.success = false;
+      state.token = null;
+      state.user = null;
+    },
+    initializeAuthState: (state) => {
+      const token = localStorage.getItem('token');
+      const userString = localStorage.getItem('user');
+      if (token && userString) {
+        state.token = token;
+        state.user = JSON.parse(userString) as UserData;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -40,16 +68,18 @@ const loginSlice = createSlice({
         state.error = null;
         state.success = false;
       })
-      .addCase(loginUser.fulfilled, (state) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string || 'Failed to register';
+        state.error = action.payload as string || 'Failed to login';
       });
   },
 });
 
-export const { resetState } = loginSlice.actions;
+export const { resetState, initializeAuthState } = loginSlice.actions;
 export default loginSlice.reducer;

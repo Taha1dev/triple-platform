@@ -59,7 +59,7 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
       <div className='flex-1'>
         <label
           htmlFor={`${id}-day`}
-          className='block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300'
+          className='block text-sm font-medium mb-1 text-foreground'
         >
           Day
         </label>
@@ -78,7 +78,7 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
       <div className='flex-1'>
         <label
           htmlFor={`${id}-month`}
-          className='block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300'
+          className='block text-sm font-medium mb-1 text-foreground'
         >
           Month
         </label>
@@ -108,7 +108,7 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
       <div className='flex-1'>
         <label
           htmlFor={`${id}-year`}
-          className='block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300'
+          className='block text-sm font-medium mb-1 text-foreground'
         >
           Year
         </label>

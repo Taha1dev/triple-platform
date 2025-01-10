@@ -13,7 +13,6 @@ import FormField, { FormFieldProps } from '../components/FormField'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { ResetPasswordSchema } from '@/models/zod-schema/zod.schema'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
@@ -21,6 +20,7 @@ import { resetPassword } from '@/store/slices/resetPasswordSlice'
 // import { useNavigate } from 'react-router-dom'
 import Spinner from '@/components/custom/Spinner'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
+import { Link } from 'react-router-dom'
 
 type FormValues = z.infer<typeof ResetPasswordSchema>
 
@@ -60,7 +60,6 @@ export default function ResetPassword() {
 
   return (
     <>
-      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           <BannerAuthImage />
@@ -104,12 +103,12 @@ export default function ResetPassword() {
                   <div className='w-full border-t border-zinc-200 my-4'></div>
                   <p className='text-sm text-zinc-600 dark:text-theme-secondary/80'>
                     Remember your password?{' '}
-                    <a
-                      href='/login'
+                    <Link
+                      to='/login'
                       className='font-medium text-theme-variant hover:underline transition-colors duration-200'
                     >
                       Login
-                    </a>
+                    </Link>
                   </p>
                 </CardFooter>
               </Card>
@@ -122,7 +121,6 @@ export default function ResetPassword() {
           </div>
         )}
       </main>
-      <Footer />
     </>
   )
 }

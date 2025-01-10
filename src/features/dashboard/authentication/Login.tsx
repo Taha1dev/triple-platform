@@ -15,7 +15,6 @@ import { AppDispatch, RootState } from '@/store/store.ts'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { LoginSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../components/FormField'
 import { loginUser } from '@/store/slices/loginSlice'
@@ -30,7 +29,10 @@ export default function Login() {
   const methods = useForm<FormValues>({
     resolver: zodResolver(LoginSchema),
   })
-  const onSubmit = (data: FormValues) => dispatch(loginUser(data))
+  const onSubmit = async (data: FormValues) => {
+    await dispatch(loginUser(data))
+    navigate('/ss')
+  }
   const FormFields = [
     {
       id: 'email',
@@ -48,7 +50,6 @@ export default function Login() {
 
   return (
     <>
-      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           <BannerAuthImage />
@@ -113,7 +114,6 @@ export default function Login() {
           </div>
         )}
       </main>
-      <Footer />
     </>
   )
 }

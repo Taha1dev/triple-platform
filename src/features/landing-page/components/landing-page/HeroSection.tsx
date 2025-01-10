@@ -1,18 +1,48 @@
-import PrimaryButton from '../buttons/PrimaryButton'
-
+import { Button } from '@/components/ui/button'
+import { motion } from 'motion/react'
 export default function HeroSection() {
   return (
-    <section className='flex items-center bg-hero-pattern bg-cover h-[543px] w-full rounded md:py-11 py-8 px-5'>
-      <div className='flex flex-col gap-4 px-6 md:px-9 py-6 md:py-11 rounded-md max-w-xl md:max-w-3xl ml-auto md:ml-5 text-background dark:text-foreground'>
-        <h1 className='text-3xl md:text-6xl font-paytone leading-tight text-wrap'>
-          Streamline Your Media Production Journey.
-        </h1>
-        <h3 className='text-lg md:text-2xl font-medium text-wrap'>
-          Find the right resources, make faster decisions, and achieve a
-          stress-free pre-production process.
-        </h3>
-        <PrimaryButton children='Learn More' />
-      </div>
-    </section>
+    <main className='flex m-2 items-center bg-background/70 backdrop-blur-lg'>
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className='flex items-center bg-hero-pattern bg-cover h-[543px] w-full rounded-2xl self-center px-6 py-8 md:py-12'
+      >
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
+          className='flex flex-col gap-6 p-6 md:p-10 rounded-[20px] max-w-xl md:max-w-3xl bg-background/50 backdrop-blur-lg shadow-2xl mr-auto text-foreground'
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6, ease: 'easeOut' }}
+            className='text-[2.20rem] md:text-5xl leading-tight text-foreground font-paytone'
+          >
+            Streamline Your Media Production Journey.
+          </motion.h1>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6, ease: 'easeOut' }}
+            className='text-lg md:text-xl font-medium text-foreground/80'
+          >
+            Find the right resources, make faster decisions, and achieve a
+            stress-free pre-production process.
+          </motion.h3>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.6, ease: 'easeOut' }}
+          >
+            <Button className='w-fit text-lg'>
+              <a href='#how-it-works'>Learn More</a>
+            </Button>
+          </motion.div>
+        </motion.div>
+      </motion.section>
+    </main>
   )
 }

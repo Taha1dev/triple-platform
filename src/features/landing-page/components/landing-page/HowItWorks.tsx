@@ -1,3 +1,4 @@
+import { Card } from '@/components/ui/card'
 import Heading from '../Heading'
 
 export default function HowItWorks() {
@@ -21,26 +22,32 @@ export default function HowItWorks() {
   return (
     <section
       id='how-it-works'
-      className='container mx-auto py-8 px-4 md:px-8 lg:px-8 mb-4'
+      className='container mx-auto py-12 px-6 md:px-8 lg:px-12'
     >
       <Heading
         sub='How It Works'
-        main='Your Path to stress-free Pre-production'
+        main='Your Path to Stress-Free Pre-production'
       />
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-12'>
-        {data.map(item => {
-          return (
-            <div key={item.id} className='flex flex-col items-center gap-11'>
-              <p className='bg-theme-variant text-white font-bold text-xl px-4 py-2 rounded-full text-center w-fit'>
-                {item.id}
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-12'>
+        {data.map(item => (
+          <Card
+            key={item.id}
+            className='flex flex-col items-center gap-8 text-center 
+            rounded-2xl p-6 transition-transform duration-300 hover:scale-105 !bg-background/50 !backdrop-blur-md '
+          >
+            <span className='bg-theme-variant text-theme-secondary font-bold text-lg px-4 py-2 rounded-full'>
+              {item.id}
+            </span>
+            <div className='flex flex-col gap-4'>
+              <h2 className='text-xl font-semibold text-foreground'>
+                {item.name}
+              </h2>
+              <p className='text-base text-muted-foreground max-w-xs mx-auto'>
+                {item.desc}
               </p>
-              <div className='flex flex-col gap-7 *:text-center'>
-                <h2 className='text-2xl font-extrabold'>{item.name}</h2>
-                <p className='w-[250px] text-xl text'>{item.desc}</p>
-              </div>
             </div>
-          )
-        })}
+          </Card>
+        ))}
       </div>
     </section>
   )

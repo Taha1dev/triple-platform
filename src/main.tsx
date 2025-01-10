@@ -14,6 +14,10 @@ import { Toaster } from 'sonner'
 import OTP_Verification from './features/dashboard/authentication/OTP-Verification.tsx'
 import ForgetPassword from './features/dashboard/authentication/ForgetPassword.tsx'
 import CountrySelection from './features/dashboard/authentication/CountrySelection.tsx'
+import FAQ from './pages/FAQs.tsx'
+import TermsAndConditions from './pages/TermsAndConditions.tsx'
+import PrivacyPolicy from './pages/PrivacyPolicy.tsx'
+import Layout from './layout/Layout.tsx'
 
 const router = createBrowserRouter([
   {
@@ -21,32 +25,50 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: 'login',
-    element: <Login />,
-  },
-  {
-    path: 'register',
-    element: <Register />,
-  },
-  {
-    path: 'reset-password',
-    element: <ResetPassword />,
-  },
-  {
-    path: 'ss',
-    element: <Test />,
-  },
-  {
-    path: 'forget-password',
-    element: <ForgetPassword />,
-  },
-  {
-    path: 'otp-verification',
-    element: <OTP_Verification />,
-  },
-  {
-    path: 'select-country',
-    element: <CountrySelection />,
+    path: '',
+    element: <Layout />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: 'reset-password',
+        element: <ResetPassword />,
+      },
+      {
+        path: 'ss',
+        element: <Test />,
+      },
+      {
+        path: 'forget-password',
+        element: <ForgetPassword />,
+      },
+      {
+        path: 'otp-verification',
+        element: <OTP_Verification />,
+      },
+      {
+        path: 'select-country',
+        element: <CountrySelection />,
+      },
+      {
+        path: 'privacy-policy',
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: 'terms',
+        element: <TermsAndConditions />,
+      },
+      {
+        path: 'faq',
+        element: <FAQ />,
+      },
+    ],
   },
 ])
 type Theme = 'light' | 'dark' | 'system'
@@ -61,6 +83,7 @@ const getThemeFromLocalStorage = (key: string): Theme | undefined => {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
+    
     <Provider store={store}>
       <RouterProvider router={router} />
       <Toaster

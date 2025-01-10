@@ -12,7 +12,6 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from 'react-router-dom'
-import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import { RegisterSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../components/FormField'
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,6 +21,7 @@ import { useEffect } from 'react'
 import Spinner from '@/components/custom/Spinner'
 import { setPath } from '@/store/slices/routerSlice'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
+import { Separator } from '@/components/ui/separator'
 
 type FormValues = z.infer<typeof RegisterSchema>
 
@@ -89,56 +89,51 @@ export default function Register() {
 
   return (
     <>
-      <NavBar showLinks={false} />
       <main className='flex min-h-screen items-center justify-center'>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
+        <section className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg border shadow-sm overflow-hidden'>
           {/* Image Section */}
           <BannerAuthImage />
 
           {/* Form Section */}
-          <article className='p-8'>
+          <article className='p-4 lg:p-10 bg-background'>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
-                <CardHeader className='space-y-2'>
-                  <CardTitle className='text-center text-2xl font-bold'>
+                <CardHeader className='space-y-3'>
+                  <CardTitle className='text-center text-2xl font-semibold'>
                     Create Your Account
                   </CardTitle>
-                  <p className='text-center text-sm text-zinc-600 dark:text-theme-secondary/80'>
+                  <p className='text-center text-sm text-muted-foreground'>
                     Join us to get started on your journey
                   </p>
                 </CardHeader>
                 <CardContent>
                   <form
                     onSubmit={methods.handleSubmit(onSubmit)}
-                    className='space-y-4'
+                    className='space-y-6'
                   >
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                       {formFields.map(field => (
-                        <div key={field.id}>
-                          <FormField
-                            id={field.id}
-                            label={field.label}
-                            placeholder={field.placeholder}
-                            type={field.type}
-                          />
-                        </div>
+                        <FormField
+                          key={field.id}
+                          id={field.id}
+                          label={field.label}
+                          placeholder={field.placeholder}
+                          type={field.type}
+                        />
                       ))}
                     </div>
-                    <Button
-                      type='submit'
-                      className='w-full bg-foreground hover:bg-foreground/95 font-medium py-2 rounded-md transition-colors duration-200 mt-6'
-                    >
+                    <Button type='submit' className='w-full' disabled={loading}>
                       {loading ? 'Registering...' : 'Register'}
                     </Button>
                   </form>
                 </CardContent>
                 <CardFooter className='flex flex-col items-center space-y-4 py-6'>
-                  <div className='w-full border-t border-zinc-200 my-4'></div>
-                  <p className='text-sm text-zinc-600 dark:text-theme-secondary/80'>
+                  <Separator />
+                  <p className='text-sm text-muted-foreground'>
                     Already have an account?{' '}
                     <Link
                       to='/login'
-                      className='font-medium text-theme-variant hover:underline transition-colors duration-200'
+                      className='font-medium text-foreground hover:underline'
                     >
                       LOGIN
                     </Link>
@@ -147,14 +142,14 @@ export default function Register() {
               </Card>
             </FormProvider>
           </article>
-        </Card>
+        </section>
+
         {loading && (
-          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+          <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50'>
             <Spinner />
           </div>
         )}
       </main>
-      <Footer />
     </>
   )
 }

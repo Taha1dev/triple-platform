@@ -1,4 +1,6 @@
 import { lazy, Suspense } from 'react'
+import Spinner from './components/custom/Spinner'
+import ScrollToTop from './components/custom/utility/ScrollToTop'
 
 const NavBar = lazy(() =>
   import('@/features/landing-page/components.barel').then(module => ({
@@ -43,7 +45,14 @@ const Footer = lazy(() =>
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+          <Spinner />
+        </div>
+      }
+    >
+      <ScrollToTop />
       <NavBar />
       <HeroSection />
       <div className='my-16'></div>

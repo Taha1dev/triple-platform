@@ -10,7 +10,7 @@ export default function SecondaryButton({
 }) {
   return (
     <Button
-      variant={'secondary'}
+      variant={'outline'}
       className='font-semibold text-xl rounded-md w-fit '
     >
       <Link

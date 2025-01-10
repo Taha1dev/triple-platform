@@ -21,8 +21,7 @@ import { AppDispatch, RootState } from '@/store/store'
 import { resendOtp } from '@/store/slices/resendOTPSlice'
 import Spinner from '@/components/custom/Spinner'
 import { verifyOtp } from '@/store/slices/verifyOTPSlice'
-import { useNavigate } from 'react-router-dom'
-import { Footer, NavBar } from '@/features/landing-page/components.barel'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 
@@ -73,7 +72,6 @@ export default function OTP_Verification() {
 
   return (
     <>
-      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           <BannerAuthImage />
@@ -139,12 +137,12 @@ export default function OTP_Verification() {
                   <div className='w-full border-t border-zinc-200 my-4'></div>
                   <p className='text-sm text-zinc-600 dark:text-theme-secondary/80'>
                     Remember your password?{' '}
-                    <a
-                      href='/login'
+                    <Link
+                      to='/login'
                       className='font-medium text-theme-variant hover:underline transition-colors duration-200'
                     >
                       Login
-                    </a>
+                    </Link>
                   </p>
                 </CardFooter>
               </Card>
@@ -158,7 +156,11 @@ export default function OTP_Verification() {
             </div>
           ))}
       </main>
-      <Footer />
+      {(loading || v_loading) ?? (
+        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+          <Spinner />
+        </div>
+      )}
     </>
   )
 }

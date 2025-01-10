@@ -10,7 +10,6 @@ import {
 import { Button } from '@/components/ui/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
-import { Footer, NavBar } from '@/features/landing-page/components.barel'
 import MultipleSelect from '../components/MultipleSelect'
 import {
   Select,
@@ -78,7 +77,6 @@ export default function CountrySelection() {
 
   return (
     <>
-      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center '>
         <Card className='w-full max-w-4xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           <article className='p-8'>
@@ -156,7 +154,6 @@ export default function CountrySelection() {
           </div>
         )}
       </main>
-      <Footer />
     </>
   )
 }

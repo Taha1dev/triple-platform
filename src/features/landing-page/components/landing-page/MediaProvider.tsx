@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Users, Images, Globe } from 'lucide-react'
 import Heading from '../Heading'
-
+import img1 from '/showcase1.png'
+import img2 from '/showcase2.png'
+import img3 from '/showcase3.png'
 export default function MediaProvider() {
   const data = [
     {
       id: 1,
-      image: '/showcase1.png',
+      image: img1,
       title: 'Expand Your Reach',
       description:
         'Gain visibility and connect with industry professionals seeking your services.',
@@ -14,7 +16,7 @@ export default function MediaProvider() {
     },
     {
       id: 2,
-      image: '/showcase2.png',
+      image: img2,
       title: 'Showcase Your Work',
       description:
         'Display your portfolio and achievements to attract the right projects.',
@@ -22,7 +24,7 @@ export default function MediaProvider() {
     },
     {
       id: 3,
-      image: '/showcase3.png',
+      image: img3,
       title: 'Join a Thriving Community',
       description:
         'Be part of a forward-thinking media ecosystem that values time, clarity, and efficiency.',
@@ -30,40 +32,38 @@ export default function MediaProvider() {
     },
   ]
   return (
-    <section id='media' className='relative flex'>
-      {/* <div className='absolute top-10 right-72 bg-blur-pattern w-[2000px] h-[1000px] bg-cover'></div> */}
-      {/* <div className='absolute top-10 z-0 overflow-x-hidden left-72 bg-blur-pattern w-[1000px] h-[1000px] bg-contain bg-no-repeat'></div> */}
-      <section className='container z-20 mx-auto py-8 px-4 md:px-8 lg:px-8 mb-4 flex-col-center gap-8 '>
+    <main id='media' className='relative flex'>
+      <section className='container mx-auto py-12 px-6 md:px-8 lg:px-12 flex flex-col items-center gap-12'>
         <Heading
           sub='Why Sign Up as a Media Service Provider'
           main='Showcase Your Expertise, Expand Your Opportunities'
         />
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-12'>
-          {data.map(item => {
-            return (
-              <div
-                key={item.id}
-                className='flex flex-col gap-11 border-2 border-white-70 rounded-2xl py-7 px-4 csard'
-              >
-                <img
-                  src={item.image}
-                  alt={`${item.title} Image`}
-                  width={394}
-                  height={260}
-                  className='rounded-lg self-center'
-                />
-                <div className='flex flex-col gap-5'>
-                  <div className='flex justify-between'>
-                    <h3 className='font-semibold text-2xl'>{item.title}</h3>
-                    <div>{item.icon}</div>
-                  </div>
-                  <p className='/90 text-xl font-light'>{item.description}</p>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          {data.map(item => (
+            <div
+              key={item.id}
+              className='flex flex-col gap-6 border border-muted rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow'
+            >
+              <img
+                src={item.image}
+                alt={`${item.title} Image`}
+                className='rounded-md w-full aspect-video object-cover'
+              />
+              <div className='flex flex-col gap-4'>
+                <div className='flex items-center justify-between'>
+                  <h3 className='text-xl font-semibold text-primary'>
+                    {item.title}
+                  </h3>
+                  <div className='text-muted-foreground'>{item.icon}</div>
                 </div>
+                <p className='text-base text-muted-foreground'>
+                  {item.description}
+                </p>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </section>
-    </section>
+    </main>
   )
 }

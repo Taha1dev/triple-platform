@@ -18,8 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { forgetPassword } from '@/store/slices/forgetPasswordSlice'
 import Spinner from '@/components/custom/Spinner'
-import { useNavigate } from 'react-router-dom'
-import { Footer, NavBar } from '@/features/landing-page/components.barel'
+import { Link, useNavigate } from 'react-router-dom'
 import { setPath } from '@/store/slices/routerSlice'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 
@@ -48,7 +47,6 @@ export default function ForgetPassword() {
 
   return (
     <>
-      <NavBar showLinks={false} />
       <main className='flex h-screen items-center justify-center'>
         <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
           {/* Banner Section */}
@@ -83,12 +81,12 @@ export default function ForgetPassword() {
                 <CardFooter className='text-center py-6'>
                   <p className='text-sm text-zinc-600 dark:text-zinc-400'>
                     Remember your password?{' '}
-                    <a
-                      href='/login'
+                    <Link
+                      to='/login'
                       className='font-medium text-theme-secondary hover:underline transition-colors duration-200'
                     >
                       Login
-                    </a>
+                    </Link>
                   </p>
                 </CardFooter>
               </Card>
@@ -101,7 +99,6 @@ export default function ForgetPassword() {
           </div>
         )}
       </main>
-      <Footer />
     </>
   )
 }

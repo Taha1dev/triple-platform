@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTheme } from '@/components/theme-provider'
 import { ModeToggle } from '@/mode-toggle'
-import { Instagram, Linkedin } from 'lucide-react'
+import { Instagram, Linkedin, Twitter } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
-
+import { Link } from 'react-router-dom'
 const Footer = () => {
   const { theme } = useTheme()
   const [logo, setLogo] = useState<string>('/triple-platform-logo.png')
@@ -49,12 +49,14 @@ const Footer = () => {
         {/* Logo and Tagline */}
         <div className='flex flex-col items-start'>
           <div className='flex-col-center'>
-            <img
-              src={logo}
-              alt='Triple Platform Logo'
-              width={250}
-              height={75}
-            />
+            <Link to={'/'}>
+              <img
+                src={logo}
+                alt='Triple Platform Logo'
+                width={250}
+                height={75}
+              />
+            </Link>
             <p className='text-lg text-muted-foreground italic'>
               Height the odds
             </p>
@@ -74,12 +76,12 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a
-                href='#faq'
+              <Link
+                to='faq'
                 className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 FAQ
-              </a>
+              </Link>
             </li>
             <li>
               <a
@@ -97,20 +99,20 @@ const Footer = () => {
           <h3 className='text-lg font-semibold mb-4 '>Legal</h3>
           <ul className='space-y-2'>
             <li>
-              <a
-                href='#privacy'
+              <Link
+                to='privacy-policy'
                 className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href='#terms'
+              <Link
+                to='terms'
                 className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 Terms of Use
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -119,20 +121,27 @@ const Footer = () => {
         <div className='flex flex-col items-center md:items-start space-y-4'>
           <h3 className='text-lg font-semibold '>Follow Us</h3>
           <div className='flex items-center space-x-4'>
-            <a
-              href='#'
+            <Link
+              to='#'
               aria-label='Instagram'
               className='text-muted-foreground hover:text-foreground transition-colors'
             >
               <Instagram size={24} />
-            </a>
-            <a
-              href='#'
+            </Link>
+            <Link
+              to='#'
               aria-label='LinkedIn'
               className='text-muted-foreground hover:text-foreground transition-colors'
             >
               <Linkedin size={24} />
-            </a>
+            </Link>
+            <Link
+              to='#'
+              aria-label='LinkedIn'
+              className='text-muted-foreground hover:text-foreground transition-colors'
+            >
+              <Twitter size={24} />
+            </Link>
           </div>
         </div>
       </div>
