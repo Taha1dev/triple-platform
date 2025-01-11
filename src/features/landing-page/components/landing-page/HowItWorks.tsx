@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card'
 import Heading from '../Heading'
+import { RainbowButton } from '@/components/ui/rainbow-button'
 
 export default function HowItWorks() {
   const data = [
@@ -22,18 +23,18 @@ export default function HowItWorks() {
   return (
     <section
       id='how-it-works'
-      className='container mx-auto py-12 px-6 md:px-8 lg:px-12'
+      className='container mx-auto py-12 px-6 md:px-8 lg:px-12 flex-col-center'
     >
       <Heading
         sub='How It Works'
         main='Your Path to Stress-Free Pre-production'
       />
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-12'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 relative'>
         {data.map(item => (
           <Card
             key={item.id}
             className='flex flex-col items-center gap-8 text-center 
-            rounded-2xl p-6 transition-transform duration-300 hover:scale-105 !bg-background/50 !backdrop-blur-md '
+            rounded-3xl p-6 transition-transform duration-300 hover:scale-105 !bg-background/50 !backdrop-blur-md '
           >
             <span className='bg-theme-variant text-theme-secondary font-bold text-lg px-4 py-2 rounded-full'>
               {item.id}
@@ -49,6 +50,7 @@ export default function HowItWorks() {
           </Card>
         ))}
       </div>
+      <RainbowButton className='mt-4'>Join Us Now 👋</RainbowButton>
     </section>
   )
 }

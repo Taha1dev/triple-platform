@@ -77,7 +77,7 @@ export function MagicCard({
     <div
       ref={cardRef}
       className={cn(
-        'group relative !bg-background md:rounded-[40px] min-h-[300px] shadow-lg flex flex-col ',
+        'group relative !bg-background min-h-[300px] shadow-lg flex flex-col ',
         className,
       )}
     >
@@ -86,7 +86,7 @@ export function MagicCard({
         {children}
       </div>
       <motion.div
-        className='pointer-events-none absolute inset-px z-10 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+        className='pointer-events-none absolute inset-px z-10 rounded-[25px] opacity-0 transition-opacity duration-300 group-hover:opacity-100'
         style={{
           background: useMotionTemplate`
             radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px, ${gradientColor}, transparent 100%)

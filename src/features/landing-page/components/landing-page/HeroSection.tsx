@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button'
-import { motion } from 'motion/react'
+import { motion, AbsoluteKeyframe } from 'motion/react'
 export default function HeroSection() {
   return (
-    <main className='flex m-2 items-center bg-background/70 backdrop-blur-lg'>
+    <main className='flex m-2 items-center bg-background/70 backdrop-blur-sm'>
       <motion.section
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -13,7 +13,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
-          className='flex flex-col gap-6 p-6 md:p-10 rounded-[20px] max-w-xl md:max-w-3xl bg-background/50 backdrop-blur-lg shadow-2xl mr-auto text-foreground'
+          className='flex flex-col gap-6 p-6 md:p-10 rounded-[20px] max-w-xl md:max-w-3xl bg-background/20 backdrop-blur-md shadow-2xl mr-auto text-foreground'
         >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -21,7 +21,7 @@ export default function HeroSection() {
             transition={{ delay: 0.8, duration: 0.6, ease: 'easeOut' }}
             className='text-[2.20rem] md:text-5xl leading-tight text-foreground font-paytone'
           >
-            Streamline Your Media Production Journey.
+            Media Pre-Production made easy
           </motion.h1>
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
@@ -29,8 +29,8 @@ export default function HeroSection() {
             transition={{ delay: 1, duration: 0.6, ease: 'easeOut' }}
             className='text-lg md:text-xl font-medium text-foreground/80'
           >
-            Find the right resources, make faster decisions, and achieve a
-            stress-free pre-production process.
+            Triple Platform makes it easy to find resources, make decisions
+            faster, and help you seamlessly manage your Media Project
           </motion.h3>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

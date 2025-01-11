@@ -9,67 +9,67 @@
 // import { Card } from '@/components/ui/card'
 
 // export default function NavBar({ showLinks = true }: any) {
-// const [isMenuOpen, setIsMenuOpen] = useState(false)
-// const [isScrolled, setIsScrolled] = useState<boolean>(false)
-// const [logo, setLogo] = useState<string>('/triple-platform-logo.png')
+//   const [isMenuOpen, setIsMenuOpen] = useState(false)
+//   const [isScrolled, setIsScrolled] = useState<boolean>(false)
+//   const [logo, setLogo] = useState<string>('/triple-platform-logo.png')
 
-// const navLinks = [
-//   { id: 1, name: 'Why Triple Platform', href: '#services' },
-//   { id: 2, name: 'How It Works', href: '#how-it-works' },
-//   { id: 3, name: 'Vision', href: '#vision' },
-//   { id: 4, name: 'Media Providers', href: '#media' },
-// ]
+//   const navLinks = [
+//     { id: 1, name: 'Why Triple Platform', href: '#services' },
+//     { id: 2, name: 'How It Works', href: '#how-it-works' },
+//     { id: 3, name: 'Vision', href: '#vision' },
+//     { id: 4, name: 'Media Providers', href: '#media' },
+//   ]
 
-// const { theme } = useTheme()
-// const getSystemTheme = () => {
-//   return window.matchMedia('(prefers-color-scheme: dark)').matches
-//     ? 'dark'
-//     : 'light'
-// }
-
-// const getEffectiveTheme = useCallback(() => {
-//   return theme === 'system' ? getSystemTheme() : theme
-// }, [theme])
-
-// useEffect(() => {
-//   const effectiveTheme = getEffectiveTheme()
-//   if (effectiveTheme === 'dark') {
-//     setLogo('/triple-logo.webp')
-//   } else {
-//     setLogo('/triple-logo-light.png')
+//   const { theme } = useTheme()
+//   const getSystemTheme = () => {
+//     return window.matchMedia('(prefers-color-scheme: dark)').matches
+//       ? 'dark'
+//       : 'light'
 //   }
-// }, [getEffectiveTheme, theme])
 
-// useEffect(() => {
-//   if (theme === 'system') {
-//     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-//     const handleSystemThemeChange = (e: any) => {
-//       const newTheme = e.matches ? 'dark' : 'light'
-//       setLogo(
-//         newTheme === 'dark'
-//           ? '/triple-platform-light-logo.png'
-//           : '/triple-platform-logo.png',
-//       )
+//   const getEffectiveTheme = useCallback(() => {
+//     return theme === 'system' ? getSystemTheme() : theme
+//   }, [theme])
+
+//   useEffect(() => {
+//     const effectiveTheme = getEffectiveTheme()
+//     if (effectiveTheme === 'dark') {
+//       setLogo('/triple-logo.webp')
+//     } else {
+//       setLogo('/triple-logo-light.png')
+//     }
+//   }, [getEffectiveTheme, theme])
+
+//   useEffect(() => {
+//     if (theme === 'system') {
+//       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+//       const handleSystemThemeChange = (e: any) => {
+//         const newTheme = e.matches ? 'dark' : 'light'
+//         setLogo(
+//           newTheme === 'dark'
+//             ? '/triple-platform-light-logo.png'
+//             : '/triple-platform-logo.png',
+//         )
+//       }
+
+//       mediaQuery.addEventListener('change', handleSystemThemeChange)
+//       return () =>
+//         mediaQuery.removeEventListener('change', handleSystemThemeChange)
+//     }
+//   }, [theme])
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setIsScrolled(window.scrollY > 10) // Set threshold for "sticky" effect
 //     }
 
-//     mediaQuery.addEventListener('change', handleSystemThemeChange)
-//     return () =>
-//       mediaQuery.removeEventListener('change', handleSystemThemeChange)
-//   }
-// }, [theme])
-// useEffect(() => {
-//   const handleScroll = () => {
-//     setIsScrolled(window.scrollY > 10) // Set threshold for "sticky" effect
-//   }
-
-//   window.addEventListener('scroll', handleScroll)
-//   return () => {
-//     window.removeEventListener('scroll', handleScroll)
-//   }
-// }, [])
+//     window.addEventListener('scroll', handleScroll)
+//     return () => {
+//       window.removeEventListener('scroll', handleScroll)
+//     }
+//   }, [])
 //   return (
 //     <Card
-//       className={`container z-50 mx-auto flex items-center justify-between gap-6 p-4 mt-2 rounded-2xl bg-background/75 backdrop-blur-sm w-full max-w-7xl transition-all duration-500 ${
+//       className={`container z-50 mx-auto flex items-center justify-between gap-6 p-4 mt-2 rounded-2xl bg-background/75 backdrop-blur-md w-full max-w-7xl transition-all duration-500 ${
 //         isScrolled ? 'sticky inset-0 top-2 transition-all duration-500' : ''
 //       }`}
 //     >
@@ -142,12 +142,13 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '@/components/ui/card' // Assuming shadcn Card component
 import { Button } from '@/components/ui/button' // Assuming shadcn Button component
-import { Menu, X } from 'lucide-react' // Assuming you're using Lucide icons
+import { X } from 'lucide-react' // Assuming you're using Lucide icons
 import { useTheme } from '@/components/theme-provider'
-
-const NavBar = ({ showLinks = true }: any) => {
+import Menu from '../Menu'
+const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState<boolean>(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
   const [logo, setLogo] = useState<string>('/triple-platform-logo.png')
 
   const navLinks = [
@@ -196,13 +197,7 @@ const NavBar = ({ showLinks = true }: any) => {
   }, [theme])
   useEffect(() => {
     const handleScroll = () => {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-          setIsScrolled(true)
-        } else {
-          setIsScrolled(false)
-        }
-      })
+      setIsScrolled(window.scrollY > 10) // Set threshold for "sticky" effect
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -210,62 +205,55 @@ const NavBar = ({ showLinks = true }: any) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+  // Simulate scroll behavior
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      setIsScrolled(true)
+    } else {
+      setIsScrolled(false)
+    }
+  })
 
   return (
     <>
       {/* Desktop Navbar */}
       <Card
-        className={`container mx-auto flex items-center gap-12 md:gap-4 px-6 mt-2 rounded-2xl !bg-background/75 !backdrop-blur-sm w-fit
-    ${isScrolled && 'sticky inset-0 top-2 z-50 transition-all duration-500'}`}
+        className={`hidden md:flex container z-50 mx-auto items-center justify-between gap-6 px-4 py-1 mt-2 rounded-2xl bg-background/75 backdrop-blur-md w-full max-w-4xl transition-all duration-500 ${
+          isScrolled ? 'sticky inset-0 top-2 shadow-lg' : ''
+        }`}
       >
-        <Link to={'/'}>
+        {/* Logo */}
+        <Link to='/' className='flex-shrink-0'>
           <img src={logo} alt='triple-logo' className='w-fit h-[55px]' />
         </Link>
-        {/* <button
-        className='block md:hidden z-50'
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label='Toggle menu'
-      >
-        {isMenuOpen ? <X size={34} /> : <Menu size={34} />}
-      </button> */}
 
-        {showLinks &&
-          navLinks.map(link => (
-            <a
+        {/* Nav Links */}
+        <div className='flex items-center gap-6'>
+          {navLinks.map(link => (
+            <Link
               key={link.id}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
+              to={link.href}
               className='font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 whitespace-nowrap'
             >
               {link.name}
-            </a>
+            </Link>
           ))}
-        <div className=' md:hidden '>
-          <Button>
-            <Link className='px-4 py-2 font-medium text-lg' to={'/login'}>
-              Login
-            </Link>
-          </Button>
-          <Button variant={'outline'}>
-            <Link className='px-4 py-2 font-medium text-lg' to={'/register'}>
-              Register
-            </Link>
-          </Button>
         </div>
 
-        <div className='hidden md:flex gap-4'>
-          <Button className='rounded-xl'>
-            <Link to={'/login'}>Login</Link>
+        {/* Auth Buttons */}
+        <div className='flex gap-3'>
+          <Button asChild variant='default' className='rounded-lg'>
+            <Link to='/login'>Login</Link>
           </Button>
-          <Button className='rounded-xl' variant={'outline'}>
-            <Link to={'/register'}>Register</Link>
+          <Button asChild variant='outline' className='rounded-lg'>
+            <Link to='/register'>Register</Link>
           </Button>
         </div>
       </Card>
 
       {/* Mobile Navbar */}
       <Card
-        className={`md:hidden container z-50 mx-auto grid grid-cols-2 gap-4 p-4 mt-2 rounded-2xl bg-background/75 backdrop-blur-sm w-full max-w-7xl transition-all *:transition-all duration-500 ${
+        className={`md:hidden container z-50 mx-auto grid grid-cols-2 gap-4 px-4 py-1 mt-2 rounded-2xl bg-background/75 backdrop-blur-md w-full max-w-7xl transition-all duration-500 ${
           isScrolled ? 'sticky inset-0 top-2 shadow-lg' : ''
         }`}
       >
@@ -276,16 +264,16 @@ const NavBar = ({ showLinks = true }: any) => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className='block px-3 md:hidden rounded-xl hover:bg-muted transition-colors justify-self-end'
+          className='block md:hidden px-3 rounded-lg hover:bg-muted transition-colors justify-self-end'
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label='Toggle menu'
         >
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {isMenuOpen ? <X size={28} /> : <Menu className='size-7' />}
         </button>
 
         {/* Nav Links and Auth Buttons (Second Row) */}
         {isMenuOpen && (
-          <div className='col-span-2 flex flex-col gap-4 mt-4 transition-all'>
+          <div className='col-span-2 flex flex-col gap-4 mt-4'>
             {/* Nav Links */}
             <div className='flex flex-col gap-3'>
               {navLinks.map(link => (
@@ -312,7 +300,6 @@ const NavBar = ({ showLinks = true }: any) => {
           </div>
         )}
       </Card>
-      {/* Mobile Menu (Separate Card) */}
     </>
   )
 }

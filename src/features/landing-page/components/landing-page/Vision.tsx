@@ -31,10 +31,7 @@ export default function Vision() {
             We must envision the future and embrace the power of giving to
             uncover macro gains within every micro detail. This is the new world
             we’re building—a world where media production is seamless,
-            efficient, and accessible to all. Triple Platform simplifies
-            resource discovery, accelerates decision-making, and ensures a
-            stress-free production process, empowering you to shape the future
-            of media.
+            efficient, and accessible to all
           </p>
         </div>
       </main>

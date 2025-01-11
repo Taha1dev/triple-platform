@@ -122,8 +122,9 @@ const Footer = () => {
           <h3 className='text-lg font-semibold '>Follow Us</h3>
           <div className='flex items-center space-x-4'>
             <Link
-              to='#'
+              to='https://www.instagram.com/triplep.odds/'
               aria-label='Instagram'
+              target='_blank'
               className='text-muted-foreground hover:text-foreground transition-colors'
             >
               <Instagram size={24} />
@@ -137,7 +138,7 @@ const Footer = () => {
             </Link>
             <Link
               to='#'
-              aria-label='LinkedIn'
+              aria-label='Twitter'
               className='text-muted-foreground hover:text-foreground transition-colors'
             >
               <Twitter size={24} />

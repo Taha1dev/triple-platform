@@ -44,14 +44,14 @@ export default function ServicesSection() {
         sub='Why Triple Platform'
         main='Simplifying Media Production for You'
       />
-      <section className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full'>
+      <section className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-7xl'>
         {services.map(service => (
           <MagicCard
             gradientColor={theme === 'dark' ? '#262626' : '#D9D9D955'}
             key={service.id}
           >
-            <div className=' px-6 py-8 md:py-10 md:rounded-[40px] min-h-[300px] flex flex-col gap-8 '>
-              <div className='!self-end  p-4 rounded-full shadow-[0px_0px_10px_0px_rgba(0,123,255)] w-fit'>
+            <div className=' px-6 py-8 md:py-10 min-h-[300px] flex flex-col gap-8 '>
+              <div className='!self-end  p-4 rounded-full shadow-[0px_0px_20px_0px_rgba(0,123,255,0.55)] w-fit'>
                 {service.icon}
               </div>
               <div className='flex flex-col gap-3'>
