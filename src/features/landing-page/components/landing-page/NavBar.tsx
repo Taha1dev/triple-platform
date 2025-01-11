@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
 import { useTheme } from '@/components/theme-provider'
 import Menu from '../Menu'
-const NavBar = ({ showLinks }: any) => {
+const NavBar = ({ showLinks = true }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
