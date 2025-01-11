@@ -1,5 +1,3 @@
-import { ArrowRight } from 'lucide-react'
-import { motion } from 'motion/react'
 import {
   CTABTN1TITLE,
   CTABTN2TITLE,

@@ -130,7 +130,8 @@ const Footer = () => {
               <Instagram size={24} />
             </Link>
             <Link
-              to='#'
+              to='https://linkedin.com/company/3xpstudio/?viewAsMember=true'
+              target='_blank'
               aria-label='LinkedIn'
               className='text-muted-foreground hover:text-foreground transition-colors'
             >

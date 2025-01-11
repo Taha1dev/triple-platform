@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { motion, AbsoluteKeyframe } from 'motion/react'
+import { motion } from 'motion/react'
 export default function HeroSection() {
   return (
     <main className='flex m-2 items-center bg-background/70 backdrop-blur-sm'>
