@@ -81,7 +81,7 @@ const NavBar = ({ showLinks = true }: any) => {
       <Card
         className={`hidden md:flex container z-50 mx-auto items-center justify-between gap-6 px-4 py-1 mt-2 rounded-2xl bg-background/75 backdrop-blur-md w-full max-w-4xl transition-all duration-500 ${
           isScrolled ? 'sticky inset-0 top-2 shadow-lg' : ''
-        }`}
+        } ${!showLinks && 'max-w-6xl'}`}
       >
         {/* Logo */}
         <Link to='/' className='flex-shrink-0'>
@@ -92,13 +92,13 @@ const NavBar = ({ showLinks = true }: any) => {
         <div className='flex items-center gap-6'>
           {showLinks &&
             navLinks.map(link => (
-              <Link
+              <a
                 key={link.id}
-                to={link.href}
+                href={link.href}
                 className='font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 whitespace-nowrap'
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
         </div>
 
@@ -140,14 +140,14 @@ const NavBar = ({ showLinks = true }: any) => {
             <div className='flex flex-col gap-3'>
               {showLinks &&
                 navLinks.map(link => (
-                  <Link
+                  <a
                     key={link.id}
-                    to={link.href}
+                    href={link.href}
                     className='font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 py-2'
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 ))}
             </div>
 

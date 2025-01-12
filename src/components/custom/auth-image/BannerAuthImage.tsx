@@ -1,6 +1,7 @@
-export default function BannerAuthImage() {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export default function BannerAuthImage({ className = '' }: any) {
   return (
-    <article className='hidden lg:block relative'>
+    <article className={`hidden lg:block relative ${className}`}>
       <img
         src='/banner.webp'
         alt='Register Visual'

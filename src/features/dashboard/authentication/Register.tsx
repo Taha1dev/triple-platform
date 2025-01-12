@@ -90,12 +90,12 @@ export default function Register() {
   return (
     <>
       <main className='flex min-h-screen items-center justify-center'>
-        <section className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg border shadow-sm overflow-hidden'>
+        <section className='grid grid-cols-1 lg:grid-cols-5 w-full max-w-6xl mx-4 rounded-lg border shadow-sm overflow-hidden'>
           {/* Image Section */}
-          <BannerAuthImage />
+          <BannerAuthImage className="col-span-2" />
 
           {/* Form Section */}
-          <article className='p-4 lg:p-10 bg-background'>
+          <article className='p-4 lg:p-10 bg-background col-span-3'>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
                 <CardHeader className='space-y-3'>

@@ -4,12 +4,15 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      textShadow: {
+        'default': '2px 2px 4px rgba(0, 0, 0, 0.5)',
+      },
       fontFamily: {
         monoScape: ['"Source Code Pro"', "sans-serif"],
         paytone: ['"Paytone One"', "sans-serif"],
       },
       backgroundImage: {
-        'hero-pattern': "url('/banner.webp')",
+        'hero-pattern': "url('/dark-banner.webp')",
         'blur-pattern': "url('blob-blur.png')"
       },
       borderRadius: {
@@ -102,6 +105,21 @@ export default {
     }
   },
   // eslint-disable-next-line no-undef
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),
+  function ({ addUtilities }) {
+    const newUtilities = {
+      '.text-shadow': {
+        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+      },
+      '.text-shadow-md': {
+        textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)',
+      },
+      '.text-shadow-lg': {
+        textShadow: '4px 4px 8px rgba(0, 0, 0, 0.5)',
+      },
+    };
+    addUtilities(newUtilities);
+  },
+  ],
 }
 

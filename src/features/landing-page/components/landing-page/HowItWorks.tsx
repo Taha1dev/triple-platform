@@ -1,6 +1,7 @@
 import { Card } from '@/components/ui/card'
 import Heading from '../Heading'
 import { RainbowButton } from '@/components/ui/rainbow-button'
+import { Link } from 'react-router-dom'
 
 export default function HowItWorks() {
   const data = [
@@ -50,7 +51,11 @@ export default function HowItWorks() {
           </Card>
         ))}
       </div>
-      <RainbowButton className='mt-4'>Join Us Now 👋</RainbowButton>
+      <RainbowButton className='mt-4'>
+        <Link to={'/register'}>
+        Join Us Now 👋
+        </Link>
+        </RainbowButton>
     </section>
   )
 }

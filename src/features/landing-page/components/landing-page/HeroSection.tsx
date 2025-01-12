@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 export default function HeroSection() {
   return (
-    <main className='flex m-2 items-center bg-background/70 backdrop-blur-sm'>
+    <main className='flex m-2 items-center'>
       <motion.section
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -13,13 +14,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
-          className='flex flex-col gap-6 p-6 md:p-10 rounded-[20px] max-w-xl md:max-w-3xl bg-background/20 backdrop-blur-md shadow-2xl mr-auto text-foreground'
+          className='flex flex-col gap-4 p-6 md:p-10 rounded-[20px] max-w-xl md:max-w-3xl mr-auto text-foreground text-theme-secondary'
         >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6, ease: 'easeOut' }}
-            className='text-[2.20rem] md:text-5xl leading-tight text-foreground font-paytone'
+            className='text-[2.20rem] md:text-5xl leading-tight  font-paytone'
           >
             Media Pre-Production made easy
           </motion.h1>
@@ -27,7 +28,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.6, ease: 'easeOut' }}
-            className='text-lg md:text-xl font-medium text-foreground/80'
+            className='text-lg md:text-xl font-medium text-theme-secondary'
           >
             Triple Platform makes it easy to find resources, make decisions
             faster, and help you seamlessly manage your Media Project
@@ -36,9 +37,13 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6, ease: 'easeOut' }}
+            className='flex gap-2'
           >
-            <Button className='w-fit text-lg'>
+            <Button className='w-fit text-lg bg-background text-foreground'>
               <a href='#how-it-works'>Learn More</a>
+            </Button>
+            <Button className='lg:hidden sblock w-fit text-lg !bg-theme-variant !text-foreground'>
+              <Link to='/register'>Sign Up</Link>
             </Button>
           </motion.div>
         </motion.div>
