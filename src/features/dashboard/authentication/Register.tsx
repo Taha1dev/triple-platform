@@ -15,13 +15,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { RegisterSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../components/FormField'
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser, resetState } from '@/store/slices/registerSlice'
+import { registerUser } from '@/store/slices/registerSlice'
 import { AppDispatch, RootState } from '@/store/store'
-import { useEffect } from 'react'
 import Spinner from '@/components/custom/Spinner'
 import { setPath } from '@/store/slices/routerSlice'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import { Separator } from '@/components/ui/separator'
+import { setEmail } from '@/store/slices/emailSlice'
+import { setSub, setTitle } from '@/store/slices/otpContentSlice'
 
 type FormValues = z.infer<typeof RegisterSchema>
 
@@ -32,13 +33,8 @@ export default function Register() {
   })
 
   const dispatch = useDispatch<AppDispatch>()
-  const { error, loading } = useSelector((state: RootState) => state.register)
+  const { loading } = useSelector((state: RootState) => state.register)
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetState())
-    }
-  }, [dispatch, error, loading])
   const formFields = [
     {
       id: 'fname',
@@ -82,7 +78,10 @@ export default function Register() {
   })
 
   const onSubmit = async (data: FormValues) => {
-    await dispatch(registerUser(data))
+    await dispatch(registerUser(data)).unwrap()
+    dispatch(setEmail(data.email))
+    dispatch(setTitle('Verify Your Email'));
+      dispatch(setSub('An OTP has been sent to your email for verification.'));
     dispatch(setPath('/select-country'))
     navigate('/otp-verification')
   }
@@ -92,7 +91,7 @@ export default function Register() {
       <main className='flex min-h-screen items-center justify-center'>
         <section className='grid grid-cols-1 lg:grid-cols-5 w-full max-w-6xl mx-4 rounded-lg border shadow-sm overflow-hidden'>
           {/* Image Section */}
-          <BannerAuthImage className="col-span-2" />
+          <BannerAuthImage className='col-span-2' />
 
           {/* Form Section */}
           <article className='p-4 lg:p-10 bg-background col-span-3'>
@@ -123,7 +122,7 @@ export default function Register() {
                       ))}
                     </div>
                     <Button type='submit' className='w-full' disabled={loading}>
-                      {loading ? 'Registering...' : 'Register'}
+                      Register
                     </Button>
                   </form>
                 </CardContent>
@@ -143,7 +142,6 @@ export default function Register() {
             </FormProvider>
           </article>
         </section>
-
         {loading && (
           <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50'>
             <Spinner />

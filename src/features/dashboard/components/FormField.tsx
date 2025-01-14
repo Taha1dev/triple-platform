@@ -28,7 +28,7 @@ const FormField: React.FC<FormFieldProps> = ({
   return (
     <div className='mb-4 flex flex-col items-start'>
       {type === 'date' ? (
-        <DatePicker id={id} control={control} {...control.register(id)} />
+        <DatePicker id={id} control={control} name={id} />
       ) : (
         <>
           <label htmlFor={id} className='font-medium mb-1 ml-1'>

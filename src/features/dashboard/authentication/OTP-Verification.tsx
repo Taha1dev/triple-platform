@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/input-otp'
 import { Button } from '@/components/ui/button'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RefreshCcw } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
@@ -29,7 +29,19 @@ export default function OTP_Verification() {
   const navigate = useNavigate()
   const [otp, setOtp] = useState('')
   const [otpError, setOtpError] = useState<string | null>(null)
-
+  const [localOtpContent, setLocalOtpContent] = useState({
+    title: 'Reset Your Password',
+    sub: 'Enter the OTP sent to your email and set a new password',
+  })
+  const otpContent = useSelector((state: RootState) => state.otpContent)
+  useEffect(() => {
+    setLocalOtpContent({
+      title: otpContent.title || 'Reset Your Password', // Fallback to default
+      sub:
+        otpContent.sub ||
+        'Enter the OTP sent to your email and set a new password',
+    })
+  }, [otpContent])
   const methods = useForm<any>()
   const { handleSubmit, control } = methods
 
@@ -82,10 +94,10 @@ export default function OTP_Verification() {
               <Card className='bg-transparent shadow-none'>
                 <CardHeader className='space-y-2'>
                   <CardTitle className='text-center text-2xl font-bold'>
-                    Reset Your Password
+                    {localOtpContent.title}
                   </CardTitle>
                   <CardDescription className='text-center text-sm text-zinc-600 dark:text-theme-secondary/80'>
-                    Enter the OTP sent to your email and set a new password
+                    {localOtpContent.sub}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -139,7 +151,7 @@ export default function OTP_Verification() {
                     Remember your password?{' '}
                     <Link
                       to='/login'
-                      className='font-medium text-theme-variant hover:underline transition-colors duration-200'
+                      className='font-medium text-foreground hover:underline'
                     >
                       Login
                     </Link>

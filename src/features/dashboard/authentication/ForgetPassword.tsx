@@ -21,6 +21,7 @@ import Spinner from '@/components/custom/Spinner'
 import { Link, useNavigate } from 'react-router-dom'
 import { setPath } from '@/store/slices/routerSlice'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
+import { setTitle, setSub } from '@/store/slices/otpContentSlice'
 
 type FormValues = z.infer<typeof emailSchema>
 
@@ -38,6 +39,10 @@ export default function ForgetPassword() {
       try {
         await dispatch(forgetPassword(data.email)).unwrap()
         dispatch(setPath('/reset-password'))
+        dispatch(setTitle('Reset Your Password'))
+        dispatch(
+          setSub('Enter the OTP sent to your email to reset your password.'),
+        )
         navigate('/otp-verification')
       } catch (err) {
         console.error('Failed to send OTP:', err)
@@ -75,7 +80,9 @@ export default function ForgetPassword() {
                       placeholder='Enter Your Email Here'
                       type='email'
                     />
-                    <Button type='submit'>Send OTP</Button>
+                    <Button disabled={loading} type='submit'>
+                      Send OTP
+                    </Button>
                   </form>
                 </CardContent>
                 <CardFooter className='text-center py-6'>

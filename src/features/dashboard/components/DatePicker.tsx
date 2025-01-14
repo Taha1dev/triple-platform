@@ -71,6 +71,9 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
           className='w-full'
           value={day}
           onChange={handleDayChange}
+          min={1}
+          max={31}
+          maxLength={2}
         />
       </div>
 
@@ -119,6 +122,9 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
           placeholder='YYYY'
           className='w-full'
           value={year}
+          min={1970}
+          maxLength={4}
+          minLength={4}
           onChange={handleYearChange}
         />
       </div>

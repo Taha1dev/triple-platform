@@ -83,22 +83,22 @@ export default function Login() {
                       variant={'link'}
                       type='button'
                       onClick={() => navigate('/forget-password')}
-                      className='text-sm text-theme-variant hover:underline'
+                      className='font-medium text-foreground hover:underline'
                     >
                       Forgot password?
                     </Button>
 
-                    <Button type='submit' className='w-full bg-foreground mt-6'>
+                    <Button type='submit' className='w-full bg-foreground mt-6' disabled={loading}>
                       LOGIN
                     </Button>
                   </form>
                 </CardContent>
                 <CardFooter className='flex flex-col items-center py-6'>
-                  <p className='text-sm text-zinc-600 dark:text-theme-secondary/80'>
+                  <p className='text-sm text-muted-foreground '>
                     Don't have an account?{' '}
                     <Link
                       to='/register'
-                      className='font-medium text-theme-variant hover:underline'
+                      className='font-medium text-foreground hover:underline'
                     >
                       SIGN UP
                     </Link>

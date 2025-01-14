@@ -6,12 +6,14 @@ interface RegisterState {
   loading: boolean;
   error: string | null;
   success: boolean;
+  email: string | any
 }
 
 const initialState: RegisterState = {
   loading: false,
   error: null,
   success: false,
+  email: ''
 };
 
 export const registerUser = createAsyncThunk(

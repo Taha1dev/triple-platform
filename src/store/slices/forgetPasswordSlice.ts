@@ -49,7 +49,7 @@ const forgetPasswordSlice = createSlice({
       .addCase(forgetPassword.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.email = action.meta.arg; // Save email from the thunk's argument
+        state.email = action.meta.arg;
       })
       .addCase(forgetPassword.rejected, (state, action) => {
         state.loading = false;
