@@ -42,7 +42,7 @@ export default function HeroSection() {
             <Button className='w-fit text-lg bg-background text-foreground'>
               <a href='#how-it-works'>Learn More</a>
             </Button>
-            <Button className='lg:hidden sblock w-fit text-lg !bg-theme-variant !text-foreground'>
+            <Button className='lg:hidden sblock w-fit text-lg !bg-theme-variant !text-white'>
               <Link to='/register'>Sign Up</Link>
             </Button>
           </motion.div>

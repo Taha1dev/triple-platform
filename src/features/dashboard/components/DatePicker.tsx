@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useController, UseControllerProps } from 'react-hook-form'
+import { fullYear } from '@/features/landing-page/constants'
 
 type DatePickerProps = UseControllerProps & {
   id: string
@@ -20,6 +21,8 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
   const [month, setMonth] = useState<string>('')
   const [year, setYear] = useState<string>('')
 
+  const maxYear = fullYear - 2
+
   const { field } = useController({
     control,
     name,
@@ -28,6 +31,13 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
 
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
+    if (Number(value) < 0) {
+      return
+    }
+
+    if (value.length > 2) {
+      return
+    }
     setDay(value)
     updateCombinedDate(value, month, year)
   }
@@ -39,6 +49,19 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
+
+    if (Number(value) < 0) {
+      return
+    }
+
+    if (value.length > 4) {
+      return
+    }
+    if (Number(value) > maxYear) {
+      return
+    }
+    setYear(value)
+    updateCombinedDate(day, month, value)
     setYear(value)
     updateCombinedDate(day, month, value)
   }
@@ -123,8 +146,7 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
           className='w-full'
           value={year}
           min={1970}
-          maxLength={4}
-          minLength={4}
+          max={maxYear}
           onChange={handleYearChange}
         />
       </div>

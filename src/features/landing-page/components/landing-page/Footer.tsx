@@ -4,6 +4,7 @@ import { ModeToggle } from '@/mode-toggle'
 import { Instagram, Linkedin, Twitter } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { fullYear } from '../../constants'
 const Footer = () => {
   const { theme } = useTheme()
   const [logo, setLogo] = useState<string>('/triple-platform-logo.png')
@@ -45,10 +46,10 @@ const Footer = () => {
   }, [theme])
   return (
     <footer className='bg-background py-12 border-t'>
-      <div className='container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8'>
+      <div className='container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left'>
         {/* Logo and Tagline */}
-        <div className='flex flex-col items-start'>
-          <div className='flex-col-center'>
+        <div className='flex flex-col items-center md:items-start'>
+          <div className='flex flex-col items-center'>
             <Link to={'/'}>
               <img
                 src={logo}
@@ -57,7 +58,7 @@ const Footer = () => {
                 height={75}
               />
             </Link>
-            <p className='text-lg text-muted-foreground italic'>
+            <p className='text-lg text-muted-foreground italic -mt-1'>
               Height the odds
             </p>
           </div>
@@ -65,7 +66,7 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className='text-lg font-semibold mb-4 '>Quick Links</h3>
+          <h3 className='text-lg font-semibold mb-4'>Quick Links</h3>
           <ul className='space-y-2'>
             <li>
               <a
@@ -96,7 +97,7 @@ const Footer = () => {
 
         {/* Legal */}
         <div>
-          <h3 className='text-lg font-semibold mb-4 '>Legal</h3>
+          <h3 className='text-lg font-semibold mb-4'>Legal</h3>
           <ul className='space-y-2'>
             <li>
               <Link
@@ -119,7 +120,7 @@ const Footer = () => {
 
         {/* Social Links and Theme Toggle */}
         <div className='flex flex-col items-center md:items-start space-y-4'>
-          <h3 className='text-lg font-semibold '>Follow Us</h3>
+          <h3 className='text-lg font-semibold'>Follow Us</h3>
           <div className='flex items-center space-x-4'>
             <Link
               to='https://www.instagram.com/triplep.odds/'
@@ -149,8 +150,8 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className='container mx-auto px-4 mt-8 border-t pt-8 text-center text-sm text-muted-foreground flex justify-between'>
-        © {new Date().getFullYear()} Triple Platform. All Rights Reserved.
+      <div className='container mx-auto px-4 mt-8 border-t pt-8 text-center text-sm text-muted-foreground flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0'>
+        <p>© {fullYear} Triple Platform. All Rights Reserved.</p>
         <ModeToggle />
       </div>
     </footer>
