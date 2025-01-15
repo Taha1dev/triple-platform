@@ -1,6 +1,6 @@
 import { Search, Eye, CheckCircle, Clock } from 'lucide-react'
-import Heading from '../Heading'
-import CardWithAnimation from '../AnimatedCard'
+import Heading from './Heading'
+import CardWithAnimation from './AnimatedCard'
 
 export default function ServicesSection() {
   const services = [

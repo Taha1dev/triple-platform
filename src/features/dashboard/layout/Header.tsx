@@ -1,32 +1,45 @@
-// import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from './store/store'
-import { initializeAuthState } from './store/slices/loginSlice'
-import { useEffect } from 'react'
-import { Input } from './components/ui/input'
-import { Bell, LogOut, Search, Settings, User } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from './components/ui/avatar'
-import { Skeleton } from './components/ui/skeleton'
-import { getCurrentDate } from './utils/utils'
-import { Button } from './components/ui/button'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Input } from '@/components/ui/input'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Button } from '@/components/ui/button'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import {
   DropdownMenu,
+  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-export default function Test() {
+
+import { initializeAuthState } from '@/store/slices/loginSlice'
+import { AppDispatch, RootState } from '@/store/store'
+import { getCurrentDate } from '@/utils/utils'
+import { Search, Bell, User, Settings, LogOut } from 'lucide-react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser } from '@/store/slices/logoutSlice'
+import Spinner from '@/components/custom/Spinner'
+import { useNavigate } from 'react-router-dom'
+
+export default function Header() {
+  const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const { user } = useSelector((state: RootState) => state.login)
+  const { loading } = useSelector((state: RootState) => state.logout)
 
   useEffect(() => {
+    if (user) {
+      console.log(user)
+    }
     dispatch(initializeAuthState())
-  }, [dispatch])
+  }, [])
 
   if (!user) {
     return <h1 className='text-8xl font-extrabold'>Loading...</h1>
   }
-
+  const handleLogout = async () => {
+    await dispatch(logoutUser(user.id))
+    navigate('/login')
+  }
   return (
     <>
       <header className='my-4 container mx-auto p-4 border-b border-border'>
@@ -41,11 +54,11 @@ export default function Test() {
             />
           </div>
 
-          <div className='flex gap-6 items-center'>
+          <div className='flex gap-3 items-center'>
             <Button
               variant='ghost'
               size='icon'
-              className='hover:bg-accent/50 rounded-full'
+              className='hover:bg-accent/50 rounded-xl'
             >
               <Bell className='w-5 h-5' />
             </Button>
@@ -65,7 +78,7 @@ export default function Test() {
                       <Skeleton className='w-10 h-10 rounded-full' />
                     </AvatarFallback>
                   </Avatar>
-                  <div className='flex flex-col'>
+                  <div className='hidden md:flex flex-col'>
                     <h4 className='font-semibold text-sm'>
                       Welcome, {user.fname}!
                     </h4>
@@ -77,14 +90,20 @@ export default function Test() {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className='w-56 mt-2'>
-                <DropdownMenuItem className='cursor-pointer'>
+                <DropdownMenuItem
+                  className='cursor-pointer'
+                  onClick={() => navigate('profile')}
+                >
                   <User className='mr-2 h-4 w-4' />
                   <span>Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className='cursor-pointer'>
                   <Settings className='mr-2 h-4 w-4' /> <span>Settings</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer text-red-600 focus:text-red-600'>
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className='cursor-pointer text-red-600 focus:text-red-600'
+                >
                   <LogOut className='mr-2 h-4 w-4' />
                   <span>Logout</span>
                 </DropdownMenuItem>
@@ -92,6 +111,11 @@ export default function Test() {
             </DropdownMenu>
           </div>
         </div>
+        {loading && (
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <Spinner />
+          </div>
+        )}
       </header>
     </>
   )

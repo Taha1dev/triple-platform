@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface LoginResponseSchema {
-  data: {
-    id: string
-    fname: string
-    rating: number
-    lname: string
-    email: string
-    data: any[]
-    portfolio: any[]
-    city: string[]
-    country: string
-    contact_number: string
-    dob: string
-    token: string
-  }
+  id: string
+  fname: string
+  rating: number
+  lname: string
+  email: string
+  data: any[]
+  portfolio: any[]
+  city: string[]
+  country: string
+  contact_number: string
+  dob: string
+  token: string
+  [key: string]: any;
 }
 // export const getDefaultUserSchema = () => {
 //   return {

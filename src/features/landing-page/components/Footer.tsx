@@ -4,7 +4,7 @@ import { ModeToggle } from '@/mode-toggle'
 import { Instagram, Linkedin, Twitter } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { fullYear } from '../../constants'
+import { fullYear } from '../constants'
 const Footer = () => {
   const { theme } = useTheme()
   const [logo, setLogo] = useState<string>('/triple-platform-logo.png')

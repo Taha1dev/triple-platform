@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Users, Images, Globe } from 'lucide-react'
-import Heading from '../Heading'
+import Heading from './Heading'
 import img1 from '/showcase1.png'
 import img2 from '/showcase2.png'
 import img3 from '/showcase3.png'

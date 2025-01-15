@@ -10,7 +10,6 @@ import {
 import { Button } from '@/components/ui/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
-import MultipleSelect from '../components/MultipleSelect'
 import {
   Select,
   SelectContent,
@@ -31,6 +30,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import Spinner from '@/components/custom/Spinner'
 import { useNavigate } from 'react-router-dom'
+import MultipleSelect from '../dashboard/components/MultipleSelect'
 interface CountryData {
   country: string
   cities: string[]

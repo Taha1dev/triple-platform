@@ -12,7 +12,6 @@ import { Button } from '@/components/ui/button'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { emailSchema } from '@/models/zod-schema/zod.schema'
-import FormField from '../components/FormField'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
@@ -22,6 +21,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { setPath } from '@/store/slices/routerSlice'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import { setTitle, setSub } from '@/store/slices/otpContentSlice'
+import FormField from '../dashboard/components/FormField'
 
 type FormValues = z.infer<typeof emailSchema>
 

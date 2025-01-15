@@ -1,11 +1,11 @@
-import Footer from './components/landing-page/Footer'
-import NavBar from './components/landing-page/NavBar'
-import HeroSection from './components/landing-page/HeroSection'
-import Vision from './components/landing-page/Vision'
-import HowItWorks from './components/landing-page/HowItWorks'
-import ServicesSection from './components/landing-page/ServicesSection'
-import MediaProvider from './components/landing-page/MediaProvider'
-import CTASection from './components/landing-page/CTA'
+import Footer from './components/Footer'
+import NavBar from './components/NavBar'
+import HeroSection from './components/HeroSection'
+import Vision from './components/Vision'
+import HowItWorks from './components/HowItWorks'
+import ServicesSection from './components/ServicesSection'
+import MediaProvider from './components/MediaProvider'
+import CTASection from './components/CTA'
 
 export {
   Footer,

@@ -5,19 +5,21 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from './components/theme-provider.tsx'
-import Login from './features/dashboard/authentication/Login.tsx'
-import Register from './features/dashboard/authentication/Register.tsx'
-import ResetPassword from './features/dashboard/authentication/ResetPassword.tsx'
+import Login from './features/authentication/Login.tsx'
+import Register from './features/authentication/Register.tsx'
+import ResetPassword from './features/authentication/ResetPassword.tsx'
 import { store } from './store/store.ts'
-import Test from './Test.tsx'
 import { Toaster } from 'sonner'
-import OTP_Verification from './features/dashboard/authentication/OTP-Verification.tsx'
-import ForgetPassword from './features/dashboard/authentication/ForgetPassword.tsx'
-import CountrySelection from './features/dashboard/authentication/CountrySelection.tsx'
+import OTP_Verification from './features/authentication/OTP-Verification.tsx'
+import ForgetPassword from './features/authentication/ForgetPassword.tsx'
+import CountrySelection from './features/authentication/CountrySelection.tsx'
 import FAQ from './pages/FAQs.tsx'
 import TermsAndConditions from './pages/TermsAndConditions.tsx'
 import PrivacyPolicy from './pages/PrivacyPolicy.tsx'
-import Layout from './layout/Layout.tsx'
+import Layout from './features/landing-page/layout/Layout.tsx'
+import PanelLayout from './features/dashboard/layout/index.tsx'
+import Dashboard from './features/dashboard/pages/Dashboard.tsx'
+import Profile from './features/dashboard/pages/Profile.tsx'
 
 const router = createBrowserRouter([
   {
@@ -40,10 +42,7 @@ const router = createBrowserRouter([
         path: 'reset-password',
         element: <ResetPassword />,
       },
-      {
-        path: 'ss',
-        element: <Test />,
-      },
+
       {
         path: 'forget-password',
         element: <ForgetPassword />,
@@ -70,6 +69,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: 'home',
+    element: <PanelLayout />,
+    children: [
+      { path: '', element: <Dashboard /> },
+      { path: 'profile', element: <Profile /> }
+
+    ],
+  },
 ])
 type Theme = 'light' | 'dark' | 'system'
 
@@ -83,7 +91,6 @@ const getThemeFromLocalStorage = (key: string): Theme | undefined => {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
-    
     <Provider store={store}>
       <RouterProvider router={router} />
       <Toaster

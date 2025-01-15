@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion' // For animations
-import Heading from '../Heading'
+import Heading from './Heading'
 
 export default function Vision() {
   return (

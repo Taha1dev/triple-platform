@@ -10,6 +10,7 @@ import citiesCountriesReducer from './slices/citiesCountriesSlice';
 import routerReducer from './slices/routerSlice';
 import emailReducer from './slices/emailSlice';
 import otpContentRedcuer from './slices/otpContentSlice';
+import logoutReducer from './slices/logoutSlice';
 
 export const store = configureStore({
   reducer: {
@@ -23,7 +24,8 @@ export const store = configureStore({
     citiesCountries: citiesCountriesReducer,
     routerInstance: routerReducer,
     email: emailReducer,
-    otpContent: otpContentRedcuer
+    otpContent: otpContentRedcuer,
+    logout: logoutReducer
   },
 });
 

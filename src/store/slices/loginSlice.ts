@@ -3,19 +3,17 @@ import axiosClient from "@/api/apiClient";
 import { LoginResponseSchema } from "@/models/api-schema/auth.model";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-type UserData = Omit<LoginResponseSchema['data'], 'token'> | null;
+type UserData = Omit<LoginResponseSchema, 'token'> | null;
 
 interface AuthState {
   loading: boolean;
   error: string | null;
   success: boolean;
   token: string | null;
-  user: UserData
+  user: UserData;
 }
-type LoginUserResponse = {
-  token: string;
-  user: Omit<LoginResponseSchema['data'], 'token'>;
-};
+
+
 const initialState: AuthState = {
   loading: false,
   error: null,
@@ -24,22 +22,26 @@ const initialState: AuthState = {
   user: null,
 };
 
-export const loginUser = createAsyncThunk<LoginUserResponse, Record<string, any>>(
+export const loginUser = createAsyncThunk<
+  { token: string; user: UserData },
+  any,
+  { rejectValue: string }
+>(
   'auth/loginUser',
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axiosClient.post<LoginResponseSchema>('/user/login', userData);
-      const { token, ...user } = response.data.data;
-
+      const { token, ...user } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
       return { token, user };
     } catch (error: any) {
-      return rejectWithValue(error?.response?.data || 'An error occurred');
+      return rejectWithValue(error?.response?.data?.message || 'An error occurred');
     }
   }
 );
+
 
 const loginSlice = createSlice({
   name: 'auth',
@@ -55,11 +57,26 @@ const loginSlice = createSlice({
     initializeAuthState: (state) => {
       const token = localStorage.getItem('token');
       const userString = localStorage.getItem('user');
+    
       if (token && userString) {
-        state.token = token;
-        state.user = JSON.parse(userString) as UserData;
+        try {
+          const user = JSON.parse(userString);
+          state.token = token;
+          state.user = {
+            ...user,
+            country: user.country || '', // Ensure `country` exists
+          };
+        } catch (error) {
+          console.error('Failed to parse user data:', error);
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+        }
+      } else {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
       }
     },
+    
   },
   extraReducers: (builder) => {
     builder

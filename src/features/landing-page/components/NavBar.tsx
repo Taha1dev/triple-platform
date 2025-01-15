@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
-import { useTheme } from '@/components/theme-provider'
-import Menu from '../Menu'
+import { navLogo, useTheme } from '@/components/theme-provider'
+import Menu from './Menu'
 const NavBar = ({ showLinks = true }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-
-  const [logo, setLogo] = useState<string>('/triple-platform-logo.png')
 
   const navLinks = [
     { id: 1, name: 'Why Triple Platform', href: '#services' },
@@ -20,45 +18,10 @@ const NavBar = ({ showLinks = true }: any) => {
   ]
 
   const { theme } = useTheme()
-  const getSystemTheme = () => {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light'
-  }
 
-  const getEffectiveTheme = useCallback(() => {
-    return theme === 'system' ? getSystemTheme() : theme
-  }, [theme])
-
-  useEffect(() => {
-    const effectiveTheme = getEffectiveTheme()
-    if (effectiveTheme === 'dark') {
-      setLogo('/triple-logo.webp')
-    } else {
-      setLogo('/triple-logo-light.png')
-    }
-  }, [getEffectiveTheme, theme])
-
-  useEffect(() => {
-    if (theme === 'system') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      const handleSystemThemeChange = (e: any) => {
-        const newTheme = e.matches ? 'dark' : 'light'
-        setLogo(
-          newTheme === 'dark'
-            ? '/triple-platform-light-logo.png'
-            : '/triple-platform-logo.png',
-        )
-      }
-
-      mediaQuery.addEventListener('change', handleSystemThemeChange)
-      return () =>
-        mediaQuery.removeEventListener('change', handleSystemThemeChange)
-    }
-  }, [theme])
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10) // Set threshold for "sticky" effect
+      setIsScrolled(window.scrollY > 10)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -85,7 +48,11 @@ const NavBar = ({ showLinks = true }: any) => {
       >
         {/* Logo */}
         <Link to='/' className='flex-shrink-0'>
-          <img src={logo} alt='triple-logo' className='w-fit h-[55px]' />
+          <img
+            src={navLogo(theme)}
+            alt='triple-logo'
+            className='w-fit h-[55px]'
+          />
         </Link>
 
         {/* Nav Links */}
@@ -121,7 +88,11 @@ const NavBar = ({ showLinks = true }: any) => {
       >
         {/* Logo */}
         <Link to='/' className='flex-shrink-0'>
-          <img src={logo} alt='triple-logo' className='w-fit h-[55px]' />
+          <img
+            src={navLogo(theme)}
+            alt='triple-logo'
+            className='w-fit h-[55px]'
+          />
         </Link>
 
         {/* Mobile Menu Toggle */}

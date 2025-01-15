@@ -27,8 +27,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--variant);
-  color: white;
+  background-color: #0b1828;
+  color: #2175eb;
 }
 
 .card {
