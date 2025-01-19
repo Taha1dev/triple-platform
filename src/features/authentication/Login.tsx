@@ -29,7 +29,7 @@ export default function Login() {
   const methods = useForm<FormValues>({
     resolver: zodResolver(LoginSchema),
   })
-  
+
   const onSubmit = async (data: FormValues) => {
     await dispatch(loginUser(data))
     navigate('/home')
@@ -90,7 +90,11 @@ export default function Login() {
                       Forgot password?
                     </Button>
 
-                    <Button type='submit' className='w-full bg-foreground mt-6' disabled={loading}>
+                    <Button
+                      type='submit'
+                      className='w-full bg-foreground mt-6'
+                      disabled={loading}
+                    >
                       LOGIN
                     </Button>
                   </form>

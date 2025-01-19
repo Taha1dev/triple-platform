@@ -10,33 +10,34 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
 
-import { initializeAuthState } from '@/store/slices/loginSlice'
 import { AppDispatch, RootState } from '@/store/store'
 import { getCurrentDate } from '@/utils/utils'
 import { Search, Bell, User, Settings, LogOut } from 'lucide-react'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '@/store/slices/logoutSlice'
 import Spinner from '@/components/custom/Spinner'
 import { useNavigate } from 'react-router-dom'
+import { initializeUserData } from '@/store/slices/userSlice'
+import { useEffect } from 'react'
+import { ModeToggle } from '@/mode-toggle'
 
 export default function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const { user } = useSelector((state: RootState) => state.login)
+  const { user } = useSelector((state: RootState) => state.user)
+  const { loading: Loading } = useSelector(
+    (state: RootState) => state.updateProfile,
+  )
   const { loading } = useSelector((state: RootState) => state.logout)
 
   useEffect(() => {
-    if (user) {
-      console.log(user)
-    }
-    dispatch(initializeAuthState())
+    dispatch(initializeUserData())
   }, [])
-
-  if (!user) {
-    return <h1 className='text-8xl font-extrabold'>Loading...</h1>
-  }
   const handleLogout = async () => {
+    if (!user) {
+      navigate('/login')
+      return
+    }
     await dispatch(logoutUser(user.id))
     navigate('/login')
   }
@@ -62,6 +63,7 @@ export default function Header() {
             >
               <Bell className='w-5 h-5' />
             </Button>
+            <ModeToggle />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className='flex gap-3 items-center cursor-pointer'>
@@ -80,7 +82,7 @@ export default function Header() {
                   </Avatar>
                   <div className='hidden md:flex flex-col'>
                     <h4 className='font-semibold text-sm'>
-                      Welcome, {user.fname}!
+                      Welcome, {user?.fname}!
                     </h4>
                     <p className='text-xs text-muted-foreground'>
                       {getCurrentDate()}
@@ -111,11 +113,12 @@ export default function Header() {
             </DropdownMenu>
           </div>
         </div>
-        {loading && (
-          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-            <Spinner />
-          </div>
-        )}
+        {loading ||
+          (Loading && (
+            <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+              <Spinner />
+            </div>
+          ))}
       </header>
     </>
   )

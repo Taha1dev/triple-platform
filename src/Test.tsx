@@ -1,8 +1,3 @@
-// import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from './store/store'
-import { initializeAuthState } from './store/slices/loginSlice'
-import { useEffect } from 'react'
 import { Input } from './components/ui/input'
 import { Bell, LogOut, Search, Settings, User } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from './components/ui/avatar'
@@ -15,13 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useSelector } from 'react-redux'
+import { RootState } from './store/store'
 export default function Test() {
-  const dispatch = useDispatch<AppDispatch>()
-  const { user } = useSelector((state: RootState) => state.login)
-
-  useEffect(() => {
-    dispatch(initializeAuthState())
-  }, [dispatch])
+  const { user } = useSelector((state: RootState) => state.user)
 
   if (!user) {
     return <h1 className='text-8xl font-extrabold'>Loading...</h1>

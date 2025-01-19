@@ -11,6 +11,9 @@ import routerReducer from './slices/routerSlice';
 import emailReducer from './slices/emailSlice';
 import otpContentRedcuer from './slices/otpContentSlice';
 import logoutReducer from './slices/logoutSlice';
+import UpdateProfileReducer from './slices/updateUserSlice';
+import userReducer from './slices/userSlice';
+import changePasswordReducer from './slices/changePasswordSlice';
 
 export const store = configureStore({
   reducer: {
@@ -25,7 +28,10 @@ export const store = configureStore({
     routerInstance: routerReducer,
     email: emailReducer,
     otpContent: otpContentRedcuer,
-    logout: logoutReducer
+    logout: logoutReducer,
+    updateProfile: UpdateProfileReducer,
+    user: userReducer,
+    changePassword: changePasswordReducer
   },
 });
 

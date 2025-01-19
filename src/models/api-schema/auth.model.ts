@@ -6,26 +6,13 @@ export interface LoginResponseSchema {
   lname: string
   email: string
   data: any[]
+  image: string
   portfolio: any[]
   city: string[]
   country: string
   contact_number: string
   dob: string
   token: string
-  [key: string]: any;
 }
-// export const getDefaultUserSchema = () => {
-//   return {
-//     id: '',
-//     fname: '',
-//     rating: 0,
-//     lname: '',
-//     email: 'string',
-//     data: [],
-//     portfolio: [],
-//     city: [],
-//     country: '',
-//     contact_number: '',
-//     dob: ''
-//   }
-// }
+
+

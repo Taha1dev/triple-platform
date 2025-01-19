@@ -10,7 +10,7 @@ export default function Component() {
   const { theme } = useTheme()
   return (
     <aside className='flex h-screen'>
-      <div className='hidden lg:block lg:w-52 lg:shrink-0 lg:border-r'>
+      <div className='hidden lg:block lg:w-72 lg:shrink-0 lg:border-r'>
         <div className='flex h-full flex-col justify-between py-6 px-4'>
           <div className='space-y-8'>
             <Link to='/home' className='flex-shrink-0'>
@@ -36,11 +36,11 @@ export default function Component() {
                 Products
               </Link>
               <Link
-                to='#'
+                to='/home/change-password'
                 className='flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'
               >
                 <Users className='h-5 w-5' />
-                Customers
+                Change Password
               </Link>
               <Link
                 to='#'

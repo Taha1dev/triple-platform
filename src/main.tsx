@@ -18,8 +18,11 @@ import TermsAndConditions from './pages/TermsAndConditions.tsx'
 import PrivacyPolicy from './pages/PrivacyPolicy.tsx'
 import Layout from './features/landing-page/layout/Layout.tsx'
 import PanelLayout from './features/dashboard/layout/index.tsx'
-import Dashboard from './features/dashboard/pages/Dashboard.tsx'
-import Profile from './features/dashboard/pages/Profile.tsx'
+import Dashboard from './features/dashboard/pages/Home.tsx'
+import Profile from './features/dashboard/pages/profile/Profile.tsx'
+import { StrictMode } from 'react'
+import UpdateProfile from './features/dashboard/pages/profile/UpdateProfile.tsx'
+import ChangePassword from './features/authentication/ChangePassword.tsx'
 
 const router = createBrowserRouter([
   {
@@ -74,8 +77,9 @@ const router = createBrowserRouter([
     element: <PanelLayout />,
     children: [
       { path: '', element: <Dashboard /> },
-      { path: 'profile', element: <Profile /> }
-
+      { path: 'profile', element: <Profile /> },
+      { path: 'update-profile', element: <UpdateProfile /> },
+      { path: 'change-password', element: <ChangePassword /> },
     ],
   },
 ])
@@ -90,14 +94,16 @@ const getThemeFromLocalStorage = (key: string): Theme | undefined => {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-      <Toaster
-        richColors
-        duration={5000}
-        theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
-      />
-    </Provider>
-  </ThemeProvider>,
+  <StrictMode>
+    <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+        <Toaster
+          richColors
+          duration={5000}
+          theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
+        />
+      </Provider>
+    </ThemeProvider>
+  </StrictMode>,
 )
