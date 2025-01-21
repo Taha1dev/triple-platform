@@ -5,7 +5,7 @@ export default function Vision() {
   return (
     <section
       id='vision'
-      className='container mx-auto py-12 px-4 md:px-8 lg:px-16 mb-8'
+      className='container mx-auto py-12 px-6 md:px-8 lg:px-12 flex-col-center'
     >
       {/* Heading Section */}
       <Heading main='Shaping the Future of Media Production' sub='Our Vision' />
@@ -16,7 +16,7 @@ export default function Vision() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className='flex flex-col md:flex-row items-center justify-between gap-12'
+        className='flex flex-col md:flex-row items-center justify-between gap-12 mt-12'
       >
         {/* Avatar Section */}
         <div className='flex flex-col items-center text-center md:text-left'>
