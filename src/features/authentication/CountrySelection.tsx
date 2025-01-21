@@ -31,6 +31,8 @@ import { useEffect, useState } from 'react'
 import Spinner from '@/components/custom/Spinner'
 import { useNavigate } from 'react-router-dom'
 import MultipleSelect from '../dashboard/components/MultipleSelect'
+import DotPattern from '@/components/ui/dot-pattern'
+import { cn } from '@/lib/utils'
 interface CountryData {
   country: string
   cities: string[]
@@ -77,8 +79,15 @@ export default function CountrySelection() {
 
   return (
     <>
+      {' '}
+      <DotPattern
+        className={cn(
+          '[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]',
+          'inset-x-0 inset-y-[-50%] h-[150%]',
+        )}
+      />
       <main className='flex h-screen items-center justify-center '>
-        <Card className='w-full max-w-4xl mx-4 rounded-lg shadow-lg overflow-hidden'>
+        <Card className='w-full max-w-4xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
           <article className='p-8'>
             <Card className='w-full bg-transparent shadow-none'>
               <CardHeader className='space-y-2 text-center'>

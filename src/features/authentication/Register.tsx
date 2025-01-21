@@ -23,6 +23,8 @@ import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import { Separator } from '@/components/ui/separator'
 import { setEmail } from '@/store/slices/emailSlice'
 import { setSub, setTitle } from '@/store/slices/otpContentSlice'
+import { cn } from '@/lib/utils'
+import DotPattern from '@/components/ui/dot-pattern'
 
 type FormValues = z.infer<typeof RegisterSchema>
 
@@ -80,16 +82,23 @@ export default function Register() {
   const onSubmit = async (data: FormValues) => {
     await dispatch(registerUser(data)).unwrap()
     dispatch(setEmail(data.email))
-    dispatch(setTitle('Verify Your Email'));
-      dispatch(setSub('An OTP has been sent to your email for verification.'));
+    dispatch(setTitle('Verify Your Email'))
+    dispatch(setSub('An OTP has been sent to your email for verification.'))
     dispatch(setPath('/select-country'))
     navigate('/otp-verification')
   }
 
   return (
     <>
+      {' '}
+      <DotPattern
+        className={cn(
+          '[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]',
+          'inset-x-0 inset-y-[-20%] h-[150%]',
+        )}
+      />
       <main className='flex min-h-screen items-center justify-center'>
-        <section className='grid grid-cols-1 lg:grid-cols-5 w-full max-w-6xl mx-4 rounded-lg border shadow-sm overflow-hidden'>
+        <section className='grid grid-cols-1 lg:grid-cols-5 w-full max-w-6xl mx-4 rounded-lg border shadow-sm overflow-hidden  z-20 bg-background'>
           {/* Image Section */}
           <BannerAuthImage className='col-span-2' />
 

@@ -24,6 +24,8 @@ import { verifyOtp } from '@/store/slices/verifyOTPSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
+import DotPattern from '@/components/ui/dot-pattern'
+import { cn } from '@/lib/utils'
 
 export default function OTP_Verification() {
   const navigate = useNavigate()
@@ -84,8 +86,15 @@ export default function OTP_Verification() {
 
   return (
     <>
-      <main className='flex h-screen items-center justify-center'>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
+      {' '}
+      <DotPattern
+        className={cn(
+          '[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]',
+          'inset-x-0 inset-y-[-50%] h-[150%]',
+        )}
+      />
+      <main className='flex h-screen items-center justify-center bg-background'>
+        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background '>
           <BannerAuthImage />
 
           {/* Form Section */}

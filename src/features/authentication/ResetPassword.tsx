@@ -61,7 +61,7 @@ export default function ResetPassword() {
   return (
     <>
       <main className='flex h-screen items-center justify-center'>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
+        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
           <BannerAuthImage />
           {/* Form Section */}
           <article className='p-8'>

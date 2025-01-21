@@ -67,7 +67,7 @@ export default function ChangePassword() {
                     type='submit'
                     className='w-full bg-foreground hover:bg-foreground/95 font-medium py-2 rounded-md transition-colors duration-200'
                   >
-                    Reset Password
+                    Change Password
                   </Button>
                 </form>
               </CardContent>

@@ -20,6 +20,8 @@ import FormField from '../dashboard/components/FormField'
 import { loginUser } from '@/store/slices/loginSlice'
 import Spinner from '@/components/custom/Spinner'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
+import DotPattern from '@/components/ui/dot-pattern'
+import { cn } from '@/lib/utils'
 
 type FormValues = z.infer<typeof LoginSchema>
 export default function Login() {
@@ -52,8 +54,14 @@ export default function Login() {
 
   return (
     <>
-      <main className='flex h-screen items-center justify-center'>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden'>
+      <DotPattern
+        className={cn(
+          '[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]',
+          'inset-x-0 inset-y-[-20%] h-[150%]',
+        )}
+      />
+      <main className='flex h-screen items-center justify-center z-50 '>
+        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
           <BannerAuthImage />
           <article className='p-8'>
             <FormProvider {...methods}>
