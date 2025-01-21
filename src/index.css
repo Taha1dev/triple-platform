@@ -12,18 +12,18 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
 .dark {
-  background-color: linear-gradient(
-    180deg,
-    transparent,
-    rgba(97, 106, 115, 0.12) 40%,
-    rgba(97, 106, 115, 0.12) 60%,
-    rgba(97, 106, 115, 0)
-  ) !important;
+  background-color: linear-gradient(180deg,
+      transparent,
+      rgba(97, 106, 115, 0.12) 40%,
+      rgba(97, 106, 115, 0.12) 60%,
+      rgba(97, 106, 115, 0)) !important;
 }
+
 body {
   font-family: 'Inter Tight', serif;
-  overflow-x: none;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -51,20 +51,27 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b; /* Use theme background */
-  border-radius: 100px; /* Rounded corners for track */
+  background: #09090b;
+  /* Use theme background */
+  border-radius: 100px;
+  /* Rounded corners for track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--variant); /* Use theme variant color */
-  border-radius: 100px; /* Rounded corners for thumb */
-  border: 20px solid var(--primary); /* Add a border to make it look inset */
+  background: var(--variant);
+  /* Use theme variant color */
+  border-radius: 100px;
+  /* Rounded corners for thumb */
+  border: 20px solid var(--primary);
+  /* Add a border to make it look inset */
 }
 
 /* Firefox Scrollbar */
 html {
-  scrollbar-color: var(--variant) var(--primary); /* Thumb and track colors */
+  scrollbar-color: var(--variant) var(--primary);
+  /* Thumb and track colors */
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -141,9 +148,11 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
 .bg-noise {
   background-image: url(https://www.transparenttextures.com/patterns/asfalt-light.png);
 }
+
 .glassy {
   background: rgba(155, 155, 155, 0.13);
   border-radius: 16px;
@@ -152,11 +161,13 @@ html {
   -webkit-backdrop-filter: blur(6.1px);
   border: 1px solid rgba(155, 155, 155, 0.3);
 }
+
 .dotted {
   background-image: radial-gradient(#000000 1px, transparent 1px);
   background-size: 10px 10px;
   background-color: rgba(255, 255, 255, 255);
 }
+
 .dark-dotted {
   background-image: radial-gradient(#fff 1px, transparent 1px);
   background-size: 10px 10px;
