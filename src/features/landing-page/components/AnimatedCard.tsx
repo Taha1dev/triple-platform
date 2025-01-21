@@ -22,7 +22,7 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
         >
           {title}
         </h4>
-        <div className='flex items-center justify-evenly mt-4 !z-50'>
+        <div className='flex items-center justify-evenly mt-4'>
           {icon.map(
             (icon: {
               src: string | undefined
@@ -31,7 +31,7 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
             }) => (
               <div
                 key={icon.alt}
-                className='flex-col-center z-50 transition-transform duration-300 hover:scale-110 hover:!rotate-3'
+                className='flex-col-center  transition-transform duration-300 hover:scale-110 hover:!rotate-3'
               >
                 <img className='size-16 mb-2' src={icon.src} alt={icon.alt} />
                 <p
