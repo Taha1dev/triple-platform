@@ -39,7 +39,7 @@ export default function HeroSection() {
             transition={{ delay: 1.2, duration: 0.6, ease: 'easeOut' }}
             className='flex gap-2'
           >
-            <Button className='w-fit text-lg bg-background text-foreground'>
+            <Button className='w-fit text-lg !bg-white hover:!bg-white/90 !transition-colors !text-black'>
               <a href='#how-it-works'>Learn More</a>
             </Button>
             <Button className='lg:hidden sblock w-fit text-lg !bg-theme-variant !text-white'>
