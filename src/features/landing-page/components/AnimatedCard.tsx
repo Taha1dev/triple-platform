@@ -22,7 +22,7 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
         >
           {title}
         </h4>
-        <div className='flex items-center justify-evenly mt-4'>
+        <div className='flex items-center justify-between mt-4'>
           {icon.map(
             (icon: {
               src: string | undefined
@@ -37,7 +37,7 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
                 <p
                   className={`text-sm ${
                     theme === 'light' ? 'text-theme-variant' : 'text-foreground'
-                  } font-bold text-center max-w-[100px]`}
+                  } font-bold text-center lg:max-w-[100px] max-w-[80px]`}
                 >
                   {icon.name}
                 </p>
