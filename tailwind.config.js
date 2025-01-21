@@ -5,15 +5,17 @@ export default {
   theme: {
     extend: {
       textShadow: {
-        'default': '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        default: '2px 2px 4px rgba(0, 0, 0, 0.5)'
       },
       fontFamily: {
         monoScape: ['"Source Code Pro"', "sans-serif"],
         paytone: ['"Paytone One"', "sans-serif"],
+
       },
       backgroundImage: {
         'hero-pattern': "url('/dark-banner.webp')",
         'blur-pattern': "url('blob-blur.png')"
+
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -96,11 +98,34 @@ export default {
           to: {
             height: '0'
           }
+        },
+        meteor: {
+          '0%': {
+            transform: 'rotate(215deg) translateX(0)',
+            opacity: '1'
+          },
+          '70%': {
+            opacity: '1'
+          },
+          '100%': {
+            transform: 'rotate(215deg) translateX(-500px)',
+            opacity: '0'
+          }
+        },
+        'background-position-spin': {
+          '0%': {
+            backgroundPosition: 'top center'
+          },
+          '100%': {
+            backgroundPosition: 'bottom center'
+          }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        meteor: 'meteor 5s linear infinite',
+        'background-position-spin': 'background-position-spin 3000ms infinite alternate'
       }
     }
   },

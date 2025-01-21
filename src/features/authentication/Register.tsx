@@ -25,13 +25,17 @@ import { setEmail } from '@/store/slices/emailSlice'
 import { setSub, setTitle } from '@/store/slices/otpContentSlice'
 import { cn } from '@/lib/utils'
 import DotPattern from '@/components/ui/dot-pattern'
+import { Checkbox } from '@/components/ui/checkbox'
+import { useState } from 'react'
 
 type FormValues = z.infer<typeof RegisterSchema>
 
 export default function Register() {
+  const [isChecked, setIsChecked] = useState<boolean>(false)
   const navigate = useNavigate()
   const methods = useForm<FormValues>({
     resolver: zodResolver(RegisterSchema),
+    mode: 'onBlur',
   })
 
   const dispatch = useDispatch<AppDispatch>()
@@ -78,7 +82,6 @@ export default function Register() {
   formFields.map((field, i) => {
     field.id = Object.keys(RegisterSchema.shape)[i]
   })
-
   const onSubmit = async (data: FormValues) => {
     await dispatch(registerUser(data)).unwrap()
     dispatch(setEmail(data.email))
@@ -130,7 +133,41 @@ export default function Register() {
                         />
                       ))}
                     </div>
-                    <Button type='submit' className='w-full' disabled={loading}>
+
+                    {/* Terms and Privacy Agreement */}
+                    <div className='flex items-center justify-center space-x-2'>
+                      <Checkbox
+                        onCheckedChange={() => setIsChecked(prev => !prev)}
+                        id='terms'
+                        required
+                      />
+                      <label
+                        htmlFor='terms'
+                        className='text-sm text-muted-foreground'
+                      >
+                        By registering, you agree to our{' '}
+                        <Link
+                          to='/terms'
+                          className='font-medium text-foreground hover:underline'
+                        >
+                          Terms of Service
+                        </Link>{' '}
+                        and{' '}
+                        <Link
+                          to='/privacy-policy'
+                          className='font-medium text-foreground hover:underline'
+                        >
+                          Privacy Policy
+                        </Link>
+                        .
+                      </label>
+                    </div>
+
+                    <Button
+                      type='submit'
+                      className='w-full'
+                      disabled={!isChecked || loading}
+                    >
                       Register
                     </Button>
                   </form>
