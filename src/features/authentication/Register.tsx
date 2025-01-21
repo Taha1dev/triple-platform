@@ -97,29 +97,29 @@ export default function Register() {
           'inset-x-0 inset-y-[-20%] h-[150%]',
         )}
       />
-      <main className='flex min-h-screen items-center justify-center'>
-        <section className='grid grid-cols-1 lg:grid-cols-5 w-full max-w-6xl mx-4 rounded-lg border shadow-sm overflow-hidden  z-20 bg-background'>
+      <main className='flex min-h-screen items-center justify-center lg:p-4 '>
+        <section className='grid grid-cols-1 lg:grid-cols-5 w-full max-w-6xl rounded-lg shadow-sm overflow-hidden z-20 bg-background border border-border'>
           {/* Image Section */}
           <BannerAuthImage className='col-span-2' />
 
           {/* Form Section */}
-          <article className='p-4 lg:p-10 bg-background col-span-3'>
+          <article className='lg:p-10 bg-background col-span-3'>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
-                <CardHeader className='space-y-3'>
-                  <CardTitle className='text-center text-2xl font-semibold'>
+                <CardHeader className='space-y-2 sm:space-y-3'>
+                  <CardTitle className='text-center text-xl sm:text-2xl font-semibold'>
                     Create Your Account
                   </CardTitle>
-                  <p className='text-center text-sm text-muted-foreground'>
+                  <p className='text-center text-xs sm:text-sm text-muted-foreground'>
                     Join us to get started on your journey
                   </p>
                 </CardHeader>
                 <CardContent>
                   <form
                     onSubmit={methods.handleSubmit(onSubmit)}
-                    className='space-y-6'
+                    className='space-y-4 sm:space-y-6'
                   >
-                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4'>
                       {formFields.map(field => (
                         <FormField
                           key={field.id}
@@ -135,9 +135,9 @@ export default function Register() {
                     </Button>
                   </form>
                 </CardContent>
-                <CardFooter className='flex flex-col items-center space-y-4 py-6'>
+                <CardFooter className='flex flex-col items-center space-y-3 sm:space-y-4 py-4 sm:py-6'>
                   <Separator />
-                  <p className='text-sm text-muted-foreground'>
+                  <p className='text-xs sm:text-sm text-muted-foreground'>
                     Already have an account?{' '}
                     <Link
                       to='/login'

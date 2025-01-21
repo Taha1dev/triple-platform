@@ -7,7 +7,7 @@ export default function Layout() {
     <div className='min-h-screen flex flex-col'>
       <NavBar showLinks={false} />
       <ScrollToTop />
-      <main className='container mx-auto flex-grow  px-4 py-8'>
+      <main className='container mx-auto flex-grow lg:px-4 lg:py-8 px-2 py-4'>
         <Outlet />
       </main>
       <Footer />

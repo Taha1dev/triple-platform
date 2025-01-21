@@ -62,12 +62,13 @@ export default function ForgetPassword() {
         )}
       />
       <main className='flex h-screen items-center justify-center'>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
+        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background border border-border'>
           {/* Banner Section */}
           <BannerAuthImage />
 
           {/* Form Section */}
-          <article className='p-8 flex items-center justify-center'>
+          <article className='lg:p-10 bg-background'>
+            {' '}
             <FormProvider {...methods}>
               <Card className='w-full bg-transparent shadow-none'>
                 <CardHeader className='space-y-2 text-center'>

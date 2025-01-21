@@ -38,7 +38,7 @@ export default function OTP_Verification() {
   const otpContent = useSelector((state: RootState) => state.otpContent)
   useEffect(() => {
     setLocalOtpContent({
-      title: otpContent.title || 'Reset Your Password', // Fallback to default
+      title: otpContent.title || 'Reset Your Password',
       sub:
         otpContent.sub ||
         'Enter the OTP sent to your email and set a new password',
@@ -94,11 +94,11 @@ export default function OTP_Verification() {
         )}
       />
       <main className='flex h-screen items-center justify-center bg-background'>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background '>
+        <article className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background border border-border'>
           <BannerAuthImage />
 
           {/* Form Section */}
-          <article className='p-8'>
+          <article className='lg:p-10 bg-background '>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
                 <CardHeader className='space-y-2'>
@@ -169,7 +169,7 @@ export default function OTP_Verification() {
               </Card>
             </FormProvider>
           </article>
-        </Card>
+        </article>
         {loading ||
           (v_loading && (
             <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>

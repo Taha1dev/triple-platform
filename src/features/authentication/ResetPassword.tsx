@@ -21,6 +21,8 @@ import { resetPassword } from '@/store/slices/resetPasswordSlice'
 import Spinner from '@/components/custom/Spinner'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import { Link } from 'react-router-dom'
+import { cn } from '@/lib/utils'
+import DotPattern from '@/components/ui/dot-pattern'
 
 type FormValues = z.infer<typeof ResetPasswordSchema>
 
@@ -34,20 +36,6 @@ export default function ResetPassword() {
   const { loading } = useSelector((state: RootState) => state.resetPassword)
   const { handleSubmit } = methods
 
-  const FormFields: FormFieldProps[] = [
-    {
-      label: 'New Password',
-      id: 'newPassword',
-      placeholder: 'Enter your new Password',
-      type: 'password',
-    },
-    {
-      label: 'Confirm Password',
-      id: 'confirmPassword',
-      placeholder: 'Confirm your Password',
-      type: 'password',
-    },
-  ]
   const onSubmit = async (data: FormValues) => {
     const { confirmPassword: password } = data
     try {
@@ -60,11 +48,17 @@ export default function ResetPassword() {
 
   return (
     <>
+      <DotPattern
+        className={cn(
+          '[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]',
+          'inset-x-0 inset-y-[-20%] h-[150%]',
+        )}
+      />
       <main className='flex h-screen items-center justify-center'>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
+        <section className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background border border-border'>
           <BannerAuthImage />
           {/* Form Section */}
-          <article className='p-8'>
+          <article className='lg:p-10 bg-background '>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
                 <CardHeader className='space-y-2'>
@@ -72,25 +66,19 @@ export default function ResetPassword() {
                     Reset Your Password
                   </CardTitle>
                   <CardDescription className='text-center text-sm text-zinc-600 dark:text-theme-secondary/80'>
-                    Enter the OTP sent to your email and set a new password
+                    Enter Your New Password here
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-                    {/* Form Fields */}
-                    {FormFields.map(field => (
-                      <div key={field.id} className='w-full'>
-                        <FormField
-                          label={field.label}
-                          id={field.id}
-                          placeholder={field.placeholder}
-                          type={field.type}
-                          schema={field.schema}
-                        />
-                      </div>
-                    ))}
-
-                    {/* Submit Button */}
+                    <div className='w-full'>
+                      <FormField
+                        label={'New Password'}
+                        id={'newPassword'}
+                        placeholder={'Enter your new Password'}
+                        type={'password'}
+                      />
+                    </div>
                     <Button
                       type='submit'
                       className='w-full bg-foreground hover:bg-foreground/95 font-medium py-2 rounded-md transition-colors duration-200'
@@ -100,12 +88,12 @@ export default function ResetPassword() {
                   </form>
                 </CardContent>
                 <CardFooter className='flex flex-col items-center space-y-4 py-6'>
-                  <div className='w-full border-t border-zinc-200 my-4'></div>
-                  <p className='text-sm text-zinc-600 dark:text-theme-secondary/80'>
+                  <div className='w-full border-t border-muted-foreground my-4'></div>
+                  <p className='text-sm text-muted-foreground '>
                     Remember your password?{' '}
                     <Link
                       to='/login'
-                      className='font-medium text-theme-variant hover:underline transition-colors duration-200'
+                      className='font-medium text-foreground hover:underline transition-colors duration-200'
                     >
                       Login
                     </Link>
@@ -114,7 +102,7 @@ export default function ResetPassword() {
               </Card>
             </FormProvider>
           </article>
-        </Card>
+        </section>
         {loading && (
           <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
             <Spinner />

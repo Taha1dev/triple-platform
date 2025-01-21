@@ -87,8 +87,8 @@ export default function CountrySelection() {
         )}
       />
       <main className='flex h-screen items-center justify-center '>
-        <Card className='w-full max-w-4xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
-          <article className='p-8'>
+        <section className='w-full max-w-4xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
+          <article className='lg:p-10 bg-background '>
             <Card className='w-full bg-transparent shadow-none'>
               <CardHeader className='space-y-2 text-center'>
                 <CardTitle className='text-2xl font-bold'>
@@ -156,7 +156,7 @@ export default function CountrySelection() {
               </CardContent>
             </Card>
           </article>
-        </Card>
+        </section>
         {loading && (
           <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
             <Spinner />

@@ -60,10 +60,10 @@ export default function Login() {
           'inset-x-0 inset-y-[-20%] h-[150%]',
         )}
       />
-      <main className='flex h-screen items-center justify-center z-50 '>
-        <Card className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background'>
+      <main className='flex h-screen items-center justify-center lg:p-4 '>
+        <section className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background border border-border'>
           <BannerAuthImage />
-          <article className='p-8'>
+          <article className='lg:p-10 bg-background'>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
                 <CardHeader className='space-y-2'>
@@ -121,7 +121,7 @@ export default function Login() {
               </Card>
             </FormProvider>
           </article>
-        </Card>
+        </section>
         {loading && (
           <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
             <Spinner />
