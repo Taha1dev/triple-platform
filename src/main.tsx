@@ -23,7 +23,7 @@ import Profile from './features/dashboard/pages/profile/Profile.tsx'
 import { StrictMode } from 'react'
 import UpdateProfile from './features/dashboard/pages/profile/UpdateProfile.tsx'
 import ChangePassword from './features/authentication/ChangePassword.tsx'
-import NotFound from './404.tsx'
+import NotFound from './pages/404.tsx'
 
 const router = createBrowserRouter([
   {

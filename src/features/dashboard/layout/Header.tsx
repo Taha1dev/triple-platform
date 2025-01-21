@@ -44,37 +44,48 @@ export default function Header() {
   return (
     <>
       <header className='my-4 container mx-auto p-4 border-b border-border'>
-        <div className='flex justify-between items-center'>
+        <div className='flex flex-wrap justify-between items-center gap-4'>
           {/* Search Input */}
-          <div className='relative'>
-            <Search className='absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground' />
+          <div className='relative w-full sm:w-auto'>
+            <Search
+              className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground'
+              aria-hidden='true'
+            />
             <Input
               type='search'
               placeholder='Search users, producers, etc...'
-              className='pl-10 w-[200px] md:w-[300px] rounded-lg bg-background focus:ring-2 focus:ring-primary transition-all'
+              aria-label='Search'
+              className='pl-10 w-full sm:w-[200px] md:w-[300px] rounded-lg bg-background focus:ring-2 focus:ring-primary focus:outline-none transition-all'
             />
           </div>
 
-          <div className='flex gap-3 items-center'>
+          {/* Right Section */}
+          <div className='flex justify-items-end gap-4'>
+            {/* Notification Button */}
             <Button
               variant='ghost'
               size='icon'
-              className='hover:bg-accent/50 rounded-xl'
+              className='hover:bg-accent/50 rounded-full border border-border transition-all'
+              aria-label='Notifications'
             >
               <Bell className='w-5 h-5' />
             </Button>
+
+            {/* Mode Toggle */}
             <ModeToggle />
+
+            {/* User Avatar and Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className='flex gap-3 items-center cursor-pointer'>
-                  <Avatar className='border-2 border-foreground size-12 hover:border-primary transition-all'>
+                <div className='flex items-center gap-3 cursor-pointer'>
+                  <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
                     <AvatarImage
-                      className='size-24 object-cover -mt-2'
                       src={
                         user?.image &&
                         `https://api.tripleplatform.app/${user.image}`
                       }
                       alt='User Avatar'
+                      className='w-10 h-10 object-cover'
                     />
                     <AvatarFallback>
                       <Skeleton className='w-10 h-10 rounded-full' />
@@ -91,28 +102,31 @@ export default function Header() {
                 </div>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent className='w-56 mt-2'>
+              <DropdownMenuContent className='w-56 mt-2 shadow-lg rounded-lg'>
                 <DropdownMenuItem
-                  className='cursor-pointer'
+                  className='cursor-pointer flex items-center gap-2'
                   onClick={() => navigate('profile')}
                 >
-                  <User className='mr-2 h-4 w-4' />
-                  <span>Profile</span>
+                  <User className='h-4 w-4' />
+                  Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer'>
-                  <Settings className='mr-2 h-4 w-4' /> <span>Settings</span>
+                <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
+                  <Settings className='h-4 w-4' />
+                  Settings
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={handleLogout}
-                  className='cursor-pointer text-red-600 focus:text-red-600'
+                  className='cursor-pointer flex items-center gap-2 text-red-600 focus:text-red-600'
                 >
-                  <LogOut className='mr-2 h-4 w-4' />
-                  <span>Logout</span>
+                  <LogOut className='h-4 w-4' />
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
+
+        {/* Loading Overlay */}
         {loading ||
           (Loading && (
             <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
