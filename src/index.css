@@ -23,7 +23,7 @@ html {
 
 body {
   font-family: 'Inter Tight', serif;
-  overflow-x: hidden;
+  overflow-x: none;
 }
 
 ::selection {
