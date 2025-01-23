@@ -1,0 +1,14 @@
+.HeroIllustration_base__H6llR
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    border: 1px solid #1e1e1e;
+    background: var(--color-bg-primary);
+    width: 1600px;
+    height: 900px;
+    margin: 280px auto auto;
+    transform: translateX(2%) scale(1.2) rotateX(47deg) rotateY(31deg) rotate(324deg);
+    transform-origin: top left;
+    backface-visibility: hidden;
+    .HeroIllustration_3d__JMg8B {
+    /* transform-style: preserve-3d;

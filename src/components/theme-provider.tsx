@@ -37,6 +37,12 @@ export const navLogo = (theme: Theme) => {
     ? '/triple-logo.webp'
     : '/triple-logo-light.png'
 }
+export const rootLogo = (theme: Theme) => {
+  const effectiveTheme = getEffectiveTheme(theme)
+  return effectiveTheme === 'dark'
+    ? '/triple-logo.webp'
+    : '/triple-logo-light.png'
+}
 
 export const footerLogo = (theme: Theme) => {
   const effectiveTheme = getEffectiveTheme(theme)

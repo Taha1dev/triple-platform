@@ -24,6 +24,8 @@ import { StrictMode } from 'react'
 import UpdateProfile from './features/dashboard/pages/profile/UpdateProfile.tsx'
 import ChangePassword from './features/authentication/ChangePassword.tsx'
 import NotFound from './pages/404.tsx'
+import ContactUs from './pages/ContactUs.tsx'
+import AboutUs from './pages/AboutUs.tsx'
 
 const router = createBrowserRouter([
   {
@@ -74,6 +76,14 @@ const router = createBrowserRouter([
       {
         path: 'faq',
         element: <FAQ />,
+      },
+      {
+        path: 'contact',
+        element: <ContactUs />,
+      },
+      {
+        path: 'about',
+        element: <AboutUs />,
       },
     ],
   },

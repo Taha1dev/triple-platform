@@ -16,7 +16,7 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
       } shadow-md max-w-xl min-h-[300px] flex flex-col justify-center items-center relative overflow-hidden hover:shadow-lg transition-shadow duration-300`}
     >
       {/* Content */}
-      <div className='text-center p-6'>
+      <div className='text-center p-6 z-20'>
         <h4
           className={`text-foreground tracking-wide text-3xl font-bold mb-4 `}
         >
@@ -50,9 +50,8 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
       {/* Shine Effect */}
       <div
         className={`shine absolute inset-0 bg-gradient-to-r ${
-          theme === 'light'
-            ? 'from-theme-variant/10 via-theme-variant/20 to-theme-variant/30'
-            : 'from-theme-variant/20 via-theme-variant/30 to-theme-variant/40'
+          theme === 'dark' &&
+          'from-theme-variant/20 via-theme-variant/30 to-theme-variant/40'
         } opacity-0 transition-opacity duration-500 hover:opacity-100`}
       ></div>
 
@@ -63,9 +62,8 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
             <div
               key={i}
               className={`tile tile-${i + 1} ${
-                theme === 'light'
-                  ? 'bg-theme-variant/5 border-theme-variant/10'
-                  : 'bg-theme-variant/10 border-theme-variant/20'
+                theme === 'dark' &&
+                'bg-theme-variant/10 border-theme-variant/20'
               }`}
             ></div>
           ))}
@@ -74,17 +72,17 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
         <div className='lines absolute inset-0'>
           <div
             className={`line line-1 ${
-              theme === 'light' ? 'bg-theme-variant/10' : ''
+              theme === 'dark' ? 'bg-theme-variant/10' : ''
             }`}
           ></div>
           <div
             className={`line line-2 ${
-              theme === 'light' ? 'bg-theme-variant/10' : ''
+              theme === 'dark' ? 'bg-theme-variant/10' : ''
             }`}
           ></div>
           <div
             className={`line line-3 ${
-              theme === 'light' ? 'bg-theme-variant/10' : ''
+              theme === 'dark' ? 'bg-theme-variant/10' : ''
             }`}
           ></div>
         </div>

@@ -137,7 +137,7 @@ export const NeonGradientCard: React.FC<NeonGradientCardProps> = ({
           "after:h-[var(--pseudo-element-height)] after:w-[var(--pseudo-element-width)] after:rounded-[var(--border-radius)] after:blur-[var(--after-blur)] after:content-['']",
           'after:bg-[linear-gradient(0deg,var(--neon-first-color),var(--neon-second-color))] after:bg-[length:100%_200%] after:opacity-80',
           'after:animate-background-position-spin',
-          'dark:bg-black dark:hover:bg-zinc-950 transition-all duration-500',
+          'dark:bg-[#09090c]/90 dark:hover:bg-zinc-950 transition-all duration-500',
           className,
         )}
       >

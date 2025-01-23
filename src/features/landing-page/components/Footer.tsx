@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTheme } from '@/components/theme-provider'
 import { ModeToggle } from '@/mode-toggle'
-import { Instagram, Linkedin, Twitter } from 'lucide-react'
+import { Instagram, Linkedin } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { fullYear } from '../constants'
@@ -69,12 +69,12 @@ const Footer = () => {
           <h3 className='text-lg font-semibold mb-4'>Quick Links</h3>
           <ul className='space-y-2'>
             <li>
-              <a
-                href='#about'
+              <Link
+                to='/about'
                 className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 About
-              </a>
+              </Link>
             </li>
             <li>
               <Link
@@ -85,12 +85,12 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <a
-                href='#contact'
+              <Link
+                to='/contact'
                 className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -137,13 +137,6 @@ const Footer = () => {
               className='text-muted-foreground hover:text-foreground transition-colors'
             >
               <Linkedin size={24} />
-            </Link>
-            <Link
-              to='#'
-              aria-label='Twitter'
-              className='text-muted-foreground hover:text-foreground transition-colors'
-            >
-              <Twitter size={24} />
             </Link>
           </div>
         </div>

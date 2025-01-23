@@ -124,10 +124,20 @@ const NavBar = ({ showLinks = true }: any) => {
 
             {/* Auth Buttons */}
             <div className='flex flex-col gap-3'>
-              <Button asChild variant='default' className='w-full rounded-lg'>
+              <Button
+                asChild
+                variant='default'
+                className='w-full rounded-lg'
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <Link to='/login'>Login</Link>
               </Button>
-              <Button asChild variant='outline' className='w-full rounded-lg'>
+              <Button
+                asChild
+                variant='outline'
+                className='w-full rounded-lg'
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <Link to='/register'>Register</Link>
               </Button>
             </div>

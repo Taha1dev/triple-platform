@@ -78,7 +78,7 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
   }
 
   return (
-    <div className='flex gap-3'>
+    <div className='w-full flex gap-3'>
       <div className='flex-1'>
         <label
           htmlFor={`${id}-day`}
