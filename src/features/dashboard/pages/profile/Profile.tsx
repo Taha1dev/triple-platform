@@ -30,7 +30,7 @@ const UserProfile = () => {
             <div className='w-32 h-32 sm:w-40 sm:h-40 border border-border hover:scale-105 transition-transform rounded-full overflow-hidden'>
               <img
                 className='w-full h-full object-cover'
-                src={`https://api.tripleplatform.app/${avatar}?t=${Date.now()}`}
+                src={`https://api.tripleplatform.app/api${avatar}?t=${Date.now()}`}
                 alt='User Avatar'
               />
             </div>
@@ -47,7 +47,6 @@ const UserProfile = () => {
           <div className='flex gap-3 mt-4 sm:mt-0'>
             <Button
               onClick={() => {
-              
                 navigate('/home/update-profile')
               }}
               className='rounded-full px-6 py-2'
@@ -94,7 +93,7 @@ const UserProfile = () => {
                   className='relative overflow-hidden rounded-lg hover:scale-105 transition-transform shadow-md'
                 >
                   <img
-                    src={`https://api.tripleplatform.app/${item}`}
+                    src={`https://api.tripleplatform.app/v1/${item}`}
                     alt={`Portfolio Image ${index + 1}`}
                     className='w-full h-40 object-cover'
                   />

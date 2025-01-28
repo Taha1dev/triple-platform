@@ -33,10 +33,11 @@ export default function Login() {
   })
 
   const onSubmit = async (data: FormValues) => {
-    await dispatch(loginUser(data))
-    navigate('/home')
+    const result = await dispatch(loginUser(data))
+    if (loginUser.fulfilled.match(result)) {
+      navigate('/home')
+    } else return
   }
-
   const FormFields = [
     {
       id: 'email',

@@ -44,32 +44,35 @@ body {
   }
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar,
+webkit-scrollbar {
   width: 8px;
   height: 8px;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-track,
+scrollbar-track {
+  background: #09090b !important;
   border-radius: 100px !important;
 }
 
-::-webkit-scrollbar-track {
-  background: #09090b;
-  /* Use theme background */
-  border-radius: 100px;
-  /* Rounded corners for track */
+::-webkit-scrollbar-thumb,
+scrollbar-thumb {
+  background: var(--variant) !important;
+  border-radius: 100px !important;
+  border: 2px solid var(--primary) !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--variant);
-  /* Use theme variant color */
-  border-radius: 100px;
-  /* Rounded corners for thumb */
-  border: 20px solid var(--primary);
-  /* Add a border to make it look inset */
+::-webkit-scrollbar-button,
+scrollbar-button {
+  display: none !important;
 }
 
-/* Firefox Scrollbar */
 html {
-  scrollbar-color: var(--variant) var(--primary);
-  /* Thumb and track colors */
+  scrollbar-color: var(--variant) var(--primary) !important;
+  scrollbar-width: thin !important;
+  border-radius: 100px !important;
 }
 
 @layer base {
@@ -154,22 +157,9 @@ html {
 }
 
 .glassy {
-  background: rgba(155, 155, 155, 0.13);
-  border-radius: 16px;
+  background: rgba(66, 66, 66, 0.13);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(6.1px);
-  -webkit-backdrop-filter: blur(6.1px);
+  backdrop-filter: blur(150px);
+  -webkit-backdrop-filter: blur(150px);
   border: 1px solid rgba(155, 155, 155, 0.3);
-}
-
-.dotted {
-  background-image: radial-gradient(#000000 1px, transparent 1px);
-  background-size: 10px 10px;
-  background-color: rgba(255, 255, 255, 255);
-}
-
-.dark-dotted {
-  background-image: radial-gradient(#fff 1px, transparent 1px);
-  background-size: 10px 10px;
-  background-color: rgba(0, 0, 0, 0);
 }

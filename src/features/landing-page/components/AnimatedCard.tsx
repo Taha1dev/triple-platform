@@ -11,7 +11,7 @@ const CardWithAnimation = ({ title, icon }: CardProps) => {
   const { theme } = useTheme()
   return (
     <Card
-      className={`an-card bg-background border ${
+      className={`an-card glassy bg-background border ${
         theme === 'light' ? 'border-border/50' : 'border-border'
       } shadow-md max-w-xl min-h-[300px] flex flex-col justify-center items-center relative overflow-hidden hover:shadow-lg transition-shadow duration-300`}
     >

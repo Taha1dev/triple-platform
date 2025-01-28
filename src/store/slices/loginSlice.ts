@@ -2,6 +2,7 @@
 import axiosClient from "@/api/apiClient";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setUser } from "./userSlice";
+import axios from "axios";
 
 interface AuthState {
   loading: boolean;
@@ -24,12 +25,13 @@ export const loginUser = createAsyncThunk<
   async (userData, { rejectWithValue, dispatch }) => {
     try {
       const response = await axiosClient.post("/user/login", userData);
-      const { token, ...user } = response.data;
+      console.log(response);
+      const { token, ...user } = response as any;
       dispatch(setUser({ ...user, token }));
     } catch (error: any) {
-      return rejectWithValue(
-        error?.response?.data?.message || "An error occurred"
-      );
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data || 'Login failed');
+      }
     }
   }
 );

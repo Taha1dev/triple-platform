@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 
 const axiosClient = axios.create({
-  baseURL: 'https://api.tripleplatform.app/app/v1/',
+  baseURL: 'http://44.201.100.137/apiapp/v1/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -24,24 +24,48 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
   (response) => {
     console.log(response);
-    if (response.data.status == 400 || response.data.status == 401 || response.data.status == 404 || response.data.status == 403) {
-      toast.error(response.data.message)
+
+    // Check if the response data is in a non-standard format and standardize it
+    const standardizedResponse = {
+      status: response.data.status || response.status,
+      message: response.data.message || response.statusText,
+      data: response.data.data || response.data,
+    };
+
+    // Handle specific status codes
+    if ([400, 401, 403, 404].includes(standardizedResponse.status)) {
+      toast.error(standardizedResponse.message || 'An error occurred');
     } else {
-      toast.success(response.data.message)
+      toast.success(standardizedResponse.message || 'Request successful');
     }
-    return response.data;
+
+    // Return the standardized response data
+    return standardizedResponse.data;
   },
   (error) => {
-    if (error?.response?.data?.status === 403) {
+    if (!error.response) {
+      toast.error('Network error or server is unreachable');
+      return Promise.reject(error);
+    }
+
+    const { status, data } = error.response;
+
+    if (status === 403) {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      console.log(error);
+      toast.error(data.message || 'Unauthorized access');
+    } else if (status === 401) {
+      toast.error(data.message || 'Authentication failed');
+    } else if (status === 404) {
+      toast.error(data.message || 'Resource not found');
+    } else if (status === 400) {
+      toast.error(data.message || 'Bad request');
+    } else {
+      toast.error(data.message || 'An unexpected error occurred');
     }
-    if (error.response) {
-      if (error.response.status === 401) {
-        console.log(error);
-      }
-    }
+
+    console.error('API Error:', error);
+
     return Promise.reject(error);
   }
 );

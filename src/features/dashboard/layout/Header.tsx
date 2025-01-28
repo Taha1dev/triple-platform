@@ -32,7 +32,8 @@ export default function Header() {
 
   useEffect(() => {
     dispatch(initializeUserData())
-  }, [])
+    console.log(user)
+  }, [dispatch])
   const handleLogout = async () => {
     if (!user) {
       navigate('/login')
