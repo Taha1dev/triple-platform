@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 
 const axiosClient = axios.create({
-  baseURL: 'https://44.201.100.137/app/v1/',
+  baseURL: 'http://44.201.100.137/app/v1/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -25,7 +25,6 @@ axiosClient.interceptors.response.use(
   (response) => {
     console.log(response);
 
-    // Check if the response data is in a non-standard format and standardize it
     const standardizedResponse = {
       status: response.data.status || response.status,
       message: response.data.message || response.statusText,
