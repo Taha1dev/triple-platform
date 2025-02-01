@@ -20,7 +20,6 @@ import Layout from './features/landing-page/layout/Layout.tsx'
 import PanelLayout from './features/dashboard/layout/index.tsx'
 import Dashboard from './features/dashboard/pages/Home.tsx'
 import Profile from './features/dashboard/pages/profile/Profile.tsx'
-import { StrictMode } from 'react'
 import UpdateProfile from './features/dashboard/pages/profile/UpdateProfile.tsx'
 import ChangePassword from './features/authentication/ChangePassword.tsx'
 import NotFound from './pages/404.tsx'
@@ -109,16 +108,14 @@ const getThemeFromLocalStorage = (key: string): Theme | undefined => {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-        <Toaster
-          richColors
-          duration={5000}
-          theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
-        />
-      </Provider>
-    </ThemeProvider>
-  </StrictMode>,
+  <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <Toaster
+        richColors
+        duration={5000}
+        theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
+      />
+    </Provider>
+  </ThemeProvider>,
 )

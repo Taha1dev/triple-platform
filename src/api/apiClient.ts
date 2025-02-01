@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 
 const axiosClient = axios.create({
-  baseURL: 'http://44.201.100.137/apiapp/v1/',
+  baseURL: 'https://44.201.100.137/app/v1/',
   headers: {
     'Content-Type': 'application/json',
   },

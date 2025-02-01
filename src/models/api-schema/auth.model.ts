@@ -15,4 +15,25 @@ export interface LoginResponseSchema {
   token: string
 }
 
+export type OnBoardingResponse = OnBoardingData[]
+export interface OnBoardingData {
+  _id: string
+  name: string
+  icon: string
+  data: any[]
+  createdAt: string
+  updatedAt: string
+  __v: number | string
+  categoryData: CategoryDaum[]
+}
 
+export interface CategoryDaum {
+  _id: string
+  name: string
+  icon: string
+  category: string
+  data: any[]
+  createdAt: string
+  updatedAt: string
+  __v: number | string
+}

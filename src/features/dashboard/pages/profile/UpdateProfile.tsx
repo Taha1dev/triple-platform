@@ -4,31 +4,88 @@ import { Camera } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { Card } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
 import { updateProfile } from '@/store/slices/updateUserSlice'
 import { useEffect, useState } from 'react'
 import { initializeUserData } from '@/store/slices/userSlice'
+import { UpdateProfileSchema } from '@/models/zod-schema/zod.schema'
+import FormField from '../../components/FormField'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import data from '@/data/countries.json'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  setSelectedCities,
+  setSelectedCountry,
+} from '@/store/slices/citiesCountriesSlice'
+import MultipleSelect from '../../components/MultipleSelect'
 
+type FormValues = z.infer<typeof UpdateProfileSchema>
+interface CountryData {
+  country: string
+  cities: string[]
+}
 export default function UpdateProfile() {
   const { user } = useSelector((state: RootState) => state.user)
-  const [formData, setFormData] = useState({
-    fname: user?.fname || '',
-    lname: user?.lname || '',
-    contact_number: user?.contact_number || '',
-    bio: user?.bio || '',
+  const formFields = [
+    {
+      id: 'fname',
+      label: 'First Name',
+      placeholder: 'Enter your First Name',
+      type: 'text',
+    },
+    {
+      id: 'lName',
+      label: 'Last Name',
+      placeholder: 'Enter your Last Name',
+      type: 'text',
+    },
+    {
+      id: 'email',
+      label: 'Email',
+      placeholder: 'Enter your Email Address',
+      type: 'email',
+    },
+    {
+      id: 'contact_number',
+      label: 'Phone Number',
+      placeholder: 'Enter your Phone Number',
+      type: 'text',
+    },
+    {
+      id: 'password',
+      label: 'Password',
+      placeholder: 'Enter your Password',
+      type: 'password',
+    },
+    {
+      id: 'dob',
+      label: 'Birth Date',
+      placeholder: 'Enter your Birth Date',
+      type: 'date',
+    },
+  ]
+  formFields.map((field, i) => {
+    field.id = Object.keys(UpdateProfileSchema.shape)[i]
   })
+
+  const methods = useForm<FormValues>({
+    resolver: zodResolver(UpdateProfileSchema),
+    mode: 'onBlur',
+  })
+  const { handleSubmit, control } = methods
+
   const [avatar, setAvatar] = useState<string | undefined>(user?.image || '')
   const dispatch = useDispatch<AppDispatch>()
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -44,27 +101,36 @@ export default function UpdateProfile() {
       console.error('Error uploading image:', error)
     }
   }
+  const [localCities, setLocalCities] = useState<string[] | any>([])
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   try {
+  //     await dispatch(updateProfile(formData)).unwrap()
+  //     dispatch(initializeUserData())
+  //   } catch (error) {
+  //     console.error('Error updating profile:', error)
+  //   }
+  // }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      await dispatch(updateProfile(formData)).unwrap()
-      dispatch(initializeUserData())
-    } catch (error) {
-      console.error('Error updating profile:', error)
-    }
+  const onSubmit = (data: any) => {
+    console.log(data)
   }
-
   useEffect(() => {
-    setFormData({
-      fname: user?.fname || '',
-      lname: user?.lname || '',
-      contact_number: user?.contact_number || '',
-      bio: user?.bio || '',
-    })
     setAvatar(user?.image)
   }, [user])
+  const handleCountryChange = (country: string) => {
+    dispatch(setSelectedCountry(country))
+    const filteredData = data.find(
+      (item: CountryData) => item.country === country,
+    )
 
+    setLocalCities(filteredData?.cities)
+    if (filteredData) {
+      dispatch(setSelectedCities(filteredData.cities))
+    } else {
+      dispatch(setSelectedCities([]))
+    }
+  }
   return (
     <div className='container mx-auto px-2 flex flex-col items-center'>
       <Card className='flex flex-col gap-6 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow w-full'>
@@ -72,7 +138,7 @@ export default function UpdateProfile() {
           <div className='border-2 border-primary w-44 h-44 hover:border-theme-variant hover:scale-105 transition-transform rounded-full overflow-hidden'>
             <img
               className='w-full h-full object-cover'
-              src={`https://api.tripleplatform.app/${avatar}?t=${Date.now()}`}
+              src={`http://44.201.100.137/${avatar}?t=${Date.now()}`}
               alt='User Avatar'
             />
           </div>
@@ -89,53 +155,60 @@ export default function UpdateProfile() {
             onChange={handleFileChange}
           />
         </div>
-        <form className='space-y-6 flex-1' onSubmit={handleSubmit}>
-          <div className='grid gap-4 sm:grid-cols-2'>
-            <div>
-              <Label htmlFor='fname'>First Name</Label>
-              <Input
-                id='fname'
-                name='fname'
-                value={formData.fname}
-                onChange={handleInputChange}
-                placeholder='Enter your first name'
+        <FormProvider {...methods}>
+          <form className='space-y-6 flex-1' onSubmit={handleSubmit(onSubmit)}>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4'>
+              {formFields.map(field => (
+                <FormField
+                  key={field.id}
+                  id={field.id}
+                  label={field.label}
+                  placeholder={field.placeholder}
+                  type={field.type}
+                />
+              ))}
+            </div>
+            <div className='w-full'>
+              <label className='block text-sm font-medium mb-2'>Country</label>
+              <Controller
+                name='country'
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    onValueChange={(value: string) => {
+                      field.onChange(value)
+                      handleCountryChange(value)
+                    }}
+                    value={field.value}
+                  >
+                    <SelectTrigger className='w-full'>
+                      <SelectValue placeholder='Select a Country' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Countries</SelectLabel>
+                        {data.map((item: CountryData) => (
+                          <SelectItem key={item.country} value={item.country}>
+                            {item.country}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
               />
             </div>
-            <div>
-              <Label htmlFor='lname'>Last Name</Label>
-              <Input
-                id='lname'
-                name='lname'
-                value={formData.lname}
-                onChange={handleInputChange}
-                placeholder='Enter your last name'
-              />
+
+            {/* City Select */}
+            <div className='w-full'>
+              <label className='block text-sm font-medium mb-2'>City</label>
+              <MultipleSelect options={localCities} />
             </div>
-          </div>
-          <div>
-            <Label htmlFor='contact_number'>Phone Number</Label>
-            <Input
-              id='contact_number'
-              name='contact_number'
-              value={formData.contact_number}
-              onChange={handleInputChange}
-              placeholder='Enter your phone number'
-            />
-          </div>
-          <div>
-            <Label htmlFor='bio'>Bio</Label>
-            <Textarea
-              id='bio'
-              name='bio'
-              value={formData.bio}
-              onChange={handleInputChange}
-              placeholder='Write a short bio about yourself'
-            />
-          </div>
-          <Button type='submit' className='w-full'>
-            Save Changes
-          </Button>
-        </form>
+            <Button type='submit' className='w-full'>
+              Save Changes
+            </Button>
+          </form>
+        </FormProvider>
       </Card>
     </div>
   )

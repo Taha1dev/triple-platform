@@ -83,7 +83,7 @@ export default function Header() {
                     <AvatarImage
                       src={
                         user?.image &&
-                        `https://api.tripleplatform.app/${user.image}`
+                        `http://44.201.100.137/${user.image}`
                       }
                       alt='User Avatar'
                       className='w-10 h-10 object-cover'
