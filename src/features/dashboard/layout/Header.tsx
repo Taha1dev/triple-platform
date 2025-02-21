@@ -28,7 +28,6 @@ export default function Header() {
   const { loading: Loading } = useSelector(
     (state: RootState) => state.updateProfile,
   )
-  const { loading } = useSelector((state: RootState) => state.logout)
 
   useEffect(() => {
     dispatch(initializeUserData())
@@ -81,10 +80,7 @@ export default function Header() {
                 <div className='flex items-center gap-3 cursor-pointer'>
                   <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
                     <AvatarImage
-                      src={
-                        user?.image &&
-                        `http://44.201.100.137/${user.image}`
-                      }
+                      src={user?.image && `http://44.201.100.137/${user.image}`}
                       alt='User Avatar'
                       className='w-10 h-10 object-cover'
                     />
@@ -127,13 +123,11 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Loading Overlay */}
-        {loading ||
-          (Loading && (
-            <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-              <Spinner />
-            </div>
-          ))}
+        {Loading && (
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <Spinner />
+          </div>
+        )}
       </header>
     </>
   )

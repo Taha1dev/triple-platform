@@ -14,11 +14,13 @@ html {
 }
 
 .dark {
-  background-color: linear-gradient(180deg,
-      transparent,
-      rgba(97, 106, 115, 0.12) 40%,
-      rgba(97, 106, 115, 0.12) 60%,
-      rgba(97, 106, 115, 0)) !important;
+  background-color: linear-gradient(
+    180deg,
+    transparent,
+    rgba(97, 106, 115, 0.12) 40%,
+    rgba(97, 106, 115, 0.12) 60%,
+    rgba(97, 106, 115, 0)
+  ) !important;
 }
 
 body {

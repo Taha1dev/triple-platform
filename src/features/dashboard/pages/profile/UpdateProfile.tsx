@@ -138,7 +138,7 @@ export default function UpdateProfile() {
           <div className='border-2 border-primary w-44 h-44 hover:border-theme-variant hover:scale-105 transition-transform rounded-full overflow-hidden'>
             <img
               className='w-full h-full object-cover'
-              src={`http://44.201.100.137/${avatar}?t=${Date.now()}`}
+              src={`http://34.226.153.150/${avatar}?t=${Date.now()}`}
               alt='User Avatar'
             />
           </div>

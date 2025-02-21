@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Spinner from '@/components/custom/Spinner'
 import { Button } from '@/components/ui/button'
 import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -16,7 +17,9 @@ export default function Dashboard() {
   const { data, loading, error } = useSelector(
     (state: RootState) => state.onBoarding,
   )
-
+  const { loading: logout_loading } = useSelector(
+    (state: RootState) => state.logout,
+  )
   useEffect(() => {
     dispatch(fetchOnBoarding())
   }, [dispatch])
@@ -26,8 +29,7 @@ export default function Dashboard() {
       <h1 className='text-2xl font-bold mb-4'>Categories</h1>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
         {loading
-          ? // Render skeleton placeholders when loading
-            Array.from({ length: 6 }).map((_, index) => (
+          ? Array.from({ length: 6 }).map((_, index) => (
               <motion.div
                 key={index}
                 className='hover:shadow-lg transition-shadow'
@@ -80,6 +82,11 @@ export default function Dashboard() {
           </div>
         )}
       </div>
+      {logout_loading && (
+        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+          <Spinner />
+        </div>
+      )}
     </div>
   )
 }
