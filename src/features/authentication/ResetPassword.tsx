@@ -12,23 +12,23 @@ import FormField from '../dashboard/components/FormField'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { ResetPasswordSchema } from '@/models/zod-schema/zod.schema'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { resetPassword } from '@/store/slices/resetPasswordSlice'
-// import { useNavigate } from 'react-router-dom'
 import Spinner from '@/components/custom/Spinner'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import DotPattern from '@/components/ui/dot-pattern'
+import { ResetPasswordSchema } from '@/models/zod-schema/zod.schema'
 
 type FormValues = z.infer<typeof ResetPasswordSchema>
 
 export default function ResetPassword() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const methods = useForm<FormValues>({
     resolver: zodResolver(ResetPasswordSchema),
+    mode:'onBlur'
   })
   const dispatch = useDispatch<AppDispatch>()
   const { email } = useSelector((state: RootState) => state.forgetPassword)
@@ -36,12 +36,13 @@ export default function ResetPassword() {
   const { handleSubmit } = methods
 
   const onSubmit = async (data: FormValues) => {
-    const { confirmPassword: password } = data
     try {
-      await dispatch(resetPassword({ password, email })).unwrap()
-      // navigate('/ss')
+      await dispatch(
+        resetPassword({ password: data.confirmPassword, email }),
+      ).unwrap()
+      navigate('/login')
     } catch (error) {
-      console.log(error)
+      console.error('Error:', error)
     }
   }
 
@@ -56,7 +57,7 @@ export default function ResetPassword() {
       <main className='flex h-screen items-center justify-center'>
         <section className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background border border-border'>
           <BannerAuthImage />
-          {/* Form Section */}
+
           <article className='lg:p-10 bg-background '>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
@@ -75,6 +76,12 @@ export default function ResetPassword() {
                         label={'New Password'}
                         id={'newPassword'}
                         placeholder={'Enter your new Password'}
+                        type={'password'}
+                      />
+                      <FormField
+                        label={'Confirm Password'}
+                        id={'confirmPassword'}
+                        placeholder={'Confirm your new Password'}
                         type={'password'}
                       />
                     </div>

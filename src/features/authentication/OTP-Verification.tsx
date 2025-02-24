@@ -31,26 +31,17 @@ export default function OTP_Verification() {
   const navigate = useNavigate()
   const [otp, setOtp] = useState('')
   const [otpError, setOtpError] = useState<string | null>(null)
+
   const [localOtpContent, setLocalOtpContent] = useState({
     title: 'Reset Your Password',
     sub: 'Enter the OTP sent to your email and set a new password',
   })
-  const otpContent = useSelector((state: RootState) => state.otpContent)
-  useEffect(() => {
-    setLocalOtpContent({
-      title: otpContent.title || 'Reset Your Password',
-      sub:
-        otpContent.sub ||
-        'Enter the OTP sent to your email and set a new password',
-    })
-  }, [otpContent])
+
   const methods = useForm<any>()
   const { handleSubmit, control } = methods
-
+  const otpContent = useSelector((state: RootState) => state.otpContent)
   const dispatch = useDispatch<AppDispatch>()
-  const { loading, email } = useSelector(
-    (state: RootState) => state.forgetPassword,
-  )
+  const { email } = useSelector((state: RootState) => state.email)
   const { path } = useSelector((state: RootState) => state.routerInstance)
   const { loading: v_loading } = useSelector(
     (state: RootState) => state.verifyOtp,
@@ -83,6 +74,15 @@ export default function OTP_Verification() {
     setOtp('')
     dispatch(resendOtp(email))
   }
+
+  useEffect(() => {
+    setLocalOtpContent({
+      title: otpContent.title || 'Reset Your Password',
+      sub:
+        otpContent.sub ||
+        'Enter the OTP sent to your email and set a new password',
+    })
+  }, [otpContent])
 
   return (
     <>
@@ -170,14 +170,13 @@ export default function OTP_Verification() {
             </FormProvider>
           </article>
         </article>
-        {loading ||
-          (v_loading && (
-            <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-              <Spinner />
-            </div>
-          ))}
+        {v_loading && (
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <Spinner />
+          </div>
+        )}
       </main>
-      {(loading || v_loading) ?? (
+      {v_loading ?? (
         <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
           <Spinner />
         </div>

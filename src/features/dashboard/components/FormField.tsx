@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
+import React, { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { useFormContext } from 'react-hook-form'
 import { ZodType } from 'zod'
 import { DatePicker } from './DatePicker'
+import { Eye, EyeOff } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label' // Import the Label component from shadcn
 
-// import moment from 'moment'
 export type FormFieldProps = {
   label: string
   id: string
@@ -24,6 +26,11 @@ const FormField: React.FC<FormFieldProps> = ({
     control,
     formState: { errors },
   } = useFormContext()
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
 
   return (
     <div className='mb-4 flex flex-col items-start'>
@@ -31,16 +38,35 @@ const FormField: React.FC<FormFieldProps> = ({
         <DatePicker id={id} control={control} name={id} />
       ) : (
         <>
-          <label htmlFor={id} className='font-medium mb-1 ml-1'>
+          <Label htmlFor={id} className='mb-1 ml-1'>
+            {' '}
+            {/* Use the Label component */}
             {label}
-          </label>
-          <Input
-            autoComplete='true'
-            id={id}
-            type={type}
-            placeholder={placeholder}
-            {...control.register(id)}
-          />
+          </Label>
+          <div className='relative w-full'>
+            <Input
+              autoComplete='true'
+              id={id}
+              type={type === 'password' && showPassword ? 'text' : type}
+              placeholder={placeholder}
+              {...control.register(id)}
+            />
+            {type === 'password' && (
+              <Button
+                type='button'
+                variant='ghost'
+                size='sm'
+                className='absolute right-2 top-1/2 transform -translate-y-1/2'
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <EyeOff className='h-4 w-4' />
+                ) : (
+                  <Eye className='h-4 w-4' />
+                )}
+              </Button>
+            )}
+          </div>
         </>
       )}
       {errors[id] && (

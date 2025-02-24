@@ -44,15 +44,6 @@ export const updateProfile = createAsyncThunk(
       const { data } = await axiosClient.get(`/user/${userId}`);
       console.log(data);
       dispatch(setUser(data));
-      // const state: any = getState();
-      // const existingUserData = state.user.user;
-
-      // // Update the local user state with formData
-      // const updatedData = { ...existingUserData, ...Object.fromEntries(formData.entries()) };
-
-      // dispatch(setUser(updatedData));
-      // return updatedData;
-
       return;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'An error occurred while updating the profile');

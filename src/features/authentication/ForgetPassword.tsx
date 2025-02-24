@@ -24,6 +24,7 @@ import { setTitle, setSub } from '@/store/slices/otpContentSlice'
 import FormField from '../dashboard/components/FormField'
 import DotPattern from '@/components/ui/dot-pattern'
 import { cn } from '@/lib/utils'
+import { setEmail } from '@/store/slices/emailSlice'
 
 type FormValues = z.infer<typeof emailSchema>
 
@@ -45,6 +46,7 @@ export default function ForgetPassword() {
         dispatch(
           setSub('Enter the OTP sent to your email to reset your password.'),
         )
+        dispatch(setEmail(data.email))
         navigate('/otp-verification')
       } catch (err) {
         console.error('Failed to send OTP:', err)

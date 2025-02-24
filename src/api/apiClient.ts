@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 
 const axiosClient = axios.create({
-  baseURL: 'http://44.201.100.137/apiapp/v1/',
+  baseURL: 'http://44.201.100.137/app/v1/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -25,21 +25,18 @@ axiosClient.interceptors.response.use(
   (response) => {
     console.log(response);
 
-    // Check if the response data is in a non-standard format and standardize it
     const standardizedResponse = {
       status: response.data.status || response.status,
       message: response.data.message || response.statusText,
       data: response.data.data || response.data,
     };
 
-    // Handle specific status codes
     if ([400, 401, 403, 404].includes(standardizedResponse.status)) {
       toast.error(standardizedResponse.message || 'An error occurred');
     } else {
       toast.success(standardizedResponse.message || 'Request successful');
     }
 
-    // Return the standardized response data
     return standardizedResponse.data;
   },
   (error) => {
