@@ -38,7 +38,7 @@ const FormField: React.FC<FormFieldProps> = ({
         <DatePicker id={id} control={control} name={id} />
       ) : (
         <>
-          <label htmlFor={id} className='font-medium mb-1 ml-1'>
+          <Label htmlFor={id} className='font-medium mb-1 ml-1'>
             {label}
           </Label>
           <div className='relative w-full'>
