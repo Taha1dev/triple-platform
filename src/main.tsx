@@ -20,12 +20,20 @@ import Layout from './features/landing-page/layout/Layout.tsx'
 import PanelLayout from './features/dashboard/layout/index.tsx'
 import Dashboard from './features/dashboard/pages/Home.tsx'
 import Profile from './features/dashboard/pages/profile/Profile.tsx'
-import { StrictMode } from 'react'
 import UpdateProfile from './features/dashboard/pages/profile/UpdateProfile.tsx'
 import ChangePassword from './features/authentication/ChangePassword.tsx'
 import NotFound from './pages/404.tsx'
 import ContactUs from './pages/ContactUs.tsx'
 import AboutUs from './pages/AboutUs.tsx'
+
+import Hh from './pages/Dumm3.tsx'
+import Fin from './pages/Dummy2.tsx'
+import ProfilePage from './pages/Dumm3.tsx'
+import LocationPage from './pages/Dummy2.tsx'
+import AgenciesPage from './pages/agencies.tsx'
+import OperatorsPage from './pages/operators.tsx'
+import HomePage2 from './pages/home-page-v2.tsx'
+import HomePage from './pages/home-page.tsx'
 
 const router = createBrowserRouter([
   {
@@ -60,6 +68,34 @@ const router = createBrowserRouter([
       {
         path: 'otp-verification',
         element: <OTP_Verification />,
+      },
+      {
+        path: 'test',
+        element: <HomePage />,
+      },
+      {
+        path: 't',
+        element: <ProfilePage />,
+      },
+      {
+        path: 'tt',
+        element: <LocationPage />,
+      },
+      {
+        path: 'op',
+        element: <OperatorsPage />,
+      },
+      {
+        path: 'h',
+        element: <HomePage2 />,
+      },
+      {
+        path: 'hh',
+        element: <HomePage />,
+      },
+      {
+        path: 'ag',
+        element: <AgenciesPage />,
       },
       {
         path: 'select-country',
@@ -109,16 +145,14 @@ const getThemeFromLocalStorage = (key: string): Theme | undefined => {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-        <Toaster
-          richColors
-          duration={5000}
-          theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
-        />
-      </Provider>
-    </ThemeProvider>
-  </StrictMode>,
+  <ThemeProvider defaultTheme='dark' storageKey='triple-theme'>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <Toaster
+        richColors
+        duration={5000}
+        theme={getThemeFromLocalStorage('triple-theme') || 'dark'}
+      />
+    </Provider>
+  </ThemeProvider>,
 )

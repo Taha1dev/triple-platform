@@ -14,31 +14,26 @@ export interface LoginResponseSchema {
   dob: string
   token: string
 }
-interface Token {
-  _id: string;
-  fname: string;
-  lname: string;
-  email: string;
-  portfolio: any[];
-  password: string;
-  contact_number: string;
-  dob: string;
-  rating: number;
-  city: any[];
-  data: any[];
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  OTP: string;
-  forgot_password_OTP: string;
-  login_token: string;
-  image: string;
+
+export type OnBoardingResponse = OnBoardingData[]
+export interface OnBoardingData {
+  _id: string
+  name: string
+  icon: string
+  data: any[]
+  createdAt: string
+  updatedAt: string
+  __v: number | string
+  categoryData: CategoryDaum[]
 }
 
-export interface UpdateProfileResponse {
-  status: number;
-  data: number;
-  message: string;
-  token: Token;
+export interface CategoryDaum {
+  _id: string
+  name: string
+  icon: string
+  category: string
+  data: any[]
+  createdAt: string
+  updatedAt: string
+  __v: number | string
 }
-

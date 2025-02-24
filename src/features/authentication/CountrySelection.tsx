@@ -27,7 +27,7 @@ import {
 } from '@/store/slices/citiesCountriesSlice'
 
 import { Controller, useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Spinner from '@/components/custom/Spinner'
 import { useNavigate } from 'react-router-dom'
 import MultipleSelect from '../dashboard/components/MultipleSelect'
@@ -58,7 +58,7 @@ export default function CountrySelection() {
     const filteredData = data.find(
       (item: CountryData) => item.country === country,
     )
-    console.log('filteredData', filteredData)
+
     setLocalCities(filteredData?.cities)
     if (filteredData) {
       dispatch(setSelectedCities(filteredData.cities))
@@ -67,14 +67,11 @@ export default function CountrySelection() {
     }
   }
 
-  useEffect(() => {
-    console.log('selectedCities', city)
-  }, [city])
 
   const onSubmit = async () => {
     const paylaod = { cities: city, country }
     await dispatch(userBase(paylaod))
-    navigate('/ss')
+    navigate('/home')
   }
 
   return (
@@ -111,7 +108,6 @@ export default function CountrySelection() {
                     <Controller
                       name='country'
                       control={control}
-                      defaultValue=''
                       render={({ field }) => (
                         <Select
                           onValueChange={(value: string) => {

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label' // Import the Label component from shadcn
 import { useFormContext } from 'react-hook-form'
 import { ZodType } from 'zod'
 import { DatePicker } from './DatePicker'
 import { Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label' // Import the Label component from shadcn
 
 export type FormFieldProps = {
   label: string
@@ -38,9 +38,7 @@ const FormField: React.FC<FormFieldProps> = ({
         <DatePicker id={id} control={control} name={id} />
       ) : (
         <>
-          <Label htmlFor={id} className='mb-1 ml-1'>
-            {' '}
-            {/* Use the Label component */}
+          <label htmlFor={id} className='font-medium mb-1 ml-1'>
             {label}
           </Label>
           <div className='relative w-full'>

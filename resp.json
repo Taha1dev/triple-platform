@@ -1,0 +1,1500 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "subcategories": [],
+      "_id": "67a47d7aae09a55fa335228b",
+      "name": "Pro-Crew",
+      "slug": "PC",
+      "details": [
+        "67a47d7bae09a55fa335228e",
+        "67a47d7bae09a55fa3352295",
+        "67a47d7cae09a55fa335229c"
+      ],
+      "createdAt": "2025-02-06T09:14:34.252Z",
+      "updatedAt": "2025-02-06T09:14:36.654Z",
+      "__v": 1
+    },
+    {
+      "subcategories": [],
+      "_id": "67a47d7cae09a55fa33522a4",
+      "name": "Pro-Crew",
+      "slug": "",
+      "details": ["67a47d7cae09a55fa33522a6"],
+      "createdAt": "2025-02-06T09:14:36.750Z",
+      "updatedAt": "2025-02-06T09:14:37.231Z",
+      "__v": 1
+    },
+    {
+      "subcategories": [],
+      "_id": "67a47d7dae09a55fa33522ae",
+      "name": "Talents",
+      "slug": "Talents",
+      "details": ["67a47d7dae09a55fa33522b0"],
+      "createdAt": "2025-02-06T09:14:37.329Z",
+      "updatedAt": "2025-02-06T09:14:37.804Z",
+      "__v": 1
+    },
+    {
+      "_id": "67b301ab6b1578ff448fce25",
+      "name": "Locations",
+      "icon": "LO_ICON",
+      "slug": "LO_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301ac6b1578ff448fce2a",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Apartment",
+          "createdAt": "2025-02-17T09:30:20.541Z",
+          "updatedAt": "2025-02-17T09:30:20.541Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ad6b1578ff448fce2d",
+          "type": "location",
+          "locationType": "Private",
+          "location": "kitchen",
+          "createdAt": "2025-02-17T09:30:21.521Z",
+          "updatedAt": "2025-02-17T09:30:21.521Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ad6b1578ff448fce30",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Townhouse",
+          "createdAt": "2025-02-17T09:30:21.617Z",
+          "updatedAt": "2025-02-17T09:30:21.617Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ad6b1578ff448fce33",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Villa",
+          "createdAt": "2025-02-17T09:30:21.714Z",
+          "updatedAt": "2025-02-17T09:30:21.714Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ad6b1578ff448fce36",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Mansion",
+          "createdAt": "2025-02-17T09:30:21.810Z",
+          "updatedAt": "2025-02-17T09:30:21.810Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ad6b1578ff448fce39",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Private Garden",
+          "createdAt": "2025-02-17T09:30:21.906Z",
+          "updatedAt": "2025-02-17T09:30:21.906Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce3c",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Private Pool",
+          "createdAt": "2025-02-17T09:30:22.002Z",
+          "updatedAt": "2025-02-17T09:30:22.002Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce3f",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Private Roof",
+          "createdAt": "2025-02-17T09:30:22.097Z",
+          "updatedAt": "2025-02-17T09:30:22.097Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce42",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Private Gym",
+          "createdAt": "2025-02-17T09:30:22.193Z",
+          "updatedAt": "2025-02-17T09:30:22.193Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce45",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Private Road",
+          "createdAt": "2025-02-17T09:30:22.289Z",
+          "updatedAt": "2025-02-17T09:30:22.289Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce48",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Offices",
+          "createdAt": "2025-02-17T09:30:22.385Z",
+          "updatedAt": "2025-02-17T09:30:22.385Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce4b",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Homes",
+          "createdAt": "2025-02-17T09:30:22.481Z",
+          "updatedAt": "2025-02-17T09:30:22.481Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce4e",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Warehouses",
+          "createdAt": "2025-02-17T09:30:22.578Z",
+          "updatedAt": "2025-02-17T09:30:22.578Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce51",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Farmhouses",
+          "createdAt": "2025-02-17T09:30:22.674Z",
+          "updatedAt": "2025-02-17T09:30:22.674Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce54",
+          "type": "location",
+          "locationType": "Private",
+          "location": "Galleries",
+          "createdAt": "2025-02-17T09:30:22.771Z",
+          "updatedAt": "2025-02-17T09:30:22.771Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ae6b1578ff448fce58",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Film studio",
+          "createdAt": "2025-02-17T09:30:22.968Z",
+          "updatedAt": "2025-02-17T09:30:22.968Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce5b",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Photography studio",
+          "createdAt": "2025-02-17T09:30:23.064Z",
+          "updatedAt": "2025-02-17T09:30:23.064Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce5e",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Video studio",
+          "createdAt": "2025-02-17T09:30:23.159Z",
+          "updatedAt": "2025-02-17T09:30:23.159Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce61",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Podcast Studio",
+          "createdAt": "2025-02-17T09:30:23.256Z",
+          "updatedAt": "2025-02-17T09:30:23.256Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce64",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Green Studio",
+          "createdAt": "2025-02-17T09:30:23.353Z",
+          "updatedAt": "2025-02-17T09:30:23.353Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce67",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "White Studio",
+          "createdAt": "2025-02-17T09:30:23.449Z",
+          "updatedAt": "2025-02-17T09:30:23.449Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce6a",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Practical studio",
+          "createdAt": "2025-02-17T09:30:23.544Z",
+          "updatedAt": "2025-02-17T09:30:23.544Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce6d",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Multiset studio",
+          "createdAt": "2025-02-17T09:30:23.639Z",
+          "updatedAt": "2025-02-17T09:30:23.639Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce70",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Virtual studio",
+          "createdAt": "2025-02-17T09:30:23.734Z",
+          "updatedAt": "2025-02-17T09:30:23.734Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce73",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Projection Studio",
+          "createdAt": "2025-02-17T09:30:23.829Z",
+          "updatedAt": "2025-02-17T09:30:23.829Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301af6b1578ff448fce76",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Private Theater",
+          "createdAt": "2025-02-17T09:30:23.927Z",
+          "updatedAt": "2025-02-17T09:30:23.927Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce79",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Private Cinema Theater",
+          "createdAt": "2025-02-17T09:30:24.022Z",
+          "updatedAt": "2025-02-17T09:30:24.022Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce7c",
+          "type": "location",
+          "locationType": "Studio",
+          "location": "Filming kitchen",
+          "createdAt": "2025-02-17T09:30:24.117Z",
+          "updatedAt": "2025-02-17T09:30:24.117Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce80",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Beach",
+          "createdAt": "2025-02-17T09:30:24.307Z",
+          "updatedAt": "2025-02-17T09:30:24.307Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce83",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Hotel Lobby",
+          "createdAt": "2025-02-17T09:30:24.404Z",
+          "updatedAt": "2025-02-17T09:30:24.404Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce86",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Hotel Room",
+          "createdAt": "2025-02-17T09:30:24.500Z",
+          "updatedAt": "2025-02-17T09:30:24.500Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce89",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Public Pool",
+          "createdAt": "2025-02-17T09:30:24.596Z",
+          "updatedAt": "2025-02-17T09:30:24.596Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce8c",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Public Gym",
+          "createdAt": "2025-02-17T09:30:24.694Z",
+          "updatedAt": "2025-02-17T09:30:24.694Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce8f",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Museum",
+          "createdAt": "2025-02-17T09:30:24.788Z",
+          "updatedAt": "2025-02-17T09:30:24.788Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce92",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Public street",
+          "createdAt": "2025-02-17T09:30:24.885Z",
+          "updatedAt": "2025-02-17T09:30:24.885Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b06b1578ff448fce95",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Public Rooftop",
+          "createdAt": "2025-02-17T09:30:24.982Z",
+          "updatedAt": "2025-02-17T09:30:24.982Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fce98",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Restaurants",
+          "createdAt": "2025-02-17T09:30:25.078Z",
+          "updatedAt": "2025-02-17T09:30:25.078Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fce9b",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Cafes",
+          "createdAt": "2025-02-17T09:30:25.175Z",
+          "updatedAt": "2025-02-17T09:30:25.175Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fce9e",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Shops",
+          "createdAt": "2025-02-17T09:30:25.271Z",
+          "updatedAt": "2025-02-17T09:30:25.271Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fcea1",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Boutiques",
+          "createdAt": "2025-02-17T09:30:25.366Z",
+          "updatedAt": "2025-02-17T09:30:25.366Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fcea4",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Malls",
+          "createdAt": "2025-02-17T09:30:25.461Z",
+          "updatedAt": "2025-02-17T09:30:25.461Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fcea7",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Night club",
+          "createdAt": "2025-02-17T09:30:25.557Z",
+          "updatedAt": "2025-02-17T09:30:25.557Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fceaa",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Private Theater",
+          "createdAt": "2025-02-17T09:30:25.652Z",
+          "updatedAt": "2025-02-17T09:30:25.652Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fcead",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Private Cinema Theater",
+          "createdAt": "2025-02-17T09:30:25.747Z",
+          "updatedAt": "2025-02-17T09:30:25.747Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fceb0",
+          "type": "location",
+          "locationType": "Public",
+          "location": "City centers",
+          "createdAt": "2025-02-17T09:30:25.845Z",
+          "updatedAt": "2025-02-17T09:30:25.845Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b16b1578ff448fceb3",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Skyscrapers",
+          "createdAt": "2025-02-17T09:30:25.940Z",
+          "updatedAt": "2025-02-17T09:30:25.940Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fceb6",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Urban parks",
+          "createdAt": "2025-02-17T09:30:26.036Z",
+          "updatedAt": "2025-02-17T09:30:26.036Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fceb9",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Street corners",
+          "createdAt": "2025-02-17T09:30:26.132Z",
+          "updatedAt": "2025-02-17T09:30:26.132Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fcebc",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Public squares",
+          "createdAt": "2025-02-17T09:30:26.228Z",
+          "updatedAt": "2025-02-17T09:30:26.228Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fcebf",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Transit stations",
+          "createdAt": "2025-02-17T09:30:26.323Z",
+          "updatedAt": "2025-02-17T09:30:26.323Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fcec2",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Parks",
+          "createdAt": "2025-02-17T09:30:26.420Z",
+          "updatedAt": "2025-02-17T09:30:26.420Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fcec5",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Beaches",
+          "createdAt": "2025-02-17T09:30:26.514Z",
+          "updatedAt": "2025-02-17T09:30:26.514Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fcec8",
+          "type": "location",
+          "locationType": "Public",
+          "location": "Gardens",
+          "createdAt": "2025-02-17T09:30:26.609Z",
+          "updatedAt": "2025-02-17T09:30:26.609Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fcecc",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Desert",
+          "createdAt": "2025-02-17T09:30:26.802Z",
+          "updatedAt": "2025-02-17T09:30:26.802Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fcecf",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Farmlands",
+          "createdAt": "2025-02-17T09:30:26.898Z",
+          "updatedAt": "2025-02-17T09:30:26.898Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b26b1578ff448fced2",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Villages",
+          "createdAt": "2025-02-17T09:30:26.995Z",
+          "updatedAt": "2025-02-17T09:30:26.995Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fced5",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Countryside",
+          "createdAt": "2025-02-17T09:30:27.091Z",
+          "updatedAt": "2025-02-17T09:30:27.091Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fced8",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Ranches",
+          "createdAt": "2025-02-17T09:30:27.186Z",
+          "updatedAt": "2025-02-17T09:30:27.186Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fcedb",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Vineyards",
+          "createdAt": "2025-02-17T09:30:27.281Z",
+          "updatedAt": "2025-02-17T09:30:27.281Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fcede",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Orchards",
+          "createdAt": "2025-02-17T09:30:27.378Z",
+          "updatedAt": "2025-02-17T09:30:27.378Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fcee1",
+          "type": "location",
+          "locationType": "Rural",
+          "location": "Meadows",
+          "createdAt": "2025-02-17T09:30:27.473Z",
+          "updatedAt": "2025-02-17T09:30:27.473Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fcee5",
+          "type": "location",
+          "locationType": "Historical or Cultural",
+          "location": "Museums",
+          "createdAt": "2025-02-17T09:30:27.664Z",
+          "updatedAt": "2025-02-17T09:30:27.664Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fcee8",
+          "type": "location",
+          "locationType": "Historical or Cultural",
+          "location": "Historical sites",
+          "createdAt": "2025-02-17T09:30:27.760Z",
+          "updatedAt": "2025-02-17T09:30:27.760Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fceeb",
+          "type": "location",
+          "locationType": "Historical or Cultural",
+          "location": "Monuments",
+          "createdAt": "2025-02-17T09:30:27.856Z",
+          "updatedAt": "2025-02-17T09:30:27.856Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b36b1578ff448fceee",
+          "type": "location",
+          "locationType": "Historical or Cultural",
+          "location": "Castles",
+          "createdAt": "2025-02-17T09:30:27.959Z",
+          "updatedAt": "2025-02-17T09:30:27.959Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcef1",
+          "type": "location",
+          "locationType": "Historical or Cultural",
+          "location": "Palaces",
+          "createdAt": "2025-02-17T09:30:28.061Z",
+          "updatedAt": "2025-02-17T09:30:28.061Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcef4",
+          "type": "location",
+          "locationType": "Historical or Cultural",
+          "location": "Temples",
+          "createdAt": "2025-02-17T09:30:28.156Z",
+          "updatedAt": "2025-02-17T09:30:28.156Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcef7",
+          "type": "location",
+          "locationType": "Historical or Cultural",
+          "location": "Shrines",
+          "createdAt": "2025-02-17T09:30:28.253Z",
+          "updatedAt": "2025-02-17T09:30:28.253Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcefb",
+          "type": "location",
+          "locationType": "Natural Landscapes",
+          "location": "Mountains",
+          "createdAt": "2025-02-17T09:30:28.446Z",
+          "updatedAt": "2025-02-17T09:30:28.446Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcefe",
+          "type": "location",
+          "locationType": "Natural Landscapes",
+          "location": "Lakes",
+          "createdAt": "2025-02-17T09:30:28.544Z",
+          "updatedAt": "2025-02-17T09:30:28.544Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcf01",
+          "type": "location",
+          "locationType": "Natural Landscapes",
+          "location": "Rivers",
+          "createdAt": "2025-02-17T09:30:28.640Z",
+          "updatedAt": "2025-02-17T09:30:28.640Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcf04",
+          "type": "location",
+          "locationType": "Natural Landscapes",
+          "location": "Valleys",
+          "createdAt": "2025-02-17T09:30:28.735Z",
+          "updatedAt": "2025-02-17T09:30:28.735Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcf07",
+          "type": "location",
+          "locationType": "Natural Landscapes",
+          "location": "Deserts",
+          "createdAt": "2025-02-17T09:30:28.830Z",
+          "updatedAt": "2025-02-17T09:30:28.830Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b46b1578ff448fcf0a",
+          "type": "location",
+          "locationType": "Natural Landscapes",
+          "location": "Waterfalls",
+          "createdAt": "2025-02-17T09:30:28.934Z",
+          "updatedAt": "2025-02-17T09:30:28.934Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf0d",
+          "type": "location",
+          "locationType": "Natural Landscapes",
+          "location": "Forest",
+          "createdAt": "2025-02-17T09:30:29.030Z",
+          "updatedAt": "2025-02-17T09:30:29.030Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf11",
+          "type": "location",
+          "locationType": "Educational or Institutional Locations",
+          "location": "Schools",
+          "createdAt": "2025-02-17T09:30:29.223Z",
+          "updatedAt": "2025-02-17T09:30:29.223Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf14",
+          "type": "location",
+          "locationType": "Educational or Institutional Locations",
+          "location": "Universities",
+          "createdAt": "2025-02-17T09:30:29.321Z",
+          "updatedAt": "2025-02-17T09:30:29.321Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf17",
+          "type": "location",
+          "locationType": "Educational or Institutional Locations",
+          "location": "Libraries",
+          "createdAt": "2025-02-17T09:30:29.420Z",
+          "updatedAt": "2025-02-17T09:30:29.420Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf1a",
+          "type": "location",
+          "locationType": "Educational or Institutional Locations",
+          "location": "Research centers",
+          "createdAt": "2025-02-17T09:30:29.516Z",
+          "updatedAt": "2025-02-17T09:30:29.516Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf1d",
+          "type": "location",
+          "locationType": "Educational or Institutional Locations",
+          "location": "Hospitals",
+          "createdAt": "2025-02-17T09:30:29.613Z",
+          "updatedAt": "2025-02-17T09:30:29.613Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf20",
+          "type": "location",
+          "locationType": "Educational or Institutional Locations",
+          "location": "Laboratories",
+          "createdAt": "2025-02-17T09:30:29.707Z",
+          "updatedAt": "2025-02-17T09:30:29.707Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b56b1578ff448fcf23",
+          "type": "location",
+          "locationType": "Educational or Institutional Locations",
+          "location": "Government buildings",
+          "createdAt": "2025-02-17T09:30:29.803Z",
+          "updatedAt": "2025-02-17T09:30:29.803Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:19.434Z",
+      "updatedAt": "2025-02-17T09:30:29.897Z",
+      "__v": 7
+    },
+    {
+      "_id": "67b301b56b1578ff448fcf27",
+      "name": "Cast",
+      "icon": "CAST_ICON",
+      "slug": "CAST_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301b66b1578ff448fcf29",
+          "type": "cast",
+          "name": "TV Speaker",
+          "createdAt": "2025-02-17T09:30:30.091Z",
+          "updatedAt": "2025-02-17T09:30:30.091Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b66b1578ff448fcf2c",
+          "type": "cast",
+          "name": "Business speaker",
+          "createdAt": "2025-02-17T09:30:30.186Z",
+          "updatedAt": "2025-02-17T09:30:30.186Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b66b1578ff448fcf2f",
+          "type": "cast",
+          "name": "Advertising Speaker",
+          "createdAt": "2025-02-17T09:30:30.281Z",
+          "updatedAt": "2025-02-17T09:30:30.281Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b66b1578ff448fcf32",
+          "type": "cast",
+          "name": "Actor/Actress",
+          "createdAt": "2025-02-17T09:30:30.376Z",
+          "updatedAt": "2025-02-17T09:30:30.376Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b66b1578ff448fcf35",
+          "type": "cast",
+          "name": "Presenter",
+          "createdAt": "2025-02-17T09:30:30.498Z",
+          "updatedAt": "2025-02-17T09:30:30.498Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b66b1578ff448fcf38",
+          "type": "cast",
+          "name": "Press",
+          "createdAt": "2025-02-17T09:30:30.594Z",
+          "updatedAt": "2025-02-17T09:30:30.594Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:29.995Z",
+      "updatedAt": "2025-02-17T09:30:30.691Z",
+      "__v": 1
+    },
+    {
+      "_id": "67b301b66b1578ff448fcf3c",
+      "name": "Athletes",
+      "icon": "ATH_ICON",
+      "slug": "ATH_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301b66b1578ff448fcf3e",
+          "type": "athletes",
+          "name": "Basketball Professional",
+          "createdAt": "2025-02-17T09:30:30.883Z",
+          "updatedAt": "2025-02-17T09:30:30.883Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b66b1578ff448fcf41",
+          "type": "athletes",
+          "name": "Football Professional",
+          "createdAt": "2025-02-17T09:30:30.978Z",
+          "updatedAt": "2025-02-17T09:30:30.978Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf44",
+          "type": "athletes",
+          "name": "Skateboard",
+          "createdAt": "2025-02-17T09:30:31.089Z",
+          "updatedAt": "2025-02-17T09:30:31.089Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf47",
+          "type": "athletes",
+          "name": "Rollerblading Professional",
+          "createdAt": "2025-02-17T09:30:31.185Z",
+          "updatedAt": "2025-02-17T09:30:31.185Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf4a",
+          "type": "athletes",
+          "name": "Gym Professional",
+          "createdAt": "2025-02-17T09:30:31.280Z",
+          "updatedAt": "2025-02-17T09:30:31.280Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf4d",
+          "type": "athletes",
+          "name": "Tennis Professional",
+          "createdAt": "2025-02-17T09:30:31.376Z",
+          "updatedAt": "2025-02-17T09:30:31.376Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf50",
+          "type": "athletes",
+          "name": "Skydiving Professional",
+          "createdAt": "2025-02-17T09:30:31.471Z",
+          "updatedAt": "2025-02-17T09:30:31.471Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf53",
+          "type": "athletes",
+          "name": "Scubadiving Professional",
+          "createdAt": "2025-02-17T09:30:31.569Z",
+          "updatedAt": "2025-02-17T09:30:31.569Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf56",
+          "type": "athletes",
+          "name": "Jetsky Professional",
+          "createdAt": "2025-02-17T09:30:31.665Z",
+          "updatedAt": "2025-02-17T09:30:31.665Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf59",
+          "type": "athletes",
+          "name": "Golf Professional",
+          "createdAt": "2025-02-17T09:30:31.762Z",
+          "updatedAt": "2025-02-17T09:30:31.762Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf5c",
+          "type": "athletes",
+          "name": "Paddle tennis Professional",
+          "createdAt": "2025-02-17T09:30:31.857Z",
+          "updatedAt": "2025-02-17T09:30:31.857Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b76b1578ff448fcf5f",
+          "type": "athletes",
+          "name": "Yoga Professional",
+          "createdAt": "2025-02-17T09:30:31.956Z",
+          "updatedAt": "2025-02-17T09:30:31.956Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf62",
+          "type": "athletes",
+          "name": "Running Professional",
+          "createdAt": "2025-02-17T09:30:32.052Z",
+          "updatedAt": "2025-02-17T09:30:32.052Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf65",
+          "type": "athletes",
+          "name": "Driving Professional",
+          "createdAt": "2025-02-17T09:30:32.153Z",
+          "updatedAt": "2025-02-17T09:30:32.153Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf68",
+          "type": "athletes",
+          "name": "Stunt Professional",
+          "createdAt": "2025-02-17T09:30:32.249Z",
+          "updatedAt": "2025-02-17T09:30:32.249Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf6b",
+          "type": "athletes",
+          "name": "Pilot Professional",
+          "createdAt": "2025-02-17T09:30:32.344Z",
+          "updatedAt": "2025-02-17T09:30:32.344Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf6e",
+          "type": "athletes",
+          "name": "Motor Driving Professional",
+          "createdAt": "2025-02-17T09:30:32.439Z",
+          "updatedAt": "2025-02-17T09:30:32.439Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf71",
+          "type": "athletes",
+          "name": "Rally Professional",
+          "createdAt": "2025-02-17T09:30:32.534Z",
+          "updatedAt": "2025-02-17T09:30:32.534Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf74",
+          "type": "athletes",
+          "name": "Drifting Professional",
+          "createdAt": "2025-02-17T09:30:32.633Z",
+          "updatedAt": "2025-02-17T09:30:32.633Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf77",
+          "type": "athletes",
+          "name": "Racing Professional",
+          "createdAt": "2025-02-17T09:30:32.731Z",
+          "updatedAt": "2025-02-17T09:30:32.731Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf7a",
+          "type": "athletes",
+          "name": "Swimming Professional",
+          "createdAt": "2025-02-17T09:30:32.826Z",
+          "updatedAt": "2025-02-17T09:30:32.826Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b86b1578ff448fcf7d",
+          "type": "athletes",
+          "name": "Bodybuilder",
+          "createdAt": "2025-02-17T09:30:32.922Z",
+          "updatedAt": "2025-02-17T09:30:32.922Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf80",
+          "type": "athletes",
+          "name": "Dancing Professional",
+          "createdAt": "2025-02-17T09:30:33.017Z",
+          "updatedAt": "2025-02-17T09:30:33.017Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf83",
+          "type": "athletes",
+          "name": "Horseback riding Professional",
+          "createdAt": "2025-02-17T09:30:33.112Z",
+          "updatedAt": "2025-02-17T09:30:33.112Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf86",
+          "type": "athletes",
+          "name": "Martial arts Professional",
+          "createdAt": "2025-02-17T09:30:33.207Z",
+          "updatedAt": "2025-02-17T09:30:33.207Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:30.787Z",
+      "updatedAt": "2025-02-17T09:30:33.302Z",
+      "__v": 1
+    },
+    {
+      "_id": "67b301b96b1578ff448fcf8a",
+      "name": "Special Skills",
+      "icon": "SS_ICON",
+      "slug": "SS_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301b96b1578ff448fcf8c",
+          "type": "special_skills",
+          "name": "Dance (e.g., ballet, hip-hop, salsa)",
+          "createdAt": "2025-02-17T09:30:33.493Z",
+          "updatedAt": "2025-02-17T09:30:33.493Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf8f",
+          "type": "special_skills",
+          "name": "Martial arts (e.g., karate, taekwondo, judo)",
+          "createdAt": "2025-02-17T09:30:33.590Z",
+          "updatedAt": "2025-02-17T09:30:33.590Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf92",
+          "type": "special_skills",
+          "name": "Musical instruments (e.g., piano, guitar, violin)",
+          "createdAt": "2025-02-17T09:30:33.686Z",
+          "updatedAt": "2025-02-17T09:30:33.686Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf95",
+          "type": "special_skills",
+          "name": "Singing (e.g., soprano, alto, tenor)",
+          "createdAt": "2025-02-17T09:30:33.782Z",
+          "updatedAt": "2025-02-17T09:30:33.782Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf98",
+          "type": "special_skills",
+          "name": "Acting (e.g., theater, film, improv)",
+          "createdAt": "2025-02-17T09:30:33.879Z",
+          "updatedAt": "2025-02-17T09:30:33.879Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301b96b1578ff448fcf9b",
+          "type": "special_skills",
+          "name": "Yoga or Pilates",
+          "createdAt": "2025-02-17T09:30:33.974Z",
+          "updatedAt": "2025-02-17T09:30:33.974Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcf9e",
+          "type": "special_skills",
+          "name": "Gymnastics",
+          "createdAt": "2025-02-17T09:30:34.069Z",
+          "updatedAt": "2025-02-17T09:30:34.069Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfa1",
+          "type": "special_skills",
+          "name": "Skateboarding or rollerblading",
+          "createdAt": "2025-02-17T09:30:34.165Z",
+          "updatedAt": "2025-02-17T09:30:34.165Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfa4",
+          "type": "special_skills",
+          "name": "Horseback riding",
+          "createdAt": "2025-02-17T09:30:34.261Z",
+          "updatedAt": "2025-02-17T09:30:34.261Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfa7",
+          "type": "special_skills",
+          "name": "Public speaking or hosting",
+          "createdAt": "2025-02-17T09:30:34.356Z",
+          "updatedAt": "2025-02-17T09:30:34.356Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfaa",
+          "type": "special_skills",
+          "name": "Makeup artistry or hairstyling",
+          "createdAt": "2025-02-17T09:30:34.453Z",
+          "updatedAt": "2025-02-17T09:30:34.453Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfad",
+          "type": "special_skills",
+          "name": "Modeling specialties (e.g., runway, print, fitness)",
+          "createdAt": "2025-02-17T09:30:34.549Z",
+          "updatedAt": "2025-02-17T09:30:34.549Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfb0",
+          "type": "special_skills",
+          "name": "Stunts or acrobatics",
+          "createdAt": "2025-02-17T09:30:34.646Z",
+          "updatedAt": "2025-02-17T09:30:34.646Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfb3",
+          "type": "special_skills",
+          "name": "Cooking or baking",
+          "createdAt": "2025-02-17T09:30:34.742Z",
+          "updatedAt": "2025-02-17T09:30:34.742Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301ba6b1578ff448fcfb6",
+          "type": "special_skills",
+          "name": "Sports proficiency (e.g., soccer, basketball, swimming)",
+          "createdAt": "2025-02-17T09:30:34.838Z",
+          "updatedAt": "2025-02-17T09:30:34.838Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:33.398Z",
+      "updatedAt": "2025-02-17T09:30:34.935Z",
+      "__v": 1
+    },
+    {
+      "_id": "67b301bb6b1578ff448fcfba",
+      "name": "Models",
+      "icon": "M_ICON",
+      "slug": "M_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301bb6b1578ff448fcfbc",
+          "type": "model",
+          "name": "Fashion Model",
+          "createdAt": "2025-02-17T09:30:35.127Z",
+          "updatedAt": "2025-02-17T09:30:35.127Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bb6b1578ff448fcfbf",
+          "type": "model",
+          "name": "Face Model",
+          "createdAt": "2025-02-17T09:30:35.221Z",
+          "updatedAt": "2025-02-17T09:30:35.221Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bb6b1578ff448fcfc2",
+          "type": "model",
+          "name": "Hand Model",
+          "createdAt": "2025-02-17T09:30:35.316Z",
+          "updatedAt": "2025-02-17T09:30:35.316Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bb6b1578ff448fcfc5",
+          "type": "model",
+          "name": "bodybuilder",
+          "createdAt": "2025-02-17T09:30:35.413Z",
+          "updatedAt": "2025-02-17T09:30:35.413Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:35.032Z",
+      "updatedAt": "2025-02-17T09:30:35.507Z",
+      "__v": 1
+    },
+    {
+      "_id": "67b301bb6b1578ff448fcfc9",
+      "name": "Operators",
+      "icon": "OP_ICON",
+      "slug": "OP_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301bb6b1578ff448fcfcb",
+          "type": "operator",
+          "name": "Exhibition Videographer",
+          "createdAt": "2025-02-17T09:30:35.704Z",
+          "updatedAt": "2025-02-17T09:30:35.704Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bb6b1578ff448fcfce",
+          "type": "operator",
+          "name": "Nightlife Videographer",
+          "createdAt": "2025-02-17T09:30:35.799Z",
+          "updatedAt": "2025-02-17T09:30:35.799Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bb6b1578ff448fcfd1",
+          "type": "operator",
+          "name": "Creative Videographer",
+          "createdAt": "2025-02-17T09:30:35.894Z",
+          "updatedAt": "2025-02-17T09:30:35.894Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bb6b1578ff448fcfd4",
+          "type": "operator",
+          "name": "Storyteller Videographer",
+          "createdAt": "2025-02-17T09:30:35.989Z",
+          "updatedAt": "2025-02-17T09:30:35.989Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bc6b1578ff448fcfd7",
+          "type": "operator",
+          "name": "Reels Videographer",
+          "createdAt": "2025-02-17T09:30:36.083Z",
+          "updatedAt": "2025-02-17T09:30:36.083Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bc6b1578ff448fcfda",
+          "type": "operator",
+          "name": "Fashion Videographer",
+          "createdAt": "2025-02-17T09:30:36.180Z",
+          "updatedAt": "2025-02-17T09:30:36.180Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bc6b1578ff448fcfdd",
+          "type": "operator",
+          "name": "Food Videographer",
+          "createdAt": "2025-02-17T09:30:36.278Z",
+          "updatedAt": "2025-02-17T09:30:36.278Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bc6b1578ff448fcfe0",
+          "type": "operator",
+          "name": "Product Videographer",
+          "createdAt": "2025-02-17T09:30:36.372Z",
+          "updatedAt": "2025-02-17T09:30:36.372Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bc6b1578ff448fcfe3",
+          "type": "operator",
+          "name": "Real-estate Videographer",
+          "createdAt": "2025-02-17T09:30:36.468Z",
+          "updatedAt": "2025-02-17T09:30:36.468Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:35.606Z",
+      "updatedAt": "2025-02-17T09:30:36.562Z",
+      "__v": 1
+    },
+    {
+      "_id": "67b301bc6b1578ff448fcfe7",
+      "name": "Camera & Photography",
+      "icon": "CA_ICON",
+      "slug": "CA_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301bc6b1578ff448fcfe9",
+          "type": "equipment",
+          "brand": "Sony",
+          "model": "FX6",
+          "createdAt": "2025-02-17T09:30:36.753Z",
+          "updatedAt": "2025-02-17T09:30:36.753Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bc6b1578ff448fcfec",
+          "type": "equipment",
+          "brand": "Sony",
+          "model": "FX3",
+          "createdAt": "2025-02-17T09:30:36.849Z",
+          "updatedAt": "2025-02-17T09:30:36.849Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bc6b1578ff448fcfef",
+          "type": "equipment",
+          "brand": "Sony",
+          "model": "A7iii",
+          "createdAt": "2025-02-17T09:30:36.944Z",
+          "updatedAt": "2025-02-17T09:30:36.944Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bd6b1578ff448fcff2",
+          "type": "equipment",
+          "brand": "Sony",
+          "model": "A7riii",
+          "createdAt": "2025-02-17T09:30:37.040Z",
+          "updatedAt": "2025-02-17T09:30:37.040Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bd6b1578ff448fcff5",
+          "type": "equipment",
+          "brand": "Sony",
+          "model": "A7siii",
+          "createdAt": "2025-02-17T09:30:37.135Z",
+          "updatedAt": "2025-02-17T09:30:37.135Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bd6b1578ff448fcff8",
+          "type": "equipment",
+          "brand": "Sony",
+          "model": "A7 iv",
+          "createdAt": "2025-02-17T09:30:37.230Z",
+          "updatedAt": "2025-02-17T09:30:37.230Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bd6b1578ff448fcffb",
+          "type": "equipment",
+          "brand": "Sony",
+          "model": "A6200",
+          "createdAt": "2025-02-17T09:30:37.326Z",
+          "updatedAt": "2025-02-17T09:30:37.326Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bd6b1578ff448fcfff",
+          "type": "equipment",
+          "brand": "Canon",
+          "model": "5D iv",
+          "createdAt": "2025-02-17T09:30:37.519Z",
+          "updatedAt": "2025-02-17T09:30:37.519Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301bd6b1578ff448fd003",
+          "type": "equipment",
+          "brand": "Black Magic",
+          "model": "Black magic 6K",
+          "createdAt": "2025-02-17T09:30:37.710Z",
+          "updatedAt": "2025-02-17T09:30:37.710Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:36.658Z",
+      "updatedAt": "2025-02-17T09:30:37.806Z",
+      "__v": 3
+    },
+    {
+      "_id": "67b301bd6b1578ff448fd007",
+      "name": "Camera Accessories",
+      "icon": "ACC_ICON",
+      "slug": "ACC_SLUG",
+      "subcategories": [
+        {
+          "_id": "67b301bd6b1578ff448fd009",
+          "type": "accessories",
+          "name": "Lenses",
+          "model": "16 - 35",
+          "createdAt": "2025-02-17T09:30:37.996Z",
+          "updatedAt": "2025-02-17T09:30:37.996Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd00c",
+          "type": "accessories",
+          "name": "Lenses",
+          "model": "24 - 105",
+          "createdAt": "2025-02-17T09:30:38.090Z",
+          "updatedAt": "2025-02-17T09:30:38.090Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd00f",
+          "type": "accessories",
+          "name": "Lenses",
+          "model": "24 - 70",
+          "createdAt": "2025-02-17T09:30:38.186Z",
+          "updatedAt": "2025-02-17T09:30:38.186Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd012",
+          "type": "accessories",
+          "name": "Lenses",
+          "model": "50",
+          "createdAt": "2025-02-17T09:30:38.282Z",
+          "updatedAt": "2025-02-17T09:30:38.282Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd015",
+          "type": "accessories",
+          "name": "Lenses",
+          "model": "70 - 200",
+          "createdAt": "2025-02-17T09:30:38.377Z",
+          "updatedAt": "2025-02-17T09:30:38.377Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd018",
+          "type": "accessories",
+          "name": "Lenses",
+          "model": "100 Macro",
+          "createdAt": "2025-02-17T09:30:38.472Z",
+          "updatedAt": "2025-02-17T09:30:38.472Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd01c",
+          "type": "accessories",
+          "name": "General",
+          "model": "Gimbal",
+          "createdAt": "2025-02-17T09:30:38.662Z",
+          "updatedAt": "2025-02-17T09:30:38.662Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd01f",
+          "type": "accessories",
+          "name": "General",
+          "model": "Interview Light",
+          "createdAt": "2025-02-17T09:30:38.756Z",
+          "updatedAt": "2025-02-17T09:30:38.756Z",
+          "__v": 0
+        },
+        {
+          "_id": "67b301be6b1578ff448fd022",
+          "type": "accessories",
+          "name": "General",
+          "model": "Neck mics",
+          "createdAt": "2025-02-17T09:30:38.852Z",
+          "updatedAt": "2025-02-17T09:30:38.852Z",
+          "__v": 0
+        }
+      ],
+      "createdAt": "2025-02-17T09:30:37.900Z",
+      "updatedAt": "2025-02-17T09:30:38.949Z",
+      "__v": 2
+    }
+  ],
+  "message": "Success"
+}

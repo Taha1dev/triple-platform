@@ -34,7 +34,7 @@ export default function ChangePassword() {
     const { password } = data
     console.log(user?.id)
     try {
-      await dispatch(changePassword({ id: user?.id, password })).unwrap()
+      await dispatch(changePassword({ _id: user?.id, password })).unwrap()
       navigate('/home')
     } catch (error) {
       console.log(error)
