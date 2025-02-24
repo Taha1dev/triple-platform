@@ -1,5 +1,5 @@
 import { Home } from "lucide-react"
-import CategoryPageLayout from "@/components/category-page-layout"
+import CategoryPageLayout from "@/features/dashboard/pages/category-page-layout"
 
 export default function HomePage() {
   return (
