@@ -15,6 +15,7 @@ import UpdateProfileReducer from './slices/updateUserSlice'
 import userReducer from './slices/userSlice'
 import changePasswordReducer from './slices/changePasswordSlice'
 import onBoardingReducer from './slices/onBoardingDataSlice'
+import onBoardingCategoriesReducer from './slices/getOnboardingDataSlice'
 
 export const store = configureStore({
   reducer: {
@@ -34,6 +35,7 @@ export const store = configureStore({
     user: userReducer,
     changePassword: changePasswordReducer,
     onBoarding: onBoardingReducer,
+    onBoardingCategories: onBoardingCategoriesReducer,
   },
 })
 

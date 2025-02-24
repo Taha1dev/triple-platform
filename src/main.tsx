@@ -26,14 +26,17 @@ import NotFound from './pages/404.tsx'
 import ContactUs from './pages/ContactUs.tsx'
 import AboutUs from './pages/AboutUs.tsx'
 
-import Hh from './pages/Dumm3.tsx'
-import Fin from './pages/Dummy2.tsx'
-import ProfilePage from './pages/Dumm3.tsx'
-import LocationPage from './pages/Dummy2.tsx'
-import AgenciesPage from './pages/agencies.tsx'
-import OperatorsPage from './pages/operators.tsx'
-import HomePage2 from './pages/home-page-v2.tsx'
-import HomePage from './pages/home-page.tsx'
+import ProfilePage from './features/dashboard/pages/Dumm3.tsx'
+import LocationPage from './features/dashboard/pages/Dummy2.tsx'
+import AgenciesPage from './features/dashboard/pages/agencies.tsx'
+import OperatorsPage from './features/dashboard/pages/operators.tsx'
+import HomePage2 from './features/dashboard/pages/home-page-v2.tsx'
+import HomePage from './features/dashboard/pages/home-page.tsx'
+import OnBoarding from './features/on-boarding/OnBoarding.tsx'
+import ProCrewPage from './features/dashboard/pages/pro-crew.tsx'
+import TalentsPage from './features/dashboard/pages/talents.tsx'
+import LogisticsPage from './features/dashboard/pages/logistics.tsx'
+import PropsPage from './features/dashboard/pages/props.tsx'
 
 const router = createBrowserRouter([
   {
@@ -102,6 +105,10 @@ const router = createBrowserRouter([
         element: <CountrySelection />,
       },
       {
+        path: 'select-department',
+        element: <OnBoarding />,
+      },
+      {
         path: 'privacy-policy',
         element: <PrivacyPolicy />,
       },
@@ -131,6 +138,13 @@ const router = createBrowserRouter([
       { path: 'profile', element: <Profile /> },
       { path: 'update-profile', element: <UpdateProfile /> },
       { path: 'change-password', element: <ChangePassword /> },
+      { path: 'pro-crew', element: <ProCrewPage /> },
+      { path: 'talents', element: <TalentsPage /> },
+      { path: 'operators', element: <OperatorsPage /> },
+      { path: 'logistics', element: <LogisticsPage /> },
+      { path: 'props', element: <PropsPage /> },
+      { path: 'locations', element: <LocationPage /> },
+      { path: 'agencies', element: <AgenciesPage /> },
     ],
   },
 ])

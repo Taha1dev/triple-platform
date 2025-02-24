@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button' // Shadcn Button component
 const ContactUs = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission logic here
     alert('Thank you for contacting us! We will get back to you soon.')
   }
 

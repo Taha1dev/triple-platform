@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { toast } from 'sonner'
-
+export const BASE_URL = 'http://34.226.153.150/app/v1/'
 const axiosClient = axios.create({
-  baseURL: 'http://34.226.153.150/app/v1/',
+  baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },

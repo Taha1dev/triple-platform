@@ -1,97 +1,146 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from 'react-router-dom'
-import { Activity, HomeIcon, LayoutGridIcon, Users } from 'lucide-react'
-import { ModeToggle } from '@/mode-toggle'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  User,
+  Home,
+  Users,
+  Briefcase,
+  Map,
+  Camera,
+  Package,
+  Building,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react'
+
+import { useMediaQuery } from '@/hooks/use-media-query'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
 import { footerLogo, useTheme } from '@/components/theme-provider'
 
+const categories = [
+  { name: 'Home', icon: Home, path: '/home' },
+  { name: 'Pro-Crew', icon: Users, path: 'pro-crew' },
+  { name: 'Talents', icon: User, path: 'talents' },
+  { name: 'Operators', icon: Briefcase, path: 'operators' },
+  { name: 'Logistics', icon: Package, path: 'logistics' },
+  { name: 'Props', icon: Camera, path: 'props' },
+  { name: 'Locations', icon: Map, path: 'locations' },
+  { name: 'Agencies', icon: Building, path: 'agencies' },
+]
 export default function Component() {
   const { theme } = useTheme()
-
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const isSmallScreen = useMediaQuery('(max-width: 640px)')
+  const router: any = useNavigate()
   return (
-    <aside className='flex h-screen'>
-      {/* Sidebar for large screens */}
-      <div className='hidden lg:block lg:w-72 lg:shrink-0 lg:border-r'>
-        <div className='flex h-full flex-col justify-between py-6 px-4'>
-          <div className='space-y-8'>
-            <Link to='/home' className='flex-shrink-0'>
-              <img
-                src={footerLogo(theme)}
-                alt='triple-logo'
-                className='w-fit h-fit object-cover'
-              />
-            </Link>
-            <nav className='space-y-1'>
+    <>
+      {!isSmallScreen && (
+        <aside
+          className={`bg-background border border-border transition-all duration-300 ${
+            sidebarOpen ? 'w-72' : 'w-20'
+          }`}
+        >
+          <div className='p-4 border-b border-border flex items-center gap-4 max-h-[72px]'>
+            {/* Logo */}
+            {sidebarOpen && (
               <Link
-                to='#'
-                className='flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'
+                to='/home'
+                className={`transition-all duration-300 ease-in-out ${
+                  sidebarOpen ? 'w-56 opacity-100' : 'w-0 opacity-0'
+                }`}
               >
-                <HomeIcon className='h-5 w-5' />
-                Home
+                <img
+                  className=''
+                  src={footerLogo(theme)}
+                  alt='Triple Logo'
+                />
               </Link>
-              <Link
-                to='#'
-                className='flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'
-              >
-                <LayoutGridIcon className='h-5 w-5' />
-                Products
-              </Link>
-              <Link
-                to='/home/change-password'
-                className='flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'
-              >
-                <Users className='h-5 w-5' />
-                Change Password
-              </Link>
-              <Link
-                to='#'
-                className='flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'
-              >
-                <Activity className='h-5 w-5' />
-                Analytics
-              </Link>
-            </nav>
-          </div>
-          <div>
-            <ModeToggle />
-          </div>
-        </div>
-      </div>
+            )}
 
-      {/* Bottom navigation bar for small screens */}
-      <div className='block lg:hidden fixed bottom-0 left-0 right-0 border-t bg-background z-50'>
-        {/* <div className='w-full flex justify-between items-center px-4 py-2'> */}
-        <nav className='flex justify-between px-4 py-2'>
-          <Link
-            to='#'
-            className='flex flex-col items-center text-sm font-medium hover:text-theme-variant'
-          >
-            <HomeIcon className='h-5 w-5' />
-            <span className='text-xs'>Home</span>
-          </Link>
-          <Link
-            to='#'
-            className='flex flex-col items-center text-sm font-medium hover:text-theme-variant'
-          >
-            <LayoutGridIcon className='h-5 w-5' />
-            <span className='text-xs'>Products</span>
-          </Link>
-          <Link
-            to='/home/change-password'
-            className='flex flex-col items-center text-sm font-medium hover:text-theme-variant'
-          >
-            <Users className='h-5 w-5' />
-            <span className='text-xs'>Change</span>
-          </Link>
-          <Link
-            to='#'
-            className='flex flex-col items-center text-sm font-medium hover:text-theme-variant'
-          >
-            <Activity className='h-5 w-5' />
-            <span className='text-xs'>Analytics</span>
-          </Link>
+            {/* Toggle Button */}
+            <Button
+              variant='ghost'
+              size='icon'
+              className='ml-auto transition-all duration-300 ease-in-out'
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              {sidebarOpen ? (
+                <ChevronLeft className='h-6 w-6' />
+              ) : (
+                <ChevronRight className='h-6 w-6' />
+              )}
+            </Button>
+          </div>
+          {/* <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  className='ml-auto transition-all duration-300 ease-in-out'
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                >
+                  {sidebarOpen ? (
+                    <ChevronLeft className='h-6 w-6' />
+                  ) : (
+                    <ChevronRight className='h-6 w-6' />
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                {sidebarOpen ? 'Collapse Sidebar' : 'Expand Sidebar'}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider> */}
+          <nav>
+            <ul className='space-y-2 p-4'>
+              {categories.map(category => (
+                <li key={category.name}>
+                  <Link to={category.path}>
+                    <Button
+                      variant='ghost'
+                      className={`w-full justify-start ${
+                        router.pathname === category.path
+                          ? 'bg-blue-100 text-blue-600'
+                          : ''
+                      }`}
+                    >
+                      <category.icon className='h-5 w-5' />
+                      {sidebarOpen && (
+                        <span className='ml-2'>{category.name}</span>
+                      )}
+                    </Button>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+
+      {isSmallScreen && (
+        <nav className='bg-background border-t border-border fixed bottom-0 left-0 right-0 z-[50]'>
+          <ul className='flex justify-around p-2'>
+            {categories.map(category => (
+              <li key={category.name}>
+                <Link to={category.path}>
+                  <Button
+                    variant='ghost'
+                    size='sm'
+                    className={`flex flex-col items-center ${
+                      router.pathname === category.path ? 'text-blue-600' : ''
+                    }`}
+                  >
+                    <category.icon className='h-5 w-5' />
+                    <span className='text-xs mt-1'>{category.name}</span>
+                  </Button>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
-        {/* </div> */}
-      </div>
-    </aside>
+      )}
+    </>
   )
 }

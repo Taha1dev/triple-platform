@@ -37,3 +37,15 @@ export interface CategoryDaum {
   updatedAt: string
   __v: number | string
 }
+export interface onBoardingCategory {
+  subcategories: onBoardingSubCategory[],
+  _id: string,
+  name: string,
+  slug: string,
+  details: []
+}
+export interface onBoardingSubCategory {
+  _id: string,
+  type: string,
+  name: string
+}
