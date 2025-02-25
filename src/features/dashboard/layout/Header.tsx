@@ -67,7 +67,7 @@ export default function Header() {
             <Bell className='h-5 w-5' />
           </Button>
           <ModeToggle />
-          <Button variant='ghost' size='icon'>
+          <Button variant='ghost' size='icon' onClick={()=>{navigate('/home/chat')}}>
             <MessageSquare className='h-5 w-5' />
           </Button>
 
