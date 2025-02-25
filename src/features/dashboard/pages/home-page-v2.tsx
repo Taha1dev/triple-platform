@@ -47,7 +47,7 @@ const featuredLocations = [
     type: 'Beach',
     price: 1000,
     rating: 4.8,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 2,
@@ -55,7 +55,7 @@ const featuredLocations = [
     type: 'Urban',
     price: 800,
     rating: 4.6,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 3,
@@ -63,7 +63,7 @@ const featuredLocations = [
     type: 'Rural',
     price: 1200,
     rating: 4.9,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
 ]
 
@@ -127,11 +127,10 @@ export default function HomePage2() {
               <li key={category.name}>
                 <Button
                   variant='ghost'
-                  className={`w-full justify-start ${
-                    category.name === 'Locations'
+                  className={`w-full justify-start ${category.name === 'Locations'
                       ? 'bg-blue-100 text-blue-600'
                       : ''
-                  }`}
+                    }`}
                 >
                   <category.icon className='mr-2 h-4 w-4' />
                   {category.name}

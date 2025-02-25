@@ -16,7 +16,7 @@ const featuredProps = [
     category: 'Photography',
     availability: 'In Stock',
     rating: 4.9,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const featuredProps = [
     category: 'Weapons',
     availability: 'Available',
     rating: 4.7,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const featuredProps = [
     category: 'Set Dressing',
     availability: 'In Stock',
     rating: 4.8,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
 ]
 

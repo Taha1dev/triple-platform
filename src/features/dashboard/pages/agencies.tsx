@@ -17,7 +17,7 @@ const featuredAgencies = [
     specialty: 'Talent Management',
     experience: '20 years',
     rating: 4.9,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const featuredAgencies = [
     specialty: 'Production Services',
     experience: '15 years',
     rating: 4.8,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const featuredAgencies = [
     specialty: 'Casting Agency',
     experience: '25 years',
     rating: 4.7,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
 ]
 

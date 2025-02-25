@@ -37,6 +37,7 @@ import ProCrewPage from './features/dashboard/pages/pro-crew.tsx'
 import TalentsPage from './features/dashboard/pages/talents.tsx'
 import LogisticsPage from './features/dashboard/pages/logistics.tsx'
 import PropsPage from './features/dashboard/pages/props.tsx'
+import Chat from './features/chat/page.tsx'
 
 const router = createBrowserRouter([
   {
@@ -147,6 +148,7 @@ const router = createBrowserRouter([
       { path: 'agencies', element: <AgenciesPage /> },
     ],
   },
+  { path: 'home/chat', element: <Chat /> }
 ])
 type Theme = 'light' | 'dark' | 'system'
 

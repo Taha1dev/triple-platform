@@ -16,7 +16,7 @@ const featuredCrew = [
     role: 'Director of Photography',
     experience: '15 years',
     rating: 4.9,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const featuredCrew = [
     role: 'Sound Engineer',
     experience: '10 years',
     rating: 4.7,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const featuredCrew = [
     role: 'Gaffer',
     experience: '8 years',
     rating: 4.8,
-    image: imagePlaceholder,
+    image: ` ${imagePlaceholder}/placeholder.svg?height=200&width=300`,
   },
 ]
 
