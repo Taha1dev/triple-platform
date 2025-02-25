@@ -33,7 +33,7 @@ export default function Header() {
   // const { loading: Loading } = useSelector(
   //   (state: RootState) => state.updateProfile,
   // )
-
+  const { isHeaderShow } = useSelector((state: RootState) => state.headerView)
   useEffect(() => {
     dispatch(initializeUserData())
     console.log(user)
@@ -50,74 +50,138 @@ export default function Header() {
     <header className='bg-background border-b border-border p-4'>
       <div className='flex items-center justify-between max-w-7xl mx-auto'>
         {/* Search Bar */}
-        <div className='flex items-center flex-1'>
-          <Input
-            type='search'
-            placeholder='Search for e.g Props...'
-            className='max-w-md'
-          />
-          <Button variant='ghost' size='icon' className='ml-2'>
-            <Search className='h-4 w-4' />
-          </Button>
-        </div>
+        {isHeaderShow && (
+          <>
+            <div className='flex items-center flex-1'>
+              <Input
+                type='search'
+                placeholder='Search for e.g Props...'
+                className='max-w-md'
+              />
+              <Button variant='ghost' size='icon' className='ml-2'>
+                <Search className='h-4 w-4' />
+              </Button>
+            </div>
+            <div className={`flex items-center space-x-4`}>
+              <Button variant='ghost' size='icon'>
+                <Bell className='h-5 w-5' />
+              </Button>
+              <ModeToggle />
+              <Button variant='ghost' size='icon' onClick={() => { navigate('/home/chat') }}>
+                <MessageSquare className='h-5 w-5' />
+              </Button>
+
+              {/* User Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className='flex items-center gap-3 cursor-pointer'>
+                    <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
+                      <AvatarImage
+                        src={user?.image && `${BASE_URL}/${user.image}`}
+                        alt='User Avatar'
+                        className='w-10 h-10 object-cover'
+                      />
+                      <AvatarFallback>
+                        <Skeleton className='w-10 h-10 rounded-full' />
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className='hidden md:flex flex-col'>
+                      <h4 className='font-semibold text-sm'>
+                        Welcome, {user?.fname}!
+                      </h4>
+                      <p className='text-xs text-muted-foreground'>
+                        {getCurrentDate()}
+                      </p>
+                    </div>
+                  </div>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent className='w-56 mt-2 shadow-lg rounded-lg'>
+                  <DropdownMenuItem
+                    className='cursor-pointer flex items-center gap-2'
+                    onClick={() => navigate('profile')}
+                  >
+                    <User className='h-4 w-4' />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
+                    <Settings className='h-4 w-4' />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className='cursor-pointer flex items-center gap-2 text-red-600 focus:text-red-600'
+                  >
+                    <LogOut className='h-4 w-4' />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </>
+        )}
 
         {/* Right Side Icons and User Menu */}
-        <div className='flex items-center space-x-4'>
-          <Button variant='ghost' size='icon'>
-            <Bell className='h-5 w-5' />
-          </Button>
-          <ModeToggle />
-          <Button variant='ghost' size='icon' onClick={()=>{navigate('/home/chat')}}>
-            <MessageSquare className='h-5 w-5' />
-          </Button>
 
-          {/* User Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className='flex items-center gap-3 cursor-pointer'>
-                <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
-                  <AvatarImage
-                    src={user?.image && `${BASE_URL}/${user.image}`}
-                    alt='User Avatar'
-                    className='w-10 h-10 object-cover'
-                  />
-                  <AvatarFallback>
-                    <Skeleton className='w-10 h-10 rounded-full' />
-                  </AvatarFallback>
-                </Avatar>
-                <div className='hidden md:flex flex-col'>
-                  <h4 className='font-semibold text-sm'>
-                    Welcome, {user?.fname}!
-                  </h4>
-                  <p className='text-xs text-muted-foreground'>
-                    {getCurrentDate()}
-                  </p>
-                </div>
-              </div>
-            </DropdownMenuTrigger>
 
-            <DropdownMenuContent className='w-56 mt-2 shadow-lg rounded-lg'>
-              <DropdownMenuItem
-                className='cursor-pointer flex items-center gap-2'
-                onClick={() => navigate('profile')}
-              >
-                <User className='h-4 w-4' />
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
-                <Settings className='h-4 w-4' />
-                Settings
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={handleLogout}
-                className='cursor-pointer flex items-center gap-2 text-red-600 focus:text-red-600'
-              >
-                <LogOut className='h-4 w-4' />
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        {!isHeaderShow && (
+          <div className={`w-full flex items-center space-x-4`}>
+            <div className='flex-1'>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className='flex items-center gap-3 cursor-pointer'>
+                    <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
+                      <AvatarImage
+                        src={user?.image && `${BASE_URL}/${user.image}`}
+                        alt='User Avatar'
+                        className='w-10 h-10 object-cover'
+                      />
+                      <AvatarFallback>
+                        <Skeleton className='w-10 h-10 rounded-full' />
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className='hidden md:flex flex-col'>
+                      <h4 className='font-semibold text-sm'>
+                        Welcome, {user?.fname}!
+                      </h4>
+                      <p className='text-xs text-muted-foreground'>
+                        {getCurrentDate()}
+                      </p>
+                    </div>
+                  </div>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent className='w-56 mt-2 shadow-lg rounded-lg'>
+                  <DropdownMenuItem
+                    className='cursor-pointer flex items-center gap-2'
+                    onClick={() => navigate('profile')}
+                  >
+                    <User className='h-4 w-4' />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
+                    <Settings className='h-4 w-4' />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className='cursor-pointer flex items-center gap-2 text-red-600 focus:text-red-600'
+                  >
+                    <LogOut className='h-4 w-4' />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <Button variant='ghost' size='icon'>
+              <Bell className='h-5 w-5' />
+            </Button>
+            <ModeToggle />
+            <Button variant='ghost' size='icon' onClick={() => { navigate('/home/chat') }}>
+              <MessageSquare className='h-5 w-5' />
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   )

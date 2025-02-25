@@ -16,6 +16,7 @@ import userReducer from './slices/userSlice'
 import changePasswordReducer from './slices/changePasswordSlice'
 import onBoardingReducer from './slices/onBoardingDataSlice'
 import onBoardingCategoriesReducer from './slices/getOnboardingDataSlice'
+import DomReducer from './slices/DOMSlice'
 
 export const store = configureStore({
   reducer: {
@@ -36,6 +37,7 @@ export const store = configureStore({
     changePassword: changePasswordReducer,
     onBoarding: onBoardingReducer,
     onBoardingCategories: onBoardingCategoriesReducer,
+    headerView: DomReducer,
   },
 })
 

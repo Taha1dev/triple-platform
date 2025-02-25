@@ -5,7 +5,7 @@ const dummyMessages = [
   { id: 2, sender: "You", content: "I'm good, thanks! How about you?" },
   { id: 3, sender: "Alice", content: "I'm doing great! Just working on a new project." },
   { id: 4, sender: "You", content: "That sounds interesting. What kind of project is it?" },
-  { id: 5, sender: "Alice", content: "It's a new chat application using React and Tailwind CSS." },
+  { id: 5, sender: "Alice", content: "It's The Chat feature for Triple Platform" },
 ]
 
 export function ChatArea() {
