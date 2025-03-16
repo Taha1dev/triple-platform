@@ -121,11 +121,18 @@ export default function Header() {
           </>
         )}
 
-        {/* Right Side Icons and User Menu */}
-
-
         {!isHeaderShow && (
           <div className={`w-full flex items-center space-x-4`}>
+            <div className='flex items-center flex-1'>
+              <Input
+                type='search'
+                placeholder='Search for e.g Props...'
+                className='max-w-md'
+              />
+              <Button variant='ghost' size='icon' className='ml-2'>
+                <Search className='h-4 w-4' />
+              </Button>
+            </div>
             <div className='flex-1'>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

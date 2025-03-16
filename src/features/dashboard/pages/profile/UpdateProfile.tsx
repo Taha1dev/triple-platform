@@ -94,6 +94,7 @@ export default function UpdateProfile() {
     if (!file) return
     const fileFormData = new FormData()
     fileFormData.append('image', file)
+    console.log(fileFormData)
     try {
       await dispatch(updateProfile(fileFormData)).unwrap()
       dispatch(initializeUserData())
@@ -112,7 +113,8 @@ export default function UpdateProfile() {
   //   }
   // }
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    await dispatch(updateProfile(data)).unwrap()
     console.log(data)
   }
   useEffect(() => {

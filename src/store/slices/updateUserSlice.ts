@@ -33,7 +33,7 @@ export const updateProfile = createAsyncThunk(
   'user/updateProfile',
   async (formData: any, { rejectWithValue, dispatch }) => {
     try {
-      const response: any = await axiosClient.put('/user', formData, {
+      const response: any = await axiosClient.post('/user-profile/update', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -30,7 +30,7 @@ const UserProfile = () => {
             <div className='w-32 h-32 sm:w-40 sm:h-40 border border-border hover:scale-105 transition-transform rounded-full overflow-hidden'>
               <img
                 className='w-full h-full object-cover'
-                src={`http://34.226.153.150/${avatar}`}
+                src={`http://34.226.153.150/app/v1/${avatar}`}
                 alt='User Avatar'
               />
             </div>
