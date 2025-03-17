@@ -6,8 +6,10 @@ import {
 } from '@/features/landing-page/constants'
 import { Button } from '@/components/ui/button'
 import { NeonGradientCard } from '@/components/ui/neon-gradient-card'
+import { useNavigate } from 'react-router-dom'
 
 export default function CTASection() {
+  const navigate = useNavigate()
   return (
     <div className='container mx-auto'>
       <NeonGradientCard className=''>
@@ -22,7 +24,7 @@ export default function CTASection() {
             <Button className='text-lg'>{CTABTN1TITLE}</Button>
             <Button
               onClick={() => {
-                console.log('object')
+                navigate('/home')
               }}
               className='!bg-theme-variant !text-theme-secondary text-lg'
             >

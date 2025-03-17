@@ -77,7 +77,7 @@ export default function Header() {
                   <div className='flex items-center gap-3 cursor-pointer'>
                     <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
                       <AvatarImage
-                        src={user?.image && `${BASE_URL}/${user.image}`}
+                        src={user?.image}
                         alt='User Avatar'
                         className='w-10 h-10 object-cover'
                       />

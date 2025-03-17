@@ -1,7 +1,10 @@
+import { ShimmerButton } from '@/components/magicui/shimmer-button'
 import { Button } from '@/components/ui/button'
 import { motion } from 'motion/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 export default function HeroSection() {
+  const navigate = useNavigate()
   return (
     <main className='flex m-2 items-center'>
       <motion.section
@@ -39,9 +42,14 @@ export default function HeroSection() {
             transition={{ delay: 1.2, duration: 0.6, ease: 'easeOut' }}
             className='flex gap-2'
           >
-            <Button className='w-fit text-lg !bg-white hover:!bg-white/90 !transition-colors !text-black'>
-              <a href='#how-it-works'>Learn More</a>
-            </Button>
+            <ShimmerButton
+              onClick={() => navigate('/home')}
+              className='shadow-2xl'
+            >
+              <span className='whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg'>
+                Explore Now
+              </span>
+            </ShimmerButton>
             <Button className='lg:hidden sblock w-fit text-lg !bg-theme-variant !text-white'>
               <Link to='/register'>Sign Up</Link>
             </Button>

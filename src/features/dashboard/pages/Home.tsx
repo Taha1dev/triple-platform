@@ -6,7 +6,6 @@ import { AppDispatch } from '@/store/store'
 
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import HomePage from './home-page'
 import FilterDashboard from './filter-dashboard'
 
 export default function Dashboard() {

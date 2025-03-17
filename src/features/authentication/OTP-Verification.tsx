@@ -59,7 +59,11 @@ export default function OTP_Verification() {
     }
 
     try {
-      await dispatch(verifyOtp({ email, forgot_password_OTP: otp })).unwrap()
+      if (otpContent.title == 'Verify Your Email') {
+        await dispatch(verifyOtp({ email, forgot_password_OTP: otp })).unwrap()
+      }
+      else
+        await dispatch(verifyOtp({ email, forgot_password_OTP: otp })).unwrap()
       navigate(path)
     } catch (err) {
       console.error('Verification failed:', err)
@@ -76,6 +80,7 @@ export default function OTP_Verification() {
   }
 
   useEffect(() => {
+    console.log(otpContent)
     setLocalOtpContent({
       title: otpContent.title || 'Reset Your Password',
       sub:
@@ -97,7 +102,6 @@ export default function OTP_Verification() {
         <article className='grid grid-cols-1 lg:grid-cols-2 w-full max-w-6xl mx-4 rounded-lg shadow-lg overflow-hidden z-20 bg-background border border-border'>
           <BannerAuthImage />
 
-          {/* Form Section */}
           <article className='lg:p-10 bg-background '>
             <FormProvider {...methods}>
               <Card className='bg-transparent shadow-none'>
@@ -114,9 +118,8 @@ export default function OTP_Verification() {
                     onSubmit={handleSubmit(onSubmit)}
                     className='space-y-4 flex-col-center'
                   >
-                    {/* OTP Input */}
                     <Controller
-                      name='otp' // Name of the field
+                      name='otp'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
@@ -124,8 +127,8 @@ export default function OTP_Verification() {
                           maxLength={6}
                           value={field.value}
                           onChange={(value: string) => {
-                            field.onChange(value) // Update react-hook-form's state
-                            setOtp(value) // Update local state
+                            field.onChange(value)
+                            setOtp(value)
                           }}
                         >
                           <InputOTPGroup>
@@ -142,7 +145,7 @@ export default function OTP_Verification() {
                         type='submit'
                         className='bg-foreground hover:bg-foreground/95 font-medium py-2 rounded-md transition-colors duration-200'
                       >
-                        Reset Password
+                        Submit
                       </Button>
                       <Button
                         type='button'
