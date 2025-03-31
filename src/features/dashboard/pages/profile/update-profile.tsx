@@ -28,6 +28,7 @@ import {
   setSelectedCountry,
 } from '@/store/slices/citiesCountriesSlice'
 import MultipleSelect from '../../components/MultipleSelect'
+import { updateProfilePic } from '@/store/slices/updateUserPicture'
 
 type FormValues = z.infer<typeof UpdateProfileSchema>
 interface CountryData {
@@ -94,9 +95,11 @@ export default function UpdateProfile() {
     if (!file) return
     const fileFormData = new FormData()
     fileFormData.append('image', file)
+    fileFormData.append('description', 'profile image')
+    fileFormData.append('alt', 'profile image')
     console.log(fileFormData)
     try {
-      await dispatch(updateProfile(fileFormData)).unwrap()
+      await dispatch(updateProfilePic(fileFormData)).unwrap()
       dispatch(initializeUserData())
     } catch (error) {
       console.error('Error uploading image:', error)
@@ -120,6 +123,7 @@ export default function UpdateProfile() {
   useEffect(() => {
     setAvatar(user?.image)
   }, [user])
+
   const handleCountryChange = (country: string) => {
     dispatch(setSelectedCountry(country))
     const filteredData = data.find(

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosClient from '@/api/apiClient'
-import { LoginResponseSchema } from '@/models/api-schema/auth.model'
+// import { LoginResponseSchema } from '@/models/api-schema/auth.model'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { setUser } from './userSlice'
+// import { setUser } from './userSlice'
 
-interface UserProfile extends Omit<LoginResponseSchema, 'token' | 'rating'> {
+interface UserProfile {
   loading: boolean
   error: string
   success: boolean
@@ -12,34 +12,27 @@ interface UserProfile extends Omit<LoginResponseSchema, 'token' | 'rating'> {
 }
 
 const initialState: UserProfile = {
-  id: '',
-  image: '',
-  fname: '',
-  lname: '',
-  contact_number: '',
-  email: '',
-  data: [],
-  portfolio: [],
-  city: [],
-  country: '',
-  dob: '',
   loading: false,
   error: '',
+  user: '',
   success: false,
-  user: null,
 }
 
-export const updateProfile = createAsyncThunk(
-  'user/updateProfile',
-  async (formData: any, { rejectWithValue, dispatch }) => {
+export const updateProfilePic = createAsyncThunk(
+  'user/update-profile-picture',
+  async (formData: any, { rejectWithValue }) => {
     try {
-      const response: any = await axiosClient.post('/user-profile/update-apperance', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      const response: any = await axiosClient.post(
+        '/user-profile/update-profile-picture',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         },
-      })
+      )
       console.log('response', response)
-      dispatch(setUser(response))
+      // dispatch(setUser(response))
       // const state: any = getState();
       // const existingUserData = state.user.user;
 
@@ -59,22 +52,22 @@ export const updateProfile = createAsyncThunk(
   },
 )
 
-const updateProfileSlice = createSlice({
+const updateProfilePicture = createSlice({
   name: 'updateProfile',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(updateProfile.pending, state => {
+      .addCase(updateProfilePic.pending, state => {
         state.loading = true
         state.error = ''
         state.success = false
       })
-      .addCase(updateProfile.fulfilled, state => {
+      .addCase(updateProfilePic.fulfilled, state => {
         state.loading = false
         state.success = true
       })
-      .addCase(updateProfile.rejected, (state, action) => {
+      .addCase(updateProfilePic.rejected, (state, action) => {
         state.loading = false
         state.error = (action.payload as string) || 'Failed to update profile'
         state.success = false
@@ -82,4 +75,4 @@ const updateProfileSlice = createSlice({
   },
 })
 
-export default updateProfileSlice.reducer
+export default updateProfilePicture.reducer

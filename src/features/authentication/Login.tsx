@@ -7,12 +7,9 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { FormProvider, useForm } from 'react-hook-form'
-
 import { Link, useNavigate } from 'react-router-dom'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store.ts'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { LoginSchema } from '@/models/zod-schema/zod.schema'
@@ -24,6 +21,7 @@ import DotPattern from '@/components/ui/dot-pattern'
 import { cn } from '@/lib/utils'
 
 type FormValues = z.infer<typeof LoginSchema>
+
 export default function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()

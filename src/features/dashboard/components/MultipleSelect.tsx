@@ -4,7 +4,7 @@ import { useTheme } from '@/components/theme-provider'
 import { Badge } from '@/components/ui/badge'
 import { setSelectedCities } from '@/store/slices/citiesCountriesSlice'
 import { AppDispatch } from '@/store/store'
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Select, { MultiValue } from 'react-select'
 
@@ -12,9 +12,8 @@ const getCustomStyles = (isDarkMode: boolean) => ({
   control: (provided: any) => ({
     ...provided,
     backgroundColor: isDarkMode ? 'hsl(240, 10%, 4%)' : 'hsl(0, 0%, 100%)',
-    border: `1px solid ${
-      isDarkMode ? 'hsl(240, 5%, 24%)' : 'hsl(240, 5%, 84%)'
-    }`,
+    border: `1px solid ${isDarkMode ? 'hsl(240, 5%, 24%)' : 'hsl(240, 5%, 84%)'
+      }`,
     borderRadius: '6px',
 
     boxShadow: 'none',
@@ -31,10 +30,10 @@ const getCustomStyles = (isDarkMode: boolean) => ({
         ? 'hsl(240, 5%, 24%)'
         : 'hsl(240, 5%, 96%)'
       : state.isFocused
-      ? isDarkMode
-        ? 'hsl(240, 5%, 20%)'
-        : 'hsl(240, 5%, 96%)'
-      : 'transparent', // Default background
+        ? isDarkMode
+          ? 'hsl(240, 5%, 20%)'
+          : 'hsl(240, 5%, 96%)'
+        : 'transparent', // Default background
     color: isDarkMode ? 'hsl(0, 0%, 100%)' : 'hsl(240, 10%, 4%)',
     padding: '6px 12px',
     fontSize: '14px',
@@ -64,9 +63,8 @@ const getCustomStyles = (isDarkMode: boolean) => ({
   menu: (provided: any) => ({
     ...provided,
     borderRadius: '6px',
-    border: `1px solid ${
-      isDarkMode ? 'hsl(240, 5%, 24%)' : 'hsl(240, 5%, 84%)'
-    }`,
+    border: `1px solid ${isDarkMode ? 'hsl(240, 5%, 24%)' : 'hsl(240, 5%, 84%)'
+      }`,
     backgroundColor: isDarkMode ? 'hsl(240, 10%, 4%)' : 'hsl(0, 0%, 100%)',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     overflow: 'hidden',
@@ -101,10 +99,8 @@ const MultipleSelect = ({ options }: MultipleSelectProps) => {
     { value: string; label: string }[]
   >([])
 
-  const selectOptions = useMemo(
-    () => options.map(option => ({ value: option, label: option })),
-    [options],
-  )
+  const selectOptions =
+    options.map(option => ({ value: option, label: option }))
   const handleChange = (
     selectedOptions: MultiValue<{ value: string; label: string }>,
   ) => {

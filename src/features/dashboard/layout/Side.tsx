@@ -31,7 +31,7 @@ const categories = [
 export default function Component() {
   const { theme } = useTheme()
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const isSmallScreen = useMediaQuery('(max-width: 640px)')
+  const isSmallScreen = useMediaQuery('(max-width: 1000px)')
   const router: any = useNavigate()
   return (
     <>

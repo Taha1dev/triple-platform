@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { toast } from 'sonner'
-export const BASE_URL = 'https://api.tripleplatform.app/app/v1/'
+export const BASE_URL = 'http://13.60.85.234/app/v1/'
 const axiosClient = axios.create({
   baseURL: BASE_URL,
   headers: {

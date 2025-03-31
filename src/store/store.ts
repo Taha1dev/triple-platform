@@ -16,7 +16,10 @@ import userReducer from './slices/userSlice'
 import changePasswordReducer from './slices/changePasswordSlice'
 import onBoardingReducer from './slices/onBoardingDataSlice'
 import onBoardingCategoriesReducer from './slices/getOnboardingDataSlice'
+import userPictureReducer from './slices/updateUserPicture'
 import DomReducer from './slices/DOMSlice'
+import filterUserReducer from './slices/filterUserSlice'
+import apperanceDetailsReducer from './slices/getApperanceDetails'
 
 export const store = configureStore({
   reducer: {
@@ -34,10 +37,13 @@ export const store = configureStore({
     logout: logoutReducer,
     updateProfile: UpdateProfileReducer,
     user: userReducer,
+    userPicture: userPictureReducer,
     changePassword: changePasswordReducer,
     onBoarding: onBoardingReducer,
     onBoardingCategories: onBoardingCategoriesReducer,
     headerView: DomReducer,
+    filterUser: filterUserReducer,
+    apperanceDetails: apperanceDetailsReducer,
   },
 })
 

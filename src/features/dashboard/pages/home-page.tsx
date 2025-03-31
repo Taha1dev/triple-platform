@@ -57,7 +57,6 @@ export default function HomePage() {
     <main className='flex-1 overflow-y-auto p-6'>
       <h2 className='text-2xl font-semibold mb-6'>Welcome back, User!</h2>
 
-      {/* Top Rated Users */}
       <section className='mb-8'>
         <h3 className='text-xl font-semibold mb-4'>Top Rated Professionals</h3>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
@@ -84,7 +83,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Categories */}
       <section>
         <h3 className='text-xl font-semibold mb-4'>Explore Categories</h3>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>

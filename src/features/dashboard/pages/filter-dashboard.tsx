@@ -1,108 +1,31 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { Check, ChevronsUpDown, Filter, X } from "lucide-react"
-
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "@/store/store"
+import FilterUserSkeletonCard from "../components/filter/filter-user-skeleton-card"
+import { postUsers } from "@/store/slices/filterUserSlice"
+import { fetchAppearance } from "@/store/slices/getApperanceDetails"
+import FilterUserCard from "../components/filter/filter-user-card"
 
-type User = {
-  id: number
-  name: string
-  email: string
-  avatar: string
-  category: string
-  subCategory: string
-  ethnicity: string
-  hairColor: string
-  hairTexture: string
-  eyeColor: string
-  skinTone: string
+type FilterOptions = {
+  category: string[]
+  subCategory: string[]
+  ethnicity: string[]
+  hairColor: string[]
+  hairTexture: string[]
+  eyeColor: string[]
+  skinTone: string[]
   facialFeatures: string[]
-  tattoo: boolean
-  piercing: boolean
-  scars: boolean
-}
-
-const filterOptions = {
-  category: ["Model", "Actor", "Musician", "Dancer", "Extra"],
-  subCategory: [
-    "Commercial",
-    "Editorial",
-    "Runway",
-    "Film",
-    "TV",
-    "Theater",
-    "Vocalist",
-    "Instrumentalist",
-    "Ballet",
-    "Contemporary",
-    "Background",
-  ],
-  ethnicity: [
-    "Asian",
-    "Black",
-    "Caucasian",
-    "Hispanic",
-    "Middle Eastern",
-    "Mixed",
-    "Native American",
-    "Pacific Islander",
-  ],
-  hairColor: ["Black", "Brown", "Blonde", "Red", "Gray", "White", "Colorful"],
-  hairTexture: ["Straight", "Wavy", "Curly", "Coily", "Bald"],
-  eyeColor: ["Brown", "Blue", "Green", "Hazel", "Gray", "Amber"],
-  skinTone: ["Very Fair", "Fair", "Medium", "Olive", "Brown", "Dark Brown", "Deep Dark Brown"],
-  facialFeatures: ["Freckles", "Dimples", "High Cheekbones", "Strong Jawline", "Full Lips", "Defined Brows"],
-}
-
-const generateDummyUsers = (count: number): User[] => {
-  const users: User[] = []
-
-  for (let i = 1; i <= count; i++) {
-    const randomCategory = filterOptions.category[Math.floor(Math.random() * filterOptions.category.length)]
-    const randomSubCategory = filterOptions.subCategory[Math.floor(Math.random() * filterOptions.subCategory.length)]
-    const randomEthnicity = filterOptions.ethnicity[Math.floor(Math.random() * filterOptions.ethnicity.length)]
-    const randomHairColor = filterOptions.hairColor[Math.floor(Math.random() * filterOptions.hairColor.length)]
-    const randomHairTexture = filterOptions.hairTexture[Math.floor(Math.random() * filterOptions.hairTexture.length)]
-    const randomEyeColor = filterOptions.eyeColor[Math.floor(Math.random() * filterOptions.eyeColor.length)]
-    const randomSkinTone = filterOptions.skinTone[Math.floor(Math.random() * filterOptions.skinTone.length)]
-
-    // Generate 1-3 random facial features
-    const randomFacialFeatures: string[] = []
-    const featureCount = Math.floor(Math.random() * 3) + 1
-    const shuffledFeatures = [...filterOptions.facialFeatures].sort(() => 0.5 - Math.random())
-    for (let j = 0; j < featureCount; j++) {
-      randomFacialFeatures.push(shuffledFeatures[j])
-    }
-
-    users.push({
-      id: i,
-      name: `User ${i}`,
-      email: `user${i}@example.com`,
-      avatar: `/placeholder.svg?height=40&width=40`,
-      category: randomCategory,
-      subCategory: randomSubCategory,
-      ethnicity: randomEthnicity,
-      hairColor: randomHairColor,
-      hairTexture: randomHairTexture,
-      eyeColor: randomEyeColor,
-      skinTone: randomSkinTone,
-      facialFeatures: randomFacialFeatures,
-      tattoo: Math.random() > 0.7,
-      piercing: Math.random() > 0.6,
-      scars: Math.random() > 0.8,
-    })
-  }
-
-  return users
+  tattoo: string[]
+  piercing: string[]
+  scars: string[]
 }
 
 type MultiSelectProps = {
@@ -173,54 +96,25 @@ function MultiSelect({ options, selected, onChange, placeholder }: MultiSelectPr
   )
 }
 
-type BooleanFilterProps = {
-  label: string
-  value: boolean | null
-  onChange: (value: boolean | null) => void
-}
-
-function BooleanFilter({ label, value, onChange }: BooleanFilterProps) {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline" className="min-w-[120px] justify-between h-auto min-h-10">
-          {value === null ? (
-            <span className="text-muted-foreground">{label}</span>
-          ) : (
-            <Badge variant="secondary" className="rounded-sm">
-              {value ? "Yes" : "No"}
-            </Badge>
-          )}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[120px] p-0">
-        <Command>
-          <CommandList>
-            <CommandGroup>
-              <CommandItem onSelect={() => onChange(true)}>
-                <Check className={cn("mr-2 h-4 w-4", value === true ? "opacity-100" : "opacity-0")} />
-                Yes
-              </CommandItem>
-              <CommandItem onSelect={() => onChange(false)}>
-                <Check className={cn("mr-2 h-4 w-4", value === false ? "opacity-100" : "opacity-0")} />
-                No
-              </CommandItem>
-              <CommandItem onSelect={() => onChange(null)}>
-                <Check className={cn("mr-2 h-4 w-4", value === null ? "opacity-100" : "opacity-0")} />
-                Any
-              </CommandItem>
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  )
-}
-
 export default function FilterDashboard() {
-  const [users, setUsers] = useState<User[]>([])
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([])
+  const dispatch = useDispatch<AppDispatch>()
+  const { data: appearance } = useSelector((state: RootState) => state.apperanceDetails)
+  const { users: filterUsers, loading } = useSelector((state: RootState) => state.filterUser)
+
+  const [filterOptions, setFilterOptions] = useState<FilterOptions>({
+    category: [],
+    subCategory: [],
+    ethnicity: [],
+    hairColor: [],
+    hairTexture: [],
+    eyeColor: [],
+    skinTone: [],
+    facialFeatures: [],
+    tattoo: [],
+    piercing: [],
+    scars: []
+  })
+
 
   const [categoryFilter, setCategoryFilter] = useState<string[]>([])
   const [subCategoryFilter, setSubCategoryFilter] = useState<string[]>([])
@@ -230,93 +124,126 @@ export default function FilterDashboard() {
   const [eyeColorFilter, setEyeColorFilter] = useState<string[]>([])
   const [skinToneFilter, setSkinToneFilter] = useState<string[]>([])
   const [facialFeaturesFilter, setFacialFeaturesFilter] = useState<string[]>([])
-  const [tattooFilter, setTattooFilter] = useState<boolean | null>(null)
-  const [piercingFilter, setPiercingFilter] = useState<boolean | null>(null)
-  const [scarsFilter, setScarsFilter] = useState<boolean | null>(null)
+  const [tattooFilter, setTattooFilter] = useState<string[]>([])
+  const [piercingFilter, setPiercingFilter] = useState<string[]>([])
+  const [scarsFilter, setScarsFilter] = useState<string[]>([])
 
-  // Generate dummy data on component mount
+
   useEffect(() => {
-    const dummyUsers = generateDummyUsers(20)
-    setUsers(dummyUsers)
-    setFilteredUsers(dummyUsers)
-  }, [])
+    const fetchData = async () => {
+      try {
+        await dispatch(postUsers({})).unwrap()
+        await dispatch(fetchAppearance()).unwrap()
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    fetchData()
+  }, [dispatch])
 
-  // Apply filters when any filter changes
+
   useEffect(() => {
-    let result = [...users]
+    if (appearance && appearance.length > 0) {
+      const appearanceData = appearance[0]
+      setFilterOptions({
+        ...filterOptions,
+        ethnicity: appearanceData.ethnicity,
+        hairColor: appearanceData.hairColor,
+        hairTexture: appearanceData.hairTexture,
+        eyeColor: appearanceData.eyeColor,
+        skinTone: appearanceData.skinTone,
+        facialFeatures: appearanceData.facialFeatures,
+        tattoo: appearanceData.tattoo,
+        piercing: appearanceData.piercing,
+        scars: appearanceData.scars
+      })
+    }
+  }, [appearance])
 
-    // Apply category filter
-    if (categoryFilter.length > 0) {
-      result = result.filter((user) => categoryFilter.includes(user.category))
+  const applyFilters = async () => {
+    const filterData = {
+      category: categoryFilter,
+      subCategory: subCategoryFilter,
+      ethnicity: ethnicityFilter,
+      hairColor: hairColorFilter,
+      hairTexture: hairTextureFilter,
+      eyeColor: eyeColorFilter,
+      skinTone: skinToneFilter,
+      facialFeatures: facialFeaturesFilter,
+      tattoo: tattooFilter,
+      piercing: piercingFilter,
+      scars: scarsFilter
     }
 
-    // Apply subCategory filter
-    if (subCategoryFilter.length > 0) {
-      result = result.filter((user) => subCategoryFilter.includes(user.subCategory))
+    try {
+      await dispatch(postUsers(filterData)).unwrap()
+    } catch (error) {
+      console.error('Error applying filters:', error)
     }
+  }
 
-    // Apply ethnicity filter
-    if (ethnicityFilter.length > 0) {
-      result = result.filter((user) => ethnicityFilter.includes(user.ethnicity))
-    }
+  // useEffect(() => {
+  //   let result = [...users]
 
-    // Apply hairColor filter
-    if (hairColorFilter.length > 0) {
-      result = result.filter((user) => hairColorFilter.includes(user.hairColor))
-    }
+  //   if (categoryFilter.length > 0) {
+  //     result = result.filter((user) => categoryFilter.includes(user.category))
+  //   }
 
-    // Apply hairTexture filter
-    if (hairTextureFilter.length > 0) {
-      result = result.filter((user) => hairTextureFilter.includes(user.hairTexture))
-    }
+  //   if (subCategoryFilter.length > 0) {
+  //     result = result.filter((user) => subCategoryFilter.includes(user.subCategory))
+  //   }
 
-    // Apply eyeColor filter
-    if (eyeColorFilter.length > 0) {
-      result = result.filter((user) => eyeColorFilter.includes(user.eyeColor))
-    }
+  //   if (ethnicityFilter.length > 0) {
+  //     result = result.filter((user) => ethnicityFilter.includes(user.ethnicity))
+  //   }
 
-    // Apply skinTone filter
-    if (skinToneFilter.length > 0) {
-      result = result.filter((user) => skinToneFilter.includes(user.skinTone))
-    }
+  //   if (hairColorFilter.length > 0) {
+  //     result = result.filter((user) => hairColorFilter.includes(user.hairColor))
+  //   }
 
-    // Apply facialFeatures filter
-    if (facialFeaturesFilter.length > 0) {
-      result = result.filter((user) => facialFeaturesFilter.some((feature) => user.facialFeatures.includes(feature)))
-    }
+  //   if (hairTextureFilter.length > 0) {
+  //     result = result.filter((user) => hairTextureFilter.includes(user.hairTexture))
+  //   }
 
-    // Apply tattoo filter
-    if (tattooFilter !== null) {
-      result = result.filter((user) => user.tattoo === tattooFilter)
-    }
+  //   if (eyeColorFilter.length > 0) {
+  //     result = result.filter((user) => eyeColorFilter.includes(user.eyeColor))
+  //   }
+  //   if (skinToneFilter.length > 0) {
+  //     result = result.filter((user) => skinToneFilter.includes(user.skinTone))
+  //   }
 
-    // Apply piercing filter
-    if (piercingFilter !== null) {
-      result = result.filter((user) => user.piercing === piercingFilter)
-    }
+  //   if (facialFeaturesFilter.length > 0) {
+  //     result = result.filter((user) => facialFeaturesFilter.some((feature) => user.facialFeatures.includes(feature)))
+  //   }
 
-    // Apply scars filter
-    if (scarsFilter !== null) {
-      result = result.filter((user) => user.scars === scarsFilter)
-    }
+  //   // if (tattooFilter !== null) {
+  //   //   result = result.filter((user) => user.tattoo === tattooFilter)
+  //   // }
 
-    setFilteredUsers(result)
-  }, [
-    users,
-    categoryFilter,
-    subCategoryFilter,
-    ethnicityFilter,
-    hairColorFilter,
-    hairTextureFilter,
-    eyeColorFilter,
-    skinToneFilter,
-    facialFeaturesFilter,
-    tattooFilter,
-    piercingFilter,
-    scarsFilter,
-  ])
+  //   // if (piercingFilter !== null) {
+  //   //   result = result.filter((user) => user.piercing === piercingFilter)
+  //   // }
 
-  // Clear all filters
+  //   // if (scarsFilter !== null) {
+  //   //   result = result.filter((user) => user.scars === scarsFilter)
+  //   // }
+
+  //   setFilteredUsers(result)
+  // }, [
+  //   users,
+  //   categoryFilter,
+  //   subCategoryFilter,
+  //   ethnicityFilter,
+  //   hairColorFilter,
+  //   hairTextureFilter,
+  //   eyeColorFilter,
+  //   skinToneFilter,
+  //   facialFeaturesFilter,
+  //   tattooFilter,
+  //   piercingFilter,
+  //   scarsFilter,
+  // ])
+
   const clearAllFilters = () => {
     setCategoryFilter([])
     setSubCategoryFilter([])
@@ -326,12 +253,11 @@ export default function FilterDashboard() {
     setEyeColorFilter([])
     setSkinToneFilter([])
     setFacialFeaturesFilter([])
-    setTattooFilter(null)
-    setPiercingFilter(null)
-    setScarsFilter(null)
+    setTattooFilter([])
+    setPiercingFilter([])
+    setScarsFilter([])
   }
 
-  // Check if any filters are applied
   const hasActiveFilters = () => {
     return (
       categoryFilter.length > 0 ||
@@ -366,7 +292,7 @@ export default function FilterDashboard() {
             <CardTitle>Filters</CardTitle>
             <CardDescription>Filter talents by their attributes</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="flex flex-wrap gap-4">
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-medium">Category</label>
@@ -450,18 +376,39 @@ export default function FilterDashboard() {
 
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-medium">Tattoo</label>
-                <BooleanFilter label="Tattoo" value={tattooFilter} onChange={setTattooFilter} />
+                <MultiSelect
+                  options={filterOptions.tattoo}
+                  selected={tattooFilter}
+                  onChange={setTattooFilter}
+                  placeholder="Tattoo"
+                />
               </div>
 
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-medium">Piercing</label>
-                <BooleanFilter label="Piercing" value={piercingFilter} onChange={setPiercingFilter} />
+                <MultiSelect
+                  options={filterOptions.piercing}
+                  selected={piercingFilter}
+                  onChange={setPiercingFilter}
+                  placeholder="Piercing"
+                />
               </div>
 
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-medium">Scars</label>
-                <BooleanFilter label="Scars" value={scarsFilter} onChange={setScarsFilter} />
+                <MultiSelect
+                  options={filterOptions.scars}
+                  selected={scarsFilter}
+                  onChange={setScarsFilter}
+                  placeholder="Scars"
+                />
               </div>
+            </div>
+
+            <div className="mt-4">
+              <Button onClick={applyFilters} className="w-full">
+                Apply Filters
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -471,7 +418,7 @@ export default function FilterDashboard() {
             <div>
               <CardTitle>Talents</CardTitle>
               <CardDescription>
-                Showing {filteredUsers.length} of {users.length} talents
+                Showing {filterUsers.length} of {filterUsers.length} talents
               </CardDescription>
             </div>
             <div className="flex items-center gap-2">
@@ -483,46 +430,10 @@ export default function FilterDashboard() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredUsers.map((user) => (
-                <Card key={user.id} className="overflow-hidden">
-                  <CardContent className="p-0">
-                    <div className="flex items-start p-4">
-                      <Avatar className="h-10 w-10 mr-4">
-                        <AvatarImage src={user.avatar} alt={user.name} />
-                        <AvatarFallback>{user.name.substring(0, 2)}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1">
-                        <h3 className="font-medium">{user.name}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          {user.category} / {user.subCategory}
-                        </p>
-                      </div>
-                    </div>
-                    <Separator />
-                    <div className="p-4 grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="font-medium">Ethnicity:</span> {user.ethnicity}
-                      </div>
-                      <div>
-                        <span className="font-medium">Hair:</span> {user.hairColor}, {user.hairTexture}
-                      </div>
-                      <div>
-                        <span className="font-medium">Eyes:</span> {user.eyeColor}
-                      </div>
-                      <div>
-                        <span className="font-medium">Skin:</span> {user.skinTone}
-                      </div>
-                      <div className="col-span-2">
-                        <span className="font-medium">Features:</span> {user.facialFeatures.join(", ")}
-                      </div>
-                      <div className="col-span-2 flex gap-2 mt-2">
-                        {user.tattoo && <Badge variant="outline">Tattoo</Badge>}
-                        {user.piercing && <Badge variant="outline">Piercing</Badge>}
-                        {user.scars && <Badge variant="outline">Scars</Badge>}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+              {loading ? (
+                Array.from({ length: 9 }).map((_, i) => <FilterUserSkeletonCard key={i} />)
+              ) : filterUsers && filterUsers.map((user) => (
+                <FilterUserCard key={user._id} user={user} />
               ))}
             </div>
           </CardContent>
