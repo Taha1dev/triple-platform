@@ -7,7 +7,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState: AppearanceState = {
-  data: null,
+  appearance: null,
   loading: false,
   error: null,
 }
@@ -34,7 +34,7 @@ const appearanceSlice = createSlice({
   initialState,
   reducers: {
     clearAppearanceData(state) {
-      state.data = null
+      state.appearance = null
       state.error = null
     },
   },
@@ -48,7 +48,7 @@ const appearanceSlice = createSlice({
         fetchAppearance.fulfilled,
         (state, action: PayloadAction<any>) => {
           state.loading = false
-          state.data = action.payload
+          state.appearance = action.payload
         },
       )
       .addCase(fetchAppearance.rejected, (state, action) => {

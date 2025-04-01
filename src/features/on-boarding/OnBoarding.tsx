@@ -3,8 +3,8 @@ import { useForm, Controller } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 import { AppDispatch, RootState } from '@/store/store'
-import { getOnBoardingData } from '@/store/slices/getOnboardingDataSlice'
-import { onBoardingCategory } from '@/models/api-schema/auth.model'
+import { getallCategories } from '@/store/slices/getAllCategoriesSlice'
+import { Categories } from '@/models/api-schema/auth.model'
 import {
   Select,
   SelectContent,
@@ -36,21 +36,21 @@ export default function OnBoarding() {
   const dispatch = useDispatch<AppDispatch>()
 
   // State for categories and subcategories
-  const [categories, setCategories] = useState<onBoardingCategory[]>([])
+  const [categories, setCategories] = useState<Categories[]>([])
   const [subCategories, setSubCategories] = useState<
-    onBoardingCategory['subcategories']
+    Categories['subcategories']
   >([])
 
   // Fetch categories data from Redux store
   const {
     loading,
-    data: categoriesData,
+    categories: categoriesData,
   } = useSelector((state: RootState) => state.onBoardingCategories)
 
   const { control, handleSubmit } = useForm<FormData>()
 
   useEffect(() => {
-    dispatch(getOnBoardingData())
+    dispatch(getallCategories())
   }, [dispatch])
 
   useEffect(() => {

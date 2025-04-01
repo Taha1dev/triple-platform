@@ -14,8 +14,8 @@ import logoutReducer from './slices/logoutSlice'
 import UpdateProfileReducer from './slices/updateUserSlice'
 import userReducer from './slices/userSlice'
 import changePasswordReducer from './slices/changePasswordSlice'
-import onBoardingReducer from './slices/onBoardingDataSlice'
-import onBoardingCategoriesReducer from './slices/getOnboardingDataSlice'
+import allCategoriesReducer from './slices/getAllCategoriesSlice'
+import onBoardingCategoriesReducer from './slices/getAllCategoriesSlice'
 import userPictureReducer from './slices/updateUserPicture'
 import DomReducer from './slices/DOMSlice'
 import filterUserReducer from './slices/filterUserSlice'
@@ -39,7 +39,7 @@ export const store = configureStore({
     user: userReducer,
     userPicture: userPictureReducer,
     changePassword: changePasswordReducer,
-    onBoarding: onBoardingReducer,
+    allCategories: allCategoriesReducer,
     onBoardingCategories: onBoardingCategoriesReducer,
     headerView: DomReducer,
     filterUser: filterUserReducer,

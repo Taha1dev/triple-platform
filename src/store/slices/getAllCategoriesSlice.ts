@@ -1,34 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosClient from '@/api/apiClient'
-import { OnBoardingData } from '@/models/api-schema/auth.model'
+import { Categories } from '@/models/api-schema/auth.model'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export type OnBoardingResponse = OnBoardingData[]
+export type CategoriesResponse = Categories[]
 
-export interface OnBoardingState {
-  data: OnBoardingResponse
+export interface CategoriesState {
+  categories: CategoriesResponse
   loading: boolean
   success: boolean
   error: string | null
 }
 
-const initialState: OnBoardingState = {
-  data: [],
+const initialState: CategoriesState = {
+  categories: [],
   loading: false,
   success: false,
   error: null,
 }
 
-export const fetchOnBoarding = createAsyncThunk<
-  OnBoardingResponse,
+export const getallCategories = createAsyncThunk<
+  CategoriesResponse,
   void,
   { rejectValue: string }
->('user/fetchOnBoarding', async (_, { rejectWithValue }: any) => {
+>('user/getallCategories', async (_, { rejectWithValue }: any) => {
   try {
-    const response = await axiosClient.get<OnBoardingResponse>(
-      'onboarding/categories',
+    const response = await axiosClient.get<CategoriesResponse>(
+      'category/all-categories/',
     )
+    console.log('response', response)
     return response
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -42,26 +43,26 @@ export const fetchOnBoarding = createAsyncThunk<
   }
 })
 
-const onBoardingSlice = createSlice({
-  name: 'onBoarding',
+const allCategoriesSlice = createSlice({
+  name: 'allCategories',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchOnBoarding.pending, state => {
+      .addCase(getallCategories.pending, state => {
         state.loading = true
         state.success = false
         state.error = null
       })
       .addCase(
-        fetchOnBoarding.fulfilled,
-        (state, action: PayloadAction<OnBoardingResponse>) => {
-          state.data = action.payload
+        getallCategories.fulfilled,
+        (state, action: PayloadAction<CategoriesResponse>) => {
+          state.categories = action.payload
           state.loading = false
           state.success = true
         },
       )
-      .addCase(fetchOnBoarding.rejected, (state, action) => {
+      .addCase(getallCategories.rejected, (state, action) => {
         state.loading = false
         state.success = false
         state.error = action.payload as string
@@ -69,4 +70,4 @@ const onBoardingSlice = createSlice({
   },
 })
 
-export default onBoardingSlice.reducer
+export default allCategoriesSlice.reducer

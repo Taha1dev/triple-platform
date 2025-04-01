@@ -13,6 +13,9 @@ import FilterUserSkeletonCard from "../components/filter/filter-user-skeleton-ca
 import { postUsers } from "@/store/slices/filterUserSlice"
 import { fetchAppearance } from "@/store/slices/getApperanceDetails"
 import FilterUserCard from "../components/filter/filter-user-card"
+import { getallCategories } from "@/store/slices/getAllCategoriesSlice"
+import Spinner from "@/components/custom/Spinner"
+import { SkeletonDropdown } from "../components/drop-down-skeleton"
 
 type FilterOptions = {
   category: string[]
@@ -98,8 +101,9 @@ function MultiSelect({ options, selected, onChange, placeholder }: MultiSelectPr
 
 export default function FilterDashboard() {
   const dispatch = useDispatch<AppDispatch>()
-  const { data: appearance } = useSelector((state: RootState) => state.apperanceDetails)
-  const { users: filterUsers, loading } = useSelector((state: RootState) => state.filterUser)
+  const { appearance, loading: appearanceLoading } = useSelector((state: RootState) => state.apperanceDetails)
+  const { users, loading } = useSelector((state: RootState) => state.filterUser)
+  const { categories, loading: categoriesloading } = useSelector((state: RootState) => state.allCategories)
 
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({
     category: [],
@@ -118,6 +122,7 @@ export default function FilterDashboard() {
 
   const [categoryFilter, setCategoryFilter] = useState<string[]>([])
   const [subCategoryFilter, setSubCategoryFilter] = useState<string[]>([])
+  const [filteredSubCategories, setFilteredSubCategories] = useState<string[]>([]);
   const [ethnicityFilter, setEthnicityFilter] = useState<string[]>([])
   const [hairColorFilter, setHairColorFilter] = useState<string[]>([])
   const [hairTextureFilter, setHairTextureFilter] = useState<string[]>([])
@@ -128,12 +133,20 @@ export default function FilterDashboard() {
   const [piercingFilter, setPiercingFilter] = useState<string[]>([])
   const [scarsFilter, setScarsFilter] = useState<string[]>([])
 
+  const categoryOptions = categories.map((c) => c.name);
+  const subCategoryMap = categories.reduce((acc, category) => {
+    acc[category.name] = category.subcategories.map((sub) => sub.name);
+    return acc;
+  }, {} as Record<string, string[]>);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(postUsers({})).unwrap()
-        await dispatch(fetchAppearance()).unwrap()
+        await Promise.all([
+          dispatch(getallCategories()).unwrap(),
+          dispatch(fetchAppearance()).unwrap(),
+          dispatch(postUsers({})).unwrap(),
+        ])
       } catch (error) {
         console.error('Error fetching data:', error)
       }
@@ -142,6 +155,15 @@ export default function FilterDashboard() {
   }, [dispatch])
 
 
+  useEffect(() => {
+    if (categoryFilter.length > 0) {
+      const newSubCategories = categoryFilter.flatMap((cat) => subCategoryMap[cat] || []);
+      setFilteredSubCategories(newSubCategories);
+    } else {
+      setFilteredSubCategories([]);
+    }
+    setSubCategoryFilter([]);
+  }, [categoryFilter]);
   useEffect(() => {
     if (appearance && appearance.length > 0) {
       const appearanceData = appearance[0]
@@ -173,76 +195,20 @@ export default function FilterDashboard() {
       tattoo: tattooFilter,
       piercing: piercingFilter,
       scars: scarsFilter
-    }
+    };
+
+    const filteredData = Object.fromEntries(
+      Object.entries(filterData).filter(([_, value]) => {
+        return Array.isArray(value) && value.length > 0;
+      })
+    );
 
     try {
-      await dispatch(postUsers(filterData)).unwrap()
+      await dispatch(postUsers(filteredData)).unwrap();
     } catch (error) {
-      console.error('Error applying filters:', error)
+      console.error('Error applying filters:', error);
     }
-  }
-
-  // useEffect(() => {
-  //   let result = [...users]
-
-  //   if (categoryFilter.length > 0) {
-  //     result = result.filter((user) => categoryFilter.includes(user.category))
-  //   }
-
-  //   if (subCategoryFilter.length > 0) {
-  //     result = result.filter((user) => subCategoryFilter.includes(user.subCategory))
-  //   }
-
-  //   if (ethnicityFilter.length > 0) {
-  //     result = result.filter((user) => ethnicityFilter.includes(user.ethnicity))
-  //   }
-
-  //   if (hairColorFilter.length > 0) {
-  //     result = result.filter((user) => hairColorFilter.includes(user.hairColor))
-  //   }
-
-  //   if (hairTextureFilter.length > 0) {
-  //     result = result.filter((user) => hairTextureFilter.includes(user.hairTexture))
-  //   }
-
-  //   if (eyeColorFilter.length > 0) {
-  //     result = result.filter((user) => eyeColorFilter.includes(user.eyeColor))
-  //   }
-  //   if (skinToneFilter.length > 0) {
-  //     result = result.filter((user) => skinToneFilter.includes(user.skinTone))
-  //   }
-
-  //   if (facialFeaturesFilter.length > 0) {
-  //     result = result.filter((user) => facialFeaturesFilter.some((feature) => user.facialFeatures.includes(feature)))
-  //   }
-
-  //   // if (tattooFilter !== null) {
-  //   //   result = result.filter((user) => user.tattoo === tattooFilter)
-  //   // }
-
-  //   // if (piercingFilter !== null) {
-  //   //   result = result.filter((user) => user.piercing === piercingFilter)
-  //   // }
-
-  //   // if (scarsFilter !== null) {
-  //   //   result = result.filter((user) => user.scars === scarsFilter)
-  //   // }
-
-  //   setFilteredUsers(result)
-  // }, [
-  //   users,
-  //   categoryFilter,
-  //   subCategoryFilter,
-  //   ethnicityFilter,
-  //   hairColorFilter,
-  //   hairTextureFilter,
-  //   eyeColorFilter,
-  //   skinToneFilter,
-  //   facialFeaturesFilter,
-  //   tattooFilter,
-  //   piercingFilter,
-  //   scarsFilter,
-  // ])
+  };
 
   const clearAllFilters = () => {
     setCategoryFilter([])
@@ -268,9 +234,9 @@ export default function FilterDashboard() {
       eyeColorFilter.length > 0 ||
       skinToneFilter.length > 0 ||
       facialFeaturesFilter.length > 0 ||
-      tattooFilter !== null ||
-      piercingFilter !== null ||
-      scarsFilter !== null
+      tattooFilter.length > 0 ||
+      piercingFilter.length > 0 ||
+      scarsFilter.length > 0
     )
   }
 
@@ -287,130 +253,139 @@ export default function FilterDashboard() {
           </div>
         </div>
 
-        <Card>
+        <Card className="p-4">
           <CardHeader>
             <CardTitle>Filters</CardTitle>
             <CardDescription>Filter talents by their attributes</CardDescription>
           </CardHeader>
-          <CardContent className="pt-6">
-            <div className="flex flex-wrap gap-4">
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Category</label>
-                <MultiSelect
-                  options={filterOptions.category}
-                  selected={categoryFilter}
-                  onChange={setCategoryFilter}
-                  placeholder="Category"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Sub Category</label>
-                <MultiSelect
-                  options={filterOptions.subCategory}
-                  selected={subCategoryFilter}
-                  onChange={setSubCategoryFilter}
-                  placeholder="Sub Category"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Ethnicity</label>
-                <MultiSelect
-                  options={filterOptions.ethnicity}
-                  selected={ethnicityFilter}
-                  onChange={setEthnicityFilter}
-                  placeholder="Ethnicity"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Hair Color</label>
-                <MultiSelect
-                  options={filterOptions.hairColor}
-                  selected={hairColorFilter}
-                  onChange={setHairColorFilter}
-                  placeholder="Hair Color"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Hair Texture</label>
-                <MultiSelect
-                  options={filterOptions.hairTexture}
-                  selected={hairTextureFilter}
-                  onChange={setHairTextureFilter}
-                  placeholder="Hair Texture"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Eye Color</label>
-                <MultiSelect
-                  options={filterOptions.eyeColor}
-                  selected={eyeColorFilter}
-                  onChange={setEyeColorFilter}
-                  placeholder="Eye Color"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Skin Tone</label>
-                <MultiSelect
-                  options={filterOptions.skinTone}
-                  selected={skinToneFilter}
-                  onChange={setSkinToneFilter}
-                  placeholder="Skin Tone"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Facial Features</label>
-                <MultiSelect
-                  options={filterOptions.facialFeatures}
-                  selected={facialFeaturesFilter}
-                  onChange={setFacialFeaturesFilter}
-                  placeholder="Facial Features"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Tattoo</label>
-                <MultiSelect
-                  options={filterOptions.tattoo}
-                  selected={tattooFilter}
-                  onChange={setTattooFilter}
-                  placeholder="Tattoo"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Piercing</label>
-                <MultiSelect
-                  options={filterOptions.piercing}
-                  selected={piercingFilter}
-                  onChange={setPiercingFilter}
-                  placeholder="Piercing"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Scars</label>
-                <MultiSelect
-                  options={filterOptions.scars}
-                  selected={scarsFilter}
-                  onChange={setScarsFilter}
-                  placeholder="Scars"
-                />
-              </div>
+          {appearanceLoading ||
+            categoriesloading ? (
+            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <SkeletonDropdown key={i} />
+              ))}
             </div>
+          ) :
+            <CardContent className="pt-6">
+              <div className="container mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Category</label>
+                  <MultiSelect
+                    options={categoryOptions}
+                    selected={categoryFilter}
+                    onChange={setCategoryFilter}
+                    placeholder="Select Category"
+                  />
+                </div>
 
-            <div className="mt-4">
-              <Button onClick={applyFilters} className="w-full">
-                Apply Filters
-              </Button>
-            </div>
-          </CardContent>
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Sub Category</label>
+                  <MultiSelect
+                    options={filteredSubCategories}
+                    selected={subCategoryFilter}
+                    onChange={setSubCategoryFilter}
+                    placeholder="Select Sub Category"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Ethnicity</label>
+                  <MultiSelect
+                    options={filterOptions.ethnicity}
+                    selected={ethnicityFilter}
+                    onChange={setEthnicityFilter}
+                    placeholder="Ethnicity"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Hair Color</label>
+                  <MultiSelect
+                    options={filterOptions.hairColor}
+                    selected={hairColorFilter}
+                    onChange={setHairColorFilter}
+                    placeholder="Hair Color"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Hair Texture</label>
+                  <MultiSelect
+                    options={filterOptions.hairTexture}
+                    selected={hairTextureFilter}
+                    onChange={setHairTextureFilter}
+                    placeholder="Hair Texture"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Eye Color</label>
+                  <MultiSelect
+                    options={filterOptions.eyeColor}
+                    selected={eyeColorFilter}
+                    onChange={setEyeColorFilter}
+                    placeholder="Eye Color"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Skin Tone</label>
+                  <MultiSelect
+                    options={filterOptions.skinTone}
+                    selected={skinToneFilter}
+                    onChange={setSkinToneFilter}
+                    placeholder="Skin Tone"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Facial Features</label>
+                  <MultiSelect
+                    options={filterOptions.facialFeatures}
+                    selected={facialFeaturesFilter}
+                    onChange={setFacialFeaturesFilter}
+                    placeholder="Facial Features"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Tattoo</label>
+                  <MultiSelect
+                    options={filterOptions.tattoo}
+                    selected={tattooFilter}
+                    onChange={setTattooFilter}
+                    placeholder="Tattoo"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Piercing</label>
+                  <MultiSelect
+                    options={filterOptions.piercing}
+                    selected={piercingFilter}
+                    onChange={setPiercingFilter}
+                    placeholder="Piercing"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium">Scars</label>
+                  <MultiSelect
+                    options={filterOptions.scars}
+                    selected={scarsFilter}
+                    onChange={setScarsFilter}
+                    placeholder="Scars"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <Button onClick={applyFilters} className="w-fit">
+                  Apply Filters
+                </Button>
+              </div>
+            </CardContent>
+          }
         </Card>
 
         <Card>
@@ -418,7 +393,7 @@ export default function FilterDashboard() {
             <div>
               <CardTitle>Talents</CardTitle>
               <CardDescription>
-                Showing {filterUsers.length} of {filterUsers.length} talents
+                Showing {users.length} of {users.length} talents
               </CardDescription>
             </div>
             <div className="flex items-center gap-2">
@@ -432,7 +407,7 @@ export default function FilterDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {loading ? (
                 Array.from({ length: 9 }).map((_, i) => <FilterUserSkeletonCard key={i} />)
-              ) : filterUsers && filterUsers.map((user) => (
+              ) : users && users.map((user) => (
                 <FilterUserCard key={user._id} user={user} />
               ))}
             </div>
