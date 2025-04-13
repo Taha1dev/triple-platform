@@ -32,9 +32,11 @@ export default function ChangePassword() {
 
   const onSubmit = async (data: FormValues) => {
     const { password } = data
-    console.log(user?.id)
+    console.log((user as any)?.user._id)
     try {
-      await dispatch(changePassword({ _id: user?.id, password })).unwrap()
+      await dispatch(
+        changePassword({ _id: (user as any)?.user._id, password }),
+      ).unwrap()
       navigate('/home')
     } catch (error) {
       console.log(error)
@@ -58,6 +60,7 @@ export default function ChangePassword() {
               <CardContent>
                 <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
                   <FormField
+                    name='password'
                     label={'New Password'}
                     id={'password'}
                     placeholder={'Enter Your New Password'}

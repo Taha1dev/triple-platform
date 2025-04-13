@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Filter, X } from 'lucide-react'
@@ -21,31 +22,17 @@ import { getallCategories } from '@/store/slices/getAllCategoriesSlice'
 import { SkeletonDropdown } from '../components/controls/drop-down-skeleton'
 import { MultiSelect } from '../components/controls/multi-select'
 
-type FilterOptions = {
-  category: string[]
-  subCategory: string[]
-  ethnicity: string[]
-  hairColor: string[]
-  hairTexture: string[]
-  eyeColor: string[]
-  skinTone: string[]
-  facialFeatures: string[]
-  tattoo: string[]
-  piercing: string[]
-  scars: string[]
-}
-
 export default function FilterDashboard() {
   const dispatch = useDispatch<AppDispatch>()
   const { appearance, loading: appearanceLoading } = useSelector(
     (state: RootState) => state.apperanceDetails,
   )
   const { users, loading } = useSelector((state: RootState) => state.filterUser)
-  const { categories, loading: categoriesloading } = useSelector(
+  const { categories, loading: categoriesLoading } = useSelector(
     (state: RootState) => state.allCategories,
   )
 
-  const [filterOptions, setFilterOptions] = useState<FilterOptions>({
+  const [filterOptions, setFilterOptions] = useState<any>({
     category: [],
     subCategory: [],
     ethnicity: [],
@@ -58,11 +45,9 @@ export default function FilterDashboard() {
     piercing: [],
     scars: [],
   })
-
+  const [filterLoading, setFilterLoading] = useState<boolean>(false)
   const [categoryFilter, setCategoryFilter] = useState<string[]>([])
   const [subCategoryFilter, setSubCategoryFilter] = useState<string[]>([])
-
-
   const [ethnicityFilter, setEthnicityFilter] = useState<string[]>([])
   const [hairColorFilter, setHairColorFilter] = useState<string[]>([])
   const [hairTextureFilter, setHairTextureFilter] = useState<string[]>([])
@@ -72,8 +57,6 @@ export default function FilterDashboard() {
   const [tattooFilter, setTattooFilter] = useState<string[]>([])
   const [piercingFilter, setPiercingFilter] = useState<string[]>([])
   const [scarsFilter, setScarsFilter] = useState<string[]>([])
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,101 +73,64 @@ export default function FilterDashboard() {
     fetchData()
   }, [dispatch])
 
-
-  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([])
-  const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState<string[]>([])
-  const [availableSubCategoryNames, setAvailableSubCategoryNames] = useState<string[]>([])
-  
-  // Create mappings between IDs and names
-  const categoryIdToName = categories.reduce((acc, category) => {
-    acc[category._id] = category.name
-    return acc
-  }, {} as Record<string, string>)
-  
-  const subCategoryIdToName = categories.reduce((acc, category) => {
-    category.subcategories.forEach(sub => {
-      acc[sub._id] = sub.name
-    })
-    return acc
-  }, {} as Record<string, string>)
-  
-  // Create name-only options for MultiSelect
-  const categoryOptions = categories.map(c => c.name)
-  const categoryNameToId = categories.reduce((acc, category) => {
-    acc[category.name] = category._id
-    return acc
-  }, {} as Record<string, string>)
-  
-  // Map of category names to their subcategory names
-  const categoryToSubcategoriesMap = categories.reduce((acc, category) => {
-    acc[category.name] = category.subcategories.map(sub => sub.name)
-    return acc
-  }, {} as Record<string, string[]>)
-  
-  // Map of subcategory names to their IDs
-  const subCategoryNameToId = categories.reduce((acc, category) => {
-    category.subcategories.forEach(sub => {
-      acc[sub.name] = sub._id
-    })
-    return acc
-  }, {} as Record<string, string>)
-  
   useEffect(() => {
-    if (selectedCategoryIds.length > 0) {
-      // Get selected category names
-      const selectedCategoryNames = selectedCategoryIds.map(id => categoryIdToName[id])
-      // Get available subcategory names
-      const subs = selectedCategoryNames.flatMap(
-        catName => categoryToSubcategoriesMap[catName] || []
+    if (categories?.length) {
+      const categoryList = categories.map(category => ({
+        id: category._id,
+        name: category.name,
+      }))
+      const subCategoryList = categories.flatMap(category =>
+        category.subcategories.map(sub => ({
+          id: sub._id,
+          name: sub.name,
+          categoryId: category._id, // Track which category this subcategory belongs to
+        })),
       )
-      setAvailableSubCategoryNames(subs)
-    } else {
-      setAvailableSubCategoryNames([])
+
+      setFilterOptions((prev: any) => ({
+        ...prev,
+        category: categoryList,
+        subCategory: subCategoryList,
+      }))
+
+      // Initialize as empty
+      setCategoryFilter([])
+      setSubCategoryFilter([])
     }
-    setSelectedSubCategoryIds([])
-  }, [selectedCategoryIds])
-  
-  // Convert selected names to IDs when changed
-  const handleCategoryChange = (selectedNames: string[]) => {
-    setCategoryFilter(selectedNames)
-  
-    // Update subcategory options based on selected categories
-    const subs = selectedNames.flatMap(
-      catName => categoryToSubcategoriesMap[catName] || []
-    )
-    setAvailableSubCategoryNames(subs)
-    setSubCategoryFilter([]) // Reset subcategory on category change
+  }, [categories])
+
+  // Filter subcategories to only those belonging to selected categories
+  const filteredSubCategories = filterOptions.subCategory.filter((sub: any) =>
+    categoryFilter.includes(sub.categoryId),
+  )
+
+  const handleCategoryChange = (selectedCategoryIds: string[]) => {
+    setCategoryFilter(selectedCategoryIds)
+    setSubCategoryFilter([]) // Reset subcategories when parent categories change
   }
-  
-  const handleSubCategoryChange = (selectedNames: string[]) => {
-    setSubCategoryFilter(selectedNames)
-  }
-  
 
   useEffect(() => {
-    if (appearance && appearance.length > 0) {
-      const appearanceData = appearance[0]
-      setFilterOptions({
-        ...filterOptions,
-        ethnicity: appearanceData.ethnicity,
-        hairColor: appearanceData.hairColor,
-        hairTexture: appearanceData.hairTexture,
-        eyeColor: appearanceData.eyeColor,
-        skinTone: appearanceData.skinTone,
-        facialFeatures: appearanceData.facialFeatures,
-        tattoo: appearanceData.tattoo,
-        piercing: appearanceData.piercing,
-        scars: appearanceData.scars,
-      })
+    if (appearance?.length) {
+      const data = appearance[0]
+      setFilterOptions((prev: any) => ({
+        ...prev,
+        ethnicity: data.ethnicity,
+        hairColor: data.hairColor,
+        hairTexture: data.hairTexture,
+        eyeColor: data.eyeColor,
+        skinTone: data.skinTone,
+        facialFeatures: data.facialFeatures,
+        tattoo: data.tattoo,
+        piercing: data.piercing,
+        scars: data.scars,
+      }))
     }
   }, [appearance])
 
   const applyFilters = async () => {
-    const categoryIds = categoryFilter.map(name => categoryNameToId[name])
-    const subCategoryIds = subCategoryFilter.map(name => subCategoryNameToId[name])
     const filterData = {
-      category: categoryIds,
-      subCategory: subCategoryIds,
+      category: categoryFilter,
+      subCategory: subCategoryFilter,
       ethnicity: ethnicityFilter,
       hairColor: hairColorFilter,
       hairTexture: hairTextureFilter,
@@ -197,15 +143,18 @@ export default function FilterDashboard() {
     }
 
     const filteredData = Object.fromEntries(
-      Object.entries(filterData).filter(([_, value]) => {
-        return Array.isArray(value) && value.length > 0
-      }),
+      Object.entries(filterData).filter(
+        ([_, value]) => Array.isArray(value) && value.length > 0,
+      ),
     )
 
     try {
+      setFilterLoading(true)
       await dispatch(postUsers(filteredData)).unwrap()
     } catch (error) {
       console.error('Error applying filters:', error)
+    } finally {
+      setFilterLoading(false)
     }
   }
 
@@ -238,7 +187,9 @@ export default function FilterDashboard() {
       scarsFilter.length > 0
     )
   }
-
+  useEffect(() => {
+    console.log('filterOptions.category', filterOptions.category)
+  }, [])
   return (
     <div className='container mx-auto py-6'>
       <div className='flex flex-col gap-6'>
@@ -264,7 +215,7 @@ export default function FilterDashboard() {
               Filter talents by their attributes
             </CardDescription>
           </CardHeader>
-          {appearanceLoading || categoriesloading ? (
+          {appearanceLoading || categoriesLoading ? (
             <div className='container mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4'>
               {Array.from({ length: 12 }).map((_, i) => (
                 <SkeletonDropdown key={i} />
@@ -276,10 +227,8 @@ export default function FilterDashboard() {
                 <div className='flex flex-col gap-2'>
                   <label className='text-sm font-medium'>Category</label>
                   <MultiSelect
-                    options={categoryOptions}
-                    selected={selectedCategoryIds.map(
-                      id => categoryIdToName[id],
-                    )}
+                    options={filterOptions.category}
+                    selected={categoryFilter}
                     onChange={handleCategoryChange}
                     placeholder='Select Category'
                   />
@@ -288,17 +237,11 @@ export default function FilterDashboard() {
                 <div className='flex flex-col gap-2'>
                   <label className='text-sm font-medium'>Sub Category</label>
                   <MultiSelect
-                    options={availableSubCategoryNames}
-                    selected={selectedSubCategoryIds.map(
-                      id => subCategoryIdToName[id],
-                    )}
-                    onChange={handleSubCategoryChange}
-                    placeholder={
-                      selectedCategoryIds.length > 0
-                        ? 'Select Sub Category'
-                        : 'Select categories first'
-                    }
-                    disabled={selectedCategoryIds.length === 0}
+                    options={filteredSubCategories}
+                    selected={subCategoryFilter}
+                    onChange={setSubCategoryFilter}
+                    placeholder='Select Subcategory'
+                    disabled={categoryFilter.length === 0}
                   />
                 </div>
 
@@ -394,8 +337,12 @@ export default function FilterDashboard() {
               </div>
 
               <div className='mt-4'>
-                <Button onClick={applyFilters} className='w-fit'>
-                  Apply Filters
+                <Button
+                  disabled={loading}
+                  onClick={applyFilters}
+                  className='w-fit'
+                >
+                  {filterLoading ? 'Filtering...' : 'Apply Filters'}
                 </Button>
               </div>
             </CardContent>

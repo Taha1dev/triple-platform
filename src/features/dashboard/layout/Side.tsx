@@ -20,15 +20,14 @@ import { footerLogo, useTheme } from '@/components/theme-provider'
 
 const categories = [
   { name: 'Home', icon: Home, path: '/home' },
-  { name: 'Pro-Crew', icon: Users, path: 'pro-crew' },
-  { name: 'Talents', icon: User, path: 'talents' },
+  { name: 'Profile', icon: Users, path: '/home/profile-settings' },
   { name: 'Operators', icon: Briefcase, path: 'operators' },
   { name: 'Logistics', icon: Package, path: 'logistics' },
   { name: 'Props', icon: Camera, path: 'props' },
   { name: 'Locations', icon: Map, path: 'locations' },
   { name: 'Agencies', icon: Building, path: 'agencies' },
 ]
-export default function Component() {
+export default function Sidebar() {
   const { theme } = useTheme()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const isSmallScreen = useMediaQuery('(max-width: 1000px)')
@@ -50,11 +49,7 @@ export default function Component() {
                   sidebarOpen ? 'w-56 opacity-100' : 'w-0 opacity-0'
                 }`}
               >
-                <img
-                  className=''
-                  src={footerLogo(theme)}
-                  alt='Triple Logo'
-                />
+                <img className='' src={footerLogo(theme)} alt='Triple Logo' />
               </Link>
             )}
 
@@ -72,27 +67,7 @@ export default function Component() {
               )}
             </Button>
           </div>
-          {/* <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant='ghost'
-                  size='icon'
-                  className='ml-auto transition-all duration-300 ease-in-out'
-                  onClick={() => setSidebarOpen(!sidebarOpen)}
-                >
-                  {sidebarOpen ? (
-                    <ChevronLeft className='h-6 w-6' />
-                  ) : (
-                    <ChevronRight className='h-6 w-6' />
-                  )}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                {sidebarOpen ? 'Collapse Sidebar' : 'Expand Sidebar'}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider> */}
+
           <nav>
             <ul className='space-y-2 p-4'>
               {categories.map(category => (

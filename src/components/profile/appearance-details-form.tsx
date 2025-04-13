@@ -99,14 +99,14 @@ export default function AppearanceDetailsForm() {
     const payload = {
       ...data,
       user_id: (user as any).user._id,
+      fcm_token: (user as any).token,
     }
 
-    await dispatch(updateApperance(payload)).unwrap()
     try {
-      // Simulate API call
+      await dispatch(updateApperance(payload)).unwrap()
     } catch (error) {
       console.error('Error updating appearance details:', error)
-      alert('Failed to update appearance details. Please try again.')
+      setIsSubmitting(false)
     } finally {
       setIsSubmitting(false)
     }

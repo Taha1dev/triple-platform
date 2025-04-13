@@ -13,7 +13,7 @@ import { useController, UseControllerProps } from 'react-hook-form'
 import { fullYear } from '@/features/landing-page/constants'
 
 type DatePickerProps = UseControllerProps & {
-  id: string
+  id?: string
 }
 
 export function DatePicker({ id, control, name }: DatePickerProps) {

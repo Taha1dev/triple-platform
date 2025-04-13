@@ -32,19 +32,18 @@ const initialState: UserProfile = {
 export const updateProfile = createAsyncThunk(
   'user/updateProfile',
   async (formData: FormData, { rejectWithValue, dispatch }) => {
+    console.log(formData);
     try {
       const response = await axiosClient.put('/user', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-      const updatedUser = response.data?.user as UserData
+      if (!response) throw new Error('Invalid response: user not found')
+      // const token = localStorage.getItem('token')
+      // dispatch(setUser({ ...response, token: response.login_token ?? undefined }))
 
-      if (!updatedUser) throw new Error('Invalid response: user not found')
-      const token = localStorage.getItem('token')
-      dispatch(setUser({ ...updatedUser, token: token ?? undefined }))
-
-      return updatedUser
+      return response
     } catch (error: any) {
       return rejectWithValue(
         error.response?.data?.message || 'An error occurred while updating the profile'

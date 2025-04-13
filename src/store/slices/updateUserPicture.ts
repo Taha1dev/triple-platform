@@ -33,7 +33,7 @@ export const updateProfilePic = createAsyncThunk(
         },
       )
       const updatedUser = response.data?.user as UserData
-
+      console.log('updatedUser', updatedUser);
       if (!updatedUser) throw new Error('Invalid response: user not found')
 
       // ✅ Optionally, preserve token if not returned again

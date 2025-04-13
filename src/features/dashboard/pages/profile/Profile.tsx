@@ -30,17 +30,27 @@ const UserProfile = () => {
   }
 
   const getLocation = () => {
-    return (user as any)?.user?.city?.length ? (user as any)?.user?.city.join(', ') : 'N/A'
+    return (user as any)?.user?.city?.length
+      ? (user as any)?.user?.city.join(', ')
+      : 'N/A'
   }
 
   const profileFields = [
     { label: 'First Name', value: (user as any)?.user?.fname },
     { label: 'Last Name', value: (user as any)?.user?.lname },
     { label: 'Email', value: (user as any)?.user?.email },
-    { label: 'Contact Number', value: (user as any)?.user?.contact_number || 'N/A' },
+    {
+      label: 'Contact Number',
+      value: (user as any)?.user?.contact_number || 'N/A',
+    },
     { label: 'Location', value: getLocation() },
     { label: 'Date of Birth', value: (user as any)?.user?.dob || 'N/A' },
-    { label: 'Rating', value: (user as any)?.user?.rating ? `${(user as any)?.user?.rating}/5` : 'N/A' },
+    {
+      label: 'Rating',
+      value: (user as any)?.user?.rating
+        ? `${(user as any)?.user?.rating}/5`
+        : 'N/A',
+    },
     { label: 'Country', value: (user as any)?.user?.country || 'N/A' },
   ]
 
@@ -55,7 +65,10 @@ const UserProfile = () => {
                 <img
                   className='w-full h-full object-cover'
                   src={avatar}
-                  alt={(user as any)?.user?.profile?.profileImage?.alt || 'User Avatar'}
+                  alt={
+                    (user as any)?.user?.profile?.profileImage?.alt ||
+                    'User Avatar'
+                  }
                   onError={() => setAvatar('/default-avatar.png')}
                 />
               ) : (
@@ -80,7 +93,7 @@ const UserProfile = () => {
           </div>
           <div className='flex gap-3 mt-4 sm:mt-0'>
             <Button
-              onClick={() => navigate('/home/update-profile')}
+              onClick={() => navigate('/home/profile-settings')}
               className='rounded-full px-6 py-2'
             >
               Update Profile
@@ -115,22 +128,27 @@ const UserProfile = () => {
               Portfolio
             </h3>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-              {(user as any)?.user?.portfolio.map((item: { url: string | undefined; alt: string | undefined }, index: Key | null | undefined) => (
-                <div
-                  key={index}
-                  className='relative overflow-hidden rounded-lg hover:scale-105 transition-transform shadow-md'
-                >
-                  <img
-                    src={item.url}
-                    alt={item.alt}
-                    className='w-full h-40 object-cover'
-                    onError={e => {
-                      const target = e.target as HTMLImageElement
-                      target.src = '/image-placeholder.png'
-                    }}
-                  />
-                </div>
-              ))}
+              {(user as any)?.user?.portfolio.map(
+                (
+                  item: { url: string | undefined; alt: string | undefined },
+                  index: Key | null | undefined,
+                ) => (
+                  <div
+                    key={index}
+                    className='relative overflow-hidden rounded-lg hover:scale-105 transition-transform shadow-md'
+                  >
+                    <img
+                      src={item.url}
+                      alt={item.alt}
+                      className='w-full h-40 object-cover'
+                      onError={e => {
+                        const target = e.target as HTMLImageElement
+                        target.src = '/image-placeholder.png'
+                      }}
+                    />
+                  </div>
+                ),
+              )}
             </div>
           </div>
         )}

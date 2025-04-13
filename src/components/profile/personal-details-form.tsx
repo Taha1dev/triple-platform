@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
-import { useForm, FormProvider } from 'react-hook-form'
+import { useForm, FormProvider, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import countriesData from '@/data/countries.json'
@@ -13,6 +14,9 @@ import FormField from '@/features/dashboard/components/controls/FormField'
 import { MultiSelect } from '@/features/dashboard/components/controls/multi-select'
 import { initializeUserData } from '@/store/slices/userSlice'
 import Spinner from '../custom/Spinner'
+import { Textarea } from '../ui/textarea'
+import { Label } from '../ui/label'
+import { cn } from '@/lib/utils'
 
 // Define validation schema
 const schema = z.object({
@@ -85,7 +89,7 @@ export default function PersonalDetailsForm() {
         cities: data.cities.join(','),
       }
 
-      await dispatch(updateProfile(formData as unknown as FormData)).unwrap()
+      await dispatch(updateProfile(formData as any)).unwrap()
     } catch (error) {
       console.error('Update failed:', error)
     } finally {
@@ -94,53 +98,81 @@ export default function PersonalDetailsForm() {
   }
   useEffect(() => {
     dispatch(initializeUserData())
-    setProfileUser(user)
   }, [dispatch])
 
   useEffect(() => {
-    if (initialized && !loading) {
+    if (initialized && !loading && (user as any)?.user) {
       setProfileUser(user)
-      console.log(user)
+
+      // Parse the user data into the form's expected format
+      methods.reset({
+        fname: (user as any)?.user.fname || '',
+        lname: (user as any)?.user.lname || '',
+        dob: (user as any)?.user.dob
+          ? new Date((user as any)?.user.dob)
+          : new Date('1999-01-01'),
+        bio: (user as any)?.user.bio || '',
+        contact_number: (user as any)?.user.contact_number || '',
+        countries: (user as any)?.user.countries
+          ? (user as any)?.user.countries.split(',')
+          : [],
+        cities: (user as any)?.user.cities
+          ? (user as any)?.user.cities.split(',')
+          : [],
+      })
     }
-  }, [user, initialized, loading])
+  }, [user, initialized, loading, methods])
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <FormField
-            value={profileUser?.user?.fname || ''}
+            name={'fname'}
+            defaultValue={profileUser?.user?.fname || ''}
             id='fname'
             label='First Name'
             placeholder='Enter your first name'
           />
           <FormField
-            value={profileUser?.user?.lname || ''}
+            name={'lname'}
+            defaultValue={profileUser?.user?.lname || ''}
             id='lname'
             label='Last Name'
             placeholder='Enter your last name'
           />
         </div>
 
-        <FormField id='dob' label='Date of Birth' type='date' />
-
-        <FormField
-          id='bio'
-          value={profileUser?.user?.bio || ''}
-          label='Bio'
-          type='textarea'
-          placeholder='Tell us about yourself'
+        <FormField name='dob' id='dob' label='Date of Birth' type='date' />
+        <Label htmlFor={'bio'} className='font-medium mb-1 ml-1'>
+          Bio
+        </Label>
+        <Controller
+          name='bio'
+          render={({ field }) => (
+            <Textarea
+              {...field}
+              id='bio'
+              className={cn(
+                'w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                errors.bio && 'border-red-500',
+              )}
+              placeholder='Tell us about yourself'
+            />
+          )}
         />
 
         <FormField
+          name='contact_number'
           id='contact_number'
-          value={profileUser?.user?.contact_number || ''}
+          defaultValue={profileUser?.user?.contact_number || ''}
           label='Contact Number'
           type='number'
           placeholder='Enter your contact number'
         />
         <FormField
+          name='email'
           id='email'
-          value={profileUser?.user?.email || ''}
+          defaultValue={profileUser?.user?.email || ''}
           label='Email Adrress'
           type='email'
           disabled

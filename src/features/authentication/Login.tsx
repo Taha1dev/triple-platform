@@ -81,6 +81,7 @@ export default function Login() {
                     {FormFields.map(field => (
                       <div key={field.id} className='w-full'>
                         <FormField
+                          name={field.id}
                           id={field.id}
                           label={field.label}
                           placeholder={field.placeholder}

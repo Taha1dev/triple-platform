@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosClient from '@/api/apiClient'
 import { UserState, ApiResponse } from '@/models/api-schema/userType'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'

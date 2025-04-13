@@ -17,9 +17,11 @@ import {
 import { cn } from '@/lib/utils'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useState } from 'react'
+type Option = string | { id: string; name: string }
+
 type MultiSelectProps = {
-  options: string[]
-  selected: string[]
+  options: Option[]
+  selected: string[] // Always `string[]` of ids or values
   onChange: (selected: string[]) => void
   placeholder: string
   disabled?: boolean
@@ -35,6 +37,13 @@ export function MultiSelect({
   className,
 }: MultiSelectProps) {
   const [open, setOpen] = useState(false)
+
+  const getOptionValue = (option: Option) =>
+    typeof option === 'string' ? option : option.id
+
+  const getOptionLabel = (option: Option) =>
+    typeof option === 'string' ? option : option.name
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -52,11 +61,17 @@ export function MultiSelect({
                   {selected.length} selected
                 </Badge>
               ) : (
-                selected.map(item => (
-                  <Badge key={item} variant='secondary' className='rounded-sm'>
-                    {item}
-                  </Badge>
-                ))
+                options
+                  .filter(option => selected.includes(getOptionValue(option)))
+                  .map(option => (
+                    <Badge
+                      key={getOptionValue(option)}
+                      variant='secondary'
+                      className='rounded-sm'
+                    >
+                      {getOptionLabel(option)}
+                    </Badge>
+                  ))
               )}
             </div>
           ) : (
@@ -74,27 +89,32 @@ export function MultiSelect({
             <CommandEmpty>No {placeholder.toLowerCase()} found.</CommandEmpty>
             <CommandGroup>
               <ScrollArea className='h-[200px]'>
-                {options.map(option => (
-                  <CommandItem
-                    key={option}
-                    value={option}
-                    onSelect={() => {
-                      onChange(
-                        selected.includes(option)
-                          ? selected.filter(item => item !== option)
-                          : [...selected, option],
-                      )
-                    }}
-                  >
-                    <Check
-                      className={cn(
-                        'mr-2 h-4 w-4',
-                        selected.includes(option) ? 'opacity-100' : 'opacity-0',
-                      )}
-                    />
-                    {option}
-                  </CommandItem>
-                ))}
+                {options.map(option => {
+                  const value = getOptionValue(option)
+                  const label = getOptionLabel(option)
+                  const isSelected = selected.includes(value)
+                  return (
+                    <CommandItem
+                      key={value}
+                      value={value}
+                      onSelect={() => {
+                        onChange(
+                          isSelected
+                            ? selected.filter(item => item !== value)
+                            : [...selected, value],
+                        )
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          'mr-2 h-4 w-4',
+                          isSelected ? 'opacity-100' : 'opacity-0',
+                        )}
+                      />
+                      {label}
+                    </CommandItem>
+                  )
+                })}
               </ScrollArea>
             </CommandGroup>
           </CommandList>

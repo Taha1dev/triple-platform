@@ -7,7 +7,6 @@ import { Separator } from '@radix-ui/react-dropdown-menu'
 import { CircleDot, Drama, ZapIcon } from 'lucide-react'
 
 export default function FilterUserCard({ user }: { user: UserData }) {
-  console.log(user)
   return (
     <Card className='overflow-hidden shadow-sm hover:shadow-md transition-shadow'>
       <CardContent className='p-0'>
