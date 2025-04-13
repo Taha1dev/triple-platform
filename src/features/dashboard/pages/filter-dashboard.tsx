@@ -61,9 +61,8 @@ export default function FilterDashboard() {
 
   const [categoryFilter, setCategoryFilter] = useState<string[]>([])
   const [subCategoryFilter, setSubCategoryFilter] = useState<string[]>([])
-  const [filteredSubCategories, setFilteredSubCategories] = useState<string[]>(
-    [],
-  )
+
+
   const [ethnicityFilter, setEthnicityFilter] = useState<string[]>([])
   const [hairColorFilter, setHairColorFilter] = useState<string[]>([])
   const [hairTextureFilter, setHairTextureFilter] = useState<string[]>([])
@@ -74,11 +73,7 @@ export default function FilterDashboard() {
   const [piercingFilter, setPiercingFilter] = useState<string[]>([])
   const [scarsFilter, setScarsFilter] = useState<string[]>([])
 
-  const categoryOptions = categories.map(c => c.name)
-  const subCategoryMap = categories.reduce((acc, category) => {
-    acc[category.name] = category.subcategories.map(sub => sub.name)
-    return acc
-  }, {} as Record<string, string[]>)
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,18 +90,77 @@ export default function FilterDashboard() {
     fetchData()
   }, [dispatch])
 
-  useEffect(() => {
-    if (categoryFilter.length > 0) {
-      const newSubCategories = categoryFilter.flatMap(
-        cat => subCategoryMap[cat] || [],
-      )
-      setFilteredSubCategories(newSubCategories)
-    } else {
-      setFilteredSubCategories([])
-    }
-    setSubCategoryFilter([])
-  }, [categoryFilter])
+
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([])
+  const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState<string[]>([])
+  const [availableSubCategoryNames, setAvailableSubCategoryNames] = useState<string[]>([])
   
+  // Create mappings between IDs and names
+  const categoryIdToName = categories.reduce((acc, category) => {
+    acc[category._id] = category.name
+    return acc
+  }, {} as Record<string, string>)
+  
+  const subCategoryIdToName = categories.reduce((acc, category) => {
+    category.subcategories.forEach(sub => {
+      acc[sub._id] = sub.name
+    })
+    return acc
+  }, {} as Record<string, string>)
+  
+  // Create name-only options for MultiSelect
+  const categoryOptions = categories.map(c => c.name)
+  const categoryNameToId = categories.reduce((acc, category) => {
+    acc[category.name] = category._id
+    return acc
+  }, {} as Record<string, string>)
+  
+  // Map of category names to their subcategory names
+  const categoryToSubcategoriesMap = categories.reduce((acc, category) => {
+    acc[category.name] = category.subcategories.map(sub => sub.name)
+    return acc
+  }, {} as Record<string, string[]>)
+  
+  // Map of subcategory names to their IDs
+  const subCategoryNameToId = categories.reduce((acc, category) => {
+    category.subcategories.forEach(sub => {
+      acc[sub.name] = sub._id
+    })
+    return acc
+  }, {} as Record<string, string>)
+  
+  useEffect(() => {
+    if (selectedCategoryIds.length > 0) {
+      // Get selected category names
+      const selectedCategoryNames = selectedCategoryIds.map(id => categoryIdToName[id])
+      // Get available subcategory names
+      const subs = selectedCategoryNames.flatMap(
+        catName => categoryToSubcategoriesMap[catName] || []
+      )
+      setAvailableSubCategoryNames(subs)
+    } else {
+      setAvailableSubCategoryNames([])
+    }
+    setSelectedSubCategoryIds([])
+  }, [selectedCategoryIds])
+  
+  // Convert selected names to IDs when changed
+  const handleCategoryChange = (selectedNames: string[]) => {
+    setCategoryFilter(selectedNames)
+  
+    // Update subcategory options based on selected categories
+    const subs = selectedNames.flatMap(
+      catName => categoryToSubcategoriesMap[catName] || []
+    )
+    setAvailableSubCategoryNames(subs)
+    setSubCategoryFilter([]) // Reset subcategory on category change
+  }
+  
+  const handleSubCategoryChange = (selectedNames: string[]) => {
+    setSubCategoryFilter(selectedNames)
+  }
+  
+
   useEffect(() => {
     if (appearance && appearance.length > 0) {
       const appearanceData = appearance[0]
@@ -126,9 +180,11 @@ export default function FilterDashboard() {
   }, [appearance])
 
   const applyFilters = async () => {
+    const categoryIds = categoryFilter.map(name => categoryNameToId[name])
+    const subCategoryIds = subCategoryFilter.map(name => subCategoryNameToId[name])
     const filterData = {
-      category: categoryFilter,
-      subCategory: subCategoryFilter,
+      category: categoryIds,
+      subCategory: subCategoryIds,
       ethnicity: ethnicityFilter,
       hairColor: hairColorFilter,
       hairTexture: hairTextureFilter,
@@ -221,8 +277,10 @@ export default function FilterDashboard() {
                   <label className='text-sm font-medium'>Category</label>
                   <MultiSelect
                     options={categoryOptions}
-                    selected={categoryFilter}
-                    onChange={setCategoryFilter}
+                    selected={selectedCategoryIds.map(
+                      id => categoryIdToName[id],
+                    )}
+                    onChange={handleCategoryChange}
                     placeholder='Select Category'
                   />
                 </div>
@@ -230,10 +288,17 @@ export default function FilterDashboard() {
                 <div className='flex flex-col gap-2'>
                   <label className='text-sm font-medium'>Sub Category</label>
                   <MultiSelect
-                    options={filteredSubCategories}
-                    selected={subCategoryFilter}
-                    onChange={setSubCategoryFilter}
-                    placeholder='Select Sub Category'
+                    options={availableSubCategoryNames}
+                    selected={selectedSubCategoryIds.map(
+                      id => subCategoryIdToName[id],
+                    )}
+                    onChange={handleSubCategoryChange}
+                    placeholder={
+                      selectedCategoryIds.length > 0
+                        ? 'Select Sub Category'
+                        : 'Select categories first'
+                    }
+                    disabled={selectedCategoryIds.length === 0}
                   />
                 </div>
 
