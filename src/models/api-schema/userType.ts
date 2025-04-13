@@ -1,24 +1,12 @@
+import { ProfileImage, UserData } from "@/store/slices/userSlice"
+
 export interface ApiResponse {
   status: number
-  data: { data: FilterUser[] }
+  data: { data: UserData[] }
   message: string
 }
 
-export interface FilterUser {
-  _id: string
-  fname: string
-  lname: string
-  email: string
-  portfolio: any[]
-  contact_number: string
-  dob: string
-  rating: number
-  city: string[]
-  categories: Category[]
-  subCategories: SubCategory[]
-  data: any[]
-  profile: Profile
-}
+
 
 export interface Category {
   _id: string
@@ -42,16 +30,17 @@ export interface Profile {
   hairTexture?: string
   eyeColor?: string
   skinTone?: string
+  profileImage: ProfileImage
   facialFeatures: string[]
   tattoo: string[]
   piercing: string[]
   scars: string[]
   user: string
-  portfolioMedia: any[]
-  languagesSpoken: any[]
+  portfolioMedia: unknown[]
+  languagesSpoken: unknown[]
 }
 export interface UserState {
-  users: FilterUser[]
+  users: UserData[]
   loading: boolean
   error: string | null
   status: number | null

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -24,28 +25,39 @@ import { logoutUser } from '@/store/slices/logoutSlice'
 import { useNavigate } from 'react-router-dom'
 import { initializeUserData } from '@/store/slices/userSlice'
 import { useEffect } from 'react'
-import { BASE_URL } from '@/api/apiClient'
+
 import { ModeToggle } from '@/mode-toggle'
 export default function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const { user } = useSelector((state: RootState) => state.user)
+  const { isHeaderShow } = useSelector((state: RootState) => state.headerView)
+  const { user, initialized, loading } = useSelector(
+    (state: RootState) => state.user,
+  )
+
+  useEffect(() => {
+    dispatch(initializeUserData())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (initialized && !loading) {
+      console.log('User from store:', user)
+      console.log('User fname', user?.fname)
+    }
+  }, [user, initialized, loading])
   // const { loading: Loading } = useSelector(
   //   (state: RootState) => state.updateProfile,
   // )
-  const { isHeaderShow } = useSelector((state: RootState) => state.headerView)
-  useEffect(() => {
-    dispatch(initializeUserData())
-    console.log(user)
-  }, [dispatch])
+
   const handleLogout = async () => {
     if (!user) {
       navigate('/login')
       return
     }
-    await dispatch(logoutUser(user.id))
+    await dispatch(logoutUser(user._id))
     navigate('/login')
   }
+
   return (
     <header className='bg-background border-b border-border p-4'>
       <div className='flex items-center justify-between max-w-7xl mx-auto'>
@@ -67,7 +79,13 @@ export default function Header() {
                 <Bell className='h-5 w-5' />
               </Button>
               <ModeToggle />
-              <Button variant='ghost' size='icon' onClick={() => { navigate('/home/chat') }}>
+              <Button
+                variant='ghost'
+                size='icon'
+                onClick={() => {
+                  navigate('/home/chat')
+                }}
+              >
                 <MessageSquare className='h-5 w-5' />
               </Button>
 
@@ -77,7 +95,7 @@ export default function Header() {
                   <div className='flex items-center gap-3 cursor-pointer'>
                     <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
                       <AvatarImage
-                        src={user?.image}
+                        src={user?.profile.profileImage.url}
                         alt='User Avatar'
                         className='w-10 h-10 object-cover'
                       />
@@ -87,7 +105,7 @@ export default function Header() {
                     </Avatar>
                     <div className='hidden md:flex flex-col'>
                       <h4 className='font-semibold text-sm'>
-                        Welcome, {user?.fname}!
+                        Welcome, {(user as any)?.fname}
                       </h4>
                       <p className='text-xs text-muted-foreground'>
                         {getCurrentDate()}
@@ -139,7 +157,7 @@ export default function Header() {
                   <div className='flex items-center gap-3 cursor-pointer'>
                     <Avatar className='border-2 border-foreground rounded-full hover:border-primary transition-all'>
                       <AvatarImage
-                        src={user?.image && `${BASE_URL}/${user.image}`}
+                        src={(user as any)?.user?.profile?.profileImage?.url}
                         alt='User Avatar'
                         className='w-10 h-10 object-cover'
                       />
@@ -149,7 +167,7 @@ export default function Header() {
                     </Avatar>
                     <div className='hidden md:flex flex-col'>
                       <h4 className='font-semibold text-sm'>
-                        Welcome, {user?.fname}!
+                        Welcome, {(user as any)?.user?.fname}!
                       </h4>
                       <p className='text-xs text-muted-foreground'>
                         {getCurrentDate()}
@@ -184,7 +202,13 @@ export default function Header() {
               <Bell className='h-5 w-5' />
             </Button>
             <ModeToggle />
-            <Button variant='ghost' size='icon' onClick={() => { navigate('/home/chat') }}>
+            <Button
+              variant='ghost'
+              size='icon'
+              onClick={() => {
+                navigate('/home/chat')
+              }}
+            >
               <MessageSquare className='h-5 w-5' />
             </Button>
           </div>

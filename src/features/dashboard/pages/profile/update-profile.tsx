@@ -9,7 +9,7 @@ import { updateProfile } from '@/store/slices/updateUserSlice'
 import { useEffect, useState } from 'react'
 import { initializeUserData } from '@/store/slices/userSlice'
 import { UpdateProfileSchema } from '@/models/zod-schema/zod.schema'
-import FormField from '../../components/FormField'
+import FormField from '../../components/controls/FormField'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -27,7 +27,7 @@ import {
   setSelectedCities,
   setSelectedCountry,
 } from '@/store/slices/citiesCountriesSlice'
-import MultipleSelect from '../../components/MultipleSelect'
+import MultipleSelect from '../../components/controls/MultipleSelect'
 import { updateProfilePic } from '@/store/slices/updateUserPicture'
 
 type FormValues = z.infer<typeof UpdateProfileSchema>
@@ -85,7 +85,9 @@ export default function UpdateProfile() {
   })
   const { handleSubmit, control } = methods
 
-  const [avatar, setAvatar] = useState<string | undefined>(user?.image || '')
+  const [avatar, setAvatar] = useState<string | undefined>(
+    user?.profile?.profileImage?.url || '',
+  )
   const dispatch = useDispatch<AppDispatch>()
 
   const handleFileChange = async (
@@ -105,7 +107,9 @@ export default function UpdateProfile() {
       console.error('Error uploading image:', error)
     }
   }
+
   const [localCities, setLocalCities] = useState<string[] | any>([])
+
   // const handleSubmit = async (e: React.FormEvent) => {
   //   e.preventDefault()
   //   try {
@@ -121,7 +125,7 @@ export default function UpdateProfile() {
     console.log(data)
   }
   useEffect(() => {
-    setAvatar(user?.image)
+    setAvatar(user?.profile?.profileImage?.url)
   }, [user])
 
   const handleCountryChange = (country: string) => {
@@ -144,7 +148,7 @@ export default function UpdateProfile() {
           <div className='border-2 border-primary w-44 h-44 hover:border-theme-variant hover:scale-105 transition-transform rounded-full overflow-hidden'>
             <img
               className='w-full h-full object-cover'
-              src={`http://34.226.153.150/${avatar}?t=${Date.now()}`}
+              src={avatar}
               alt='User Avatar'
             />
           </div>

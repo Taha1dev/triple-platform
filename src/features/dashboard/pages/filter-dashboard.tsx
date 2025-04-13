@@ -1,21 +1,25 @@
-import { useState, useEffect } from "react"
-import { Check, ChevronsUpDown, Filter, X } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { cn } from "@/lib/utils"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch, RootState } from "@/store/store"
-import FilterUserSkeletonCard from "../components/filter/filter-user-skeleton-card"
-import { postUsers } from "@/store/slices/filterUserSlice"
-import { fetchAppearance } from "@/store/slices/getApperanceDetails"
-import FilterUserCard from "../components/filter/filter-user-card"
-import { getallCategories } from "@/store/slices/getAllCategoriesSlice"
-import Spinner from "@/components/custom/Spinner"
-import { SkeletonDropdown } from "../components/drop-down-skeleton"
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react'
+import { Filter, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/store/store'
+import FilterUserSkeletonCard from '../components/filter/filter-user-skeleton-card'
+import { postUsers } from '@/store/slices/filterUserSlice'
+import { fetchAppearance } from '@/store/slices/getApperanceDetails'
+import FilterUserCard from '../components/filter/filter-user-card'
+import { getallCategories } from '@/store/slices/getAllCategoriesSlice'
+
+import { SkeletonDropdown } from '../components/controls/drop-down-skeleton'
+import { MultiSelect } from '../components/controls/multi-select'
 
 type FilterOptions = {
   category: string[]
@@ -31,79 +35,15 @@ type FilterOptions = {
   scars: string[]
 }
 
-type MultiSelectProps = {
-  options: string[]
-  selected: string[]
-  onChange: (selected: string[]) => void
-  placeholder: string
-}
-
-function MultiSelect({ options, selected, onChange, placeholder }: MultiSelectProps) {
-  const [open, setOpen] = useState(false)
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="min-w-[200px] justify-between h-auto min-h-10"
-        >
-          {selected.length > 0 ? (
-            <div className="flex flex-wrap gap-1">
-              {selected.length > 2 ? (
-                <Badge variant="secondary" className="rounded-sm">
-                  {selected.length} selected
-                </Badge>
-              ) : (
-                selected.map((item) => (
-                  <Badge key={item} variant="secondary" className="rounded-sm">
-                    {item}
-                  </Badge>
-                ))
-              )}
-            </div>
-          ) : (
-            <span className="text-muted-foreground">{placeholder}</span>
-          )}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder={`Search ${placeholder.toLowerCase()}...`} />
-          <CommandList>
-            <CommandEmpty>No {placeholder.toLowerCase()} found.</CommandEmpty>
-            <CommandGroup>
-              <ScrollArea className="h-[200px]">
-                {options.map((option) => (
-                  <CommandItem
-                    key={option}
-                    value={option}
-                    onSelect={() => {
-                      onChange(
-                        selected.includes(option) ? selected.filter((item) => item !== option) : [...selected, option],
-                      )
-                    }}
-                  >
-                    <Check className={cn("mr-2 h-4 w-4", selected.includes(option) ? "opacity-100" : "opacity-0")} />
-                    {option}
-                  </CommandItem>
-                ))}
-              </ScrollArea>
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  )
-}
-
 export default function FilterDashboard() {
   const dispatch = useDispatch<AppDispatch>()
-  const { appearance, loading: appearanceLoading } = useSelector((state: RootState) => state.apperanceDetails)
+  const { appearance, loading: appearanceLoading } = useSelector(
+    (state: RootState) => state.apperanceDetails,
+  )
   const { users, loading } = useSelector((state: RootState) => state.filterUser)
-  const { categories, loading: categoriesloading } = useSelector((state: RootState) => state.allCategories)
+  const { categories, loading: categoriesloading } = useSelector(
+    (state: RootState) => state.allCategories,
+  )
 
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({
     category: [],
@@ -116,13 +56,14 @@ export default function FilterDashboard() {
     facialFeatures: [],
     tattoo: [],
     piercing: [],
-    scars: []
+    scars: [],
   })
-
 
   const [categoryFilter, setCategoryFilter] = useState<string[]>([])
   const [subCategoryFilter, setSubCategoryFilter] = useState<string[]>([])
-  const [filteredSubCategories, setFilteredSubCategories] = useState<string[]>([]);
+  const [filteredSubCategories, setFilteredSubCategories] = useState<string[]>(
+    [],
+  )
   const [ethnicityFilter, setEthnicityFilter] = useState<string[]>([])
   const [hairColorFilter, setHairColorFilter] = useState<string[]>([])
   const [hairTextureFilter, setHairTextureFilter] = useState<string[]>([])
@@ -133,11 +74,11 @@ export default function FilterDashboard() {
   const [piercingFilter, setPiercingFilter] = useState<string[]>([])
   const [scarsFilter, setScarsFilter] = useState<string[]>([])
 
-  const categoryOptions = categories.map((c) => c.name);
+  const categoryOptions = categories.map(c => c.name)
   const subCategoryMap = categories.reduce((acc, category) => {
-    acc[category.name] = category.subcategories.map((sub) => sub.name);
-    return acc;
-  }, {} as Record<string, string[]>);
+    acc[category.name] = category.subcategories.map(sub => sub.name)
+    return acc
+  }, {} as Record<string, string[]>)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -154,16 +95,18 @@ export default function FilterDashboard() {
     fetchData()
   }, [dispatch])
 
-
   useEffect(() => {
     if (categoryFilter.length > 0) {
-      const newSubCategories = categoryFilter.flatMap((cat) => subCategoryMap[cat] || []);
-      setFilteredSubCategories(newSubCategories);
+      const newSubCategories = categoryFilter.flatMap(
+        cat => subCategoryMap[cat] || [],
+      )
+      setFilteredSubCategories(newSubCategories)
     } else {
-      setFilteredSubCategories([]);
+      setFilteredSubCategories([])
     }
-    setSubCategoryFilter([]);
-  }, [categoryFilter]);
+    setSubCategoryFilter([])
+  }, [categoryFilter])
+  
   useEffect(() => {
     if (appearance && appearance.length > 0) {
       const appearanceData = appearance[0]
@@ -177,7 +120,7 @@ export default function FilterDashboard() {
         facialFeatures: appearanceData.facialFeatures,
         tattoo: appearanceData.tattoo,
         piercing: appearanceData.piercing,
-        scars: appearanceData.scars
+        scars: appearanceData.scars,
       })
     }
   }, [appearance])
@@ -194,21 +137,21 @@ export default function FilterDashboard() {
       facialFeatures: facialFeaturesFilter,
       tattoo: tattooFilter,
       piercing: piercingFilter,
-      scars: scarsFilter
-    };
+      scars: scarsFilter,
+    }
 
     const filteredData = Object.fromEntries(
       Object.entries(filterData).filter(([_, value]) => {
-        return Array.isArray(value) && value.length > 0;
-      })
-    );
+        return Array.isArray(value) && value.length > 0
+      }),
+    )
 
     try {
-      await dispatch(postUsers(filteredData)).unwrap();
+      await dispatch(postUsers(filteredData)).unwrap()
     } catch (error) {
-      console.error('Error applying filters:', error);
+      console.error('Error applying filters:', error)
     }
-  };
+  }
 
   const clearAllFilters = () => {
     setCategoryFilter([])
@@ -241,175 +184,184 @@ export default function FilterDashboard() {
   }
 
   return (
-    <div className="container mx-auto py-6">
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold">Talent Dashboard</h1>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={clearAllFilters} disabled={!hasActiveFilters()}>
-              <X className="mr-2 h-4 w-4" />
+    <div className='container mx-auto py-6'>
+      <div className='flex flex-col gap-6'>
+        <div className='flex items-center justify-between'>
+          <h1 className='text-3xl font-bold'>Talent Dashboard</h1>
+          <div className='flex items-center gap-2'>
+            <Button
+              variant='outline'
+              size='sm'
+              onClick={clearAllFilters}
+              disabled={!hasActiveFilters()}
+            >
+              <X className='mr-2 h-4 w-4' />
               Clear Filters
             </Button>
           </div>
         </div>
 
-        <Card className="p-4">
+        <Card className='p-4'>
           <CardHeader>
             <CardTitle>Filters</CardTitle>
-            <CardDescription>Filter talents by their attributes</CardDescription>
+            <CardDescription>
+              Filter talents by their attributes
+            </CardDescription>
           </CardHeader>
-          {appearanceLoading ||
-            categoriesloading ? (
-            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4">
+          {appearanceLoading || categoriesloading ? (
+            <div className='container mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4'>
               {Array.from({ length: 12 }).map((_, i) => (
                 <SkeletonDropdown key={i} />
               ))}
             </div>
-          ) :
-            <CardContent className="pt-6">
-              <div className="container mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Category</label>
+          ) : (
+            <CardContent className='pt-6'>
+              <div className='container mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4'>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Category</label>
                   <MultiSelect
                     options={categoryOptions}
                     selected={categoryFilter}
                     onChange={setCategoryFilter}
-                    placeholder="Select Category"
+                    placeholder='Select Category'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Sub Category</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Sub Category</label>
                   <MultiSelect
                     options={filteredSubCategories}
                     selected={subCategoryFilter}
                     onChange={setSubCategoryFilter}
-                    placeholder="Select Sub Category"
+                    placeholder='Select Sub Category'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Ethnicity</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Ethnicity</label>
                   <MultiSelect
                     options={filterOptions.ethnicity}
                     selected={ethnicityFilter}
                     onChange={setEthnicityFilter}
-                    placeholder="Ethnicity"
+                    placeholder='Ethnicity'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Hair Color</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Hair Color</label>
                   <MultiSelect
                     options={filterOptions.hairColor}
                     selected={hairColorFilter}
                     onChange={setHairColorFilter}
-                    placeholder="Hair Color"
+                    placeholder='Hair Color'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Hair Texture</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Hair Texture</label>
                   <MultiSelect
                     options={filterOptions.hairTexture}
                     selected={hairTextureFilter}
                     onChange={setHairTextureFilter}
-                    placeholder="Hair Texture"
+                    placeholder='Hair Texture'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Eye Color</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Eye Color</label>
                   <MultiSelect
                     options={filterOptions.eyeColor}
                     selected={eyeColorFilter}
                     onChange={setEyeColorFilter}
-                    placeholder="Eye Color"
+                    placeholder='Eye Color'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Skin Tone</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Skin Tone</label>
                   <MultiSelect
                     options={filterOptions.skinTone}
                     selected={skinToneFilter}
                     onChange={setSkinToneFilter}
-                    placeholder="Skin Tone"
+                    placeholder='Skin Tone'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Facial Features</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Facial Features</label>
                   <MultiSelect
                     options={filterOptions.facialFeatures}
                     selected={facialFeaturesFilter}
                     onChange={setFacialFeaturesFilter}
-                    placeholder="Facial Features"
+                    placeholder='Facial Features'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Tattoo</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Tattoo</label>
                   <MultiSelect
                     options={filterOptions.tattoo}
                     selected={tattooFilter}
                     onChange={setTattooFilter}
-                    placeholder="Tattoo"
+                    placeholder='Tattoo'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Piercing</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Piercing</label>
                   <MultiSelect
                     options={filterOptions.piercing}
                     selected={piercingFilter}
                     onChange={setPiercingFilter}
-                    placeholder="Piercing"
+                    placeholder='Piercing'
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Scars</label>
+                <div className='flex flex-col gap-2'>
+                  <label className='text-sm font-medium'>Scars</label>
                   <MultiSelect
                     options={filterOptions.scars}
                     selected={scarsFilter}
                     onChange={setScarsFilter}
-                    placeholder="Scars"
+                    placeholder='Scars'
                   />
                 </div>
               </div>
 
-              <div className="mt-4">
-                <Button onClick={applyFilters} className="w-fit">
+              <div className='mt-4'>
+                <Button onClick={applyFilters} className='w-fit'>
                   Apply Filters
                 </Button>
               </div>
             </CardContent>
-          }
+          )}
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
+          <CardHeader className='flex flex-row items-center justify-between'>
             <div>
               <CardTitle>Talents</CardTitle>
               <CardDescription>
                 Showing {users.length} of {users.length} talents
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm">
-                <Filter className="mr-2 h-4 w-4" />
+            <div className='flex items-center gap-2'>
+              <Button variant='outline' size='sm'>
+                <Filter className='mr-2 h-4 w-4' />
                 View
               </Button>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {loading ? (
-                Array.from({ length: 9 }).map((_, i) => <FilterUserSkeletonCard key={i} />)
-              ) : users && users.map((user) => (
-                <FilterUserCard key={user._id} user={user} />
-              ))}
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+              {loading
+                ? Array.from({ length: 9 }).map((_, i) => (
+                    <FilterUserSkeletonCard key={i} />
+                  ))
+                : users &&
+                  users.map(user => (
+                    <FilterUserCard key={user._id} user={user} />
+                  ))}
             </div>
           </CardContent>
         </Card>
@@ -417,4 +369,3 @@ export default function FilterDashboard() {
     </div>
   )
 }
-

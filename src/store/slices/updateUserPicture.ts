@@ -2,6 +2,7 @@
 import axiosClient from '@/api/apiClient'
 // import { LoginResponseSchema } from '@/models/api-schema/auth.model'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { setUser, UserData } from './userSlice'
 // import { setUser } from './userSlice'
 
 interface UserProfile {
@@ -20,7 +21,7 @@ const initialState: UserProfile = {
 
 export const updateProfilePic = createAsyncThunk(
   'user/update-profile-picture',
-  async (formData: any, { rejectWithValue }) => {
+  async (formData: any, { rejectWithValue, dispatch }) => {
     try {
       const response: any = await axiosClient.post(
         '/user-profile/update-profile-picture',
@@ -31,25 +32,21 @@ export const updateProfilePic = createAsyncThunk(
           },
         },
       )
-      console.log('response', response)
-      // dispatch(setUser(response))
-      // const state: any = getState();
-      // const existingUserData = state.user.user;
+      const updatedUser = response.data?.user as UserData
 
-      // // Update the local user state with formData
-      // const updatedData = { ...existingUserData, ...Object.fromEntries(formData.entries()) };
+      if (!updatedUser) throw new Error('Invalid response: user not found')
 
-      // dispatch(setUser(updatedData));
-      // return updatedData;
+      // ✅ Optionally, preserve token if not returned again
+      const token = localStorage.getItem('token')
+      dispatch(setUser({ ...updatedUser, token: token ?? undefined }))
 
-      return
+      return updatedUser
     } catch (error: any) {
       return rejectWithValue(
-        error.response?.data?.message ||
-          'An error occurred while updating the profile',
+        error.response?.data?.message || 'An error occurred while updating the profile'
       )
     }
-  },
+  }
 )
 
 const updateProfilePicture = createSlice({

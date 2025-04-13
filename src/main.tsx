@@ -19,7 +19,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy.tsx'
 import Layout from './features/landing-page/layout/Layout.tsx'
 import PanelLayout from './features/dashboard/layout/index.tsx'
 import Dashboard from './features/dashboard/pages/Dashboard.tsx'
-import Profile from './features/dashboard/pages/profile/profile.tsx'
+
 import UpdateProfile from './features/dashboard/pages/profile/update-profile.tsx'
 import ChangePassword from './features/authentication/ChangePassword.tsx'
 import NotFound from './pages/404.tsx'
@@ -38,6 +38,8 @@ import TalentsPage from './features/dashboard/pages/talents.tsx'
 import LogisticsPage from './features/dashboard/pages/logistics.tsx'
 import PropsPage from './features/dashboard/pages/props.tsx'
 import Chat from './features/chat/page.tsx'
+import NewProfile from './features/dashboard/pages/new-profile.tsx'
+import UserProfile from './features/dashboard/pages/profile/Profile.tsx'
 
 const router = createBrowserRouter([
   {
@@ -109,6 +111,7 @@ const router = createBrowserRouter([
         path: 'select-department',
         element: <OnBoarding />,
       },
+
       {
         path: 'privacy-policy',
         element: <PrivacyPolicy />,
@@ -136,11 +139,15 @@ const router = createBrowserRouter([
     element: <PanelLayout />,
     children: [
       { path: '', element: <Dashboard /> },
-      { path: 'profile', element: <Profile /> },
+      { path: 'profile', element: <UserProfile /> },
       { path: 'update-profile', element: <UpdateProfile /> },
       { path: 'change-password', element: <ChangePassword /> },
       { path: 'pro-crew', element: <ProCrewPage /> },
       { path: 'talents', element: <TalentsPage /> },
+      {
+        path: 'new-profile',
+        element: <NewProfile />,
+      },
       { path: 'operators', element: <OperatorsPage /> },
       { path: 'logistics', element: <LogisticsPage /> },
       { path: 'props', element: <PropsPage /> },
@@ -148,7 +155,7 @@ const router = createBrowserRouter([
       { path: 'agencies', element: <AgenciesPage /> },
     ],
   },
-  { path: 'home/chat', element: <Chat /> }
+  { path: 'home/chat', element: <Chat /> },
 ])
 type Theme = 'light' | 'dark' | 'system'
 

@@ -20,6 +20,7 @@ import userPictureReducer from './slices/updateUserPicture'
 import DomReducer from './slices/DOMSlice'
 import filterUserReducer from './slices/filterUserSlice'
 import apperanceDetailsReducer from './slices/getApperanceDetails'
+import updateApperanceReducer from './slices/updateApperanceSlice'
 
 export const store = configureStore({
   reducer: {
@@ -44,6 +45,7 @@ export const store = configureStore({
     headerView: DomReducer,
     filterUser: filterUserReducer,
     apperanceDetails: apperanceDetailsReducer,
+    updateApperance: updateApperanceReducer,
   },
 })
 

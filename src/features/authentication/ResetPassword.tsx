@@ -8,7 +8,7 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import FormField from '../dashboard/components/FormField'
+import FormField from '../dashboard/components/controls/FormField'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -28,7 +28,7 @@ export default function ResetPassword() {
   const navigate = useNavigate()
   const methods = useForm<FormValues>({
     resolver: zodResolver(ResetPasswordSchema),
-    mode:'onBlur'
+    mode: 'onBlur',
   })
   const dispatch = useDispatch<AppDispatch>()
   const { email } = useSelector((state: RootState) => state.forgetPassword)
