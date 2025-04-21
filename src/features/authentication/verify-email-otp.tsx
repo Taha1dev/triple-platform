@@ -27,26 +27,21 @@ import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import DotPattern from '@/components/ui/dot-pattern'
 import { cn } from '@/lib/utils'
 
-export default function OTP_Verification() {
+export default function VerifyEmailOTP() {
   const navigate = useNavigate()
   const [otp, setOtp] = useState('')
   const [otpError, setOtpError] = useState<string | null>(null)
 
-  const [localOtpContent, setLocalOtpContent] = useState({
-    title: 'Reset Your Password',
-    sub: 'Enter the OTP sent to your email and set a new password',
-  })
-
   const methods = useForm<any>()
   const { handleSubmit, control } = methods
-  const otpContent = useSelector((state: RootState) => state.otpContent)
   const dispatch = useDispatch<AppDispatch>()
   const { email } = useSelector((state: RootState) => state.email)
-  const { path } = useSelector((state: RootState) => state.routerInstance)
   const { loading: v_loading } = useSelector(
     (state: RootState) => state.verifyOtp,
   )
-
+  useEffect(() => {
+    console.log(email)
+  }, [email])
   const onSubmit = async () => {
     if (otp.length < 6) {
       setOtpError('error')
@@ -59,12 +54,8 @@ export default function OTP_Verification() {
     }
 
     try {
-      if (otpContent.title == 'Verify Your Email') {
-        await dispatch(verifyOtp({ email, forgot_password_OTP: otp })).unwrap()
-      }
-      else
-        await dispatch(verifyOtp({ email, forgot_password_OTP: otp })).unwrap()
-      navigate(path)
+      await dispatch(verifyOtp({ email, OTP:otp })).unwrap()
+      navigate('/home')
     } catch (err) {
       console.error('Verification failed:', err)
     }
@@ -79,19 +70,8 @@ export default function OTP_Verification() {
     dispatch(resendOtp(email))
   }
 
-  useEffect(() => {
-    console.log(otpContent)
-    setLocalOtpContent({
-      title: otpContent.title || 'Reset Your Password',
-      sub:
-        otpContent.sub ||
-        'Enter the OTP sent to your email and set a new password',
-    })
-  }, [otpContent])
-
   return (
     <>
-      {' '}
       <DotPattern
         className={cn(
           '[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]',
@@ -107,10 +87,10 @@ export default function OTP_Verification() {
               <Card className='bg-transparent shadow-none'>
                 <CardHeader className='space-y-2'>
                   <CardTitle className='text-center text-2xl font-bold'>
-                    {localOtpContent.title}
+                    Verify Your Email
                   </CardTitle>
                   <CardDescription className='text-center text-sm text-zinc-600 dark:text-theme-secondary/80'>
-                    {localOtpContent.sub}
+                    Enter the code sent to your account
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

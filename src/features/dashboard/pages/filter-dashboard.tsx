@@ -13,14 +13,14 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
-import FilterUserSkeletonCard from '../components/filter/filter-user-skeleton-card'
+import FilterUserSkeletonCard from '../../../components/filter/filter-user-skeleton-card'
 import { postUsers } from '@/store/slices/filterUserSlice'
 import { fetchAppearance } from '@/store/slices/getApperanceDetails'
-import FilterUserCard from '../components/filter/filter-user-card'
+import FilterUserCard from '../../../components/filter/filter-user-card'
 import { getallCategories } from '@/store/slices/getAllCategoriesSlice'
 
-import { SkeletonDropdown } from '../components/controls/drop-down-skeleton'
-import { MultiSelect } from '../components/controls/multi-select'
+import { SkeletonDropdown } from '../../../components/controls/drop-down-skeleton'
+import { MultiSelect } from '../../../components/controls/multi-select'
 
 export default function FilterDashboard() {
   const dispatch = useDispatch<AppDispatch>()

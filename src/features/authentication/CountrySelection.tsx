@@ -30,7 +30,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import Spinner from '@/components/custom/Spinner'
 import { useNavigate } from 'react-router-dom'
-import MultipleSelect from '../dashboard/components/controls/MultipleSelect'
+import MultipleSelect from '../../components/controls/MultipleSelect'
 import DotPattern from '@/components/ui/dot-pattern'
 import { cn } from '@/lib/utils'
 interface CountryData {

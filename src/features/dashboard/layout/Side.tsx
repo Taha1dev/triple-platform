@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useNavigate } from 'react-router-dom'
 import {
-  User,
   Home,
   Users,
-  Briefcase,
   Map,
   Camera,
-  Package,
   Building,
   ChevronLeft,
   ChevronRight,
+  Images,
+  Settings2,
 } from 'lucide-react'
 
 import { useMediaQuery } from '@/hooks/use-media-query'
@@ -20,9 +19,9 @@ import { footerLogo, useTheme } from '@/components/theme-provider'
 
 const categories = [
   { name: 'Home', icon: Home, path: '/home' },
-  { name: 'Profile', icon: Users, path: '/home/profile-settings' },
-  { name: 'Operators', icon: Briefcase, path: 'operators' },
-  { name: 'Logistics', icon: Package, path: 'logistics' },
+  { name: 'General', icon: Users, path: '/home/profile-settings' },
+  { name: 'Portfolio', icon: Images, path: '/home/potfolio' },
+  { name: 'Settings', icon: Settings2, path: '/home/settings' },
   { name: 'Props', icon: Camera, path: 'props' },
   { name: 'Locations', icon: Map, path: 'locations' },
   { name: 'Agencies', icon: Building, path: 'agencies' },

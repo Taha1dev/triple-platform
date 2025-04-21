@@ -8,7 +8,7 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import FormField from '../dashboard/components/controls/FormField'
+import FormField from '../../components/controls/FormField'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -73,12 +73,14 @@ export default function ResetPassword() {
                   <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
                     <div className='w-full'>
                       <FormField
+                        name='newPassword'
                         label={'New Password'}
                         id={'newPassword'}
                         placeholder={'Enter your new Password'}
                         type={'password'}
                       />
                       <FormField
+                        name='confirmPassword'
                         label={'Confirm Password'}
                         id={'confirmPassword'}
                         placeholder={'Confirm your new Password'}

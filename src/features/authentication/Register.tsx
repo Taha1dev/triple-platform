@@ -13,16 +13,14 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from 'react-router-dom'
 import { RegisterSchema } from '@/models/zod-schema/zod.schema'
-import FormField from '../dashboard/components/controls/FormField'
+import FormField from '../../components/controls/FormField'
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '@/store/slices/registerSlice'
 import { AppDispatch, RootState } from '@/store/store'
 import Spinner from '@/components/custom/Spinner'
-import { setPath } from '@/store/slices/routerSlice'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import { Separator } from '@/components/ui/separator'
 import { setEmail } from '@/store/slices/emailSlice'
-import { setSub, setTitle } from '@/store/slices/otpContentSlice'
 import { cn } from '@/lib/utils'
 import DotPattern from '@/components/ui/dot-pattern'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -74,7 +72,7 @@ export default function Register() {
     },
     {
       id: 'dob',
-      label: 'Birth Date',
+      label: '',
       placeholder: 'Enter your Birth Date',
       type: 'date',
     },
@@ -85,10 +83,7 @@ export default function Register() {
   const onSubmit = async (data: FormValues) => {
     await dispatch(registerUser(data)).unwrap()
     dispatch(setEmail(data.email))
-    dispatch(setTitle('Verify Your Email'))
-    dispatch(setSub('An OTP has been sent to your email for verification.'))
-    dispatch(setPath('/select-country'))
-    navigate('/otp-verification')
+    navigate('/verify-otp')
   }
 
   return (

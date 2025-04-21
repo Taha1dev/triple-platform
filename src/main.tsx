@@ -10,7 +10,7 @@ import Register from './features/authentication/Register.tsx'
 import ResetPassword from './features/authentication/ResetPassword.tsx'
 import { store } from './store/store.ts'
 import { Toaster } from 'sonner'
-import OTP_Verification from './features/authentication/OTP-Verification.tsx'
+import OTP_Verification from './features/authentication/forget-password-otp.tsx'
 import ForgetPassword from './features/authentication/ForgetPassword.tsx'
 import FAQ from './pages/FAQs.tsx'
 import TermsAndConditions from './pages/TermsAndConditions.tsx'
@@ -27,6 +27,8 @@ import AboutUs from './pages/AboutUs.tsx'
 import Chat from './features/chat/page.tsx'
 import NewProfile from './features/dashboard/pages/new-profile.tsx'
 import UserProfile from './features/dashboard/pages/profile/Profile.tsx'
+import VerifyEmailOTP from './features/authentication/verify-email-otp.tsx'
+import PortfolioPage from './features/dashboard/pages/profile/portfolio-page.tsx'
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,10 @@ const router = createBrowserRouter([
         element: <OTP_Verification />,
       },
       {
+        path: 'verify-otp',
+        element: <VerifyEmailOTP />,
+      },
+      {
         path: 'privacy-policy',
         element: <PrivacyPolicy />,
       },
@@ -95,6 +101,10 @@ const router = createBrowserRouter([
       {
         path: 'profile-settings',
         element: <NewProfile />,
+      },
+      {
+        path: 'potfolio',
+        element: <PortfolioPage />,
       },
     ],
   },

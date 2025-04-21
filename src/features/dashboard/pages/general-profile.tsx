@@ -5,7 +5,6 @@ import {
   MapPin,
   Calendar,
   Share2,
-  ExternalLink,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -19,14 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
-import {
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-  useEffect,
-} from 'react'
+import { useEffect } from 'react'
 import { initializeUserData } from '@/store/slices/userSlice'
 
 const userData = {
@@ -172,35 +164,34 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-          <div className='mt-8'>
+          {/* <div className='mt-8'>
             <h3 className='text-lg font-semibold mb-4'>Portfolio</h3>
-            {(user as any)?.user?.portfolio.length > 0 ? (
+            {(user as any)?.user?.profile.portfolioMedia.length > 0 ? (
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                {(user as any)?.user?.portfolio.map((item: any) => (
-                  <Card key={item._id}>
-                    <img
-                      src={item.url || '/placeholder.svg'}
-                      alt={item.description}
-                      className='w-full h-32 object-cover rounded-t-lg'
-                    />
-                    <CardContent className='p-4'>
-                      <h4 className='font-semibold'>
-                        {item.title || 'Untitled'}
-                      </h4>
-                      <p className='text-sm text-gray-500'>
-                        {item.type || 'Project'}
-                      </p>
-                      <Button variant='link' size='sm' className='mt-2 p-0'>
-                        View Project <ExternalLink className='ml-1 h-3 w-3' />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+                {(user as any)?.user?.profile.portfolioMedia.map(
+                  (item: any) => (
+                    <Card key={item._id}>
+                      <img
+                        src={item.url || '/placeholder.svg'}
+                        alt={item.description}
+                        className='w-full h-32 object-contain rounded-t-lg'
+                      />
+                      <CardContent className='p-4'>
+                        <h4 className='font-semibold'>
+                          {item.alt || 'Untitled'}
+                        </h4>
+                        <p className='text-sm text-gray-500'>
+                          {item.description || 'Project'}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  ),
+                )}
               </div>
             ) : (
               <p className='text-gray-500'>No portfolio items yet</p>
             )}
-          </div>
+          </div> */}
         </CardContent>
       </Card>
     </div>

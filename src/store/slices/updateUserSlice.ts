@@ -2,7 +2,6 @@
 import axiosClient from '@/api/apiClient'
 import { LoginResponseSchema } from '@/models/api-schema/auth.model'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { setUser, UserData } from './userSlice'
 
 interface UserProfile extends Omit<LoginResponseSchema, 'token' | 'rating'> {
   loading: boolean
@@ -31,7 +30,7 @@ const initialState: UserProfile = {
 
 export const updateProfile = createAsyncThunk(
   'user/updateProfile',
-  async (formData: FormData, { rejectWithValue, dispatch }) => {
+  async (formData: FormData, { rejectWithValue, }) => {
     console.log(formData);
     try {
       const response = await axiosClient.put('/user', formData, {

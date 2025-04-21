@@ -2,7 +2,7 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { Card } from '@/components/ui/card'
-import { Key, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Share2 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -108,7 +108,6 @@ const UserProfile = () => {
             </Button>
           </div>
         </div>
-
         {/* Profile Fields */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
           {profileFields.map((field, index) => (
@@ -120,19 +119,16 @@ const UserProfile = () => {
             </div>
           ))}
         </div>
-
+        user.profile.portfolioMedia
         {/* Portfolio Section */}
-        {(user as any)?.user?.portfolio?.length && (
+        {(user as any)?.user?.profile.portfolioMedia && (
           <div className='mt-8'>
             <h3 className='font-bold text-2xl text-foreground mb-6'>
               Portfolio
             </h3>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-              {(user as any)?.user?.portfolio.map(
-                (
-                  item: { url: string | undefined; alt: string | undefined },
-                  index: Key | null | undefined,
-                ) => (
+              {(user as any)?.user?.profile.portfolioMedia.map(
+                (item: any, index: number) => (
                   <div
                     key={index}
                     className='relative overflow-hidden rounded-lg hover:scale-105 transition-transform shadow-md'

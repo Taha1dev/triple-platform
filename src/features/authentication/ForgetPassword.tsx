@@ -21,7 +21,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { setPath } from '@/store/slices/routerSlice'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import { setTitle, setSub } from '@/store/slices/otpContentSlice'
-import FormField from '../dashboard/components/controls/FormField'
+import FormField from '../../components/controls/FormField'
 import DotPattern from '@/components/ui/dot-pattern'
 import { cn } from '@/lib/utils'
 import { setEmail } from '@/store/slices/emailSlice'
@@ -87,6 +87,7 @@ export default function ForgetPassword() {
                     className='space-y-4 flex flex-col'
                   >
                     <FormField
+                      name='email'
                       id='email'
                       label='Email'
                       placeholder='Enter Your Email Here'

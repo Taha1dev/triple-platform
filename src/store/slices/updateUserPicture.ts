@@ -36,7 +36,7 @@ export const updateProfilePic = createAsyncThunk(
       console.log('updatedUser', updatedUser);
       if (!updatedUser) throw new Error('Invalid response: user not found')
 
-      // ✅ Optionally, preserve token if not returned again
+    
       const token = localStorage.getItem('token')
       dispatch(setUser({ ...updatedUser, token: token ?? undefined }))
 

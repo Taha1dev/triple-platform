@@ -1,7 +1,6 @@
-1. adjust category filter
 2. enable profile visit 
 3. update profile pictue 
-4. chat 
 5. user profile visit
 6. guest authoroties
 7. favourite users
+4. chat 

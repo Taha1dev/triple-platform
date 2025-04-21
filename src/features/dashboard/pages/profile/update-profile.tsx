@@ -9,7 +9,7 @@ import { updateProfile } from '@/store/slices/updateUserSlice'
 import { useEffect, useState } from 'react'
 import { initializeUserData } from '@/store/slices/userSlice'
 import { UpdateProfileSchema } from '@/models/zod-schema/zod.schema'
-import FormField from '../../components/controls/FormField'
+import FormField from '../../../../components/controls/FormField'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -27,7 +27,7 @@ import {
   setSelectedCities,
   setSelectedCountry,
 } from '@/store/slices/citiesCountriesSlice'
-import MultipleSelect from '../../components/controls/MultipleSelect'
+import MultipleSelect from '../../../../components/controls/MultipleSelect'
 import { updateProfilePic } from '@/store/slices/updateUserPicture'
 
 type FormValues = z.infer<typeof UpdateProfileSchema>

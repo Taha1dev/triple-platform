@@ -9,7 +9,7 @@ import { AppDispatch, RootState } from '@/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCategories } from '@/store/slices/updateCategories'
 import Spinner from '../custom/Spinner'
-import { MultiSelect } from '@/features/dashboard/components/controls/multi-select'
+import { MultiSelect } from '@/components/controls/multi-select'
 import { getallCategories } from '@/store/slices/getAllCategoriesSlice'
 
 interface User {

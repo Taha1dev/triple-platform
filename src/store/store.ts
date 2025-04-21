@@ -7,6 +7,7 @@ import forgetPasswordReducer from './slices/forgetPasswordSlice'
 import VerifyOtpReducer from './slices/verifyOTPSlice'
 import resetPasswordReducer from './slices/resetPasswordSlice'
 import citiesCountriesReducer from './slices/citiesCountriesSlice'
+import ForgetPasswordOtpReducer from './slices/ForgetPasswordOTPSlice'
 import routerReducer from './slices/routerSlice'
 import emailReducer from './slices/emailSlice'
 import otpContentRedcuer from './slices/otpContentSlice'
@@ -21,6 +22,7 @@ import DomReducer from './slices/DOMSlice'
 import filterUserReducer from './slices/filterUserSlice'
 import apperanceDetailsReducer from './slices/getApperanceDetails'
 import updateApperanceReducer from './slices/updateApperanceSlice'
+import uploadPortfolioReducer from './slices/updatePortfolioItemsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -29,7 +31,9 @@ export const store = configureStore({
     login: loginReducer,
     resendOtp: resendOtpReducer,
     verifyOtp: VerifyOtpReducer,
+    forgetPasswordOtp: ForgetPasswordOtpReducer,
     forgetPassword: forgetPasswordReducer,
+    uploadPortfolio: uploadPortfolioReducer,
     resetPassword: resetPasswordReducer,
     citiesCountries: citiesCountriesReducer,
     routerInstance: routerReducer,

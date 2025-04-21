@@ -24,7 +24,7 @@ export default function NewProfile() {
         onValueChange={setActiveTab}
         className='w-full'
       >
-        <TabsList className='grid w-full lg:grid-cols-4 grid-cols-2'>
+        <TabsList className='grid w-full h-full lg:grid-cols-4 grid-cols-2'>
           <TabsTrigger value='profile'>Profile</TabsTrigger>
           <TabsTrigger value='personal'>Personal Details</TabsTrigger>
           <TabsTrigger value='appearance'>Appearance</TabsTrigger>
