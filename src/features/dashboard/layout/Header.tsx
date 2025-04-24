@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Input } from '@/components/ui/input'
+
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
@@ -12,14 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { AppDispatch, RootState } from '@/store/store'
 import { getCurrentDate } from '@/utils/utils'
-import {
-  Search,
-  Bell,
-  User,
-  Settings,
-  LogOut,
-  MessageSquare,
-} from 'lucide-react'
+import { Bell, User, Settings, LogOut, MessageSquare } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '@/store/slices/logoutSlice'
 import { useNavigate } from 'react-router-dom'
@@ -30,7 +23,7 @@ import { ModeToggle } from '@/mode-toggle'
 export default function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const { isHeaderShow } = useSelector((state: RootState) => state.headerView)
+
   const { user, initialized, loading } = useSelector(
     (state: RootState) => state.user,
   )

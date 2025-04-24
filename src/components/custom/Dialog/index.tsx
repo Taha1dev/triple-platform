@@ -71,7 +71,7 @@ export const Dialog: React.FC<DialogProps> = ({ body, ques }) => {
             <FormProvider {...methods}>
               <form className='space-y-4 border-t border-zinc-200 pt-4 dark:border-zinc-800'>
                 {FormFields.map(field => (
-                  <FormField key={field.id} {...field} />
+                  <FormField name={field.id} key={field.id} {...field} />
                 ))}
                 <div className='flex justify-end space-x-2'>
                   <AlertDialogCancel className='bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700'>

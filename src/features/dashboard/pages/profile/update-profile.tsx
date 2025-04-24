@@ -121,6 +121,7 @@ export default function UpdateProfile() {
   // }
 
   const onSubmit = async (data: any) => {
+    console.log(data)
     await dispatch(updateProfile(data)).unwrap()
     console.log(data)
   }
@@ -170,6 +171,7 @@ export default function UpdateProfile() {
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4'>
               {formFields.map(field => (
                 <FormField
+                  name={field.id}
                   key={field.id}
                   id={field.id}
                   label={field.label}

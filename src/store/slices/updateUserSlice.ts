@@ -38,6 +38,7 @@ export const updateProfile = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       })
+      console.log('user response', response);
       if (!response) throw new Error('Invalid response: user not found')
       // const token = localStorage.getItem('token')
       // dispatch(setUser({ ...response, token: response.login_token ?? undefined }))
