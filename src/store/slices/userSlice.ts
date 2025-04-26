@@ -118,7 +118,7 @@ const userSlice = createSlice({
       }
       return newState;
     },
-    clearUser(state) {
+    clearUser() {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('userState');
       }

@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/store/store'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
 import { useEffect } from 'react'
 
 const userData = {
@@ -50,15 +50,14 @@ const userData = {
 }
 
 export default function ProfilePage() {
-  const  user = useSelector((state: RootState) => state.user)
-  const dispatch = useDispatch<AppDispatch>()
-  
+  const user = useSelector((state: RootState) => state.user)
+  // const dispatch = useDispatch<AppDispatch>()
+
   const handleShare = () => {
     const profileUrl = `${window.location.origin}/profile/${userData.id}`
     navigator.clipboard.writeText(profileUrl)
     alert('Profile link copied to clipboard!')
   }
-
 
   useEffect(() => {}, [user])
   return (
