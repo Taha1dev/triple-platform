@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { UserData } from '@/store/slices/userSlice'
+
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar'
 import { Separator } from '@radix-ui/react-dropdown-menu'
 import { CircleDot, Drama, ZapIcon } from 'lucide-react'
 
-export default function FilterUserCard({ user }: { user: UserData }) {
+export default function FilterUserCard({ user }: any) {
   return (
     <Card className='overflow-hidden shadow-sm hover:shadow-md transition-shadow'>
       <CardContent className='p-0'>

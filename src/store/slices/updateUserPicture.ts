@@ -2,7 +2,7 @@
 import axiosClient from '@/api/apiClient'
 // import { LoginResponseSchema } from '@/models/api-schema/auth.model'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { setUser, UserData } from './userSlice'
+import { setUser } from './userSlice'
 // import { setUser } from './userSlice'
 
 interface UserProfile {
@@ -32,11 +32,11 @@ export const updateProfilePic = createAsyncThunk(
           },
         },
       )
-      const updatedUser = response.data?.user as UserData
+      const updatedUser = response.data?.user as any
       console.log('updatedUser', updatedUser);
       if (!updatedUser) throw new Error('Invalid response: user not found')
 
-    
+
       const token = localStorage.getItem('token')
       dispatch(setUser({ ...updatedUser, token: token ?? undefined }))
 
