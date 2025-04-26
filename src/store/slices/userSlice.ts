@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Category {
+export interface Category {
   _id: string;
   name: string;
   icon: string;
   slug: string;
 }
 
-interface SubCategory {
+export interface SubCategory {
   _id: string;
   type: string;
   name: string;
 }
 
-interface ProfileMedia {
+export interface ProfileMedia {
   url: string;
   alt: string;
   key: string;
@@ -22,7 +22,7 @@ interface ProfileMedia {
   description: string;
 }
 
-interface ProfileImage {
+export interface ProfileImage {
   url: string;
   alt: string;
   key: string;
@@ -30,7 +30,7 @@ interface ProfileImage {
   description: string;
 }
 
-interface Profile {
+export interface Profile {
   _id: string;
   facialFeatures: any[];
   tattoo: any[];
@@ -42,7 +42,7 @@ interface Profile {
   profileImage: ProfileImage;
 }
 
-interface UserState {
+export interface UserState {
   _id: string;
   fname: string;
   lname: string;

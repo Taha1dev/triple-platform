@@ -26,7 +26,7 @@ export default function ChangePassword() {
     resolver: zodResolver(changePasswordSchema),
   })
   const dispatch = useDispatch<AppDispatch>()
-  const { user } = useSelector((state: RootState) => state.user)
+  const user  = useSelector((state: RootState) => state.user)
   const { loading } = useSelector((state: RootState) => state.changePassword)
   const { handleSubmit } = methods
 

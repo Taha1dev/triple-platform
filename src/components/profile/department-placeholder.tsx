@@ -32,7 +32,7 @@ export default function DepartmentPlaceholder() {
   const { categories, loading } = useSelector(
     (state: RootState) => state.allCategories,
   )
-  const { user } = useSelector((state: RootState) => state.user)
+  const  user  = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
     dispatch(getallCategories())

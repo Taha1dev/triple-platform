@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 
 const UserProfile = () => {
-  const { user } = useSelector((state: RootState) => state.user)
+  const user  = useSelector((state: RootState) => state.user)
   const navigate = useNavigate()
 
   const [avatar, setAvatar] = useState<string>(
@@ -112,7 +112,7 @@ const UserProfile = () => {
         </div>
 
         {/* Portfolio Section */}
-        {user?.profile.portfolioMedia && (
+        {user?.profile?.portfolioMedia && (
           <div className='mt-8'>
             <h3 className='font-bold text-2xl text-foreground mb-6'>
               Portfolio

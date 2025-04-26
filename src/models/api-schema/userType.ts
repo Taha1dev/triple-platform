@@ -1,8 +1,9 @@
-import { ProfileImage, UserData } from "@/store/slices/userSlice"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ProfileImage} from "@/store/slices/userSlice"
 
 export interface ApiResponse {
   status: number
-  data: { data: UserData[] }
+  data: any
   message: string
 }
 
@@ -40,7 +41,7 @@ export interface Profile {
   languagesSpoken: unknown[]
 }
 export interface UserState {
-  users: UserData[]
+  users: any
   loading: boolean
   error: string | null
   status: number | null

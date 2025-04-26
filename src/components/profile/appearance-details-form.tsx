@@ -58,7 +58,7 @@ export default function AppearanceDetailsForm() {
   const { appearance, loading } = useSelector(
     (state: RootState) => state.apperanceDetails,
   )
-  const { user } = useSelector((state: RootState) => state.user)
+  const  user  = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {

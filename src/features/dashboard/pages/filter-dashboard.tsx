@@ -373,7 +373,7 @@ export default function FilterDashboard() {
                     <FilterUserSkeletonCard key={i} />
                   ))
                 : users &&
-                  users.map(user => (
+                  users.map((user: any) => (
                     <FilterUserCard key={user._id} user={user} />
                   ))}
             </div>
