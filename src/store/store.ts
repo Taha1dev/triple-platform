@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import dialogReducer from './slices/openDialogSlice'
 import registerReducer from './slices/registerSlice'
-import loginReducer from './slices/loginSlice'
+import authReducer from './slices/authSlice'
 import resendOtpReducer from './slices/resendOTPSlice'
 import forgetPasswordReducer from './slices/forgetPasswordSlice'
 import VerifyOtpReducer from './slices/verifyOTPSlice'
@@ -11,7 +11,7 @@ import ForgetPasswordOtpReducer from './slices/ForgetPasswordOTPSlice'
 import routerReducer from './slices/routerSlice'
 import emailReducer from './slices/emailSlice'
 import otpContentRedcuer from './slices/otpContentSlice'
-import logoutReducer from './slices/logoutSlice'
+
 import UpdateProfileReducer from './slices/updateUserSlice'
 import userReducer from './slices/userSlice'
 import changePasswordReducer from './slices/changePasswordSlice'
@@ -28,7 +28,7 @@ export const store = configureStore({
   reducer: {
     dialog: dialogReducer,
     register: registerReducer,
-    login: loginReducer,
+    auth: authReducer,
     resendOtp: resendOtpReducer,
     verifyOtp: VerifyOtpReducer,
     forgetPasswordOtp: ForgetPasswordOtpReducer,
@@ -39,7 +39,6 @@ export const store = configureStore({
     routerInstance: routerReducer,
     email: emailReducer,
     otpContent: otpContentRedcuer,
-    logout: logoutReducer,
     updateProfile: UpdateProfileReducer,
     user: userReducer,
     userPicture: userPictureReducer,

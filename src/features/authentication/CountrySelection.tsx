@@ -35,11 +35,11 @@ import DotPattern from '@/components/ui/dot-pattern'
 import { cn } from '@/lib/utils'
 interface CountryData {
   country: string
-  cities: string[]
+  city: string[]
 }
 interface FormData {
   country: string
-  cities: string[]
+  city: string[]
 }
 
 export default function CountrySelection() {
@@ -59,16 +59,16 @@ export default function CountrySelection() {
       (item: CountryData) => item.country === country,
     )
 
-    setLocalCities(filteredData?.cities)
+    setLocalCities(filteredData?.city)
     if (filteredData) {
-      dispatch(setSelectedCities(filteredData.cities))
+      dispatch(setSelectedCities(filteredData.city))
     } else {
       dispatch(setSelectedCities([]))
     }
   }
 
   const onSubmit = async () => {
-    const paylaod = { cities: city, country }
+    const paylaod = { city: city, country }
     await dispatch(userBase(paylaod))
     navigate('/home')
   }

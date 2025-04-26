@@ -1,99 +1,147 @@
-import { SubCategory } from '@/models/api-schema/auth.model'
-import { Category, Profile } from '@/models/api-schema/userType'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface UserData {
-  _id: string
-  fname: string
-  lname: string
-  email: string
-  portfolio: ProfileImage[]
-  password: string
-  contact_number: string
-  dob: string
-  rating: number
-  city: string[]
-  categories: Category[]
-  subCategories: SubCategory[]
-  data: unknown[]
-  profile: Profile
-  OTP: string
-  login_token: string
-  country: string
-  token?: string
+interface Category {
+  _id: string;
+  name: string;
+  icon: string;
+  slug: string;
 }
 
-
-
-export interface ProfileImage {
-  url: string
-  alt: string
-  key: string
-  mimetype: string
-  description: string
+interface SubCategory {
+  _id: string;
+  type: string;
+  name: string;
 }
 
-
-export interface UserState {
-  user: UserData | null
-  token?: string
-  loading: boolean
-  initialized: boolean
+interface ProfileMedia {
+  url: string;
+  alt: string;
+  key: string;
+  mimetype: string;
+  description: string;
 }
 
-const initialState: UserState = {
-  user: null,
-  token: undefined,
-  loading: false,
-  initialized: false,
+interface ProfileImage {
+  url: string;
+  alt: string;
+  key: string;
+  mimetype: string;
+  description: string;
 }
+
+interface Profile {
+  _id: string;
+  facialFeatures: any[];
+  tattoo: any[];
+  piercing: any[];
+  scars: any[];
+  user: string;
+  portfolioMedia: ProfileMedia[];
+  languagesSpoken: any[];
+  profileImage: ProfileImage;
+}
+
+interface UserState {
+  _id: string;
+  fname: string;
+  lname: string;
+  bio: string;
+  email: string;
+  contact_number: string;
+  dob: string;
+  createdAt: string;
+  city: string[];
+  country: string;
+  rating: number;
+  portfolio: any[];
+  categories: Category[];
+  subCategories: SubCategory[];
+  profile: Profile | null;
+}
+
+const loadUserState = (): UserState => {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('userState');
+    return saved ? JSON.parse(saved) : {
+      _id: '',
+      fname: '',
+      lname: '',
+      email: '',
+      contact_number: '',
+      dob: '',
+      bio: "",
+      createdAt: '',
+      city: [],
+      country: '',
+      rating: 0,
+      portfolio: [],
+      categories: [],
+      subCategories: [],
+      profile: null,
+    };
+  }
+  return {
+    _id: '',
+    fname: '',
+    lname: '',
+    email: '',
+    contact_number: '',
+    dob: '',
+    bio: "",
+    createdAt: '',
+    city: [],
+    country: '',
+    rating: 0,
+    portfolio: [],
+    categories: [],
+    subCategories: [],
+    profile: null,
+  };
+};
 
 const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: loadUserState(),
   reducers: {
-    setUser: (state, action: PayloadAction<UserData>) => {
-      state.user = action.payload
-      state.token = action.payload.token
-      // Store user data without token in 'user' key
-      const { token, ...userData } = action.payload
-      localStorage.setItem('user', JSON.stringify(userData))
-      if (token) {
-        localStorage.setItem('token', token)
+    setUser(state, action: PayloadAction<UserState>) {
+      const newState = { ...state, ...action.payload };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userState', JSON.stringify(newState));
       }
+      return newState;
     },
-    clearUser: state => {
-      state.user = null
-      state.token = undefined
-      localStorage.removeItem('user')
-      localStorage.removeItem('token')
-    },
-    initializeUserData: state => {
-      state.loading = true
-      const userString = localStorage.getItem('user')
-      const token = localStorage.getItem('token')
-
-      if (userString) {
-        try {
-          const user = JSON.parse(userString) as UserData
-          state.user = {
-            ...user,
-            token: token || undefined // Add token to user object if it exists
-          }
-          state.token = token || undefined
-        } catch (error) {
-          console.error('Failed to parse user data:', error)
-          state.user = null
-          state.token = undefined
-          localStorage.removeItem('user')
-          localStorage.removeItem('token')
-        }
+    updateUser(state, action: PayloadAction<Partial<UserState>>) {
+      const newState = { ...state, ...action.payload };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userState', JSON.stringify(newState));
       }
-      state.loading = false
-      state.initialized = true
-    }
+      return newState;
+    },
+    clearUser(state) {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('userState');
+      }
+      return {
+        _id: '',
+        fname: '',
+        lname: '',
+        email: '',
+        contact_number: '',
+        dob: '',
+        bio: "",
+        createdAt: '',
+        city: [],
+        country: '',
+        rating: 0,
+        portfolio: [],
+        categories: [],
+        subCategories: [],
+        profile: null,
+      };
+    },
   },
-})
+});
 
-export const { setUser, clearUser, initializeUserData } = userSlice.actions
-export default userSlice.reducer
+export const { setUser, updateUser, clearUser } = userSlice.actions;
+export default userSlice.reducer;

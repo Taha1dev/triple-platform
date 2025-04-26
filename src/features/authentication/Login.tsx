@@ -14,7 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { LoginSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../../components/controls/FormField'
-import { loginUser } from '@/store/slices/loginSlice'
+import { loginUser } from '@/store/slices/authSlice'
 import Spinner from '@/components/custom/Spinner'
 import BannerAuthImage from '@/components/custom/auth-image/BannerAuthImage'
 import DotPattern from '@/components/ui/dot-pattern'
@@ -25,16 +25,23 @@ type FormValues = z.infer<typeof LoginSchema>
 export default function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const { loading } = useSelector((state: RootState) => state.login)
+  const { loading } = useSelector((state: RootState) => state.auth)
   const methods = useForm<FormValues>({
     resolver: zodResolver(LoginSchema),
   })
 
   const onSubmit = async (data: FormValues) => {
-    const result = await dispatch(loginUser(data))
-    if (loginUser.fulfilled.match(result)) {
-      navigate('/home')
-    } else return
+    try {
+      const resultAction = await dispatch(loginUser(data))
+
+      if (loginUser.fulfilled.match(resultAction)) {
+        navigate('/home')
+      } else {
+        console.error('Login failed:', resultAction)
+      }
+    } catch (error) {
+      console.error('Unexpected login error:', error)
+    }
   }
   const FormFields = [
     {

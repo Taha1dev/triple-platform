@@ -7,7 +7,6 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { updateProfile } from '@/store/slices/updateUserSlice'
 import { useEffect, useState } from 'react'
-import { initializeUserData } from '@/store/slices/userSlice'
 import { UpdateProfileSchema } from '@/models/zod-schema/zod.schema'
 import FormField from '../../../../components/controls/FormField'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
@@ -33,10 +32,10 @@ import { updateProfilePic } from '@/store/slices/updateUserPicture'
 type FormValues = z.infer<typeof UpdateProfileSchema>
 interface CountryData {
   country: string
-  cities: string[]
+  city: string[]
 }
 export default function UpdateProfile() {
-  const { user } = useSelector((state: RootState) => state.user)
+  const user = useSelector((state: RootState) => state.user)
   const formFields = [
     {
       id: 'fname',
@@ -102,7 +101,7 @@ export default function UpdateProfile() {
     console.log(fileFormData)
     try {
       await dispatch(updateProfilePic(fileFormData)).unwrap()
-      dispatch(initializeUserData())
+  
     } catch (error) {
       console.error('Error uploading image:', error)
     }
@@ -110,20 +109,8 @@ export default function UpdateProfile() {
 
   const [localCities, setLocalCities] = useState<string[] | any>([])
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   try {
-  //     await dispatch(updateProfile(formData)).unwrap()
-  //     dispatch(initializeUserData())
-  //   } catch (error) {
-  //     console.error('Error updating profile:', error)
-  //   }
-  // }
-
   const onSubmit = async (data: any) => {
-    console.log(data)
     await dispatch(updateProfile(data)).unwrap()
-    console.log(data)
   }
   useEffect(() => {
     setAvatar(user?.profile?.profileImage?.url)
@@ -135,9 +122,9 @@ export default function UpdateProfile() {
       (item: CountryData) => item.country === country,
     )
 
-    setLocalCities(filteredData?.cities)
+    setLocalCities(filteredData?.city)
     if (filteredData) {
-      dispatch(setSelectedCities(filteredData.cities))
+      dispatch(setSelectedCities(filteredData.city))
     } else {
       dispatch(setSelectedCities([]))
     }

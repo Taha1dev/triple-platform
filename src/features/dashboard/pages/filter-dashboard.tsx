@@ -27,6 +27,7 @@ export default function FilterDashboard() {
   const { appearance, loading: appearanceLoading } = useSelector(
     (state: RootState) => state.apperanceDetails,
   )
+  const user = useSelector((state: RootState) => state.user)
   const { users, loading } = useSelector((state: RootState) => state.filterUser)
   const { categories, loading: categoriesLoading } = useSelector(
     (state: RootState) => state.allCategories,
@@ -70,6 +71,7 @@ export default function FilterDashboard() {
         console.error('Error fetching data:', error)
       }
     }
+    console.log('user is', user)
     fetchData()
   }, [dispatch])
 
@@ -129,8 +131,8 @@ export default function FilterDashboard() {
 
   const applyFilters = async () => {
     const filterData = {
-      category: categoryFilter,
-      subCategory: subCategoryFilter,
+      categories: categoryFilter,
+      subCategories: subCategoryFilter,
       ethnicity: ethnicityFilter,
       hairColor: hairColorFilter,
       hairTexture: hairTextureFilter,

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useController, UseControllerProps } from 'react-hook-form'
-import { fullYear } from '@/features/landing-page/constants'
+import moment from 'moment'
 
 type DatePickerProps = UseControllerProps & {
   id?: string
@@ -20,8 +20,7 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
   const [day, setDay] = useState<string>('')
   const [month, setMonth] = useState<string>('')
   const [year, setYear] = useState<string>('')
-
-  const maxYear = fullYear - 2
+  const maxYear = moment().year() - 2
 
   const { field } = useController({
     control,
@@ -29,15 +28,21 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
     defaultValue: '',
   })
 
+  useEffect(() => {
+    if (field.value) {
+      const date = moment(field.value, ['DD/MM/YYYY', moment.ISO_8601])
+      if (date.isValid()) {
+        setDay(date.format('DD'))
+        setMonth(date.format('MM'))
+        setYear(date.format('YYYY'))
+      }
+    }
+  }, [field.value])
+
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    if (Number(value) < 0) {
-      return
-    }
+    if (Number(value) < 0 || value.length > 2) return
 
-    if (value.length > 2) {
-      return
-    }
     setDay(value)
     updateCombinedDate(value, month, year)
   }
@@ -49,29 +54,20 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
+    if (Number(value) < 0 || value.length > 4 || Number(value) > maxYear) return
 
-    if (Number(value) < 0) {
-      return
-    }
-
-    if (value.length > 4) {
-      return
-    }
-    if (Number(value) > maxYear) {
-      return
-    }
-    setYear(value)
-    updateCombinedDate(day, month, value)
     setYear(value)
     updateCombinedDate(day, month, value)
   }
 
   const updateCombinedDate = (day: string, month: string, year: string) => {
     if (day && month && year) {
-      const formattedDay = day.padStart(2, '0')
-      const formattedMonth = month.padStart(2, '0')
-      const combinedDate = `${formattedDay}/${formattedMonth}/${year}`
-      field.onChange(combinedDate)
+      const formattedDate = moment(`${day}/${month}/${year}`, 'DD/MM/YYYY')
+      if (formattedDate.isValid()) {
+        field.onChange(formattedDate.format('DD/MM/YYYY'))
+      } else {
+        field.onChange('')
+      }
     } else {
       field.onChange('')
     }
@@ -79,6 +75,7 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
 
   return (
     <div className='w-full flex gap-3'>
+      {/* Day Input */}
       <div className='flex-1'>
         <label
           htmlFor={`${id}-day`}
@@ -108,23 +105,23 @@ export function DatePicker({ id, control, name }: DatePickerProps) {
         >
           Month
         </label>
-        <Select onValueChange={handleMonthChange}>
+        <Select onValueChange={handleMonthChange} value={month}>
           <SelectTrigger className='w-full'>
-            <SelectValue placeholder='MM' />
+            <SelectValue placeholder='MM'>
+              {month ? moment(month, 'MM').format('MMMM') : 'MM'}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Months</SelectLabel>
-              {Array.from({ length: 12 }, (_, i) => i + 1).map(monthValue => (
-                <SelectItem
-                  key={monthValue}
-                  value={String(monthValue).padStart(2, '0')}
-                >
-                  {new Date(0, monthValue - 1).toLocaleString('default', {
-                    month: 'long',
-                  })}
-                </SelectItem>
-              ))}
+              {Array.from({ length: 12 }, (_, i) => i + 1).map(monthValue => {
+                const monthStr = String(monthValue).padStart(2, '0')
+                return (
+                  <SelectItem key={monthValue} value={monthStr}>
+                    {moment(monthStr, 'MM').format('MMMM')}
+                  </SelectItem>
+                )
+              })}
             </SelectGroup>
           </SelectContent>
         </Select>

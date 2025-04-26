@@ -79,7 +79,7 @@ export default function OTP_Verification() {
   }
 
   useEffect(() => {
-    console.log(otpContent)
+    
     setLocalOtpContent({
       title: otpContent.title || 'Reset Your Password',
       sub:

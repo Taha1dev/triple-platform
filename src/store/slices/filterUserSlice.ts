@@ -18,7 +18,7 @@ export const postUsers = createAsyncThunk(
         '/filter',
         filterData,
       )
-      console.log(response)
+
       return response
     } catch (error: any) {
       return rejectWithValue({

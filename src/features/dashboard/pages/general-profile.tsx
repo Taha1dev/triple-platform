@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Calendar,
-  Share2,
-} from 'lucide-react'
+import { Mail, Phone, MapPin, Calendar, Share2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -19,7 +13,6 @@ import { Badge } from '@/components/ui/badge'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { useEffect } from 'react'
-import { initializeUserData } from '@/store/slices/userSlice'
 
 const userData = {
   id: 1,
@@ -57,20 +50,17 @@ const userData = {
 }
 
 export default function ProfilePage() {
-  const { user } = useSelector((state: RootState) => state.user)
+  const  user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch<AppDispatch>()
+  
   const handleShare = () => {
     const profileUrl = `${window.location.origin}/profile/${userData.id}`
     navigator.clipboard.writeText(profileUrl)
     alert('Profile link copied to clipboard!')
   }
-  useEffect(() => {
-    dispatch(initializeUserData())
-  }, [dispatch]) // Only run once on mount
 
-  useEffect(() => {
-    console.log(user) // Will log whenever user changes
-  }, [user])
+
+  useEffect(() => {}, [user])
   return (
     <div className='min-h-screen bg-background'>
       <Card className='shadow-none'>
@@ -79,26 +69,24 @@ export default function ProfilePage() {
             <Avatar className='h-20 w-20'>
               <AvatarImage
                 src={
-                  (user as any)?.user?.profile?.profileImage?.url ||
+                  user?.profile?.profileImage?.url ||
                   '/placeholder.svg?height=80&width=80'
                 }
-                alt={`${(user as any)?.user?.fname} ${
-                  (user as any)?.user?.lname
-                }`}
+                alt={`${user?.fname} ${user?.lname}`}
               />
               <AvatarFallback>
-                {(user as any)?.user?.fname?.charAt(0)}
-                {(user as any)?.user?.lname?.charAt(0)}
+                {user?.fname?.charAt(0)}
+                {user?.lname?.charAt(0)}
               </AvatarFallback>
             </Avatar>
             <div>
               <CardTitle className='text-2xl'>
-                {(user as any)?.user?.fname} {(user as any)?.user?.lname}
+                {user?.fname} {user?.lname}
               </CardTitle>
               <CardDescription>
-                {(user as any)?.user?.bio
-                  ? (user as any)?.user?.bio
-                  : (user as any)?.user?.categories
+                {user?.bio
+                  ? user?.bio
+                  : user?.categories
                       .map((cat: { name: any }) => cat.name)
                       .join(', ')}
               </CardDescription>
@@ -114,38 +102,34 @@ export default function ProfilePage() {
             <div>
               <h3 className='text-lg font-semibold mb-2'>About</h3>
               <p className='text-muted-foreground mb-4'>
-                {(user as any)?.user?.subCategories
+                {user?.subCategories
                   .map((sub: { name: any }) => sub.name)
                   .join(', ')}
               </p>
               <div className='space-y-2'>
                 <div className='flex items-center text-muted-foreground'>
                   <Mail className='mr-2 h-4 w-4' />
-                  {(user as any)?.user?.email}
+                  {user?.email}
                 </div>
                 <div className='flex items-center text-muted-foreground'>
                   <Phone className='mr-2 h-4 w-4' />
-                  {(user as any)?.user?.contact_number}
+                  {user?.contact_number}
                 </div>
                 <div className='flex items-center text-muted-foreground'>
                   <MapPin className='mr-2 h-4 w-4' />
-                  {(user as any)?.user?.city.join(', ')}{' '}
-                  {(user as any)?.user?.country &&
-                    `, ${(user as any)?.user?.country}`}
+                  {user?.city.join(', ')}{' '}
+                  {user?.country && `, ${user?.country}`}
                 </div>
                 <div className='flex items-center text-muted-foreground'>
                   <Calendar className='mr-2 h-4 w-4' />
-                  Member since{' '}
-                  {new Date(
-                    (user as any)?.user?.createdAt,
-                  ).toLocaleDateString()}
+                  Member since {new Date(user?.createdAt).toLocaleDateString()}
                 </div>
               </div>
             </div>
             <div>
               <h3 className='text-lg font-semibold mb-2'>Categories</h3>
               <div className='flex flex-wrap gap-2'>
-                {(user as any)?.user?.categories.map((category: any) => (
+                {user?.categories.map((category: any) => (
                   <Badge key={category._id} variant='secondary'>
                     {category.name}
                   </Badge>
@@ -156,7 +140,7 @@ export default function ProfilePage() {
                 Specializations
               </h3>
               <div className='flex flex-wrap gap-2'>
-                {(user as any)?.user?.subCategories.map((subCategory: any) => (
+                {user?.subCategories.map((subCategory: any) => (
                   <Badge key={subCategory._id} variant='outline'>
                     {subCategory.name}
                   </Badge>
@@ -166,9 +150,9 @@ export default function ProfilePage() {
           </div>
           {/* <div className='mt-8'>
             <h3 className='text-lg font-semibold mb-4'>Portfolio</h3>
-            {(user as any)?.user?.profile.portfolioMedia.length > 0 ? (
+            {user?.profile.portfolioMedia.length > 0 ? (
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                {(user as any)?.user?.profile.portfolioMedia.map(
+                {user?.profile.portfolioMedia.map(
                   (item: any) => (
                     <Card key={item._id}>
                       <img

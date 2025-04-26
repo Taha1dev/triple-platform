@@ -1,59 +1,59 @@
 [
   {
     "country": "United Arab Emirates",
-    "cities": ["Dubai", "Abu Dhabi", "Sharjah", "Al Ain", "Ajman"]
+    "city": ["Dubai", "Abu Dhabi", "Sharjah", "Al Ain", "Ajman"]
   },
   {
     "country": "Saudi Arabia",
-    "cities": ["Riyadh", "Jeddah", "Dammam", "Medina", "Mecca"]
+    "city": ["Riyadh", "Jeddah", "Dammam", "Medina", "Mecca"]
   },
   {
     "country": "United States",
-    "cities": ["Los Angeles", "New York", "Chicago", "Houston", "Phoenix"]
+    "city": ["Los Angeles", "New York", "Chicago", "Houston", "Phoenix"]
   },
   {
     "country": "United Kingdom",
-    "cities": ["London", "Manchester", "Birmingham", "Liverpool", "Edinburgh"]
+    "city": ["London", "Manchester", "Birmingham", "Liverpool", "Edinburgh"]
   },
   {
     "country": "India",
-    "cities": ["Mumbai", "NewDelhi", "Bangalore", "Kolkata", "Chennai"]
+    "city": ["Mumbai", "NewDelhi", "Bangalore", "Kolkata", "Chennai"]
   },
   {
     "country": "Canada",
-    "cities": ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"]
+    "city": ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"]
   },
   {
     "country": "Germany",
-    "cities": ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne"]
+    "city": ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne"]
   },
   {
     "country": "France",
-    "cities": ["Paris", "Marseille", "Lyon", "Toulouse", "Nice"]
+    "city": ["Paris", "Marseille", "Lyon", "Toulouse", "Nice"]
   },
   {
     "country": "Japan",
-    "cities": ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Nagoya"]
+    "city": ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Nagoya"]
   },
   {
     "country": "China",
-    "cities": ["Beijing", "Shanghai", "Guangzhou", "Shenzhen", "Chongqing"]
+    "city": ["Beijing", "Shanghai", "Guangzhou", "Shenzhen", "Chongqing"]
   },
   {
     "country": "South Korea",
-    "cities": ["Seoul", "Busan", "Incheon", "Daegu", "Daejeon"]
+    "city": ["Seoul", "Busan", "Incheon", "Daegu", "Daejeon"]
   },
   {
     "country": "Australia",
-    "cities": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"]
+    "city": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"]
   },
   {
     "country": "Brazil",
-    "cities": ["SãoPaulo", "RiodeJaneiro", "Brasília", "Salvador", "Fortaleza"]
+    "city": ["SãoPaulo", "RiodeJaneiro", "Brasília", "Salvador", "Fortaleza"]
   },
   {
     "country": "Russia",
-    "cities": [
+    "city": [
       "Moscow",
       "Saint Petersburg",
       "Novosibirsk",
@@ -63,27 +63,27 @@
   },
   {
     "country": "Italy",
-    "cities": ["Rome", "Milan", "Naples", "Turin", "Florence"]
+    "city": ["Rome", "Milan", "Naples", "Turin", "Florence"]
   },
   {
     "country": "Spain",
-    "cities": ["Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza"]
+    "city": ["Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza"]
   },
   {
     "country": "Mexico",
-    "cities": ["MexicoCity", "Guadalajara", "Monterrey", "Puebla", "Tijuana"]
+    "city": ["MexicoCity", "Guadalajara", "Monterrey", "Puebla", "Tijuana"]
   },
   {
     "country": "Netherlands",
-    "cities": ["Amsterdam", "Rotterdam", "TheHague", "Utrecht", "Eindhoven"]
+    "city": ["Amsterdam", "Rotterdam", "TheHague", "Utrecht", "Eindhoven"]
   },
   {
     "country": "Sweden",
-    "cities": ["Stockholm", "Gothenburg", "Malmö", "Uppsala", "Örebro"]
+    "city": ["Stockholm", "Gothenburg", "Malmö", "Uppsala", "Örebro"]
   },
   {
     "country": "South Africa",
-    "cities": [
+    "city": [
       "Johannesburg",
       "Cape Town",
       "Durban",
@@ -93,20 +93,20 @@
   },
   {
     "country": "Nigeria",
-    "cities": ["Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano"]
+    "city": ["Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano"]
   },
   {
     "country": "Argentina",
-    "cities": ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "LaPlata"]
+    "city": ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "LaPlata"]
   },
   {
     "country": "Turkey",
-    "cities": ["Istanbul", "Ankara", "Izmir", "Bursa", "Adana"]
+    "city": ["Istanbul", "Ankara", "Izmir", "Bursa", "Adana"]
   },
 
   {
     "country": "Singapore",
-    "cities": [
+    "city": [
       "Singapore City",
       "Jurong East",
       "Woodlands",
@@ -116,79 +116,79 @@
   },
   {
     "country": "New Zealand",
-    "cities": ["Auckland", "Wellington", "Christchurch", "Hamilton", "Dunedin"]
+    "city": ["Auckland", "Wellington", "Christchurch", "Hamilton", "Dunedin"]
   },
   {
     "country": "Ireland",
-    "cities": ["Dublin", "Cork", "Galway", "Limerick", "Waterford"]
+    "city": ["Dublin", "Cork", "Galway", "Limerick", "Waterford"]
   },
   {
     "country": "Belgium",
-    "cities": ["Brussels", "Antwerp", "Ghent", "Charleroi", "Liège"]
+    "city": ["Brussels", "Antwerp", "Ghent", "Charleroi", "Liège"]
   },
   {
     "country": "Switzerland",
-    "cities": ["Zurich", "Geneva", "Basel", "Lausanne", "Bern"]
+    "city": ["Zurich", "Geneva", "Basel", "Lausanne", "Bern"]
   },
   {
     "country": "Austria",
-    "cities": ["Vienna", "Graz", "Linz", "Salzburg", "Innsbruck"]
+    "city": ["Vienna", "Graz", "Linz", "Salzburg", "Innsbruck"]
   },
   {
     "country": "Denmark",
-    "cities": ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"]
+    "city": ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"]
   },
   {
     "country": "Norway",
-    "cities": ["Oslo", "Bergen", "Stavanger", "Trondheim", "Drammen"]
+    "city": ["Oslo", "Bergen", "Stavanger", "Trondheim", "Drammen"]
   },
   {
     "country": "Finland",
-    "cities": ["Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu"]
+    "city": ["Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu"]
   },
   {
     "country": "Poland",
-    "cities": ["Warsaw", "Kraków", "Łódź", "Wrocław", "Poznań"]
+    "city": ["Warsaw", "Kraków", "Łódź", "Wrocław", "Poznań"]
   },
   {
     "country": "Czech Republic",
-    "cities": ["Prague", "Brno", "Ostrava", "Plzeň", "Liberec"]
+    "city": ["Prague", "Brno", "Ostrava", "Plzeň", "Liberec"]
   },
   {
     "country": "Portugal",
-    "cities": ["Lisbon", "Porto", "Braga", "Coimbra", "Faro"]
+    "city": ["Lisbon", "Porto", "Braga", "Coimbra", "Faro"]
   },
   {
     "country": "Greece",
-    "cities": ["Athens", "Thessaloniki", "Patras", "Heraklion", "Larissa"]
+    "city": ["Athens", "Thessaloniki", "Patras", "Heraklion", "Larissa"]
   },
   {
     "country": "Malaysia",
-    "cities": ["Kuala Lumpur", "GeorgeTown", "Johor Bahru", "Ipoh", "Shah Alam"]
+    "city": ["Kuala Lumpur", "GeorgeTown", "Johor Bahru", "Ipoh", "Shah Alam"]
   },
   {
     "country": "Thailand",
-    "cities": ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Hat Yai"]
+    "city": ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Hat Yai"]
   },
   {
     "country": "Egypt",
-    "cities": ["Cairo", "Alexandria", "Giza", "Shubra El Kheima", "Port Said"]
+    "city": ["Cairo", "Alexandria", "Giza", "Shubra El Kheima", "Port Said"]
   },
   {
     "country": "Philippines",
-    "cities": ["Manila", "QuezonCity", "Davao City", "Caloocan", "Cebu City"]
+    "city": ["Manila", "QuezonCity", "Davao City", "Caloocan", "Cebu City"]
   },
   {
     "country": "Indonesia",
-    "cities": ["Jakarta", "Surabaya", "Bandung", "Medan", "Bekasi"]
+    "city": ["Jakarta", "Surabaya", "Bandung", "Medan", "Bekasi"]
   },
   {
     "country": "Colombia",
-    "cities": ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena"]
+    "city": ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena"]
   },
   {
     "country": "Chile",
-    "cities": [
+    "city": [
       "Santiago",
       "Valparaíso",
       "Concepción",
@@ -198,56 +198,56 @@
   },
   {
     "country": "Hungary",
-    "cities": ["Budapest", "Debrecen", "Szeged", "Miskolc", "Pécs"]
+    "city": ["Budapest", "Debrecen", "Szeged", "Miskolc", "Pécs"]
   },
   {
     "country": "Ukraine",
-    "cities": ["Kiev", "Kharkiv", "Odessa", "Dnipro", "Donetsk"]
+    "city": ["Kiev", "Kharkiv", "Odessa", "Dnipro", "Donetsk"]
   },
   {
     "country": "Romania",
-    "cities": ["Bucharest", "Cluj-Napoca", "Timișoara", "Iași", "Constanța"]
+    "city": ["Bucharest", "Cluj-Napoca", "Timișoara", "Iași", "Constanța"]
   },
 
   {
     "country": "Qatar",
-    "cities": ["Doha", "Al Rayyan", "Al Wakrah", "Al Khor", "Al Daayen"]
+    "city": ["Doha", "Al Rayyan", "Al Wakrah", "Al Khor", "Al Daayen"]
   },
   {
     "country": "Vietnam",
-    "cities": ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hai Phong", "Can Tho"]
+    "city": ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hai Phong", "Can Tho"]
   },
   {
     "country": "Pakistan",
-    "cities": ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Rawalpindi"]
+    "city": ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Rawalpindi"]
   },
   {
     "country": "Morocco",
-    "cities": ["Casablanca", "Rabat", "Marrakesh", "Fes", "Tangier"]
+    "city": ["Casablanca", "Rabat", "Marrakesh", "Fes", "Tangier"]
   },
   {
     "country": "Peru",
-    "cities": ["Lima", "Arequipa", "Trujillo", "Chiclayo", "Piura"]
+    "city": ["Lima", "Arequipa", "Trujillo", "Chiclayo", "Piura"]
   },
   {
     "country": "Kazakhstan",
-    "cities": ["Nur-Sultan(Astana)", "Almaty", "Karaganda", "Shymkent", "Taraz"]
+    "city": ["Nur-Sultan(Astana)", "Almaty", "Karaganda", "Shymkent", "Taraz"]
   },
   {
     "country": "Uzbekistan",
-    "cities": ["Tashkent", "Samarkand", "Namangan", "Andijan", "Bukhara"]
+    "city": ["Tashkent", "Samarkand", "Namangan", "Andijan", "Bukhara"]
   },
   {
     "country": "Lebanon",
-    "cities": ["Beirut", "Tripoli", "Sidon", "Tyre", "Zahle"]
+    "city": ["Beirut", "Tripoli", "Sidon", "Tyre", "Zahle"]
   },
   {
     "country": "Bahrain",
-    "cities": ["Manama", "Riffa", "Muharraq", "Hamad Town", "Isa Town"]
+    "city": ["Manama", "Riffa", "Muharraq", "Hamad Town", "Isa Town"]
   },
   {
     "country": "Hong Kong",
-    "cities": [
+    "city": [
       "Hong Kong Island",
       "Kowloon",
       "New Territories",
@@ -257,10 +257,10 @@
   },
   {
     "country": "Syria",
-    "cities": ["Damascus", "Aleppo", "Homs", "Hama", "Latakia"]
+    "city": ["Damascus", "Aleppo", "Homs", "Hama", "Latakia"]
   },
   {
     "country": "Armenia",
-    "cities": ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Hrazdan"]
+    "city": ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Hrazdan"]
   }
 ]

@@ -40,7 +40,7 @@ export default function VerifyEmailOTP() {
     (state: RootState) => state.verifyOtp,
   )
   useEffect(() => {
-    console.log(email)
+
   }, [email])
   const onSubmit = async () => {
     if (otp.length < 6) {

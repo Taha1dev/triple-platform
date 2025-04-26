@@ -13,15 +13,13 @@ const UserProfile = () => {
   const navigate = useNavigate()
 
   const [avatar, setAvatar] = useState<string>(
-    (user as any)?.user?.profile?.profileImage?.url || '',
+    user?.profile?.profileImage?.url || '',
   )
 
   useEffect(() => {
-    console.log('profileUser', user)
-    if ((user as any)?.user?.profile?.profileImage?.url) {
-      setAvatar((user as any)?.user?.profile.profileImage.url)
+    if (user?.profile?.profileImage?.url) {
+      setAvatar(user?.profile.profileImage.url)
     }
-    console.log('user-profile', user)
   }, [user])
 
   const shareProfile = () => {
@@ -30,28 +28,24 @@ const UserProfile = () => {
   }
 
   const getLocation = () => {
-    return (user as any)?.user?.city?.length
-      ? (user as any)?.user?.city.join(', ')
-      : 'N/A'
+    return user?.city?.length ? user?.city.join(', ') : 'N/A'
   }
 
   const profileFields = [
-    { label: 'First Name', value: (user as any)?.user?.fname },
-    { label: 'Last Name', value: (user as any)?.user?.lname },
-    { label: 'Email', value: (user as any)?.user?.email },
+    { label: 'First Name', value: user?.fname },
+    { label: 'Last Name', value: user?.lname },
+    { label: 'Email', value: user?.email },
     {
       label: 'Contact Number',
-      value: (user as any)?.user?.contact_number || 'N/A',
+      value: user?.contact_number || 'N/A',
     },
     { label: 'Location', value: getLocation() },
-    { label: 'Date of Birth', value: (user as any)?.user?.dob || 'N/A' },
+    { label: 'Date of Birth', value: user?.dob || 'N/A' },
     {
       label: 'Rating',
-      value: (user as any)?.user?.rating
-        ? `${(user as any)?.user?.rating}/5`
-        : 'N/A',
+      value: user?.rating ? `${user?.rating}/5` : 'N/A',
     },
-    { label: 'Country', value: (user as any)?.user?.country || 'N/A' },
+    { label: 'Country', value: user?.country || 'N/A' },
   ]
 
   return (
@@ -65,10 +59,7 @@ const UserProfile = () => {
                 <img
                   className='w-full h-full object-cover'
                   src={avatar}
-                  alt={
-                    (user as any)?.user?.profile?.profileImage?.alt ||
-                    'User Avatar'
-                  }
+                  alt={user?.profile?.profileImage?.alt || 'User Avatar'}
                   onError={() => setAvatar('/default-avatar.png')}
                 />
               ) : (
@@ -79,14 +70,14 @@ const UserProfile = () => {
             </div>
             <div className='text-center sm:text-left'>
               <h3 className='font-bold text-2xl text-foreground'>
-                {(user as any)?.user?.fname} {(user as any)?.user?.lname}
+                {user?.fname} {user?.lname}
               </h3>
               <p className='text-md tracking-wide text-muted-foreground'>
-                {(user as any)?.user?.email}
+                {user?.email}
               </p>
-              {(user as any)?.user?.contact_number && (
+              {user?.contact_number && (
                 <p className='text-md tracking-wide text-muted-foreground'>
-                  {(user as any)?.user?.contact_number}
+                  {user?.contact_number}
                 </p>
               )}
             </div>
@@ -119,32 +110,26 @@ const UserProfile = () => {
             </div>
           ))}
         </div>
-        user.profile.portfolioMedia
+
         {/* Portfolio Section */}
-        {(user as any)?.user?.profile.portfolioMedia && (
+        {user?.profile.portfolioMedia && (
           <div className='mt-8'>
             <h3 className='font-bold text-2xl text-foreground mb-6'>
               Portfolio
             </h3>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-              {(user as any)?.user?.profile.portfolioMedia.map(
-                (item: any, index: number) => (
-                  <div
-                    key={index}
-                    className='relative overflow-hidden rounded-lg hover:scale-105 transition-transform shadow-md'
-                  >
-                    <img
-                      src={item.url}
-                      alt={item.alt}
-                      className='w-full h-40 object-cover'
-                      onError={e => {
-                        const target = e.target as HTMLImageElement
-                        target.src = '/image-placeholder.png'
-                      }}
-                    />
-                  </div>
-                ),
-              )}
+              {user?.profile.portfolioMedia.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className='relative overflow-hidden rounded-lg hover:scale-105 transition-transform shadow-md'
+                >
+                  <img
+                    src={item.url}
+                    alt={item.alt}
+                    className='w-full h-40 object-cover'
+                  />
+                </div>
+              ))}
             </div>
           </div>
         )}

@@ -65,7 +65,7 @@ export default function AppearanceDetailsForm() {
     const fetchData = async () => {
       try {
         await dispatch(fetchAppearance()).unwrap()
-        console.log(appearance)
+      
       } catch (error) {
         console.error('Error fetching data:', error)
       }

@@ -29,7 +29,6 @@ export const getallCategories = createAsyncThunk<
     const response = await axiosClient.get<CategoriesResponse>(
       'category/all-categories/',
     )
-    console.log('response', response)
     return response
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -52,7 +52,7 @@ export function MultiSelect({
           role='combobox'
           aria-expanded={open}
           disabled={disabled}
-          className={`min-w-[200px] justify-between h-auto min-h-10 ${className}`}
+          className={`min-w-[150px] w-full justify-between h-auto min-h-10 ${className}`}
         >
           {selected.length > 0 ? (
             <div className='flex flex-wrap gap-1'>

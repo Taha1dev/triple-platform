@@ -8,17 +8,29 @@ const axiosClient = axios.create({
   },
 })
 
-const DEFAULT_TIMEOUT = 20000; 
+const DEFAULT_TIMEOUT = 20000;
 
 axiosClient.interceptors.request.use(
   (config) => {
-
     config.timeout = config.timeout || DEFAULT_TIMEOUT;
 
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    try {
+      const userState = localStorage.getItem('userState');
+
+      if (userState) {
+        const parsedUserState = JSON.parse(userState);
+
+        const loginToken = parsedUserState.loginToken;
+        console.log(loginToken);
+        console.log(parsedUserState);
+        if (loginToken) {
+          config.headers.Authorization = `Bearer ${loginToken}`;
+        }
+      }
+    } catch (error) {
+      console.error('Error parsing user state from localStorage:', error);
     }
+
     return config;
   },
   (error) => {
@@ -47,7 +59,7 @@ axiosClient.interceptors.response.use(
 
     // Handle network errors (no response)
     if (!error.response) {
-  
+
       toast.error('Network error or server is unreachable');
       return Promise.reject(error);
     }

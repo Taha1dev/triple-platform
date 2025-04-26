@@ -12,32 +12,28 @@ import { AppDispatch, RootState } from '@/store/store'
 import { updateProfile } from '@/store/slices/updateUserSlice'
 import FormField from '@/components/controls/FormField'
 import { MultiSelect } from '@/components/controls/multi-select'
-import { initializeUserData } from '@/store/slices/userSlice'
-import Spinner from '../custom/Spinner'
 import { Textarea } from '../ui/textarea'
 import { Label } from '../ui/label'
 import { cn } from '@/lib/utils'
 
-// Define validation schema
 const schema = z.object({
   fname: z.string().min(2, 'First name must be at least 2 characters.'),
   lname: z.string().min(2, 'Last name must be at least 2 characters.'),
   dob: z.any(),
+  email: z.string().email(),
   bio: z.string().max(500, 'Bio must not exceed 500 characters.').optional(),
   contact_number: z
     .string()
     .min(6, 'Contact number must be at least 6 digits.'),
-  countries: z.array(z.string()).min(1, 'At least one country is required'),
-  cities: z.array(z.string()).min(1, 'At least one city is required'),
+  country: z.array(z.string()).min(1, 'At least one country is required'),
+  city: z.array(z.string()).min(1, 'At least one city is required'),
 })
 
 type FormValues = z.infer<typeof schema>
 
 export default function PersonalDetailsForm() {
-  const { user, loading, initialized } = useSelector(
-    (state: RootState) => state.user,
-  )
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user = useSelector((state: RootState) => state.user)
+
   const [profileUser, setProfileUser] = useState<any>()
   const methods = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -46,9 +42,10 @@ export default function PersonalDetailsForm() {
       lname: '',
       dob: new Date('1999-01-01'),
       bio: '',
+      email: '',
       contact_number: '',
-      countries: [],
-      cities: [],
+      country: [],
+      city: [],
     },
   })
 
@@ -62,33 +59,27 @@ export default function PersonalDetailsForm() {
   const dispatch = useDispatch<AppDispatch>()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Watch the form values
-  const formCountries = watch('countries')
-  const formCities = watch('cities')
+  const formCountries = watch('country')
+  const formCities = watch('city')
 
-  // Get all unique countries from the data
   const allCountries = countriesData.map(item => item.country)
 
-  // Get cities for all selected countries (flattened array)
   const availableCities =
     formCountries.length > 0
       ? countriesData
           .filter(item => formCountries.includes(item.country))
-          .flatMap(item => item.cities)
+          .flatMap(item => item.city)
       : []
 
   const onSubmit = async (data: FormValues) => {
     try {
       setIsSubmitting(true)
 
-      // Prepare the data to send
       const formData = {
         ...data,
-        // Convert arrays to comma-separated strings if your backend expects that
-        countries: data.countries.join(','),
-        cities: data.cities.join(','),
+        country: data.country.join(','),
+        city: data.city.join(','),
       }
-
       await dispatch(updateProfile(formData as any)).unwrap()
     } catch (error) {
       console.error('Update failed:', error)
@@ -96,32 +87,27 @@ export default function PersonalDetailsForm() {
       setIsSubmitting(false)
     }
   }
-  useEffect(() => {
-    dispatch(initializeUserData())
-  }, [dispatch])
 
   useEffect(() => {
-    if (initialized && !loading && (user as any)?.user) {
+    if (user) {
       setProfileUser(user)
 
-      // Parse the user data into the form's expected format
       methods.reset({
-        fname: (user as any)?.user.fname || '',
-        lname: (user as any)?.user.lname || '',
-        dob: (user as any)?.user.dob
-          ? new Date((user as any)?.user.dob)
-          : new Date('1999-01-01'),
-        bio: (user as any)?.user.bio || '',
-        contact_number: (user as any)?.user.contact_number || '',
-        countries: (user as any)?.user.countries
-          ? (user as any)?.user.countries.split(',')
-          : [],
-        cities: (user as any)?.user.cities
-          ? (user as any)?.user.cities.split(',')
-          : [],
+        fname: user.fname || '',
+        lname: user.lname || '',
+        dob: user.dob ? new Date(user.dob) : new Date('1999-01-01'),
+        bio: user.bio || '',
+        email: user.email || '',
+        contact_number: user.contact_number || '',
+        country: Array.isArray(user.country)
+          ? user.country
+          : [user.country].filter(Boolean),
+        city: Array.isArray(user.city)
+          ? user.city
+          : [user.city].filter(Boolean),
       })
     }
-  }, [user, initialized, loading, methods])
+  }, [user, methods])
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
@@ -187,15 +173,15 @@ export default function PersonalDetailsForm() {
               options={allCountries}
               selected={formCountries}
               onChange={selected => {
-                setValue('countries', selected, { shouldValidate: true })
+                setValue('country', selected, { shouldValidate: true })
 
-                setValue('cities', [], { shouldValidate: true })
+                setValue('city', [], { shouldValidate: true })
               }}
               placeholder='Select countries'
             />
-            {errors.countries && (
+            {errors.country && (
               <p className='mt-1 text-sm text-red-600'>
-                {errors.countries.message}
+                {errors.country.message}
               </p>
             )}
           </div>
@@ -208,7 +194,7 @@ export default function PersonalDetailsForm() {
               options={availableCities}
               selected={formCities}
               onChange={selected => {
-                setValue('cities', selected, { shouldValidate: true })
+                setValue('city', selected, { shouldValidate: true })
               }}
               placeholder={
                 formCountries.length > 0
@@ -217,10 +203,8 @@ export default function PersonalDetailsForm() {
               }
               disabled={formCountries.length === 0}
             />
-            {errors.cities && (
-              <p className='mt-1 text-sm text-red-600'>
-                {errors.cities.message}
-              </p>
+            {errors.city && (
+              <p className='mt-1 text-sm text-red-600'>{errors.city.message}</p>
             )}
           </div>
         </div>
@@ -240,11 +224,6 @@ export default function PersonalDetailsForm() {
           )}
         </Button>
       </form>
-      {loading && (
-        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-          <Spinner />
-        </div>
-      )}
     </FormProvider>
   )
 }

@@ -35,18 +35,14 @@ export const Dialog: React.FC<DialogProps> = ({ body, ques }) => {
   const { reset, handleSubmit, getValues } = methods
 
   const handleOpenChange = (open: boolean) => {
-    console.log('enter')
-    console.log('is open', open)
+
     dispatch(setIsDialogOpen(open))
     if (!open && !getValues()) {
-      console.log('e2')
       reset()
     }
   }
 
   const onSubmit = (data: FormValues) => {
-    console.log('onSubmit')
-    console.log('Form data submitted:', data)
     handleOpenChange(false)
   }
 

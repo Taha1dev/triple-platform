@@ -30,7 +30,7 @@ import UserProfile from './features/dashboard/pages/profile/Profile.tsx'
 import VerifyEmailOTP from './features/authentication/verify-email-otp.tsx'
 import PortfolioPage from './features/dashboard/pages/profile/portfolio-page.tsx'
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,

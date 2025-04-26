@@ -3,34 +3,38 @@ import { Link, useNavigate } from 'react-router-dom'
 import {
   Home,
   Users,
-  Map,
-  Camera,
-  Building,
   ChevronLeft,
   ChevronRight,
   Images,
   Settings2,
+  LogOut,
 } from 'lucide-react'
 
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { footerLogo, useTheme } from '@/components/theme-provider'
+import { logoutUser } from '@/store/slices/authSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/store/store'
 
 const categories = [
   { name: 'Home', icon: Home, path: '/home' },
   { name: 'General', icon: Users, path: '/home/profile-settings' },
   { name: 'Portfolio', icon: Images, path: '/home/potfolio' },
   { name: 'Settings', icon: Settings2, path: '/home/settings' },
-  { name: 'Props', icon: Camera, path: 'props' },
-  { name: 'Locations', icon: Map, path: 'locations' },
-  { name: 'Agencies', icon: Building, path: 'agencies' },
 ]
+
 export default function Sidebar() {
   const { theme } = useTheme()
+  const dispatch = useDispatch<AppDispatch>()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const isSmallScreen = useMediaQuery('(max-width: 1000px)')
-  const router: any = useNavigate()
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    dispatch(logoutUser())
+    navigate('/login')
+  }
   return (
     <>
       {!isSmallScreen && (
@@ -40,7 +44,6 @@ export default function Sidebar() {
           }`}
         >
           <div className='p-4 border-b border-border flex items-center gap-4 max-h-[72px]'>
-            {/* Logo */}
             {sidebarOpen && (
               <Link
                 to='/home'
@@ -52,7 +55,6 @@ export default function Sidebar() {
               </Link>
             )}
 
-            {/* Toggle Button */}
             <Button
               variant='ghost'
               size='icon'
@@ -72,14 +74,7 @@ export default function Sidebar() {
               {categories.map(category => (
                 <li key={category.name}>
                   <Link to={category.path}>
-                    <Button
-                      variant='ghost'
-                      className={`w-full justify-start ${
-                        router.pathname === category.path
-                          ? 'bg-blue-100 text-blue-600'
-                          : ''
-                      }`}
-                    >
+                    <Button variant='ghost' className={`w-full justify-start`}>
                       <category.icon className='h-5 w-5' />
                       {sidebarOpen && (
                         <span className='ml-2'>{category.name}</span>
@@ -88,6 +83,14 @@ export default function Sidebar() {
                   </Link>
                 </li>
               ))}
+              <Button
+                onClick={handleLogout}
+                variant={'link'}
+                className='cursor-pointer flex items-center gap-2 text-red-600 focus:text-red-600'
+              >
+                <LogOut className='h-4 w-4' />
+                Logout
+              </Button>
             </ul>
           </nav>
         </aside>
@@ -102,9 +105,7 @@ export default function Sidebar() {
                   <Button
                     variant='ghost'
                     size='sm'
-                    className={`flex flex-col items-center ${
-                      router.pathname === category.path ? 'text-blue-600' : ''
-                    }`}
+                    className={`flex flex-col items-center`}
                   >
                     <category.icon className='h-5 w-5' />
                     <span className='text-xs mt-1'>{category.name}</span>

@@ -32,11 +32,9 @@ export default function ChangePassword() {
 
   const onSubmit = async (data: FormValues) => {
     const { password } = data
-    console.log((user as any)?.user._id)
+  
     try {
-      await dispatch(
-        changePassword({ _id: (user as any)?.user._id, password }),
-      ).unwrap()
+      await dispatch(changePassword({ _id: user?._id, password })).unwrap()
       navigate('/home')
     } catch (error) {
       console.log(error)
